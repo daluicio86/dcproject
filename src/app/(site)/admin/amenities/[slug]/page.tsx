@@ -12,7 +12,7 @@ interface Props {
 
 export default async function AmenitiePage({ params }: Props) {
 
-  const { slug } = await params;
+  const { slug } =  params;
 
   const [amenitie] = await Promise.all([
     getAmenitieByName(slug),
