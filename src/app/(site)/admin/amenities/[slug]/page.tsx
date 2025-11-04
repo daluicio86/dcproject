@@ -1,30 +1,22 @@
-
 import { redirect } from 'next/navigation';
 import HeroSub from '@/components/shared/HeroSub';
 import { getAmenitieByName } from '@/actions/amenitie/get-amenitie-by-name';
 import { AmenitieForm } from './ui/AmenitieForm';
 
-interface Props {
-  params: {
-    slug: string;
-  }
+interface Params {
+  slug: string;
 }
 
-export default async function AmenitiePage({ params }: Props) {
+export default async function AmenitiePage({ params }: { params: Promise<Params> }) {
+  const { slug } = await params;
 
-  const { slug } =  params;
+  const amenitie = await getAmenitieByName(slug);
 
-  const [amenitie] = await Promise.all([
-    getAmenitieByName(slug),
-  ]);
-
-
-  // Todo: new
   if (!amenitie && slug !== 'new') {
-    redirect('/admin/amenitie')
+    redirect('/admin/amenitie');
   }
 
-  const title = (slug === 'new') ? 'Nuevo amenitie' : 'Editar amenitie'
+  const title = slug === 'new' ? 'Nuevo amenitie' : 'Editar amenitie';
 
   return (
     <>
