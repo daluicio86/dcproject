@@ -1,0 +1,127 @@
+{
+  "welcome": "Bienvenidos a Ecuador",
+  "tagline": "Invierte en Ecuador: el destino perfecto para tu próxima propiedad.",
+  "welcome1": "Compra y venta en Ecuador, ",
+  "welcome2": "el mejor clima del mundo.",
+  "ciudadDetalles": "Detalles de la ciudad",
+  "ciudadPropiedades": "Propiedades en la ciudad",
+  "ciudadCercanias": "Lugares cercanos",
+  "selectCiudad": "Seleccionar ciudad",
+  "contact": "Contáctanos",
+  "btnText1": "Contactar",
+  "btnText2": "Ver detalles",
+  "categories": "Categorías",
+  "promotionalServiceText": "Explore las mejores propiedades con servicios expertos.",
+  "promotionalServiceText1": "Descubra una amplia gama de propiedades premium, desde lujosos apartamentos hasta espaciosas villas, adaptadas a sus necesidades.",
+  "btnService": "Ver propiedades",
+  "properties": "Propiedades",
+  "discoverInspiringHomes": "Descubra hogares con diseños inspiradores.",
+  "curatedHomes": "Hogares seleccionados donde la elegancia, el estilo y la comodidad se unen.",
+  "featuredProperty": "Propiedad destacada",
+  "modernLuxeVilla": "Villa moderna de lujo",
+  "featuredPropertyDescription": "Experimente la vida de lujo en la villa moderna de lujo, ubicada en 20 S Aurora Ave, Miami. Con un precio de $1,650,500, esta casa inteligente de 560 ft² ofrece 4 dormitorios, 3 baños y amplias áreas de estar. Disfrute de eficiencia energética, luz natural, sistemas de seguridad, espacios al aire libre y 2 áreas de bar, perfectas para más de 8 invitados. Construida en 2025.",
+  "inquireNow": "Consultar ahora",
+  "estPrice": "Precio estimado",
+  "testimonials": "Testimonios",
+  "whatOurClientsSay": "Lo que dicen nuestros clientes",
+  "testimonial1": "¡Encontré la casa ideal en poco tiempo! Los listados eran detallados, las fotos eran precisas y todo el proceso se sintió fluido. El servicio al cliente fue de primera, respondiendo todas mis preguntas. ¡Definitivamente usaré esta plataforma nuevamente en el futuro!",
+  "testimonial2": "¡Una experiencia increíble! La atención al cliente fue excepcional y me ayudaron a encontrar la propiedad perfecta. Estoy muy agradecido por todo su apoyo.",
+  "blog": "Blog",
+  "realEstateInsights": "Perspectivas inmobiliarias",
+  "stayAheadInThePropertyMarket": "Manténgase a la vanguardia en el mercado inmobiliario con consejos y actualizaciones de expertos",
+  "readAllArticles": "Leer todos los artículos",
+  "heroSection": {
+    "title": "Descubra un reino de lujo y sofisticación",
+    "cta": "Póngase en contacto"
+  },
+  "faq": {
+    "iconText": "Preguntas frecuentes",
+    "title": "Todo sobre Fincas Asombrosas",
+    "description": "Sabemos que comprar, vender o invertir en bienes raíces puede ser abrumador. Aquí hay algunas preguntas frecuentes para ayudarlo a guiarse a través del proceso",
+    "items": {
+      "item1": {
+        "question": "1. ¿Puedo personalizar mi propiedad?",
+        "answer": "¡Por supuesto! Ofrecemos diversas opciones de personalización para que su propiedad sea realmente suya."
+      },
+      "item2": {
+        "question": "2. ¿Dónde puedo encontrar propiedades?",
+        "answer": "Puede encontrar nuestras propiedades publicadas en nuestro sitio web, con descripciones detalladas y fotos."
+      },
+      "item3": {
+        "question": "3. ¿Qué pasos se deben seguir para comprar una propiedad?",
+        "answer": "Para comprar una propiedad, comience explorando nuestros listados en línea. Una vez que encuentre una propiedad que le guste, contacte con nuestro equipo de ventas para programar una visita. Después, puede hacer una oferta y, si es aceptada, proceder con la documentación necesaria y las opciones de financiación."
+      }
+    }
+  },
+  "footer": {
+    "subscribeText": "Manténgase actualizado con las últimas noticias,",
+    "emailPlaceholder": "Ingrese su correo electrónico",
+    "subscribeButton": "Suscribirse",
+    "subscribeDisclaimer": "Al suscribirse, acepta recibir nuestros correos electrónicos promocionales. Puede darse de baja en cualquier momento.",
+    "title": "Comience su camino hacia el éxito, contáctenos hoy.",
+    "cta": "Póngase en contacto",
+    "termsOfService": "Términos de servicio",
+    "privacyPolicy": "Política de privacidad",
+    "description": "¿Busca la propiedad de sus sueños o está lista para vender? Nuestro equipo de expertos ofrece orientación personalizada y experiencia en el mercado adaptada a usted."
+  },
+  "contactUs": {
+    "breadcrumb": "Contáctenos",
+    "title": "¿Tiene preguntas? ¡Listos para ayudar!",
+    "description": "¿Busca la propiedad de sus sueños o está lista para vender? Nuestro equipo de expertos ofrece orientación personalizada y experiencia en el mercado adaptada a usted.",
+    "formTitle": "Información de contacto",
+    "formDescription": "¿Listo para encontrar la propiedad de sus sueños o vender su propiedad? ¡Estamos aquí para ayudar!",
+    "sendMessage": "Enviar mensaje",
+    "namePlaceholder": "Nombre*",
+    "phonePlaceholder": "Número de teléfono*",
+    "emailPlaceholder": "Dirección de correo electrónico*",
+    "messagePlaceholder": "Escriba aquí su mensaje"
+  },
+  "footerNavbar": {
+    "home": "Inicio",
+    "properties": "Propiedades",
+    "contactUs": "Contáctenos"
+  },
+  "property": {
+    "title": "Descubra propiedades de extensiones increíbles.",
+    "description": "Experimente la elegancia y el confort con nuestras exclusivas fincas de lujo, diseñadas para una vida sofisticada.",
+    "badge": "Propiedades"
+  },
+  "header": {
+    "contact": "Contacto"
+  },
+  "navLinks": {
+    "home": "Inicio",
+    "properties": "Propiedades",
+    "contact": "Contacto",
+    "catalogs": "Catálogos",
+    "users": "Usuarios",
+    "roles": "Roles"
+  },
+  "login": {
+    "signIn": "Iniciar Sesión",
+    "signUp": "Registrarse"
+  },
+  "propiedadForm": {
+    "title": "Nombre",
+    "description": "Descripción",
+    "apto": "Propiedad apta para",
+    "price": "Precio",
+    "metros": "Superficie (m²)",
+    "altura": "Altura",
+    "address": "Dirección",
+    "geoLink": "Enlace a Google Maps",
+    "esPrincipal": "¿Es la principal?",
+    "images": "Imágenes",
+    "categoria": "Categoría",
+    "selectCategory": "Seleccionar una categoría",
+    "selectClimate": "Seleccionar clima",
+    "selectRentaVenta": "Seleccionar",
+    "selectApto": "Seleccionar propiedad apta para",
+    "selectImages": "Seleccionar imágenes",
+    "submitButton": "Guardar propiedad"
+  },
+  "servicioForm": {
+    "nombre": "Nombre",
+    "submitButton": "Guardar Servicio"
+  }
+}

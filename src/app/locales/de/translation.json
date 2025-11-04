@@ -1,0 +1,127 @@
+{
+  "welcome": "Willkommen in Ecuador",
+  "tagline": "Investieren Sie in Ecuador: das perfekte Ziel für Ihre nächste Immobilie.",
+  "welcome1": "Kaufen und verkaufen in Ecuador",
+  "welcome2": "Das beste Klima der Welt.",
+  "ciudadDetalles": "Stadtdetails",
+  "ciudadPropiedades": "Immobilien in der Stadt",
+  "ciudadCercanias": "In der Nähe befindliche Orte",
+  "selectCiudad": "Stadt auswählen",
+  "contact": "Kontakt",
+  "btnText1": "Kontakt aufnehmen",
+  "btnText2": "Details anzeigen",
+  "categories": "Kategorien",
+  "promotionalServiceText": "Entdecken Sie die besten Immobilien mit Expertenservice.",
+  "promotionalServiceText1": "Entdecken Sie eine vielfältige Auswahl an Premium-Immobilien, von luxuriösen Apartments bis hin zu geräumigen Villen, maßgeschneidert für Ihre Bedürfnisse.",
+  "btnService": "Immobilien ansehen",
+  "properties": "Immobilien",
+  "discoverInspiringHomes": "Entdecken Sie inspirierend gestaltete Häuser.",
+  "curatedHomes": "Ausgewählte Häuser, die Eleganz, Stil und Komfort vereinen.",
+  "featuredProperty": "Ausgewählte Immobilie",
+  "modernLuxeVilla": "Moderne Luxusvilla",
+  "featuredPropertyDescription": "Erleben Sie luxuriöses Wohnen in einer modernen Luxusvilla in der 20 S Aurora Ave, Miami. Preis: Dieses 52 m² große Smart Home für 1.650.500 $ bietet 4 Schlafzimmer, 3 Badezimmer und großzügige Wohnbereiche. Freuen Sie sich auf Energieeffizienz, Tageslicht, Sicherheitssysteme, Außenbereiche und zwei Barbereiche – ideal für 8+ Gäste. Baujahr 2025.",
+  "inquireNow": "Jetzt anfragen",
+  "estPrice": "Geschätzter Preis",
+  "testimonials": "Kundenmeinungen",
+  "whatOurClientsSay": "Was unsere Kunden sagen",
+  "testimonial1": "Ich habe in kürzester Zeit mein Traumhaus gefunden! Die Angebote waren detailliert, die Fotos waren akkurat und der gesamte Prozess verlief reibungslos. Der Kundenservice war erstklassig und beantwortete alle meine Fragen. Ich werde diese Plattform in Zukunft definitiv wieder nutzen!",
+  "testimonial2": "Eine unglaubliche Erfahrung! Der Kundenservice war außergewöhnlich und sie haben mir geholfen, die perfekte Immobilie zu finden. Ich bin sehr dankbar für ihre Unterstützung.",
+  "blog": "Blog",
+  "realEstateInsights": "Immobilieninformationen",
+  "stayAheadInThePropertyMarket": "Bleiben Sie mit Expertenratschlägen und Updates auf dem Immobilienmarkt immer einen Schritt voraus",
+  "readAllArticles": "Alle Artikel lesen",
+  "heroSection": {
+    "title": "Entdecken Sie Luxus und Eleganz",
+    "cta": "Kontaktieren Sie uns"
+  },
+  "faq": {
+    "iconText": "FAQs",
+    "title": "Alles über Amazing Farms",
+    "description": "Wir wissen, dass der Kauf, Verkauf oder die Investition in Immobilien überwältigend sein kann. Hier finden Sie einige häufig gestellte Fragen, die Ihnen den Prozess erleichtern",
+    "items": {
+      "item1": {
+        "question": "1. Kann ich mein Anwesen individuell gestalten?",
+        "answer": "Selbstverständlich! Wir bieten Ihnen zahlreiche Anpassungsmöglichkeiten, damit Ihr Anwesen ganz nach Ihren Wünschen gestaltet wird."
+      },
+      "item2": {
+        "question": "2. Wo finde ich Immobilien?",
+        "answer": "Unsere Immobilien finden Sie auf unserer Website mit detaillierten Beschreibungen und Fotos."
+      },
+      "item3": {
+        "question": "3. Wie kaufe ich eine Immobilie?",
+        "answer": "Um eine Immobilie zu kaufen, durchsuchen Sie zunächst unsere Angebote online. Wenn Sie eine Immobilie gefunden haben, die Ihnen gefällt, kontaktieren Sie unser Verkaufsteam, um einen Besichtigungstermin zu vereinbaren. Anschließend können Sie ein Angebot abgeben und, falls es angenommen wird, die notwendigen Formalitäten und Finanzierungsoptionen erledigen."
+      }
+    }
+  },
+  "footer": {
+    "subscribeText": "Bleiben Sie über die neuesten Nachrichten auf dem Laufenden",
+    "emailPlaceholder": "E-Mail-Adresse eingeben",
+    "subscribeButton": "Abonnieren",
+    "subscribeDisclaimer": "Mit Ihrer Anmeldung stimmen Sie dem Erhalt unserer Werbe-E-Mails zu. Sie können sich jederzeit wieder abmelden.",
+    "title": "Beginnen Sie Ihren Weg zum Erfolg – ​​kontaktieren Sie uns noch heute.",
+    "cta": "Kontaktieren Sie uns",
+    "termsOfService": "Nutzungsbedingungen",
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "description": "Suchen Sie Ihre Traumimmobilie oder möchten Sie verkaufen? Unser Expertenteam bietet Ihnen individuelle Beratung und Marktexpertise, die auf Sie zugeschnitten ist."
+  },
+  "contactUs": {
+    "breadcrumb": "Kontakt",
+    "title": "Haben Sie Fragen? Wir helfen Ihnen gerne!",
+    "description": "Suchen Sie Ihre Traumimmobilie oder möchten Sie verkaufen? Unser Expertenteam bietet Ihnen individuelle Beratung und Marktexpertise, die auf Ihre Bedürfnisse zugeschnitten ist.",
+    "formTitle": "Kontaktinformationen",
+    "formDescription": "Bereit, Ihre Traumimmobilie zu finden oder zu verkaufen? Wir helfen Ihnen gerne!",
+    "sendMessage": "Nachricht senden",
+    "namePlaceholder": "Name*",
+    "phonePlaceholder": "Telefonnummer*",
+    "emailPlaceholder": "E-Mail-Adresse*",
+    "messagePlaceholder": "Schreiben Sie hier Ihre Nachricht"
+  },
+  "footerNavbar": {
+    "home": "Startseite",
+    "properties": "Immobilien",
+    "contactUs": "Kontakt"
+  },
+  "property": {
+    "title": "Entdecken Sie die Eigenschaften unglaublicher Erweiterungen.",
+    "description": "Erleben Sie Eleganz und Komfort in unseren exklusiven Luxusimmobilien für anspruchsvolles Wohnen.",
+    "badge": "Immobilien"
+  },
+  "header": {
+    "contact": "Kontakt"
+  },
+  "navLinks": {
+    "home": "Startseite",
+    "properties": "Immobilien",
+    "contact": "Kontakt",
+    "catalogs": "Kataloge",
+    "users": "Benutzer",
+    "roles": "Rollen"
+  },
+  "login": {
+    "signIn": "Anmelden",
+    "signUp": "Registrieren"
+  },
+  "propiedadForm": {
+    "title": "Name",
+    "description": "Beschreibung",
+    "suitable": "Geeignete Immobilie",
+    "price": "Preis",
+    "meters": "Fläche (m²)",
+    "height": "Höhe",
+    "address": "Adresse",
+    "geoLink": "Google Maps-Link",
+    "esPrincipal": "Ist es Hauptobjekt?",
+    "images": "Bilder",
+    "category": "Kategorie",
+    "selectCategory": "Kategorie auswählen",
+    "selectClimate": "Klima auswählen",
+    "selectRentaVenta": "auswählen",
+    "selectApto": "Geeignete Immobilie auswählen",
+    "selectImages": "Bilder auswählen",
+    "submitButton": "Immobilie speichern"
+  },
+  "servicioForm": {
+    "nombre": "Name",
+    "submitButton": "Dienstleistung speichern"
+  }
+}

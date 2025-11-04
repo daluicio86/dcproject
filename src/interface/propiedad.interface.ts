@@ -1,0 +1,28 @@
+
+export interface Propiedad {
+  id: string;
+  title: string;
+  slug: string;
+  description?: string;
+  apto?: string;
+  precio: number | null;
+  metros: number;
+  altura: number;
+  address: string;
+  geoLink: string;
+  esPrincipal: boolean;
+
+  //ubicacion?: string;
+  rentaVenta?: string;
+  temperatura?: string;
+
+  categoriaId: string;
+  userId: string;
+  images: string[];
+  amenities?: { id: string; name: string }[];
+  sevicios?: { id: string; nombre: string }[];
+}
+
+export interface PropiedadImage {
+  url: string;
+}

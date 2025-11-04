@@ -1,0 +1,127 @@
+{
+  "welcome": "Welcome to Ecuador",
+  "tagline": "Invest in Ecuador: the perfect destination for your next property.",
+  "welcome1": "Buying and selling in Ecuador, ",
+  "welcome2": "the most beautiful weather in the world.",
+  "ciudadDetalles": "City details",
+  "ciudadPropiedades": "Properties in the city",
+  "ciudadCercanias": "Nearby places",
+  "selectCiudad": "Select city",
+  "contact": "Contact Us",
+  "btnText1": "Get in Touch",
+  "btnText2": "View Details",
+  "categories": "Categories",
+  "promotionalServiceText": "Explore best properties with expert services.",
+  "promotionalServiceText1": "Discover a diverse range of premium properties, from luxurious apartments  to spacious villas, tailored to your needs",
+  "btnService": "View properties",
+  "properties": "Properties",
+  "discoverInspiringHomes": "Discover inspiring designed homes.",
+  "curatedHomes": "Curated homes where elegance, style, and comfort unite.",
+  "featuredProperty": "Featured property",
+  "modernLuxeVilla": "Modern luxe villa",
+  "featuredPropertyDescription": "Experience luxury living at modern luxe villa, located at 20 S Aurora Ave, Miami. Priced at $1,650,500, this 560 ft² smart home offers 4 bedrooms, 3 bathrooms, and spacious living areas. Enjoy energy efficiency, natural light, security systems, outdoor spaces, and 2 bar areas—perfect for 8+ guests. Built in 2025.",
+  "inquireNow": "Inquire Now",
+  "estPrice": "Estimated price",
+  "testimonials": "Testimonials",
+  "whatOurClientsSay": "What our clients say",
+  "testimonial1": "I found my ideal home in no time! The listings were detailed, the photos were accurate, and the whole process felt seamless. Customer service was top-notch, answering all my questions. I will definitely use this platform again in the future!",
+  "testimonial2": "An incredible experience! The customer service was exceptional, and they helped me find the perfect property. I'm so grateful for all their support.",
+  "blog": "Blog",
+  "realEstateInsights": "Real estate insights",
+  "stayAheadInThePropertyMarket": "Stay ahead in the property market with expert advice and updates",
+  "readAllArticles": "Read all articles",
+  "heroSection": {
+    "title": "Discover a realm of luxury and sophistication",
+    "cta": "Get In Touch"
+  },
+  "faq": {
+    "iconText": "FAQs",
+    "title": "All about Amazing Farms",
+    "description": "We know that buying, selling, or investing in real estate can be overwhelming. Here are some frequently asked questions to help guide you through the process",
+    "items": {
+      "item1": {
+        "question": "1. Can I customize my estate?",
+        "answer": "Absolutely! We offer a range of customization options to make your estate truly yours."
+      },
+      "item2": {
+        "question": "2. Where can I find estates?",
+        "answer": "You can find our estates listed on our website, complete with detailed descriptions and photos."
+      },
+      "item3": {
+        "question": "3. What steps to buy an estate?",
+        "answer": "To buy an estate, start by browsing our listings online. Once you find a property you like, contact our sales team to schedule a viewing. After that, you can make an offer, and if accepted, proceed with the necessary paperwork and financing options."
+      }
+    }
+  },
+  "footer": {
+    "subscribeText": "Stay updated with the latest news,",
+    "emailPlaceholder": "Enter Your Email",
+    "subscribeButton": "Subscribe",
+    "subscribeDisclaimer": "By subscribing, you agree to receive our promotional emails. You can unsubscribe at any time.",
+    "title": "Begin your path to\nsuccess contact us today.",
+    "cta": "Get In Touch",
+    "termsOfService": "Terms of service",
+    "privacyPolicy": "Privacy policy",
+    "description": "Looking for your dream property or ready to sell? Our expert team offers personalized guidance and market expertise tailored to you."
+  },
+  "contactUs": {
+    "breadcrumb": "Contact us",
+    "title": "Have questions? ready to help!",
+    "description": "Are you looking for your dream property or are you ready to sell? Our team of experts offers personalized guidance and market expertise tailored to your needs.",
+    "formTitle": "Contact information",
+    "formDescription": "Ready to find your dream property or sell your property? We’re here to help!",
+    "sendMessage": "Send message",
+    "namePlaceholder": "Name*",
+    "phonePlaceholder": "Phone number*",
+    "emailPlaceholder": "Email address*",
+    "messagePlaceholder": "Write here your message"
+  },
+  "footerNavbar": {
+    "home": "Home",
+    "properties": "Properties",
+    "contactUs": "Contact Us"
+  },
+  "property": {
+    "title": "Discover the properties of incredible extensions.",
+    "description": "Experience elegance and comfort with our exclusive luxury estates, designed for sophisticated living.",
+    "badge": "Properties"
+  },
+  "header": {
+    "contact": "Contact"
+  },
+  "navLinks": {
+    "home": "Home",
+    "properties": "Properties",
+    "contact": "Contact",
+    "catalogs": "Catalogs",
+    "users": "Users",
+    "roles": "Roles"
+  },
+  "login": {
+    "signIn": "Sign in",
+    "signUp": "Sign Up"
+  },
+  "propiedadForm": {
+    "title": "Name",
+    "description": "Description",
+    "apto": "Property suitable for",
+    "price": "Price",
+    "metros": "Area (m²)",
+    "altura": "Height",
+    "address": "Address",
+    "geoLink": "Google Maps link",
+    "esPrincipal": "Is it main?",
+    "images": "Images",
+    "categoria": "Category",
+    "selectCategory": "Select a category",
+    "selectClimate": "Select climate",
+    "selectRentaVenta": "Select",
+    "selectApto": "Select property suitable for",
+    "selectImages": "Select images",
+    "submitButton": "Save Property"
+  },
+  "servicioForm": {
+    "nombre": "Name",
+    "submitButton": "Save Service"
+  }
+}
