@@ -23,7 +23,7 @@ interface FormCiudadInputs {
     servicios: string[];
 }
 
-export const CiudadForm = ({ item, servicios }: Props) => {
+export const CiudadForm = ({ item }: Props) => {
     const router = useRouter();
     const { t } = useTranslation();
     const [preview, setPreview] = useState<string | null>(item?.url ?? null);
