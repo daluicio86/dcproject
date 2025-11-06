@@ -5,10 +5,8 @@ import { AmenitieForm } from './ui/AmenitieForm';
 
 export default async function AmenitiePage({
   params,
-  searchParams,
 }: {
   params: { nombre: string };
-  searchParams?: Record<string, string | string[] | undefined>;
 }) {
   const { nombre } = params;
 
