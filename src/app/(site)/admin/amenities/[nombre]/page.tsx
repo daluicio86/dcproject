@@ -9,22 +9,21 @@ interface Props {
     nombre: string;
   }
 }
+
 export default async function AmenitiePage({ params }: Props) {
 
-  const { nombre } =  params;
-
+  const { nombre } = await params;
   const [amenitie] = await Promise.all([
-    getAmenitieByName(nombre),
+    getAmenitieByName(nombre)
   ]);
-
 
   // Todo: new
   if (!amenitie && nombre !== 'new') {
     redirect('/admin/amenities')
   }
 
-  const title = (nombre === 'new') ? 'Nuevo amenitie' : 'Editar amenitie'
 
+  const title = (nombre === 'new') ? 'Nuevo amenitie' : 'Editar amenitie'
   return (
     <>
       <HeroSub
