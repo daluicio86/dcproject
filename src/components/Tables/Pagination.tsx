@@ -10,6 +10,7 @@ import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
 
 interface Props {
   totalPages: number;
+  currentPage?: number;
 }
 
 
