@@ -2,14 +2,12 @@ import { redirect } from 'next/navigation';
 import HeroSub from '@/components/shared/HeroSub';
 import { getAmenitieByName } from '@/actions/amenitie/get-amenitie-by-name';
 import { AmenitieForm } from './ui/AmenitieForm';
+import type { PageProps } from "next";
 
-export default async function AmenitiePage({
-  params,
-}: {
-  params: { nombre: string };
-}) {
-  const { nombre } = params;
-
+export default async function AmenitiePage({ params }: PageProps<{
+  nombre: string;
+}>) {
+  const { nombre } = await params;
   const amenitie = await getAmenitieByName(nombre);
 
   if (!amenitie && nombre !== 'new') {
