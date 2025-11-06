@@ -7,27 +7,15 @@ export const getAmenitieByName = async( name: string ) => {
 
 
   try {
-
+    const nombreLimpio = decodeURIComponent(name.trim());
     const amenitie = await prisma.amenities.findFirst({
-      where: {
-        name: name,
-        estado: true
-      }
-    })
+      where: { name: nombreLimpio },
 
-
-    if ( !amenitie ) return null;
-
-    return {
-      ...amenitie,
-    };
-
-    
+    });
+    return amenitie ?? null;
   } catch (error) {
-    console.log(error);
-    throw new Error('Error al obtener producto por slug');
+    console.error(error);
+    throw new Error("Error al obtener amenitie por nombre");
   }
-
-
 
 }
