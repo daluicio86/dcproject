@@ -6,24 +6,24 @@ import { AmenitieForm } from './ui/AmenitieForm';
 
 interface Props {
   params: {
-    slug: string;
+    nombre: string;
   }
 }
 export default async function AmenitiePage({ params }: Props) {
 
-  const { slug } =  params;
+  const { nombre } =  params;
 
   const [amenitie] = await Promise.all([
-    getAmenitieByName(slug),
+    getAmenitieByName(nombre),
   ]);
 
 
   // Todo: new
-  if (!amenitie && slug !== 'new') {
+  if (!amenitie && nombre !== 'new') {
     redirect('/admin/amenities')
   }
 
-  const title = (slug === 'new') ? 'Nuevo amenitie' : 'Editar amenitie'
+  const title = (nombre === 'new') ? 'Nuevo amenitie' : 'Editar amenitie'
 
   return (
     <>
