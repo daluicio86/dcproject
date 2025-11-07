@@ -3,13 +3,7 @@ import HeroSub from '@/components/shared/HeroSub';
 import { getAmenitieByName } from '@/actions/amenitie/get-amenitie-by-name';
 import { AmenitieForm } from './ui/AmenitieForm';
 
-interface Props {
-  params: {
-    slug: string;
-  }
-}
-
-export default async function AmenitiePage({ params }: Props) {
+export default async function AmenitiePage({ params }: { params: { slug: string } }) {
   // NO usar "await" aquí
   const { slug } = params;
 
