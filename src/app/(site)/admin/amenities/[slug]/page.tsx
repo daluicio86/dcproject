@@ -13,7 +13,11 @@ export default async function AmenitiePage({ params }: Props) {
   // NO usar "await" aquí
   const { slug } = params;
 
-  const amenitie = await getAmenitieByName(slug);
+  const [amenitie] = await Promise.all([
+    getAmenitieByName(slug)
+  ]);
+
+  //const amenitie = await getAmenitieByName(slug);
 
   // Todo: new
   if (!amenitie && slug !== 'new') {
