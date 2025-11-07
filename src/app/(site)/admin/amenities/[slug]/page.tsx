@@ -3,17 +3,16 @@ import HeroSub from '@/components/shared/HeroSub';
 import { getAmenitieByName } from '@/actions/amenitie/get-amenitie-by-name';
 import { AmenitieForm } from './ui/AmenitieForm';
 
-export default async function AmenitiePage({ params }: { params: { slug: string } }) {
-  // NO usar "await" aquí
-  const { slug } = params;
+type Params = { slug: string };
+
+export default async function AmenitiePage({ params }: { params: Params | Promise<Params> }) {
+  // Aceptamos params como objeto o Promise; await asegura que tenemos el objeto.
+  const { slug } = await params;
 
   const [amenitie] = await Promise.all([
     getAmenitieByName(slug)
   ]);
 
-  //const amenitie = await getAmenitieByName(slug);
-
-  // Todo: new
   if (!amenitie && slug !== 'new') {
     redirect('/admin/amenitie');
   }
