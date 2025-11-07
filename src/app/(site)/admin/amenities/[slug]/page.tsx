@@ -5,8 +5,8 @@ import { AmenitieForm } from './ui/AmenitieForm';
 
 type Params = { slug: string };
 
-export default async function AmenitiePage({ params }: { params: Params | Promise<Params> }) {
-  // Aceptamos params como objeto o Promise; await asegura que tenemos el objeto.
+// Tipamos params COMO Promise<Params> para cumplir la firma que espera PageProps
+export default async function AmenitiePage({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
 
   const [amenitie] = await Promise.all([
