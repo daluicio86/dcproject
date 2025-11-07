@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default async function AmenitiePage({ params }: Props) {
-  // <- NO await aquí
+  // NO usar "await" aquí
   const { slug } = params;
 
   const amenitie = await getAmenitieByName(slug);
