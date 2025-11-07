@@ -1,17 +1,33 @@
-"use server";
+'use server';
 
-import prisma from "@/lib/prisma";
+import prisma from '@/lib/prisma';
 
-export const getAmenitieByName = async (nombre: string) => {
+
+export const getAmenitieByName = async( name: string ) => {
+
+
   try {
-    if (!nombre) return null;
-    const nombreLimpio = decodeURIComponent(nombre.trim());
+
     const amenitie = await prisma.amenities.findFirst({
-      where: { name: nombreLimpio },
-    });
-    return amenitie ?? null;
+      where: {
+        name: name,
+        estado: true
+      }
+    })
+
+
+    if ( !amenitie ) return null;
+
+    return {
+      ...amenitie,
+    };
+
+    
   } catch (error) {
-    console.error(error);
-    throw new Error("Error al obtener amenitie por nombre");
+    console.log(error);
+    throw new Error('Error al obtener producto por slug');
   }
-};
+
+
+
+}

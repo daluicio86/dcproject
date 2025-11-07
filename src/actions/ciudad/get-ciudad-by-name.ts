@@ -21,6 +21,7 @@ export const getCiudadByName = async (nombre: string) => {
         },
       },
     });
+    console.log("Ciudad obtenida por nombre:", ciudad);
     return ciudad ?? null;
   } catch (error) {
     console.error(error);
