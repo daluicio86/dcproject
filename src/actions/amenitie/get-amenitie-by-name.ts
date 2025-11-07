@@ -1,21 +1,17 @@
-'use server';
+"use server";
 
-import prisma from '@/lib/prisma';
+import prisma from "@/lib/prisma";
 
-
-export const getAmenitieByName = async( name: string ) => {
-
-
+export const getAmenitieByName = async (nombre: string) => {
   try {
-    const nombreLimpio = decodeURIComponent(name.trim());
+    if (!nombre) return null;
+    const nombreLimpio = decodeURIComponent(nombre.trim());
     const amenitie = await prisma.amenities.findFirst({
       where: { name: nombreLimpio },
-
     });
     return amenitie ?? null;
   } catch (error) {
     console.error(error);
     throw new Error("Error al obtener amenitie por nombre");
   }
-
-}
+};
