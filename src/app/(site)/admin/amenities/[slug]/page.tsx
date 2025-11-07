@@ -6,20 +6,21 @@ import { AmenitieForm } from './ui/AmenitieForm';
 interface Props {
   params: {
     slug: string;
-  };
+  }
 }
 
 export default async function AmenitiePage({ params }: Props) {
-  const { slug } = params; // ✅ no lleva await
+  // <- NO await aquí
+  const { slug } = params;
 
   const amenitie = await getAmenitieByName(slug);
 
-  // Si no existe y no es "new", redirige
+  // Todo: new
   if (!amenitie && slug !== 'new') {
-    redirect('/admin/amenities');
+    redirect('/admin/amenitie');
   }
 
-  const title = slug === 'new' ? 'Nuevo amenitie' : 'Editar amenitie';
+  const title = (slug === 'new') ? 'Nuevo amenitie' : 'Editar amenitie';
 
   return (
     <>
