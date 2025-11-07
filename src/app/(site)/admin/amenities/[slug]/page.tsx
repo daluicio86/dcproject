@@ -1,4 +1,3 @@
-
 import { redirect } from 'next/navigation';
 import HeroSub from '@/components/shared/HeroSub';
 import { getAmenitieByName } from '@/actions/amenitie/get-amenitie-by-name';
@@ -7,24 +6,20 @@ import { AmenitieForm } from './ui/AmenitieForm';
 interface Props {
   params: {
     slug: string;
-  }
+  };
 }
 
 export default async function AmenitiePage({ params }: Props) {
+  const { slug } = params; // ✅ no lleva await
 
-  const { slug } = await params;
+  const amenitie = await getAmenitieByName(slug);
 
-  const [amenitie] = await Promise.all([
-    getAmenitieByName(slug),
-  ]);
-
-
-  // Todo: new
+  // Si no existe y no es "new", redirige
   if (!amenitie && slug !== 'new') {
-    redirect('/admin/amenitie')
+    redirect('/admin/amenities');
   }
 
-  const title = (slug === 'new') ? 'Nuevo amenitie' : 'Editar amenitie'
+  const title = slug === 'new' ? 'Nuevo amenitie' : 'Editar amenitie';
 
   return (
     <>
