@@ -2,11 +2,16 @@
 
 import prisma from "@/lib/prisma";
 
-export const getPropiedads = async () => {
+export const getPropiedads = async (limit = 100) => {
   try {
     const propiedads = await prisma.propiedad.findMany({
+      take: limit,
       include: {
-        images: true,
+        images: {
+          select: {
+            url: true,
+          },
+        },
         amenities: true,
       },
       orderBy: {

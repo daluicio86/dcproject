@@ -77,7 +77,7 @@ export function PropertyFilters({ categories, tiposPropiedad }: Props) {
                                     {t("propiedadForm.selectRentaVenta")}
                                 </option>
                                 {enumRentaVenta ? (
-                                    Object.values(enumRentaVenta).map((item) => (
+                                    enumRentaVenta.map((item) => (
                                         <option key={item.id} value={item.id}>
                                             {item.name}
                                         </option>
@@ -94,7 +94,7 @@ export function PropertyFilters({ categories, tiposPropiedad }: Props) {
                                     {t("propiedadForm.selectClimate")}
                                 </option>
                                 {enumClima ? (
-                                    Object.values(enumClima).map((tipo) => (
+                                    enumClima.map((tipo) => (
                                         <option key={tipo.id} value={tipo.id}>
                                             {tipo.name}
                                         </option>
@@ -114,7 +114,7 @@ export function PropertyFilters({ categories, tiposPropiedad }: Props) {
                                     {t("propiedadForm.selectCategory")}
                                 </option>
                                 {categories ? (
-                                    Object.values(categories).map((categoria) => (
+                                    categories.map((categoria) => (
                                         <option key={categoria.id} value={categoria.id}>
                                             {categoria.name}
                                         </option>
@@ -131,7 +131,7 @@ export function PropertyFilters({ categories, tiposPropiedad }: Props) {
                                     Selecciona Tipo Propiedad
                                 </option>
                                 {tiposPropiedad ? (
-                                    Object.values(tiposPropiedad).map((tipo) => (
+                                    tiposPropiedad.map((tipo) => (
                                         <option key={tipo.id} value={tipo.id}>
                                             {tipo.name}
                                         </option>

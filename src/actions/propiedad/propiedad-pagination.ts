@@ -62,10 +62,6 @@ export const getPaginatedPropiedadsWithImages = async ({
       totalPages,
       propiedads: propiedads.map((p) => ({
         ...p,
-        apto: p.apto ?? "",
-        address: p.address ?? "",
-        description: p.description ?? "",
-        userId: p.userId ?? "",
         images: p.images.map((img) => img.url),
       })),
     };

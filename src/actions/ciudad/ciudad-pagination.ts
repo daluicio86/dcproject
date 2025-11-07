@@ -21,13 +21,17 @@ export const getPaginatedCiudades = async ({
       skip: (page - 1) * take,
       include: {
         servicios: {
-          include: {
-            images: true, // 👈 Incluye las imágenes asociadas a cada servicio
+          select: {
+            id: true,
+            nombre: true,
+            slug: true,
           },
         },
         propiedades: {
-          include: {
-            images: true, // 👈 Incluye las imágenes asociadas a cada propiedad
+          select: {
+            id: true,
+            title: true,
+            slug: true,
           },
         },
       },
