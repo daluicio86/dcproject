@@ -3,7 +3,13 @@ import HeroSub from '@/components/shared/HeroSub';
 import { getAmenitieByName } from '@/actions/amenitie/get-amenitie-by-name';
 import { AmenitieForm } from './ui/AmenitieForm';
 
-export default async function AmenitiePage({ params }: PageProps<{ slug: string }>) {
+type AmenitiePageProps = {
+  params: {
+    slug: string;
+  };
+};
+
+export default async function AmenitiePage({ params }: AmenitiePageProps) {
   const { slug } = params;
 
   const amenitie = await getAmenitieByName(slug);
