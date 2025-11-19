@@ -9,21 +9,23 @@ type Props = {
   };
 };
 
-//export default async function AmenitiePage({ searchParams }: Props) {
+export default async function AmenitiesPage({ searchParams }: Props) {
+  // ❌ NADA de await aquí
+  const slug = searchParams?.slug ?? '';
 
+  console.log('Slug recibido:', slug);
 
-  export default async function AmenitiesPage({ searchParams }: { searchParams?: { slug?: string } }) {
+  const amenitie = await getAmenitieByName(slug);
 
-  const params = await searchParams;
-
-  console.log('Slug recibido:', params); // Debugging line
-  const amenitie = await getAmenitieByName(params?.slug ?? '');
-
-  /*if (!amenitie && params?.slug !== 'new') {
+  // Si usas "new" como modo creación:
+  /*
+  if (!amenitie && slug !== 'new') {
     redirect('/admin/amenitie');
-  }*/
+  }
+  */
 
-  const title = params?.slug === 'new' ? 'Nuevo amenitie' : 'Editar amenitie';
+  const title = slug === 'new' ? 'Nuevo amenitie' : 'Editar amenitie';
+
   return (
     <>
       <HeroSub
