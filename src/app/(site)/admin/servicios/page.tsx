@@ -4,10 +4,9 @@ import HeroSub from '@/components/shared/HeroSub';
 import Link from 'next/link';
 import React from 'react'
 
-export default async function ServiciosPage({ 
-    searchParams 
-}: { 
-    searchParams?: Promise<{ 
+// Opción 1: Con interface
+interface Props {
+    searchParams: Promise<{
         page?: string;
         rentaVenta?: string;
         temperatura?: string;
@@ -15,18 +14,32 @@ export default async function ServiciosPage({
         categoria?: string;
         precioMin?: string;
         precioMax?: string;
-    }> 
+    }>;
+}
+
+// Opción 2: Directamente en la función
+export default async function ServiciosPage({ 
+    searchParams 
+}: { 
+    searchParams: Promise<{
+        page?: string;
+        rentaVenta?: string;
+        temperatura?: string;
+        tipoPropiedad?: string;
+        categoria?: string;
+        precioMin?: string;
+        precioMax?: string;
+    }>;
 }) {
-    // Desestructurar después del await
+    // USAR AWAIT con searchParams
     const params = await searchParams;
-    const page = params?.page;
-    const pageNumber = Number(page ?? "1");
+    const page = Number(params.page ?? "1");
 
     const {
         servicios = [],
         currentPage = 1,
         totalPages = 1,
-    } = (await getPaginatedServiciosWithImages({ page: pageNumber })) ?? {};
+    } = (await getPaginatedServiciosWithImages({ page })) ?? {};
     
     return (
         <>
@@ -45,7 +58,9 @@ export default async function ServiciosPage({
                 </Link>
             </div>
             <ServicioListing
-                servicios={servicios}
+                servicios={servicios.map((p: any) => ({
+                    ...p,
+                }))}
                 currentPage={currentPage}
                 totalPages={totalPages}
             />
