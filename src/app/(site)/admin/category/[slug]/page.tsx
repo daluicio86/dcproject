@@ -4,7 +4,7 @@ import { CategoryForm } from './ui/CategoryForm';
 import { getCategoryByName } from '@/actions/categories/get-category-by-name';
 
 // Next.js 15.2 requiere await con params
-export default async function AmenitiesPage({ 
+export default async function CategoryPage({ 
   params 
 }: { 
   params: Promise<{ slug: string }> 
