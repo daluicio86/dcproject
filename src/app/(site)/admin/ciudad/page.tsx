@@ -4,26 +4,21 @@ import { Metadata } from "next";
 import { Pagination } from "@/components/Tables/Pagination";
 import CiudadListing from "@/components/Ciudad/CiudadList";
 import { getPaginatedCiudades } from "@/actions/ciudad/ciudad-pagination";
+
 export const metadata: Metadata = {
-    title: "Lista de servicios| Buying and selling",
+    title: "Lista de ciudades| Buying and selling",
 };
 
 interface Props {
-    searchParams?: {
+    searchParams: Promise<{
         page?: string;
-    }
+    }>;
 }
 
 export default async function CiudadesPage({ searchParams }: Props) {
-    const params = await searchParams; // 👈 resolver la Promise
-    const page = params?.page ? parseInt(params.page) : 1;
-
-    const { ciudades, currentPage, totalPages } = await getPaginatedCiudades({ page });
-
-
-    /*if (!categories || categories.length === 0) {
-        redirect('/admin/category');
-    }*/
+    const { page } = await searchParams;
+    const pageNumber = page ? parseInt(page) : 1;
+    const { ciudades, currentPage, totalPages } = await getPaginatedCiudades({ page: pageNumber });
 
     return (
         <>
@@ -37,4 +32,3 @@ export default async function CiudadesPage({ searchParams }: Props) {
         </>
     );
 };
-

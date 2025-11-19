@@ -1,31 +1,31 @@
-
 import { redirect } from 'next/navigation';
 import HeroSub from '@/components/shared/HeroSub';
-import { getCiudadByName } from '@/actions/ciudad/get-ciudad-by-name';
 import { CiudadForm } from './ui/CiudadForm';
 import { getServicios } from '@/actions/servicio/get-servicios';
+import { getCiudadByName } from '@/actions/ciudad/get-ciudad-by-name';
 
-interface Props {
-  params: {
-    nombre: string;
-  }
-}
 
-export default async function CiudadPage({ params }: Props) {
-
+// Next.js 15.2 requiere await con params
+export default async function CiudadPage({ 
+  params 
+}: { 
+  params: Promise<{ nombre: string }> 
+}) {
+  // DEBES usar await con params en Next.js 15.2
   const { nombre } = await params;
+  
+  
+  // Validación del nombre
+  if (!nombre) {
+    redirect('/admin/ciudad');
+  }
   const [ciudad, servicios] = await Promise.all([
     getCiudadByName(nombre),
     getServicios(),
   ]);
 
-  // Todo: new
-  if (!ciudad && nombre !== 'new') {
-    redirect('/admin/ciudad')
-  }
-
-
-  // Normalize servicios.images to string[] (extract URLs) expected by CiudadForm
+  const title = nombre === 'new' ? 'Nuevo ciudad' : 'Editar ciudad';
+    // Normalize servicios.images to string[] (extract URLs) expected by CiudadForm
   const normalizedServicios = (servicios ?? []).map(s => ({
     ...s,
     images: Array.isArray((s as any).images)
@@ -39,7 +39,7 @@ export default async function CiudadPage({ params }: Props) {
         description="Gestiona tus servicios fácilmente con nuestra plataforma intuitiva."
         badge="Ciudades"
       />
-      <CiudadForm item={ciudad ?? {}} servicios={normalizedServicios}/>
+      <CiudadForm item={ciudad ?? null} servicios={normalizedServicios}/>
     </>
   );
 }

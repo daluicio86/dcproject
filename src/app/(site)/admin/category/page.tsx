@@ -15,7 +15,7 @@ interface Props {
     }>;
 }
 
-export default async function AmenitiesPage({ searchParams }: Props) {
+export default async function CategoriesPage({ searchParams }: Props) {
     const { page } = await searchParams;
     const pageNumber = page ? parseInt(page) : 1;
 
