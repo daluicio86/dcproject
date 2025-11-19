@@ -14,8 +14,8 @@ interface Props {
     }
 }
 
-export default async function CategoriesPage({ searchParams }: Props) {
-    const params = searchParams; // 👈 resolver la Promise
+export default async function AmenitiesPage({ searchParams }: Props) {
+    const params = await searchParams; // 👈 resolver la Promise
     const page = params?.page ? parseInt(params.page) : 1;
 
     const { amenities, currentPage, totalPages } = await getPaginatedAmenities({ page });

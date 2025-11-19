@@ -10,7 +10,9 @@ type AmenitiePageProps = {
 };
 
 export default async function AmenitiePage({ params }: AmenitiePageProps) {
-  const { slug } = params;
+  const { slug } =await params;
+
+  console.log('Slug recibido:', params); // Debugging line
 
   const amenitie = await getAmenitieByName(slug);
 
