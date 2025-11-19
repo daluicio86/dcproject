@@ -6,13 +6,14 @@ import Link from 'next/link';
 import React from 'react'
 
 interface Props {
-    searchParams: {
+    searchParams: Promise<{
         page?: string;
-    };
+    }>;
 }
 
-//export default async function ServiciosPage({ searchParams }: Props) {
 export default async function ServiciosPage({ searchParams }: Props) {
+//export default async function ServiciosPage({ searchParams }: Props) {
+//export default async function ServiciosPage({ searchParams }: Props) {
     const params = await searchParams
     const page = Number(params.page ?? "1");
 
