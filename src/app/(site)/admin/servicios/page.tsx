@@ -1,27 +1,33 @@
-
 import { getPaginatedServiciosWithImages } from '@/actions/servicio/servicio-pagination';
 import ServicioListing from '@/components/Servicio/ServicioList';
 import HeroSub from '@/components/shared/HeroSub';
 import Link from 'next/link';
 import React from 'react'
 
-interface Props {
-    searchParams: Promise<{
+export default async function ServiciosPage({ 
+    searchParams 
+}: { 
+    searchParams?: Promise<{ 
         page?: string;
-    }>;
-}
-
-export default async function ServiciosPage({ searchParams }: Props) {
-//export default async function ServiciosPage({ searchParams }: Props) {
-//export default async function ServiciosPage({ searchParams }: Props) {
-    const params = await searchParams
-    const page = Number(params.page ?? "1");
+        rentaVenta?: string;
+        temperatura?: string;
+        tipoPropiedad?: string;
+        categoria?: string;
+        precioMin?: string;
+        precioMax?: string;
+    }> 
+}) {
+    // Desestructurar después del await
+    const params = await searchParams;
+    const page = params?.page;
+    const pageNumber = Number(page ?? "1");
 
     const {
         servicios = [],
         currentPage = 1,
         totalPages = 1,
-    } = (await getPaginatedServiciosWithImages({ page })) ?? {};
+    } = (await getPaginatedServiciosWithImages({ page: pageNumber })) ?? {};
+    
     return (
         <>
             <HeroSub
@@ -39,9 +45,7 @@ export default async function ServiciosPage({ searchParams }: Props) {
                 </Link>
             </div>
             <ServicioListing
-                servicios={servicios.map((p: any) => ({
-                    ...p,
-                }))}
+                servicios={servicios}
                 currentPage={currentPage}
                 totalPages={totalPages}
             />
