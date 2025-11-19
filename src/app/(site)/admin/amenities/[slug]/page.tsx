@@ -14,7 +14,7 @@ type Props = {
 
   export default async function AmenitiesPage({ searchParams }: { searchParams?: { slug?: string } }) {
 
-  const params = searchParams;
+  const params = await searchParams;
 
   console.log('Slug recibido:', params); // Debugging line
   const amenitie = await getAmenitieByName(params?.slug ?? '');
