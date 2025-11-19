@@ -14,7 +14,7 @@ interface Props {
 export default async function PropiedadPage({
     params
 }: {
-    params: Promise<{ page: string }>
+    params: Promise<{ page: number }>
 }) {
 
     const { page } = await params;
