@@ -9,9 +9,12 @@ type Props = {
   };
 };
 
-export default async function AmenitiesPage({ searchParams }: Props) {
-  // ❌ NADA de await aquí
-  const slug = searchParams?.slug ?? '';
+export default async function AmenitiesPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params;
 
   console.log('Slug recibido:', slug);
 
