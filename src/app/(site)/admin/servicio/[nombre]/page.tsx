@@ -11,7 +11,13 @@ interface Props {
         nombre: string;
     }
 }
-export default async function ServicioPage({ params }: Props) {
+//export default async function ServicioPage({ params }: Props) {
+
+export default async function AmenitiesPage({ 
+  params 
+}: { 
+  params: Promise<{ nombre: string }> 
+}) {
 
     const { nombre } = await params;
     const [servicio] = await Promise.all([
