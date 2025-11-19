@@ -10,9 +10,14 @@ interface Props {
     };
 }
 
-export default async function PropiedadesPage({ searchParams }: Props) {
-    const params = await searchParams
-    const page = Number(params.page ?? "1");
+//export default async function PropiedadesPage({ searchParams }: Props) {
+export default async function PropiedadPage({
+    params
+}: {
+    params: Promise<{ page: string }>
+}) {
+
+    const { page } = await params;
 
     const {
         propiedads = [],

@@ -17,7 +17,7 @@ interface Props {
 //export default async function PropiedadPage({ params }: Props) {
 
 
-export default async function AmenitiesPage({
+export default async function PropiedadPage({
     params
 }: {
     params: Promise<{ slug: string }>
