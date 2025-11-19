@@ -3,12 +3,13 @@ import HeroSub from '@/components/shared/HeroSub';
 import { getAmenitieByName } from '@/actions/amenitie/get-amenitie-by-name';
 import { AmenitieForm } from './ui/AmenitieForm';
 
+// Next.js 15.2 requiere await con params
 export default async function AmenitiesPage({ 
   params 
 }: { 
   params: Promise<{ slug: string }> 
 }) {
-  // Desestructura el Promise con await
+  // DEBES usar await con params en Next.js 15.2
   const { slug } = await params;
   
   console.log('Slug recibido:', slug);
@@ -17,7 +18,6 @@ export default async function AmenitiesPage({
   if (!slug) {
     redirect('/admin/amenitie');
   }
-
   let amenitie: { id: string; name: string; estado: boolean; } | null = null;
   
   if (slug !== 'new') {
