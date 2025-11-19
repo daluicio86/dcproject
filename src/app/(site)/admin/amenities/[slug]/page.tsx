@@ -3,22 +3,22 @@ import HeroSub from '@/components/shared/HeroSub';
 import { getAmenitieByName } from '@/actions/amenitie/get-amenitie-by-name';
 import { AmenitieForm } from './ui/AmenitieForm';
 
-type AmenitiePageProps = {
-  searchParams: {
-    slug: string;
+type Props = {
+  searchParams?: {
+    slug?: string;
   };
 };
 
-export default async function AmenitiePage({ searchParams }: AmenitiePageProps) {
-  
-  const  params  =await searchParams;
+export default async function AmenitiePage({ searchParams }: Props) {
 
-  console.log('Slug recibido:', searchParams); // Debugging line
-  const amenitie = await getAmenitieByName(params?.slug);
+  const params = await searchParams;
 
-  if (!amenitie && params?.slug !== 'new') {
+  console.log('Slug recibido:', params); // Debugging line
+  const amenitie = await getAmenitieByName(params?.slug ?? '');
+
+  /*if (!amenitie && params?.slug !== 'new') {
     redirect('/admin/amenitie');
-  }
+  }*/
 
   const title = params?.slug === 'new' ? 'Nuevo amenitie' : 'Editar amenitie';
   return (

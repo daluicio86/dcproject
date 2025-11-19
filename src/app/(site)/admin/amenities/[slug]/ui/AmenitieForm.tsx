@@ -56,7 +56,7 @@ export const AmenitieForm = ({ title, item }: Props) => {
             return;
         }
 
-        router.replace(`/admin/amenitie`)
+        router.replace(`/admin/amenities`)
         /*router.refresh();
         alert('Contacto actualizado correctamente');*/
     };

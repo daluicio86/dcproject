@@ -20,16 +20,12 @@ export default async function AmenitiesPage({ searchParams }: Props) {
 
     const { amenities, currentPage, totalPages } = await getPaginatedAmenities({ page });
 
-    /*if (!categories || categories.length === 0) {
-        redirect('/admin/category');
-    }*/
-
     return (
         <>
             <HeroSub
-                title="Gestión de servicios"
+                title="Gestión de Amenities"
                 description="Gestiona tus servicios fácilmente con nuestra plataforma intuitiva."
-                badge="Servicios"
+                badge="Amenities"
             />
             <AmenitiesListing items={amenities} />
             <Pagination totalPages={totalPages} />
