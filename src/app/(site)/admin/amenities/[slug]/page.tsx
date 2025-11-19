@@ -4,24 +4,23 @@ import { getAmenitieByName } from '@/actions/amenitie/get-amenitie-by-name';
 import { AmenitieForm } from './ui/AmenitieForm';
 
 type AmenitiePageProps = {
-  params: {
+  searchParams: {
     slug: string;
   };
 };
 
-export default async function AmenitiePage({ params }: AmenitiePageProps) {
-  const { slug } =await params;
+export default async function AmenitiePage({ searchParams }: AmenitiePageProps) {
+  
+  const  params  =await searchParams;
 
-  console.log('Slug recibido:', params); // Debugging line
+  console.log('Slug recibido:', searchParams); // Debugging line
+  const amenitie = await getAmenitieByName(params?.slug);
 
-  const amenitie = await getAmenitieByName(slug);
-
-  if (!amenitie && slug !== 'new') {
+  if (!amenitie && params?.slug !== 'new') {
     redirect('/admin/amenitie');
   }
 
-  const title = slug === 'new' ? 'Nuevo amenitie' : 'Editar amenitie';
-
+  const title = params?.slug === 'new' ? 'Nuevo amenitie' : 'Editar amenitie';
   return (
     <>
       <HeroSub
