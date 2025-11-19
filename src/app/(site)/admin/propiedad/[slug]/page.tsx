@@ -14,8 +14,14 @@ interface Props {
         slug: string;
     }
 }
-export default async function PropiedadPage({ params }: Props) {
+//export default async function PropiedadPage({ params }: Props) {
 
+
+export default async function AmenitiesPage({
+    params
+}: {
+    params: Promise<{ slug: string }>
+}) {
     const { slug } = await params;
     const [propiedad, categories, amenities, tiposPropiedad, ciudades] = await Promise.all([
         getPropiedadBySlug(slug),
@@ -52,7 +58,7 @@ export default async function PropiedadPage({ params }: Props) {
                         }
                         : {}
                 }
-                ciudades={Object.values(ciudades ?? {})} 
+                ciudades={Object.values(ciudades ?? {})}
                 categories={categories ?? []}
                 amenities={amenities ?? []}
                 tiposPropiedad={tiposPropiedad ?? []}
