@@ -1,31 +1,34 @@
-
 import { redirect } from 'next/navigation';
+import HeroSub from '@/components/shared/HeroSub';
 import { CategoryForm } from './ui/CategoryForm';
 import { getCategoryByName } from '@/actions/categories/get-category-by-name';
-import HeroSub from '@/components/shared/HeroSub';
 
-interface Props {
-  params: {
-    slug: string;
+// Next.js 15.2 requiere await con params
+export default async function AmenitiesPage({ 
+  params 
+}: { 
+  params: Promise<{ slug: string }> 
+}) {
+  // DEBES usar await con params en Next.js 15.2
+  const { slug } = await params;
+
+  
+  // Validación del slug
+  if (!slug) {
+    redirect('/admin/category');
   }
-}
-
-export default async function CategoryPage({ params }: Props) {
-
-  const { slug } = params;
-
-  const [category] = await Promise.all([
-    getCategoryByName(slug),
-  ]);
-
-
-  // Todo: new
-  if (!category && slug !== 'new') {
-    redirect('/admin/category')
+  let category: { id: string; name: string; estado: boolean; } | null = null;
+  
+  if (slug !== 'new') {
+    try {
+      category = await getCategoryByName(slug);
+    } catch (error) {
+      console.error('Error fetching category:', error);
+    }
   }
 
-  const title = (slug === 'new') ? 'Nueva categoría' : 'Editar categoría'
-
+  const title = slug === 'new' ? 'Nuevo category' : 'Editar category';
+  
   return (
     <>
       <HeroSub
