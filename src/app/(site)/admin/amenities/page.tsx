@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     title: "Lista de servicios| Buying and selling",
 };
 
-export default async function AmenitiesPage({ params, }: { params: Promise<{ page?: string }> }) {
-    const { page } = await params;
+export default async function AmenitiesPage({ params, }: { params: { page?: string } }) {
+    const { page } =  params;
     const pageNumber = page ? parseInt(page) : 1;
 
     const { amenities, /*currentPage, */totalPages } = await getPaginatedAmenities({ page: pageNumber });

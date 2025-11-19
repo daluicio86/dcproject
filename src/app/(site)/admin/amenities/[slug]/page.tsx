@@ -3,43 +3,28 @@ import HeroSub from '@/components/shared/HeroSub';
 import { getAmenitieByName } from '@/actions/amenitie/get-amenitie-by-name';
 import { AmenitieForm } from './ui/AmenitieForm';
 
-// Para deployment en Vercel, genera estáticamente las páginas conocidas
-export async function generateStaticParams() {
-  return [
-    { slug: 'new' }
-    // Puedes agregar más slugs estáticos si los conoces
-  ];
-}
-
+// Opción 1: Si estás usando Next.js 14+ (recomendado)
 export default async function AmenitiesPage({ 
   params 
 }: { 
-  params: Promise<{ slug?: string }> 
+  params: { slug: string } 
 }) {
-  // Desestructuración correcta para Vercel
-  const { slug } = await params;
+  const { slug } = params;
   
   console.log('Slug recibido:', slug);
   
-  // Validación más robusta
+  // Validación del slug
   if (!slug) {
     redirect('/admin/amenitie');
   }
 
   let amenitie: { id: string; name: string; estado: boolean; } | null = null;
   
-  // Solo buscar en la base de datos si no es 'new'
   if (slug !== 'new') {
     try {
       amenitie = await getAmenitieByName(slug);
-      
-      // Redirigir si no existe la amenitie (opcional)
-      // if (!amenitie) {
-      //   redirect('/admin/amenitie');
-      // }
     } catch (error) {
       console.error('Error fetching amenitie:', error);
-      // En caso de error, puedes redirigir o mostrar un estado de error
     }
   }
 
