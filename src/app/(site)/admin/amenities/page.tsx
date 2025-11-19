@@ -8,17 +8,15 @@ export const metadata: Metadata = {
     title: "Lista de servicios| Buying and selling",
 };
 
-interface Props {
-    searchParams?: {
-        page?: string;
-    }
-}
+export default async function AmenitiesPage({
+    params,
+}: {
+    params: Promise<{ page?: string }>
+}) {
+    const { page } = await params;
+    //const pageNumber = page ? parseInt(page) : 1;
 
-export default async function AmenitiesPage({ searchParams }: Props) {
-    const params = await searchParams; // 👈 resolver la Promise
-    const page = params?.page ? parseInt(params.page) : 1;
-
-    const { amenities, currentPage, totalPages } = await getPaginatedAmenities({ page });
+    const { amenities, /*currentPage, */totalPages } = await getPaginatedAmenities({ page });
 
     return (
         <>
