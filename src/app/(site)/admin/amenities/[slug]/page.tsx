@@ -3,13 +3,13 @@ import HeroSub from '@/components/shared/HeroSub';
 import { getAmenitieByName } from '@/actions/amenitie/get-amenitie-by-name';
 import { AmenitieForm } from './ui/AmenitieForm';
 
-// Opción 1: Si estás usando Next.js 14+ (recomendado)
 export default async function AmenitiesPage({ 
   params 
 }: { 
-  params: { slug: string } 
+  params: Promise<{ slug: string }> 
 }) {
-  const { slug } = params;
+  // Desestructura el Promise con await
+  const { slug } = await params;
   
   console.log('Slug recibido:', slug);
   
