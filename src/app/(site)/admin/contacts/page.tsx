@@ -1,20 +1,24 @@
-import { getPaginatedContacts } from '@/actions/contact/contact-pagination';
-import ContactListing from '@/components/Contact/ContactList';
-import HeroSub from '@/components/shared/HeroSub';
-import React from 'react'
+import HeroSub from "@/components/shared/HeroSub";
+import React from "react";
+import { Metadata } from "next";
+import { getPaginatedContacts } from "@/actions/contact/contact-pagination";
+import ContactListing from "@/components/Contact/ContactList";
+
+export const metadata: Metadata = {
+    title: "Lista de servicios| Buying and selling",
+};
 
 interface Props {
-    searchParams: {
+    searchParams: Promise<{
         page?: string;
-    };
+    }>;
 }
 
-export default async function ContactPage({ searchParams }: Props) {
-    const params = await searchParams
-    const page = Number(params.page ?? "1");
+export default async function ContactsPage({ searchParams }: Props) {
+    const { page } = await searchParams;
+    const pageNumber = page ? parseInt(page) : 1;
 
-    const { contacts, currentPage, totalPages } =
-        await getPaginatedContacts({ page });
+    const { contacts, currentPage, totalPages } = await getPaginatedContacts({ page: pageNumber });
 
     return (
         <>
@@ -25,5 +29,5 @@ export default async function ContactPage({ searchParams }: Props) {
             />
             <ContactListing contacts={contacts} currentPage={currentPage} totalPages={totalPages} />
         </>
-    )
-}
+    );
+};
