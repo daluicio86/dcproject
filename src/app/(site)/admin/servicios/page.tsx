@@ -20,9 +20,14 @@ export default async function ServiciosPage({ searchParams }: Props) {
     const { page } = await searchParams;
     const pageNumber = Number(page ?? "1");
 
-    const { servicios = [], currentPage = 1, totalPages = 1 } = 
+    const { servicios = [], currentPage = 1, totalPages = 1 } =
         await getPaginatedServiciosWithImages({ page: pageNumber });
-    
+
+    const serviciosWithImages = servicios.map(servicio => ({
+        ...servicio,
+        images: servicio.images.map(url => ({ url }))
+    }));
+
     return (
         <>
             <HeroSub
@@ -31,15 +36,11 @@ export default async function ServiciosPage({ searchParams }: Props) {
                 badge="Servicios"
             />
             <div className="flex justify-end mb-5">
-                <Link 
-                    href="/admin/servicio/new"
-                    className="px-8 py-4 rounded-full bg-primary text-white text-base font-semibold hover:cursor-pointer hover:bg-dark duration-300"
-                >
-                    Nuevo
-                </Link>
+                <Link
+                    href="/admin/servicio/new" />
             </div>
             <ServicioListing
-                servicios={servicios}
+                servicios={serviciosWithImages}
                 currentPage={currentPage}
                 totalPages={totalPages}
             />
