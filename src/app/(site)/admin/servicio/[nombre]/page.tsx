@@ -13,7 +13,7 @@ interface Props {
 }
 //export default async function ServicioPage({ params }: Props) {
 
-export default async function AmenitiesPage({ 
+export default async function ServicioPage({ 
   params 
 }: { 
   params: Promise<{ nombre: string }> 
