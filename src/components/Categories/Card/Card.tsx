@@ -3,13 +3,13 @@
 import { useRouter } from 'next/navigation';
 import { deleteCategory } from '@/actions/categories/delete-categorie';
 import { TableCell, TableRow } from '@/components/ui/table'
-import { Category } from '@/interface'
 import {
   AiFillDelete
 } from "react-icons/ai";
+import { Categoria } from '@/interface';
 
 
-const CategoryCard: React.FC<{ item: Category }> = ({ item }) => {
+const CategoryCard: React.FC<{ item: Categoria }> = ({ item }) => {
   const { id, name } = item
   const router = useRouter();
   
