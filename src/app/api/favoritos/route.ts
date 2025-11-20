@@ -1,31 +1,34 @@
 import { getServerSession } from "next-auth";
-//import { authOptions } from "@/auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/auth.config";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   const session = await getServerSession(authOptions);
-  if (!session?.user?.id)
+
+  if (!session?.user?.id) {
     return NextResponse.json({ error: "No autorizado" }, { status: 401 });
+  }
 
   const { propiedadId } = await req.json();
 
+  if (!propiedadId) {
+    return NextResponse.json(
+      { error: "propiedadId es requerido" },
+      { status: 400 }
+    );
+  }
+
   const favorito = await prisma.favorito.findFirst({
-    where: { userId: session.user.id, propiedadId: propiedadId },
+    where: { userId: session.user.id, propiedadId },
   });
 
-  try {
-    if (!propiedadId) throw new Error("PropiedadId es requerido");
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
-  }
   if (favorito) {
-    // Si ya existe, lo elimina (toggle off)
+    // Ya existe → lo quitas (toggle off)
     await prisma.favorito.delete({ where: { id: favorito.id } });
     return NextResponse.json({ status: "removed" });
   } else {
-    // Si no existe, lo crea
+    // No existe → lo creas
     await prisma.favorito.create({
       data: { userId: session.user.id, propiedadId },
     });

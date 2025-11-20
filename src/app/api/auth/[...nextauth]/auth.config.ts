@@ -6,6 +6,8 @@ import prisma from "@/lib/prisma";
 import { signInEmailPassword } from "@/auth/actions/auth-actions";
 import { Adapter } from "next-auth/adapters";
 
+
+
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as Adapter,
   providers: [
