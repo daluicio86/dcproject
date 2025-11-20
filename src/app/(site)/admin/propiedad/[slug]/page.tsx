@@ -58,7 +58,15 @@ export default async function PropiedadPage({
                         }
                         : {}
                 }
-                ciudades={Object.values(ciudades ?? {})}
+                ciudades={Array.isArray(ciudades) ? ciudades.map(ciudad => ({
+                    ...ciudad,
+                    descripcion: ciudad.descripcion === null ? undefined : ciudad.descripcion,
+                    propiedades: ciudad.propiedades.map(prop => ({
+                        id: prop.id,
+                        title: prop.title,
+                        images: []
+                    }))
+                })) : []}
                 categories={categories ?? []}
                 amenities={amenities ?? []}
                 tiposPropiedad={tiposPropiedad ?? []}
