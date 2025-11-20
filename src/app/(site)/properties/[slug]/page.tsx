@@ -9,14 +9,13 @@ import { getPropiedadBySlug } from '@/actions';
 import notFound from '@/app/not-found';
 import { Propiedad } from '@/interface';
 import { useFavoritos } from '@/hooks/useFavoritos';
-import { useSession } from 'next-auth/react';
+
 import { useTranslation } from 'react-i18next';
 
 export default function Details() {
     const params = useParams();
     const slug = params.slug as string;
-    
-    const { data: session } = useSession();
+
     const { favoritos, toggleFavorito } = useFavoritos();
     const { t } = useTranslation();
 
