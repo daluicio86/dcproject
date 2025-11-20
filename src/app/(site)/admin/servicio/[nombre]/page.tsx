@@ -1,49 +1,46 @@
-
 import { redirect } from 'next/navigation';
 import React from 'react'
 import { ServicioForm } from './ui/ServicioForm';
 import { getServicioByNombre } from '@/actions/servicio/get-servicio-by-slug';
 import { getCiudades } from '@/actions/ciudad/get-ciudad';
 
-
 interface Props {
-    params: {
-        nombre: string;
-    }
+    params: Promise<{ nombre: string }>;
 }
-//export default async function ServicioPage({ params }: Props) {
 
-export default async function ServicioPage({ 
-  params 
-}: { 
-  params: Promise<{ nombre: string }> 
-}) {
-
+export default async function ServicioPage({ params }: Props) {
     const { nombre } = await params;
-    const [servicio] = await Promise.all([
+    
+    const [servicio, ciudades] = await Promise.all([
         getServicioByNombre(nombre),
-    ]);
-
-    const [ciudades] = await Promise.all([
         getCiudades(),
     ]);
 
-    /*if (!servicio) {
-        redirect('/admin/servicios');
-    }*/
-
-    // Todo: new
     if (!servicio && nombre !== 'new') {
-        redirect('/admin/servicios')
+        redirect('/admin/servicios');
     }
-    //const title = !servicio ? 'Nueva servicio' : 'Editar servicio'
+
+    // Transformar las imágenes al tipo esperado por ServicioForm
+    const servicioNormalizado = servicio ? {
+        ...servicio,
+        images: Array.isArray(servicio.images) 
+            ? servicio.images.map((url: string, index: number) => ({
+                id: index.toString(),
+                url: url,
+                servicioId: servicio.id
+            }))
+            : []
+    } : {};
+
     return (
         <>
-            {/*<div>{title}</div>*/}
             <ServicioForm
-                servicio={servicio ? { ...servicio, } : {}}
-                ciudades={ciudades ? { ...ciudades, } : {}}
+                servicio={servicioNormalizado}
+                ciudades={(ciudades ?? []).map(ciudad => ({
+                    ...ciudad,
+                    descripcion: ciudad.descripcion ?? undefined
+                }))}
             />
         </>
-    )
+    );
 }
