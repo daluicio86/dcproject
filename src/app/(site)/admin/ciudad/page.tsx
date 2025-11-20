@@ -4,6 +4,7 @@ import { Metadata } from "next";
 import { Pagination } from "@/components/Tables/Pagination";
 import CiudadListing from "@/components/Ciudad/CiudadList";
 import { getPaginatedCiudades } from "@/actions/ciudad/ciudad-pagination";
+import { normalizeCiudades } from "@/utils/normalizeCiudad";
 
 export const metadata: Metadata = {
     title: "Lista de ciudades| Buying and selling",
@@ -20,6 +21,8 @@ export default async function CiudadesPage({ searchParams }: Props) {
     const pageNumber = page ? parseInt(page) : 1;
     const { ciudades, currentPage, totalPages } = await getPaginatedCiudades({ page: pageNumber });
 
+    const normalizedCiudades = normalizeCiudades(ciudades) as any;
+
     return (
         <>
             <HeroSub
@@ -27,8 +30,8 @@ export default async function CiudadesPage({ searchParams }: Props) {
                 description="Gestiona tus ciudades fácilmente con nuestra plataforma intuitiva."
                 badge="Ciudades"
             />
-            <CiudadListing items={ciudades} />
+            <CiudadListing items={normalizedCiudades} />
             <Pagination totalPages={totalPages} />
         </>
     );
-};
+}
