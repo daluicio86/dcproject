@@ -63,7 +63,7 @@ const ServicioCard: React.FC<{ item: Servicio }> = ({ item }) => {
                   <CarouselItem key={index}>
                     <Link href={`/admin/servicio/${nombre}`}>
                       <Image
-                        src={ele}
+                        src={ele.url}
                         alt={index.toString()}
                         width={250}
                         height={250}
