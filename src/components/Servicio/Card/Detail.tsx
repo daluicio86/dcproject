@@ -51,7 +51,7 @@ const ServicioDetail: React.FC<{ item: Servicio }> = ({ item }) => {
                 {images.map((ele, index) => (
                   <CarouselItem key={index}>
                       <Image
-                        src={ele}
+                        src={ele.url}
                         alt={index.toString()}
                         width={250}
                         height={250}
