@@ -1,6 +1,6 @@
 
 
-import { Category } from '@/interface'
+import { Categoria } from '@/interface'
 import CategoryCard from '../Card/Card'
 import React from "react";
 import {
@@ -13,7 +13,7 @@ import {
 import Link from 'next/link';
 
 interface Props {
-  items?: Category[]
+  items?: Categoria[]
 }
 
 const PropertiesListing: React.FC<Props> = async ({ items }: Props) => {
