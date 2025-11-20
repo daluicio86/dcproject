@@ -1,5 +1,5 @@
 import PropertyCard from '@/components/Home/Properties/Card/Card'
-import { propertyHomes } from '@/app/api/propertyhomes'
+
 import { Propiedad } from '@/interface'
 
 interface Props {

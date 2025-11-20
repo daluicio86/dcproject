@@ -1,10 +1,10 @@
 import PropertyCard from '@/components/Home/Properties/Card/Card'
-import { propertyHomes } from '@/app/api/propertyhomes'
+import { Propiedad } from '@/interface' 
 
 interface Props {
   items: Propiedad[]
 }
-import { Propiedad } from '@/interface' 
+
 const OfficeSpace: React.FC<Props> = ({ items }) => {
     return (
         <section className='pt-0!'>
