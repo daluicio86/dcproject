@@ -29,6 +29,7 @@ const Servicios = () => {
           nombre: c.nombre,
           url: c.url ?? null,
           servicios: c.servicios ?? [],
+          propiedades: c.propiedades ?? [],
         }));
         setCiudades(normalized);
         setCurrentPage(res.currentPage ?? 1);
