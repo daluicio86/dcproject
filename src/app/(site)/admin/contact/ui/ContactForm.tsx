@@ -9,7 +9,6 @@ interface Props {
     contact: Partial<Contacto> | null;
 }
 
-
 interface FormContactInputs {
     id: number
     name: string | null
@@ -20,16 +19,12 @@ interface FormContactInputs {
 }
 
 export const ContactForm = ({ contact }: Props) => {
-
     const router = useRouter();
 
     const {
         handleSubmit,
         register,
         formState: { isValid },
-        getValues,
-        setValue,
-        watch,
     } = useForm<FormContactInputs>({
         defaultValues: {
             ...contact
@@ -45,10 +40,11 @@ export const ContactForm = ({ contact }: Props) => {
             formData.append("id", String(contact.id ?? ""));
         }
 
-        formData.append("name", contactToSave.name);
-        formData.append("telefono", contactToSave.telefono);
+        // Convertir null a string vacío
+        formData.append("name", contactToSave.name ?? "");
+        formData.append("telefono", contactToSave.telefono ?? "");
         formData.append("email", contactToSave.email);
-        formData.append("mensaje", contactToSave.mensaje);
+        formData.append("mensaje", contactToSave.mensaje ?? "");
 
         const { ok, contact: updatedContact } = await createUpdateContact(formData);
 
@@ -56,8 +52,6 @@ export const ContactForm = ({ contact }: Props) => {
             alert('Contacto no se pudo actualizar');
             return;
         }
-
-        //router.replace(`/admin/contact/${ updatedContact?.slug }`)
 
         router.refresh();
         alert('Contacto actualizado correctamente');
@@ -96,7 +90,6 @@ export const ContactForm = ({ contact }: Props) => {
                         {...register("mensaje", { required: true })}
                     ></textarea>
                 </div>
-
 
                 <div className="flex flex-col mb-2">
                     <span>Email</span>
