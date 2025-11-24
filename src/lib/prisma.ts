@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma/client'
+//import { PrismaClient } from '@prisma/client'
 
-//import { PrismaClient } from './../../../../app/generated/prisma-client/index.js'
+import { PrismaClient } from './../../../../app/generated/prisma-client/index.js'
 import { withAccelerate } from '@prisma/extension-accelerate'
 
 const prismaClientSingleton = () => {
