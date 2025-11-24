@@ -14,6 +14,7 @@ export const signInEmailPassword = async (email: string, password: string) => {
   } else {
     await editUser(email);
   }
+
   const isValid = await bcrypt.compare(password, user.password ?? "");
   if (!isValid) return null;
 
@@ -21,42 +22,29 @@ export const signInEmailPassword = async (email: string, password: string) => {
 };
 
 const createUser = async (name: string, email: string, password: string) => {
-  const hashedPassword = await bcrypt.hashSync(password, 10);
+  const hashedPassword = bcrypt.hashSync(password, 10);
 
-  if (email === "diego.aluicio@gmail.com") {
-    const newUser = await prisma.user.create({
-      data: {
-        name,
-        email,
-        password: hashedPassword,
-        role: "admin", // or another valid role value
-      },
-    });
-    return newUser;
-  } else {
-    const newUser = await prisma.user.create({
-      data: {
-        name,
-        email,
-        password: hashedPassword,
-        role: "user", // or another valid role value
-      },
-    });
-    return newUser;
-  }
+  const role = email === "diego.aluicio@gmail.com" ? "admin" : "user";
+
+  const newUser = await prisma.user.create({
+    data: {
+      name,
+      email,
+      password: hashedPassword,
+      role,
+    },
+  });
+
+  return newUser;
 };
 
-
 const editUser = async (email: string) => {
+  const role = email === "diego.aluicio@gmail.com" ? "admin" : "user";
 
-  if (email === "diego.aluicio@gmail.com") {
-    const editUser = await prisma.user.update({
-      where: { email },
-      data: {
-        role: "admin", // or another valid role value
-      },
-    });
-    return editUser;
-  } 
-  }
+  const updatedUser = await prisma.user.update({
+    where: { email },
+    data: { role },
+  });
+
+  return updatedUser;
 };
