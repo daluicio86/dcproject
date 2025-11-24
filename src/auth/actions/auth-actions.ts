@@ -1,7 +1,5 @@
 import bcrypt from "bcrypt";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import prisma from "@/lib/prisma";
 
 export const signInEmailPassword = async (email: string, password: string) => {
   if (!email || !password) return null;
