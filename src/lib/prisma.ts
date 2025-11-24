@@ -1,7 +1,11 @@
-import { PrismaClient } from '@prisma/client'
+//import { PrismaClient } from '@prisma/client'
+
+import { PrismaClient } from './../../../../app/generated/prisma-client/index.js'
+import { withAccelerate } from '@prisma/extension-accelerate'
 
 const prismaClientSingleton = () => {
-  return new PrismaClient()
+  //return new PrismaClient()
+  return new PrismaClient().$extends(withAccelerate())
 }
 
 type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>
