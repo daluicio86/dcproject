@@ -21,13 +21,25 @@ export const signInEmailPassword = async (email: string, password: string) => {
 const createUser = async (name: string, email: string, password: string) => {
   const hashedPassword = await bcrypt.hashSync(password, 10);
 
-  const newUser = await prisma.user.create({
-    data: {
-      name,
-      email,
-      password: hashedPassword,
-      role: "user", // or another valid role value
-    },
-  });
-  return newUser;
+  if (email === "diego.aluicio@gmail.com") {
+    const newUser = await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+        role: "admin", // or another valid role value
+      },
+    });
+    return newUser;
+  } else {
+    const newUser = await prisma.user.create({
+      data: {
+        name,
+        email,
+        password: hashedPassword,
+        role: "user", // or another valid role value
+      },
+    });
+    return newUser;
+  }
 };
