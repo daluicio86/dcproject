@@ -10,16 +10,17 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     ignores: [
       "**/app/generated/**",
+      "app/generated/**",
       "**/.next/**",
       "**/node_modules/**",
       "**/dist/**",
       "**/build/**",
     ],
   },
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {
       "@typescript-eslint/no-explicit-any": "warn",
