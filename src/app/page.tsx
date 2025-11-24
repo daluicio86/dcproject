@@ -11,8 +11,15 @@ import { Welcome } from '@/components/Home/Welcome'
 export default function Home() {
   return (
     <main>
-    <h1>Index — prueba mínima</h1>
-      <p>Si ves esto, la raíz funciona y el problema eran los imports.</p>
+      <Hero />
+      <Welcome />
+      <Services />
+      {/*<Properties />
+      <FeaturedProperty />*/}
+      <Testimonial />
+      <BlogSmall />
+      <GetInTouch />
+      <FAQ />
     </main>
   )
 }

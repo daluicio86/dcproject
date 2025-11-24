@@ -5,19 +5,16 @@ import Link from 'next/link';
 import React from 'react'
 
 interface Props {
-    searchParams: {
+    searchParams: Promise<{
         page?: string;
-    };
+    }>;
 }
 
-//export default async function PropiedadesPage({ searchParams }: Props) {
-export default async function PropiedadPage({
-    params
-}: {
-    params: Promise<{ page: number }>
-}) {
+export const dynamic = 'force-dynamic';
 
-    const { page } = await params;
+export default async function PropiedadPage({ searchParams }: Props) {
+    const { page: pageParam } = await searchParams;
+    const page = pageParam ? parseInt(pageParam) : 1;
 
     const {
         propiedads = [],
