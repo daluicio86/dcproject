@@ -2,7 +2,9 @@
 
 import prisma from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
-import { Amenities } from '@prisma/client';
+//import { Amenities } from '@prisma/client';
+import { Amenities } from './../../../app/generated/prisma-client'
+
 import { z } from 'zod';
 
 
