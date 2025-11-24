@@ -3,6 +3,7 @@
 .env
 
 /postgres/
+/app/generated/
 
 # dependencies
 /node_modules
