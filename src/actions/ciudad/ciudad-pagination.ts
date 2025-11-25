@@ -15,38 +15,40 @@ export const getPaginatedCiudades = async ({
   if (page < 1) page = 1;
 
   try {
-    // 1. Obtener los productos
+    const orden = ["cayambe", "quito", "pedro vicente maldonado"];
+
+    const normalizar = (str: string) =>
+      str.trim().toLowerCase();
+
     const ciudades = await prisma.ciudad.findMany({
       take: take,
       skip: (page - 1) * take,
       include: {
         servicios: {
-          include: {
-            images: true, // 👈 Incluye las imágenes asociadas a cada servicio
-          },
+          include: { images: true },
         },
         propiedades: {
-          include: {
-            images: true, // 👈 Incluye las imágenes asociadas a cada propiedad
-          },
+          include: { images: true },
         },
       },
+      orderBy: { nombre: "asc" },
     });
 
-    // 2. Obtener el total de páginas
-    // todo:
-    const totalCount =
-      await prisma.ciudad.count(/*{ where: { estado: true } }*/);
+    const ciudadesOrdenadas = ciudades.sort(
+      (a, b) =>
+        orden.indexOf(normalizar(a.nombre)) -
+        orden.indexOf(normalizar(b.nombre))
+    );
 
+    const totalCount = await prisma.ciudad.count();
     const totalPages = Math.ceil(totalCount / take);
+
     return {
       currentPage: page,
-      totalPages: totalPages,
-      ciudades: ciudades.map((city) => ({
-        ...city,
-      })),
+      totalPages,
+      ciudades: ciudadesOrdenadas,
     };
   } catch (error) {
-    throw new Error("No se pudo cargar los productos");
+    throw new Error("No se pudo cargar las ciudades");
   }
 };

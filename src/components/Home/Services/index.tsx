@@ -42,7 +42,7 @@ const Servicios = () => {
       mounted = false;
     };
   }, [page]);
-
+console.log(ciudades);
   return (
     <section className="relative overflow-hidden">
       <div className="absolute left-0 top-0">
