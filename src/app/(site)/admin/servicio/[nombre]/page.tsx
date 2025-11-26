@@ -37,8 +37,19 @@ export default async function ServicioPage({ params }: Props) {
             <ServicioForm
                 servicio={servicioNormalizado}
                 ciudades={(ciudades ?? []).map(ciudad => ({
-                    ...ciudad,
-                    descripcion: ciudad.descripcion ?? undefined
+                    id: ciudad.id,
+                    nombre: ciudad.nombre,
+                    descripcion: ciudad.descripcion ?? undefined,
+                    url: ciudad.url,
+                    servicios: ciudad.servicios?.map(s => ({
+                        id: s.id,
+                        nombre: s.nombre
+                    })) ?? [],
+                    propiedades: ciudad.propiedades?.map(p => ({
+                        id: p.id,
+                        title: p.title,
+                        images: []
+                    })) ?? []
                 }))}
             />
         </>

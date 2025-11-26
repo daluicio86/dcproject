@@ -77,7 +77,6 @@ export const ServicioForm = ({ servicio, ciudades }: Props) => {
         alert('Servicio actualizado correctamente');
     };
 
-console.log("session", session);
     if (!session || session.user?.role !== 'admin') {
         redirect('/servicios');
     }
