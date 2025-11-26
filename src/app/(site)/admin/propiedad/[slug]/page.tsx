@@ -35,6 +35,8 @@ export default async function PropiedadPage({
         redirect('/admin/propiedads');
     }*/
 
+
+    console.log("propiedad", propiedad);
     // Todo: new
     if (!propiedad && slug !== 'new') {
         redirect('/admin/propiedads')
@@ -56,7 +58,15 @@ export default async function PropiedadPage({
                         }
                         : {}
                 }
-                ciudades={ciudades ?? []}
+                ciudades={Array.isArray(ciudades) ? ciudades.map(ciudad => ({
+                    ...ciudad,
+                    descripcion: ciudad.descripcion === null ? undefined : ciudad.descripcion,
+                    propiedades: ciudad.propiedades.map(prop => ({
+                        id: prop.id,
+                        title: prop.title,
+                        images: []
+                    }))
+                })) : []}
                 categories={categories ?? []}
                 amenities={amenities ?? []}
                 tiposPropiedad={tiposPropiedad ?? []}
