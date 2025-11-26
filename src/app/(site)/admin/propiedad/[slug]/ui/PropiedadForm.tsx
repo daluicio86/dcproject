@@ -72,11 +72,20 @@ const tiposCategoria = [
     { value: TipoPropiedad.Hacienda, text: "Hacienda", selected: false },
 ];*/
 
-export const PropiedadForm = ({ propiedad, categories, amenities, tiposPropiedad, ciudades }: Props) => {
+//export const PropiedadForm = ({ propiedad, categories, amenities, tiposPropiedad, ciudades }: Props) => {
+
+export const PropiedadForm = ({
+    propiedad,
+    categories = [],
+    amenities = [],
+    tiposPropiedad = [],
+    ciudades = []
+}: Props) => {
     const { data: session } = useSession();
     const router = useRouter();
     const { t } = useTranslation();
 
+    const ciudadesArray = Object.values(ciudades);
     const {
         handleSubmit,
         register,
@@ -213,7 +222,7 @@ export const PropiedadForm = ({ propiedad, categories, amenities, tiposPropiedad
                                     <option key={-1} value=''>
                                         {t("selectCiudad")}
                                     </option>
-                                    {Array.isArray(ciudades) && ciudades.map((item) => (
+                                    {ciudadesArray.map((item) => (
                                         <option key={item.id} value={item.id}>
                                             {item.nombre}
                                         </option>
@@ -230,7 +239,7 @@ export const PropiedadForm = ({ propiedad, categories, amenities, tiposPropiedad
                                     autoComplete='address'
                                     placeholder={t("propiedadForm.address")}
                                     required
-                                    className='px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline'
+                                    className='px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full'
                                 />
                                 <input
                                     type='text'
@@ -238,9 +247,8 @@ export const PropiedadForm = ({ propiedad, categories, amenities, tiposPropiedad
                                     name='geoLink'
                                     id='geoLink'
                                     autoComplete='off'
-                                    placeholder={t("propiedadForm.geoLink")}
-                                    required
-                                    className='px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline'
+                                    placeholder={t("propiedadForm.geoLink")}                                    
+                                    className='px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full'
                                 />
                             </div>
                             <div className='flex flex-col lg:flex-row gap-6'>
@@ -350,7 +358,7 @@ export const PropiedadForm = ({ propiedad, categories, amenities, tiposPropiedad
                                     </option>}
                                 </select>
                             </div>
-                            <div className="flex flex-col gap-4">
+                            {/*<div className="flex flex-col gap-4">
                                 <span className="text-lg font-semibold">Servicios</span>
 
                                 <div className="flex flex-wrap justify-between">
@@ -369,7 +377,7 @@ export const PropiedadForm = ({ propiedad, categories, amenities, tiposPropiedad
                                         </div>
                                     ))}
                                 </div>
-                            </div>
+                            </div>*/}
 
 
                             <textarea
