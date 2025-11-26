@@ -13,9 +13,10 @@ export const getCiudades= async () => {
 
     if (!ciudades) return null;
 
-    return {
-      ...ciudades,
-    };
+    return ciudades.map(ciudad => ({
+      ...ciudad,
+      descripcion: ciudad.descripcion ?? undefined
+    }));
   } catch (error) {
     console.log(error);
     throw new Error("Error al obtener ciudades");
