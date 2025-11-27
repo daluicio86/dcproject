@@ -7,7 +7,7 @@ export async function getPropiedadBySlug(slug: string) {
     const propiedad = await prisma.propiedad.findFirst({
       include: {
         images: true,
-        amenities: true,
+        //amenities: true,
       },
       where: { slug },
     });
@@ -20,7 +20,7 @@ export async function getPropiedadBySlug(slug: string) {
       description: propiedad.description === null ? "" : propiedad.description,
       userId: propiedad.userId === null ? "" : propiedad.userId,
       images: propiedad.images.map((image) => image.url) || [],
-      amenities: propiedad.amenities || [],
+      //amenities: propiedad.amenities || [],
     };
   } catch (error) {
     console.log(error);
