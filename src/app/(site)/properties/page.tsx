@@ -53,8 +53,6 @@ export default async function PropertiesPage({
         precioMaximo: precioMax 
     });
 
-    console.log("propiedads", propiedads);
-
     return (
         <>
             <HeroSub
@@ -73,6 +71,7 @@ export default async function PropertiesPage({
                         ...p,
                         rentaVenta: p.rentaVenta === null ? undefined : p.rentaVenta,
                         temperatura: p.temperatura === null ? undefined : p.temperatura,
+                        geoLink: p.geoLink ?? "",
                     }))} />
                     <Pagination totalPages={totalPages} />
                 </>
