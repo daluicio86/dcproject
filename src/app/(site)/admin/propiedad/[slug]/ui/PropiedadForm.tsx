@@ -396,7 +396,7 @@ export const PropiedadForm = ({
                                     {...register('images')}
                                     multiple
                                     className="p-2 border rounded-md bg-gray-200"
-                                    accept="image/png, image/jpeg, image/avif"
+                                    accept="image/png, image/jpeg, image/avif, video/mp4, video/webm, video/avi "
                                 />
                             </div>
 
