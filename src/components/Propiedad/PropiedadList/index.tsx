@@ -4,7 +4,7 @@ import PropiedadCard from '../Card/Card'
 import { Propiedad } from '@/interface/propiedad.interface';
 
 const PropiedadListing: React.FC<{ propiedads: Propiedad[], currentPage: number, totalPages: number }> = ({ propiedads, currentPage, totalPages }) => {
-  
+  console.log("propiedads in listing", propiedads);
   return (
     <section className='pt-0!'>
       <div className='container max-w-8xl mx-auto px-5 2xl:px-0'>

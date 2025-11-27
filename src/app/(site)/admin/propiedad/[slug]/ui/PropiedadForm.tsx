@@ -4,17 +4,17 @@ import { useForm } from "react-hook-form";
 import { Propiedad, PropiedadImage as PropiedadWithImage } from "@/interface/propiedad.interface";
 import { createUpdatePropiedad } from "@/actions/propiedad/create-update-propiedad";
 import { useRouter } from 'next/navigation';
-import { Amenities, Categoria, Ciudad } from "@/interface";
+import {  Categoria, Ciudad } from "@/interface";
 import { useTranslation } from "react-i18next";
 import HeroSub from "@/components/shared/HeroSub";
 import { useSession } from "next-auth/react";
-import { clsx } from "clsx";
+//import { clsx } from "clsx";
 import { TipoPropiedad } from "@/interface/tipoPropiedad.interface";
 
 interface Props {
     propiedad: Partial<Propiedad> & { PropiedadImage?: PropiedadWithImage[] };
     categories: Categoria[];
-    amenities: Amenities[];
+    //amenities: Amenities[];
     tiposPropiedad: TipoPropiedad[];
     ciudades: Ciudad[];
 }
@@ -42,7 +42,7 @@ interface FormInputs {
 
     userId: string
     images?: FileList;
-    amenities: string[];
+    //amenities: string[];
 }
 const enumRentaVenta = [
     { id: "1", name: "Renta" },
@@ -77,7 +77,7 @@ const tiposCategoria = [
 export const PropiedadForm = ({
     propiedad,
     categories = [],
-    amenities = [],
+    //amenities = [],
     tiposPropiedad = [],
     ciudades = []
 }: Props) => {
@@ -97,12 +97,11 @@ export const PropiedadForm = ({
         defaultValues: {
             ...propiedad,
             precio: propiedad?.precio ?? undefined,
-            amenities: propiedad?.amenities ? propiedad.amenities.map(a => a.id) : [],
             images: undefined
-        },
+        } as FormInputs,
     });
 
-    const slugify = (text: string) => {
+    /*const slugify = (text: string) => {
         return text
             .toString()
             .normalize("NFD")                   // separa acentos
@@ -111,7 +110,7 @@ export const PropiedadForm = ({
             .trim()
             .replace(/\s+/g, "-")               // espacios → guiones
             .replace(/[^a-z0-9-]/g, "");        // quita símbolos raros
-    };
+    };*/
 
     const onSubmit = async (data: FormInputs) => {
         const formData = new FormData();
@@ -135,7 +134,7 @@ export const PropiedadForm = ({
         formData.append("esPrincipal", String(false));
         formData.append("categoriaId", propiedadToSave.categoriaId);
         formData.append("tipoPropiedadId", propiedadToSave.tipoPropiedadId);
-        formData.append("amenities", propiedadToSave.amenities.toString());
+        //formData.append("amenities", propiedadToSave.amenities.toString());
         formData.append("userId", session?.user?.id || '');
 
         //formData.append("ubicacion", propiedadToSave.tipoPropiedadId);
@@ -167,9 +166,9 @@ export const PropiedadForm = ({
         alert('Propiedad actualizado correctamente');
     };
 
-    watch("amenities");
+    //watch("amenities");
 
-    const onAmenityChanged = (amenity: string) => {
+    /*const onAmenityChanged = (amenity: string) => {
         const amenities = new Set(getValues("amenities"));
         if (amenities.has(amenity)) {
             amenities.delete(amenity);
@@ -177,7 +176,7 @@ export const PropiedadForm = ({
             amenities.add(amenity);
         }
         setValue("amenities", Array.from(amenities));
-    };
+    };*/
 
     return (
 

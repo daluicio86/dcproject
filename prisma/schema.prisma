@@ -10,7 +10,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 enum Role {
@@ -34,7 +33,7 @@ model Amenities {
   id          String      @id @default(uuid())
   name        String      @unique
   estado      Boolean     @default(true)
-  propiedades Propiedad[]
+  //propiedades Propiedad[]
 }
 
 model TipoPropiedad {
@@ -65,7 +64,7 @@ model Propiedad {
   metros      Float    @default(0)
   altura      Float    @default(0)
   address     String?
-  geoLink     String //ubicacion
+  geoLink     String? //ubicacion
   esPrincipal Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -83,7 +82,7 @@ model Propiedad {
   ciudadId String // clave foránea
   ciudad   Ciudad @relation(fields: [ciudadId], references: [id])
 
-  amenities Amenities[]
+  //amenities Amenities[]
 
   images PropiedadImage[]
   User   User?            @relation(fields: [userId], references: [id])

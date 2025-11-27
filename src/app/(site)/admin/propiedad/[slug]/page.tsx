@@ -9,11 +9,11 @@ import { getPropiedadBySlug } from '@/actions';
 import { getCiudades } from '@/actions/ciudad/get-ciudad';
 
 
-interface Props {
+/*interface Props {
     params: {
         slug: string;
     }
-}
+}*/
 //export default async function PropiedadPage({ params }: Props) {
 
 
@@ -22,11 +22,13 @@ export default async function PropiedadPage({
 }: {
     params: Promise<{ slug: string }>
 }) {
+            console.log("params", params);
     const { slug } = await params;
-    const [propiedad, categories, amenities, tiposPropiedad, ciudades] = await Promise.all([
+
+        console.log("slug", slug);
+    const [propiedad, categories, tiposPropiedad, ciudades] = await Promise.all([
         getPropiedadBySlug(slug),
         getCategories(2),
-        getAmenities(),
         getTiposPropiedad(),
         getCiudades()
     ]);
@@ -37,10 +39,12 @@ export default async function PropiedadPage({
 
 
     console.log("propiedad", propiedad);
-    // Todo: new
+
     if (!propiedad && slug !== 'new') {
         redirect('/admin/propiedads')
     }
+
+
     return (
         <>
             {/*<div>{title}</div>*/}
@@ -55,6 +59,7 @@ export default async function PropiedadPage({
                             apto: propiedad.apto === null ? undefined : propiedad.apto,
                             description: propiedad.description === null ? undefined : propiedad.description,
                             userId: propiedad.userId === null ? undefined : propiedad.userId,
+                            geoLink: propiedad.geoLink === null ? undefined : propiedad.geoLink,
                         }
                         : {}
                 }
@@ -68,7 +73,7 @@ export default async function PropiedadPage({
                     }))
                 })) : []}
                 categories={categories ?? []}
-                amenities={amenities ?? []}
+                //amenities={amenities ?? []}
                 tiposPropiedad={tiposPropiedad ?? []}
             />
         </>

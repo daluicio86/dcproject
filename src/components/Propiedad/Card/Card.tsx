@@ -34,7 +34,6 @@ const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
       api.scrollTo(index);
     }
   };
-
   return (
     <div>
       <div className='relative rounded-2xl border border-dark/10 dark:border-white/10 group hover:shadow-3xl duration-300 dark:hover:shadow-white/20'>
@@ -52,7 +51,7 @@ const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
             )}
           </Link>*/}
 
-          <div className="relative">            
+          <div className="relative">
             <Carousel
               setApi={setApi}
               opts={{
@@ -63,20 +62,20 @@ const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
                 {images.map((ele, index) => (
                   <CarouselItem key={index}>
                     <Link href={`/admin/propiedad/${slug}`}>
-                    <Image
-                      src={ele}
-                      alt={index.toString()}
-                      width={250}
-                      height={250}
-                      className="rounded-2xl w-full h-96"
-                      unoptimized={true}
-                    />
+                      <Image
+                        src={ele}
+                        alt={index.toString()}
+                        width={250}
+                        height={250}
+                        className="rounded-2xl w-full h-96"
+                        unoptimized={true}
+                      />
                     </Link>
                   </CarouselItem>
                 ))}
               </CarouselContent>
             </Carousel>
-            
+
             <div className="absolute left-2/5 bg-dark/50 rounded-full py-2.5 bottom-10 flex justify-center mt-4 gap-2.5 px-2.5">
               {Array.from({ length: count }).map((_, index) => (
                 <button

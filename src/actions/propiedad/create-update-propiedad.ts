@@ -32,7 +32,7 @@ const propiedadSchema = z.object({
   ciudadId: z.string(),
   rentaVenta: z.string(),
   temperatura: z.string(),
-  amenities: z.coerce.string().transform((val) => val.split(",")),
+  //amenities: z.coerce.string().transform((val) => val.split(",")),
 });
 
 export const createUpdatePropiedad = async (formData: FormData) => {
@@ -55,32 +55,32 @@ export const createUpdatePropiedad = async (formData: FormData) => {
 
       if (id) {
         // Actualizar
+        const { categoriaId, tipoPropiedadId, ciudadId, ...propiedadData } = rest;
         propiedad = await prisma.propiedad.update({
           where: { id },
           data: {
-            ...(({ categoriaId, tipoPropiedadId, ciudadId, amenities, ...other }) =>
-              other)(rest),
-            categoria: { connect: { id: rest.categoriaId } }, // Use actual category id
-            tipoPropiedad: { connect: { id: rest.tipoPropiedadId } },
-            ciudad: { connect: { id: rest.ciudadId } },
-            amenities: {
-              connect: (rest.amenities as string[]).map((id) => ({ id })),
-            },
+            ...propiedadData,
+            categoria: { connect: { id: categoriaId } }, // Use actual category id
+            tipoPropiedad: { connect: { id: tipoPropiedadId } },
+            ciudad: { connect: { id: ciudadId } },
+            /*amenities: {
+              connect: (amenities as string[]).map((id) => ({ id })),
+            },*/
           },
         });
       } else {
         // Crear
+        const { categoriaId, tipoPropiedadId, ciudadId, ...propiedadData } = rest;
         propiedad = await prisma.propiedad.create({
           data: {
             // Remove categoriaId, tipoPropiedadId, ciudadId and amenities from rest
-            ...(({ categoriaId, tipoPropiedadId, ciudadId, amenities, ...other }) =>
-              other)(rest),
-            categoria: { connect: { id: rest.categoriaId } }, // Use actual category id
-            tipoPropiedad: { connect: { id: rest.tipoPropiedadId } },
-            ciudad: { connect: { id: rest.ciudadId } },
-            amenities: {
-              connect: (rest.amenities as string[]).map((id) => ({ id })),
-            },
+            ...propiedadData,
+            categoria: { connect: { id: categoriaId } }, // Use actual category id
+            tipoPropiedad: { connect: { id: tipoPropiedadId } },
+            ciudad: { connect: { id: ciudadId } },
+            /*amenities: {
+              connect: (amenities as string[]).map((id) => ({ id })),
+            },*/
           },
         });
       }

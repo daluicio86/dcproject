@@ -37,7 +37,12 @@ export default async function ServiciosPage({ searchParams }: Props) {
             />
             <div className="flex justify-end mb-5">
                 <Link
-                    href="/admin/servicio/new" />
+                    href="/admin/servicio/new" className="px-8 py-4 rounded-full bg-primary text-white
+                                text-base font-semibold hover:cursor-pointer
+                                hover:bg-dark duration-300"
+                >
+                    Nuevo
+                </Link>
             </div>
             <ServicioListing
                 servicios={serviciosWithImages}

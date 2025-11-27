@@ -40,7 +40,7 @@ export default function Details() {
     useEffect(() => {
         const fetchData = async () => {
             if (!slug) return;
-            
+
             const result = await getPropiedadBySlug(slug);
             if (result) {
                 setItem({
@@ -48,6 +48,7 @@ export default function Details() {
                     address: result.address ?? "",
                     rentaVenta: result.rentaVenta === null ? '' : result.rentaVenta,
                     temperatura: result.temperatura === null ? '' : result.temperatura,
+                    geoLink: result.geoLink ?? "",
                 });
             } else {
                 setItem(null);
@@ -199,10 +200,10 @@ export default function Details() {
                                 {item?.description}
                             </p>
                         </div>
-                        <div className="py-8 mt-8 border-t border-dark/5 dark:border-white/15">
+                        {/* <div className="py-8 mt-8 border-t border-dark/5 dark:border-white/15">
                             <h3 className='text-xl font-medium'>What this property offers</h3>
                             <div className="grid grid-cols-3 mt-5 gap-6">
-                                {/* <div className="flex items-center gap-2.5">
+                         <div className="flex items-center gap-2.5">
                                     <Icon icon="ph:aperture" width={24} height={24} className="text-dark dark:text-white" />
                                     <p className='text-base dark:text-white text-dark'>Smart Home Integration</p>
                                 </div>
@@ -225,39 +226,38 @@ export default function Details() {
                                 <div className="flex items-center gap-2.5">
                                     <Icon icon="ph:cloud" width={24} height={24} className="text-dark dark:text-white" />
                                     <p className='text-base dark:text-white text-dark'>Outdoor Spaces</p>
-                                </div>*/}
-                                {(console.log("Servicios del item:", item?.geoLink)) ?? null}
+                                </div>
                                 {item?.amenities && item.amenities.map((item) => (
                                     <div key={item.id} className="flex items-center gap-2.5">
                                         <p className='text-base dark:text-white text-dark'>{item.name}</p>
                                     </div>
                                 ))}
                             </div>
-                        </div>
-                        <iframe
-                            src={item?.geoLink}
-                            width="1114" height="400" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="rounded-2xl w-full">
-                        </iframe>
                     </div>
-                    <div className="lg:col-span-4 col-span-12">
-                        <div className="bg-primary/10 p-8 rounded-2xl relative z-10 overflow-hidden">
-                            <p className='text-sm text-dark/50 dark:text-white'>Favorites</p>
-                            {item && (
-                                <button
-                                    onClick={() => item && toggleFavorito(item.id)}
-                                    className="text-xl mt-1"
-                                >
-                                    {favoritos?.includes(item.id) ? "❤️" : "🤍"}
-                                </button>
-                            )}                            
-                            <Link href="#" className='py-4 px-8 bg-primary text-white rounded-full w-full block text-center hover:bg-dark duration-300 text-base mt-8 hover:cursor-pointer'>
-                                {t("btnText1")}
-                            </Link>
-                            <div className="absolute right-0 top-4 -z-[1]">
-                                <Image src="/images/properties/vector.svg" width={400} height={500} alt="vector" unoptimized={true} />
-                            </div>
+                    <iframe
+                        src={item?.geoLink}
+                        width="1114" height="400" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="rounded-2xl w-full">
+                    </iframe>*/}
+                </div>
+                <div className="lg:col-span-4 col-span-12">
+                    <div className="bg-primary/10 p-8 rounded-2xl relative z-10 overflow-hidden">
+                        <p className='text-sm text-dark/50 dark:text-white'>Favorites</p>
+                        {item && (
+                            <button
+                                onClick={() => item && toggleFavorito(item.id)}
+                                className="text-xl mt-1"
+                            >
+                                {favoritos?.includes(item.id) ? "❤️" : "🤍"}
+                            </button>
+                        )}
+                        <Link href="#" className='py-4 px-8 bg-primary text-white rounded-full w-full block text-center hover:bg-dark duration-300 text-base mt-8 hover:cursor-pointer'>
+                            {t("btnText1")}
+                        </Link>
+                        <div className="absolute right-0 top-4 -z-[1]">
+                            <Image src="/images/properties/vector.svg" width={400} height={500} alt="vector" unoptimized={true} />
                         </div>
-                        {/*{testimonials.slice(0, 1).map((item, index) => (
+                    </div>
+                    {/*{testimonials.slice(0, 1).map((item, index) => (
                             <div key={index} className="border p-10 rounded-2xl border-dark/10 dark:border-white/20 mt-10 flex flex-col gap-6">
                                 <Icon icon="ph:house-simple" width={44} height={44} className="text-primary" />
                                 <p className='text-xm text-dark dark:text-white'>{item.review}</p>
@@ -270,9 +270,9 @@ export default function Details() {
                                 </div>
                             </div>
                         ))}*/}
-                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+        </section >
     );
 }
