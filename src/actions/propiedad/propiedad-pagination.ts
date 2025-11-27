@@ -47,7 +47,7 @@ export const getPaginatedPropiedadsWithImages = async ({
         images: {
           select: { url: true },
         },
-        amenities: true,
+        //amenities: true,
       },
       where, // 👈 aquí usamos el objeto dinámico
     });
