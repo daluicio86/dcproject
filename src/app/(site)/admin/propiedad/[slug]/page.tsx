@@ -22,10 +22,9 @@ export default async function PropiedadPage({
 }: {
     params: Promise<{ slug: string }>
 }) {
-            console.log("params", params);
+            
     const { slug } = await params;
 
-        console.log("slug", slug);
     const [propiedad, categories, tiposPropiedad, ciudades] = await Promise.all([
         getPropiedadBySlug(slug),
         getCategories(2),

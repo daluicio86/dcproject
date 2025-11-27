@@ -28,7 +28,6 @@ export const createUpdateCiudad = async (formData: FormData) => {
 
   const parsed = ciudadSchema.safeParse(ciudadData);
   if (!parsed.success) {
-    console.log("Error de validación:", parsed.error);
     return { ok: false, message: "Datos inválidos" };
   }
 
@@ -53,7 +52,6 @@ export const createUpdateCiudad = async (formData: FormData) => {
       ciudadData.url = currentCiudad.url;
     }
 
-    console.log("Ciudad lista para guardar:", serviciosRaw);
 
     const prismaTx = await prisma.$transaction(async (tx) => {
       let ciudad: Ciudad;

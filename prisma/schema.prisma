@@ -10,6 +10,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 enum Role {
@@ -33,7 +34,7 @@ model Amenities {
   id          String      @id @default(uuid())
   name        String      @unique
   estado      Boolean     @default(true)
-  //propiedades Propiedad[]
+  propiedades Propiedad[]
 }
 
 model TipoPropiedad {

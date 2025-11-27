@@ -12,7 +12,6 @@ export default async function AmenitiesPage({
   // DEBES usar await con params en Next.js 15.2
   const { slug } = await params;
   
-  console.log('Slug recibido:', slug);
   
   // Validación del slug
   if (!slug) {

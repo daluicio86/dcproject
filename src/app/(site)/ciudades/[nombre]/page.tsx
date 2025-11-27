@@ -283,7 +283,6 @@ export default function Details() {
                 className="w-full"
               >
                 <CarouselContent className="-ml-2">
-                  {(console.log("Propiedades Carousel Items:", item?.propiedades)) ?? null}
                   {item?.propiedades?.map((ele, index) => (
                     <CarouselItem key={index} className="pl-2 md:basis-1/3 sm:basis-1/2 basis-full">
                       <PropiedadCardV1 key={ele.id} item={ele as Propiedad} />
