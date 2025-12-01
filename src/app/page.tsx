@@ -7,6 +7,8 @@ import BlogSmall from '@/components/shared/Blog'
 import GetInTouch from '@/components/Home/GetInTouch'
 import FAQ from '@/components/Home/FAQs'
 import { Welcome } from '@/components/Home/Welcome'
+import Jubilados from '@/components/Home/Jubilados'
+import Actividades from '@/components/Home/Actividades'
 
 export default function Home() {
   return (
@@ -16,6 +18,9 @@ export default function Home() {
       <Services />
       {/*<Properties />
       <FeaturedProperty />*/}
+      <Jubilados />
+      <Actividades />
+
       <Testimonial />
       <BlogSmall />
       <GetInTouch />

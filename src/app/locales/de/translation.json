@@ -76,6 +76,19 @@
     "emailPlaceholder": "E-Mail-Adresse*",
     "messagePlaceholder": "Schreiben Sie hier Ihre Nachricht"
   },
+  "investors": {
+    "breadcrumb": "Investoren",
+    "title": "🌎 Ecuador: Leben im Zentrum des Planeten",
+    "description": {
+      "name": "Ecuador liegt direkt am Äquator und bietet daher ganzjährig ein außergewöhnliches Klima. Dank seiner privilegierten Lage bietet es eine einzigartige Vielfalt an Umgebungen:",
+      "point1": "Tropisch, ideal für alle, die Sonne und Strand lieben",
+      "point2": "Subtropisch, mit angenehmen Temperaturen und grünen Landschaften",
+      "point3": "Feucht, mit üppiger Vegetation und Natur",
+      "point4": "Trocken, perfekt für warme und stabile Klimazonen"
+    },
+    "description1": "Diese Vielfalt an Klimazonen und Ökosystemen macht das Land zu einem idealen Ort zum Leben, Investieren und Genießen. Ecuador bietet nicht nur Naturschönheit und hohe Lebensqualität, sondern auch attraktive Immobilienmöglichkeiten mit Objekten in städtischen, ländlichen und touristischen Gebieten für jeden Lebensstil.",
+    "title1": "In Ecuador zu investieren bedeutet, sich für ein Land mit einem privilegierten Klima und einzigartigen Ökosystemen zu entscheiden. Vielfalt und eine Zukunft voller Möglichkeiten."
+  },
   "footerNavbar": {
     "home": "Startseite",
     "properties": "Immobilien",
@@ -123,5 +136,80 @@
   "servicioForm": {
     "nombre": "Name",
     "submitButton": "Dienstleistung speichern"
+  },
+  "jubiladosForm": {
+    "whyEcuador": "Warum Ecuador?",
+    "reason1": "🇪🇨 1. Erschwingliche Lebenshaltungskosten\nIm Vergleich zu vielen Ländern Amerikas und Europas ist das Leben in Ecuador in der Regel günstiger.\nGünstiger Wohnraum\nPreiswerte Dienstleistungen und Transport\nFrisches und preiswertes Essen (insbesondere auf Märkten)\n\n",
+    "reason2": "🌎 2. Natürliche Vielfalt auf kleinem Raum\nIn nur wenigen Stunden können Sie von der Küste ins Andenhochland, den Amazonas-Regenwald oder zu den Galapagos-Inseln gelangen.\nStrände\nBerge und Vulkane\nRegenwald\nModerne Städte\n\n",
+    "reason3": "🌡️ 3. Klimazonen für jeden Geschmack\nDa Ecuador am Äquator liegt, gibt es keine ausgeprägten Jahreszeiten.\nWenn Sie es warm mögen: Küste und Amazonas\nWenn Sie ein gemäßigtes Klima bevorzugen: Anden\nSie können immer eine Klimazone wählen, die Ihnen zusagt.\n\n",
+    "reason4": "❤️ 4. Freundliche Menschen und ein entspannter Lebensstil\nDie meisten Menschen schätzen:\nDie Freundlichkeit und Herzlichkeit\nDas Gemeinschaftsleben\nEin langsameres Lebenstempo als in anderen Ländern\n\n",
+    "reason5": "🏥 5. Bezahlbare Gesundheitsversorgung\nEs gibt preiswerte öffentliche Krankenhäuser und qualitativ hochwertige Privatkliniken zu niedrigeren Preisen als in den USA oder Europa.\n\n",
+    "reason6": "💵 6. US-Dollar als Währung\nDies zieht viele Menschen aufgrund der wirtschaftlichen Stabilität an und weil starke Abwertungen vermieden werden.\n\n",
+    "reason7": "🧳 7. Angebote für Ausländer\nEcuador bietet verschiedene Aufenthaltsvisa an:\nVisum für Rentner\nInvestorenvisum\nArbeitsvisum\nVisum für digitale Nomaden (vorübergehende Aufenthaltserlaubnis für Telearbeit)\n\n",
+    "reason8": "🥑 8. Frische und abwechslungsreiche Lebensmittel\nDas Land produziert Obst, Gemüse, und Meeresfrüchte das ganze Jahr über. Es ist einfach, sich gesund und frisch zu ernähren.\n\n",
+    "reason9": "🏛️ 9. Reichhaltige und vielfältige Kultur\nIndigene Traditionen\nMestizeneinflüsse\nFarbenfrohe Feste\nMusik, Kunsthandwerk und vielfältige Gastronomie."
+  },
+  "actividadesForm": {
+    "title": "AKTIVITÄTEN IN ECUADOR",
+    "description": "Ecuador bietet Erlebnisse für jeden Reisenden: Natur, Abenteuer, Kultur, Gastronomie und Entspannung. Hier sind einige der beliebtesten Aktivitäten:",
+    "activity1": {
+      "name": "🌋 1. Abenteuer und Natur",
+      "act1": "Trekking zum Quilotoa (Vulkankrater mit türkisfarbener Lagune)",
+      "act2": "Besteigung des Cotopaxi oder Wandern im Cotopaxi-Nationalpark",
+      "act3": "Besuch des Chimborazo (der sonnennächste Punkt)",
+      "act4": "Tauchen und Schnorcheln auf den Galapagos-Inseln",
+      "act5": "Canopy-Touren und Rafting in Baños de Agua Santa",
+      "act6": "Vogelbeobachtung in Mindo",
+      "act7": "Wandern im Cajas-Nationalpark (Cuenca)",
+      "act8": "Trekking in El Altar und Sangay Nationalparks"
+    },
+    "activity2": {
+      "name": "🏙️ 2. Kultur und Städte",
+      "act1": "Erkunden Sie das historische Zentrum von Quito (UNESCO-Weltkulturerbe)",
+      "act2": "Besuchen Sie Cuenca und seine Kolonialkirchen",
+      "act3": "Schlendern Sie entlang des Malecón 2000 in Guayaquil",
+      "act4": "Erkunden Sie La Ronda und Mitad del Mundo",
+      "act5": "Besuchen Sie Museen"
+    },
+    "activity3": {
+      "name": "🏖️ 3. Strände und Küste",
+      "act1": "Montañita (Surfen und Nachtleben)",
+      "act2": "Ayampe (Ruhe, Yoga, Surfen)",
+      "act3": "Los Frailes (einer der schönsten Strände des Landes)",
+      "act4": "Salinas (familienfreundlicher Badeort)",
+      "act5": "Puerto López (Walbeobachtung im Juni) (Stand: September)",
+      "act6": "Isla de la Plata (die „günstigen Galapagosinseln“)"
+    },
+    "activity4": {
+      "name": "🌿 4. Amazonas-Regenwald",
+      "act1": "Cuyabeno → Wirtschaft und artenreiche Tierwelt",
+      "act2": "Yasuní → Tiefer Regenwald, indigene Gemeinschaften",
+      "act3": "Tena → Rafting und Wassersport",
+      "act4": "Kanutouren, Kaiman- und Rosa-Delfin-Beobachtung"
+    },
+    "activity5": {
+      "name": "🐢 5. Galapagos",
+      "act1": "Besuch von Isabela (Flamingo-Lagune, Lavatunnel)",
+      "act2": "Schnorcheln in Los Túneles",
+      "act3": "Ausflug nach Bartolomé (ikonische Landschaft)",
+      "act4": "Riesenschildkröten in El Chato",
+      "act5": "Strände: Tortuga Bay, Las Grietas"
+    },
+    "activity6": {
+      "name": "❤️ 6. Einzigartige Erlebnisse",
+      "act1": "Buckelwalbeobachtung in Manabí",
+      "act2": "Überquerung der Teufelsnasenbahn (Riobamba – Alausí)",
+      "act3": "Besuch des versteinerten Waldes von Puyango",
+      "act4": "Spaziergang auf Hängebrücken in Mindo",
+      "act5": "Kaffee- und Schokoladentouren an der Küste und im Amazonasgebiet",
+      "act6": "Besuch indigener Gemeinschaften in Otavalo und Saraguro"
+    },
+    "activity7": {
+      "name": "🛒 7. Märkte und Kunsthandwerk",
+      "act1": "Markt in Otavalo (eines der größten in Südamerika)",
+      "act2": "Kunsthandwerk aus Cuenca",
+      "act3": "Strohhüte Toquilla (fälschlicherweise als „Panamahut“ bezeichnet)",
+      "act4": "Lokale Produkte: Kakao, Kaffee, Keramik, Textilien"
+    }
   }
 }
