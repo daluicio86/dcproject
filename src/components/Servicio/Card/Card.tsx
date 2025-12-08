@@ -76,7 +76,7 @@ const ServicioCard: React.FC<{ item: Servicio }> = ({ item }) => {
               </CarouselContent>
             </Carousel>
 
-            <div className="absolute left-2/5 bg-dark/50 rounded-full py-2.5 bottom-10 flex justify-center mt-4 gap-2.5 px-2.5">
+            <div className="absolute left-1/2 -translate-x-1/2 bg-dark/50 rounded-full py-2.5 bottom-10 flex justify-center mt-4 gap-2.5 px-2.5 z-10">
               {Array.from({ length: count }).map((_, index) => (
                 <button
                   key={index}
