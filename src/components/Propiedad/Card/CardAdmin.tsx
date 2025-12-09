@@ -19,7 +19,6 @@ function formatPriceEcuador(value) {
 
 const PropiedadAdminCard: React.FC<{ item: Propiedad }> = ({ item }) => {
 
-  console.log('PropiedadAdminCard slug:', item);
   const { title, slug, apto, precio, metros,
     altura, address, images } = item
   const { t } = useTranslation();

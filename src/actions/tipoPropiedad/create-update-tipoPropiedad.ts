@@ -20,7 +20,6 @@ export const createUpdateService = async( formData: FormData ) => {
   const tipoPropiedadParsed = tipoPropiedadSchema.safeParse( data );
 
   if ( !tipoPropiedadParsed.success) {
-    console.log( tipoPropiedadParsed.error );
     return { ok: false }
   }
 

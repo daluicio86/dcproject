@@ -36,9 +36,6 @@ export default async function PropiedadPage({
         redirect('/admin/propiedads');
     }*/
 
-
-    console.log("propiedad", propiedad);
-
     if (!propiedad && slug !== 'new') {
         redirect('/admin/propiedads')
     }

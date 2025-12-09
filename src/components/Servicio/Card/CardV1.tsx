@@ -13,7 +13,6 @@ import { useTranslation } from 'react-i18next'
 const ServicioCardV1: React.FC<{ item: Servicio }> = ({ item }) => {
   const { nombre , images } = item
 
-  console.log("ServicioCardV1 item:", nombre);
   const { t } = useTranslation();
   const [api, setApi] = React.useState<CarouselApi | undefined>(undefined);
   const [current, setCurrent] = React.useState(0);
