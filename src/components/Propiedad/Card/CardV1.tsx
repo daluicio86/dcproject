@@ -8,6 +8,11 @@ import Link from 'next/link'
 import React from 'react';
 import { useTranslation } from 'react-i18next'
 
+function formatPriceEcuador(value) {
+  return value
+    .toString()
+    .replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " USD";
+}
 
 
 const PropiedadCardV1: React.FC<{ item: Propiedad }> = ({ item }) => {
@@ -111,7 +116,7 @@ const PropiedadCardV1: React.FC<{ item: Propiedad }> = ({ item }) => {
             </div>
             <div>
               <button className='text-base font-normal text-primary px-5 py-2 rounded-full bg-primary/10'>
-                ${precio}
+                 ${formatPriceEcuador(precio)}
               </button>
             </div>
           </div>

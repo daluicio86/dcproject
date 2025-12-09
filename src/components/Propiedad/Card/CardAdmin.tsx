@@ -8,6 +8,8 @@ import Link from 'next/link'
 import React from 'react';
 import { useTranslation } from 'react-i18next'
 
+
+
 function formatPriceEcuador(value) {
   return value
     .toString()
@@ -15,7 +17,9 @@ function formatPriceEcuador(value) {
 }
 
 
-const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
+const PropiedadAdminCard: React.FC<{ item: Propiedad }> = ({ item }) => {
+
+  console.log('PropiedadAdminCard slug:', item);
   const { title, slug, apto, precio, metros,
     altura, address, images } = item
   const { t } = useTranslation();
@@ -43,19 +47,6 @@ const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
     <div>
       <div className='relative rounded-2xl border border-dark/10 dark:border-white/10 group hover:shadow-3xl duration-300 dark:hover:shadow-white/20'>
         <div className='overflow-hidden rounded-t-2xl'>
-          {/*<Link href={`/propiedad/${slug}`}>
-            {mainImage && (
-              <Image
-                src={mainImage}
-                alt={title}
-                width={440}
-                height={300}
-                className='w-full rounded-t-2xl group-hover:brightness-50 group-hover:scale-125 transition duration-300 delay-75'
-                unoptimized={true}
-              />
-            )}
-          </Link>*/}
-
           <div className="relative">
             <Carousel
               setApi={setApi}
@@ -103,7 +94,7 @@ const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
         <div className='p-6'>
           <div className='flex flex-col mobile:flex-row gap-5 mobile:gap-0 justify-between mb-6'>
             <div>
-              <Link href={`/propiedad/${slug}`}>
+              <Link href={`/admin/propiedad/${slug}`}>
                 <h3 className='text-xl font-medium text-black dark:text-white duration-300 group-hover:text-primary'>
                   {title}
                 </h3>
@@ -156,4 +147,4 @@ const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
   )
 }
 
-export default PropiedadCard
+export default PropiedadAdminCard

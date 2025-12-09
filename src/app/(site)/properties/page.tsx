@@ -7,6 +7,8 @@ import { Pagination } from "@/components/Tables/Pagination";
 import { PropertyFilters } from "@/components/Properties/PropertyFilters ";
 import { getCategories } from "@/actions/categories/get-categories";
 import { getTiposPropiedad } from "@/actions/tipoPropiedad/get-tipoPropiedad";
+import PropiedadAdminList from "@/components/Propiedad/PropiedadAdminList";
+import PropiedadList from "@/components/Propiedad/PropiedadList";
 
 export const metadata: Metadata = {
     title: "Lista de propiedades| Buying and selling",
@@ -67,12 +69,16 @@ export default async function PropertiesPage({
                 </div>
             ) : (
                 <>
-                    <PropertiesListing items={propiedads.map(p => ({
-                        ...p,
-                        rentaVenta: p.rentaVenta === null ? undefined : p.rentaVenta,
-                        temperatura: p.temperatura === null ? undefined : p.temperatura,
-                        geoLink: p.geoLink ?? "",
-                    }))} />
+                    <PropiedadList
+                        propiedads={propiedads.map(p => ({
+                            ...p,
+                            rentaVenta: p.rentaVenta === null ? undefined : p.rentaVenta,
+                            temperatura: p.temperatura === null ? undefined : p.temperatura,
+                            geoLink: p.geoLink ?? "",
+                        }))}
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                    />
                     <Pagination totalPages={totalPages} />
                 </>
             )}

@@ -3,6 +3,7 @@ import PropiedadListing from '@/components/Propiedad/PropiedadList';
 import HeroSub from '@/components/shared/HeroSub';
 import Link from 'next/link';
 import React from 'react'
+import PropiedadAdminList from '@/components/Propiedad/PropiedadAdminList';
 
 interface Props {
     searchParams: Promise<{
@@ -37,7 +38,7 @@ export default async function PropiedadPage({ searchParams }: Props) {
                     Nuevo
                 </Link>
             </div>
-            <PropiedadListing
+            <PropiedadAdminList
                 propiedads={propiedads.map((p: any) => ({
                     ...p,
                     ubicacion: p.ubicacion === null ? undefined : p.ubicacion,

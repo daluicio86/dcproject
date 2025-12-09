@@ -11,6 +11,7 @@ import { Propiedad } from '@/interface';
 import { useFavoritos } from '@/hooks/useFavoritos';
 
 import { useTranslation } from 'react-i18next';
+import PropertyAdminCard from '@/components/Home/Properties/Card/AdminCard';
 
 export default function Details() {
     const params = useParams();
@@ -20,21 +21,11 @@ export default function Details() {
     const { t } = useTranslation();
 
     const [item, setItem] = React.useState<Propiedad | null>(null);
+    const [images, setImages] = React.useState<string[]>([]);
+
     const [api, setApi] = React.useState<CarouselApi | undefined>(undefined);
     const [current, setCurrent] = React.useState(0);
     const [count, setCount] = React.useState(0);
-
-    React.useEffect(() => {
-        if (!api) {
-            return;
-        }
-        setCount(api.scrollSnapList().length);
-        setCurrent(api.selectedScrollSnap() + 1);
-
-        api.on("select", () => {
-            setCurrent(api.selectedScrollSnap() + 1);
-        });
-    }, [api]);
 
     // Separar el efecto para cargar los datos
     useEffect(() => {
@@ -46,10 +37,12 @@ export default function Details() {
                 setItem({
                     ...result,
                     address: result.address ?? "",
-                    rentaVenta: result.rentaVenta === null ? '' : result.rentaVenta,
-                    temperatura: result.temperatura === null ? '' : result.temperatura,
+                    rentaVenta: result.rentaVenta === null ? '0' : result.rentaVenta,
+                    temperatura: result.temperatura === null ? '0' : result.temperatura,
                     geoLink: result.geoLink ?? "",
+                    images: result.images ?? [],
                 });
+                setImages(result.images ?? []);
             } else {
                 setItem(null);
                 notFound();
@@ -63,6 +56,18 @@ export default function Details() {
             api.scrollTo(index);
         }
     };
+
+    React.useEffect(() => {
+        if (!api) {
+            return;
+        }
+        setCount(api.scrollSnapList().length);
+        setCurrent(api.selectedScrollSnap() + 1);
+
+        api.on("select", () => {
+            setCurrent(api.selectedScrollSnap() + 1);
+        });
+    }, [api]);
 
     return (
         <section className="!pt-44 pb-20 relative" >
@@ -80,7 +85,7 @@ export default function Details() {
                             <div className='flex flex-col gap-2 border-e border-black/10 dark:border-white/20 pr-2 xs:pr-4 mobile:pr-8'>
                                 <Icon icon="ph:cloud" width={20} height={20} />
                                 <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
-                                    {item?.apto} Property suitable
+                                    {item?.apto}
                                 </p>
                             </div>
                             <div className='flex flex-col gap-2 border-e border-black/10 dark:border-white/20 px-2 xs:px-4 mobile:px-8'>
@@ -102,57 +107,66 @@ export default function Details() {
                         </div>
                     </div>
                 </div>
-                <div className="grid grid-cols-12 mt-8 gap-8">
-                    <div className="lg:col-span-8 col-span-12 row-span-2">
-                        <div className="relative">
-                            <Carousel
-                                setApi={setApi}
-                                opts={{
-                                    loop: true,
-                                }}
-                            >
-                                <CarouselContent>
-                                    {item?.images?.map((ele, index) => (
-                                        <CarouselItem key={index}>
-                                            <Image
-                                                src={ele}
-                                                alt={index.toString()}
-                                                width={250}
-                                                height={250}
-                                                className="rounded-2xl w-full h-96"
-                                                unoptimized={true}
-                                            />
-                                        </CarouselItem>
-                                    ))}
-                                </CarouselContent>
-                            </Carousel>
+                <div className="grid grid-cols-12 gap-8 mt-10">
 
-                            <div className="absolute left-2/5 bg-dark/50 rounded-full py-2.5 bottom-10 flex justify-center mt-4 gap-2.5 px-2.5">
-                                {Array.from({ length: count }).map((_, index) => (
+                    {/* Carrusel a la izquierda */}
+                    <div className="lg:col-span-8 col-span-12">
+                        <Carousel className="rounded-2xl overflow-hidden w-full">
+                            <CarouselContent>
+                                {images.map((src, index) => (
+                                    <CarouselItem key={index}>
+                                        <Image
+                                            src={src}
+                                            width={1600}
+                                            height={900}
+                                            className="w-full h-[420px] object-cover rounded-2xl"
+                                            alt={`img-${index}`}
+                                        />
+                                    </CarouselItem>
+                                ))}
+                            </CarouselContent>
+
+                            {/* Dots abajo centrados */}
+                            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
+                                {images.map((_, i) => (
                                     <button
-                                        key={index}
-                                        onClick={() => handleDotClick(index)}
-                                        className={`w-2.5 h-2.5 rounded-full ${current === index + 1 ? "bg-white" : "bg-white/50"}`}
+                                        key={i}
+                                        onClick={() => handleDotClick(i)}
+                                        className={`w-2 h-2 rounded-full transition-all ${current - 1 === i ? "bg-white scale-125" : "bg-white/50"
+                                            }`}
                                     />
                                 ))}
                             </div>
+                        </Carousel>
+                    </div>
+
+                    {/* Favorites a la derecha */}
+                    <div className="lg:col-span-4 col-span-12">
+                        <div className="bg-primary/10 p-8 rounded-2xl relative overflow-hidden">
+                            <p className='text-sm text-dark/50 dark:text-white'>Favorites</p>
+
+                            {item && (
+                                <button
+                                    onClick={() => toggleFavorito(item.id)}
+                                    className="text-xl mt-1"
+                                >
+                                    {favoritos?.includes(item.id) ? "❤️" : "🤍"}
+                                </button>
+                            )}
+
+                            <Link
+                                href="#"
+                                className='py-4 px-8 bg-primary text-white rounded-full w-full block text-center hover:bg-dark duration-300 text-base mt-8'
+                            >
+                                {t("btnText1")}
+                            </Link>
+
+                            <div className="absolute right-0 top-4 opacity-30">
+                                <Image src="/images/properties/vector.svg" width={300} height={300} alt="vector" />
+                            </div>
                         </div>
                     </div>
-                    <div className="lg:col-span-4 lg:block hidden">
-                        {item?.images && item?.images[1] && (
-                            <Image src={item.images[1]} alt="Property Image 2" width={400} height={500} className="rounded-2xl w-full h-full" unoptimized={true} />
-                        )}
-                    </div>
-                    <div className="lg:col-span-2 col-span-6">
-                        {item?.images && item?.images[2] && (
-                            <Image src={item.images[2]} alt="Property Image 3" width={400} height={500} className="rounded-2xl w-full h-full" unoptimized={true} />
-                        )}
-                    </div>
-                    <div className="lg:col-span-2 col-span-6">
-                        {item?.images && item?.images[3] && (
-                            <Image src={item.images[3]} alt="Property Image 4" width={400} height={500} className="rounded-2xl w-full h-full" unoptimized={true} />
-                        )}
-                    </div>
+
                 </div>
                 <div className="grid grid-cols-12 gap-8 mt-10">
                     <div className="lg:col-span-8 col-span-12">
@@ -238,9 +252,9 @@ export default function Details() {
                         src={item?.geoLink}
                         width="1114" height="400" loading="lazy" referrerPolicy="no-referrer-when-downgrade" className="rounded-2xl w-full">
                     </iframe>*/}
-                </div>
-                <div className="lg:col-span-4 col-span-12">
-                    <div className="bg-primary/10 p-8 rounded-2xl relative z-10 overflow-hidden">
+                    </div>
+                    <div className="lg:col-span-4 col-span-12">
+                        {/* <div className="bg-primary/10 p-8 rounded-2xl relative z-10 overflow-hidden">
                         <p className='text-sm text-dark/50 dark:text-white'>Favorites</p>
                         {item && (
                             <button
@@ -257,7 +271,7 @@ export default function Details() {
                             <Image src="/images/properties/vector.svg" width={400} height={500} alt="vector" unoptimized={true} />
                         </div>
                     </div>
-                    {/*{testimonials.slice(0, 1).map((item, index) => (
+                   {testimonials.slice(0, 1).map((item, index) => (
                             <div key={index} className="border p-10 rounded-2xl border-dark/10 dark:border-white/20 mt-10 flex flex-col gap-6">
                                 <Icon icon="ph:house-simple" width={44} height={44} className="text-primary" />
                                 <p className='text-xm text-dark dark:text-white'>{item.review}</p>
@@ -270,9 +284,9 @@ export default function Details() {
                                 </div>
                             </div>
                         ))}*/}
+                    </div>
                 </div>
             </div>
-        </div>
         </section >
     );
 }
