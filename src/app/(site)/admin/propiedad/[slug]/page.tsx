@@ -22,11 +22,12 @@ export default async function PropiedadPage({
 }: {
     params: Promise<{ slug: string }>
 }) {
-            
+
     const { slug } = await params;
+    const cleanSlug = decodeURIComponent(slug).replace(/\s+/g, " ");
 
     const [propiedad, categories, tiposPropiedad, ciudades] = await Promise.all([
-        getPropiedadBySlug(slug),
+        getPropiedadBySlug(cleanSlug),
         getCategories(2),
         getTiposPropiedad(),
         getCiudades()
@@ -34,11 +35,11 @@ export default async function PropiedadPage({
 
     /*if (!propiedad) {
         redirect('/admin/propiedads');
-    }*/
+    }
 
     if (!propiedad && slug !== 'new') {
         redirect('/admin/propiedads')
-    }
+    }*/
 
 
     return (

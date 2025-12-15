@@ -1,5 +1,6 @@
 
 "use client";
+import { deleteTipoPropiedad } from '@/actions/tipoPropiedad/delete-tipoPropiedad';
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { Propiedad } from '@/interface';
 import { Icon } from '@iconify/react'
@@ -7,7 +8,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react';
 import { useTranslation } from 'react-i18next'
-
+import { AiFillDelete } from 'react-icons/ai';
+import { useRouter } from 'next/navigation';
+import { deletePropiedad } from '@/actions/propiedad/delete-propiedad';
 
 
 function formatPriceEcuador(value) {
@@ -18,13 +21,14 @@ function formatPriceEcuador(value) {
 
 
 const PropiedadAdminCard: React.FC<{ item: Propiedad }> = ({ item }) => {
-
-  const { title, slug, apto, precio, metros,
+  const { id, title, slug, apto, tipoPropiedadId, precio, metros,
     altura, address, images } = item
+
   const { t } = useTranslation();
   const [api, setApi] = React.useState<CarouselApi | undefined>(undefined);
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
+  const router = useRouter();
   React.useEffect(() => {
     if (!api) {
       return;
@@ -40,6 +44,15 @@ const PropiedadAdminCard: React.FC<{ item: Propiedad }> = ({ item }) => {
   const handleDotClick = (index: number) => {
     if (api) {
       api.scrollTo(index);
+    }
+  };
+
+  const handleDelete = async () => {
+    const result = await deletePropiedad(id);
+    if (result.ok) {
+      router.refresh();
+    } else {
+      console.error(result.message);
     }
   };
   return (
@@ -127,17 +140,26 @@ const PropiedadAdminCard: React.FC<{ item: Propiedad }> = ({ item }) => {
                 width={20}
                 height={20}
               />
-              <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
-                {metros}m<sup>2</sup>
-              </p>
+
+              {tipoPropiedadId === "46b7ed78-bf5c-48e3-a878-123da509f361" ? (
+                <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
+                  {metros}ha
+                </p>
+              ) : (
+                <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
+                  {metros}m<sup>2</sup>
+                </p>)}
             </div>
             <div className='flex flex-col gap-2 pl-2 xs:pl-4 mobile:pl-8'>
               <Icon
                 icon={'lineicons:arrow-up'}
                 width={20} height={20} />
               <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
-                Altura: {altura}
+                Height: {altura}m
               </p>
+              <button onClick={handleDelete} title="Eliminar">
+                <AiFillDelete size={24} className="text-red-500" title='Delete' />
+              </button>
             </div>
           </div>
         </div>

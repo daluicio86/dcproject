@@ -91,7 +91,7 @@ export default function Details() {
                             <div className='flex flex-col gap-2 border-e border-black/10 dark:border-white/20 px-2 xs:px-4 mobile:px-8'>
                                 <Icon icon={'lineicons:arrow-up'} width={20} height={20} />
                                 <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
-                                    {item?.altura} Height
+                                    {item?.altura}m Height
                                 </p>
                             </div>
                             <div className='flex flex-col gap-2 pl-2 xs:pl-4 mobile:pl-8'>
@@ -100,9 +100,12 @@ export default function Details() {
                                     width={20}
                                     height={20}
                                 />
-                                <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
+                                {item?.tipoPropiedadId === "46b7ed78-bf5c-48e3-a878-123da509f361" ? (<p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
+                                    {item?.metros}ha
+                                </p>) : (<p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
                                     {item?.metros}m<sup>2</sup>
-                                </p>
+                                </p>)}
+
                             </div>
                         </div>
                     </div>

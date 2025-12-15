@@ -1,4 +1,3 @@
-
 export interface Propiedad {
   id: string;
   title: string;
@@ -11,7 +10,7 @@ export interface Propiedad {
   address: string;
   geoLink: string;
   esPrincipal: boolean;
-
+  tipoPropiedadId: string;
   //ubicacion?: string;
   rentaVenta?: string;
   temperatura?: string;

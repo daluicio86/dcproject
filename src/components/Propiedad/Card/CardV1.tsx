@@ -16,8 +16,8 @@ function formatPriceEcuador(value) {
 
 
 const PropiedadCardV1: React.FC<{ item: Propiedad }> = ({ item }) => {
-  
-  const { title, slug, apto, precio, metros,
+
+  const { title, slug, apto, tipoPropiedadId, precio, metros,
     altura, address, images } = item
   const { t } = useTranslation();
   const [api, setApi] = React.useState<CarouselApi | undefined>(undefined);
@@ -116,7 +116,7 @@ const PropiedadCardV1: React.FC<{ item: Propiedad }> = ({ item }) => {
             </div>
             <div>
               <button className='text-base font-normal text-primary px-5 py-2 rounded-full bg-primary/10'>
-                 ${formatPriceEcuador(precio)}
+                ${formatPriceEcuador(precio)}
               </button>
             </div>
           </div>
@@ -139,16 +139,21 @@ const PropiedadCardV1: React.FC<{ item: Propiedad }> = ({ item }) => {
                 width={20}
                 height={20}
               />
-              <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
-                {metros}m<sup>2</sup>
-              </p>
+              {tipoPropiedadId === "46b7ed78-bf5c-48e3-a878-123da509f361" ? (
+                <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
+                  {metros}ha
+                </p>
+              ) : (
+                <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
+                  {metros}m<sup>2</sup>
+                </p>)}
             </div>
             <div className='flex flex-col gap-2 pl-2 xs:pl-4 mobile:pl-8'>
               <Icon
                 icon={'lineicons:arrow-up'}
                 width={20} height={20} />
               <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
-                Altura: {altura}
+                Height: {altura}m
               </p>
             </div>
           </div>

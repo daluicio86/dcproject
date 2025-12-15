@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -34,7 +28,6 @@ model Amenities {
   id          String      @id @default(uuid())
   name        String      @unique
   estado      Boolean     @default(true)
-  //propiedades Propiedad[]
 }
 
 model TipoPropiedad {
@@ -60,30 +53,27 @@ model Propiedad {
   slug        String   @unique
   description String?
   apto        String?
-  //ciudad      String?
   precio      Float    @default(0)
   metros      Float    @default(0)
   altura      Float    @default(0)
   address     String?
-  geoLink     String? //ubicacion
+  geoLink     String?
   esPrincipal Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
-  //ubicacion String?
   rentaVenta  String?
   temperatura String?
 
-  categoria   Categoria? @relation(fields: [categoriaId], references: [id])
+  categoria   Categoria?     @relation(fields: [categoriaId], references: [id])
   categoriaId String
 
   tipoPropiedad   TipoPropiedad? @relation(fields: [tipoPropiedadId], references: [id])
   tipoPropiedadId String
 
-  ciudadId String // clave foránea
-  ciudad   Ciudad @relation(fields: [ciudadId], references: [id])
-
-  //amenities Amenities[]
+  // 👉 Ciudad opcional
+  ciudadId String?
+  ciudad   Ciudad?      @relation(fields: [ciudadId], references: [id])
 
   images PropiedadImage[]
   User   User?            @relation(fields: [userId], references: [id])
@@ -110,29 +100,27 @@ model PropiedadImage {
 model Contacto {
   id            String   @id @default(uuid())
   name          String?
-  telefono      String?  @default("") // Agregado para almacenar el teléfono
+  telefono      String?  @default("")
   email         String
   mensaje       String?
   fechaCreacion DateTime @default(now())
 }
-
-//nuevas tablas
 
 model Ciudad {
   id          String      @id @default(uuid())
   nombre      String
   descripcion String?
   url         String?
-  servicios   Servicio[] // una ciudad puede tener varios servicios
+  servicios   Servicio[]
   propiedades Propiedad[]
 }
 
 model Servicio {
-  id          String          @id @default(uuid())
+  id          String   @id @default(uuid())
   nombre      String
   descripcion String?
-  ciudadId    String // clave foránea
-  ciudad      Ciudad          @relation(fields: [ciudadId], references: [id])
+  ciudadId    String
+  ciudad      Ciudad   @relation(fields: [ciudadId], references: [id])
   images      ServicioImage[]
 }
 
@@ -144,7 +132,7 @@ model ServicioImage {
   servicioId String
 }
 
-//auth.js
+// Auth
 
 model Account {
   id                       String  @id @default(uuid())
@@ -182,7 +170,7 @@ model Session {
 model User {
   id            String    @id @default(uuid())
   name          String?
-  password      String?   @default("") // Agregado para almacenar la contraseña
+  password      String?   @default("")
   email         String    @unique
   role          String    @default("user")
   isActive      Boolean   @default(true)

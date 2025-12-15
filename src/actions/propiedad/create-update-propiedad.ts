@@ -15,30 +15,20 @@ const propiedadSchema = z.object({
   description: z.string(),
   apto: z.string(),
   geoLink: z.string(),
-  precio: z.coerce
-    .number()
-    .min(0)
-    .transform((val) => Number(val.toFixed(2))),
-  metros: z.coerce
-    .number()
-    .min(0)
-    .transform((val) => Number(val.toFixed(0))),
-  altura: z.coerce
-    .number()
-    .min(0)
-    .transform((val) => Number(val.toFixed(0))),
+  precio: z.coerce.number().min(0),
+  metros: z.coerce.number().min(0),
+  altura: z.coerce.number().min(0),
   categoriaId: z.string(),
   tipoPropiedadId: z.string(),
-  ciudadId: z.string(),
+  ciudadId: z.string().optional().nullable(), // <-- Ahora es opcional
   rentaVenta: z.string(),
   temperatura: z.string(),
-  //amenities: z.coerce.string().transform((val) => val.split(",")),
 });
 
 export const createUpdatePropiedad = async (formData: FormData) => {
   const data = Object.fromEntries(formData);
-  const propiedadParsed = propiedadSchema.safeParse(data);
 
+  const propiedadParsed = propiedadSchema.safeParse(data);
   if (!propiedadParsed.success) {
     console.log(propiedadParsed.error);
     return { ok: false };
@@ -49,73 +39,92 @@ export const createUpdatePropiedad = async (formData: FormData) => {
 
   const { id, ...rest } = propiedad;
 
+  // 🔥 imágenes a eliminar desde el frontend
+  const imagesToDelete = formData.getAll("imagesToDelete") as string[];
+
   try {
     const prismaTx = await prisma.$transaction(async (tx) => {
       let propiedad: Propiedad;
 
       if (id) {
-        // Actualizar
         const { categoriaId, tipoPropiedadId, ciudadId, ...propiedadData } = rest;
-        propiedad = await prisma.propiedad.update({
+
+        propiedad = await tx.propiedad.update({
           where: { id },
           data: {
             ...propiedadData,
-            categoria: { connect: { id: categoriaId } }, // Use actual category id
+            categoria: { connect: { id: categoriaId } },
             tipoPropiedad: { connect: { id: tipoPropiedadId } },
             ciudad: { connect: { id: ciudadId } },
-            /*amenities: {
-              connect: (amenities as string[]).map((id) => ({ id })),
-            },*/
           },
         });
       } else {
         // Crear
         const { categoriaId, tipoPropiedadId, ciudadId, ...propiedadData } = rest;
-        propiedad = await prisma.propiedad.create({
+
+        propiedad = await tx.propiedad.create({
           data: {
-            // Remove categoriaId, tipoPropiedadId, ciudadId and amenities from rest
             ...propiedadData,
-            categoria: { connect: { id: categoriaId } }, // Use actual category id
+            categoria: { connect: { id: categoriaId } },
             tipoPropiedad: { connect: { id: tipoPropiedadId } },
             ciudad: { connect: { id: ciudadId } },
-            /*amenities: {
-              connect: (amenities as string[]).map((id) => ({ id })),
-            },*/
           },
         });
       }
 
-      // Proceso de carga y guardado de imagenes
-      // Recorrer las imagenes y guardarlas
-      if (formData.getAll("images")) {
-        // [https://url.jpg, https://url.jpg]
-        const images = await uploadImages(formData.getAll("images") as File[]);
-        if (!images) {
-          throw new Error("No se pudo cargar las imágenes, rollingback");
+      /* ------------------------------------------------------------------
+          🔥 ELIMINAR IMÁGENES SELECCIONADAS
+      ------------------------------------------------------------------ */
+
+      if (imagesToDelete.length > 0) {
+        const imagesDB = await tx.propiedadImage.findMany({
+          where: { id: { in: imagesToDelete } },
+        });
+
+        // 1. Eliminar de Cloudinary
+        for (const img of imagesDB) {
+          // extraer public_id desde la URL
+          const publicId = img.url.split("/").pop()?.split(".")[0];
+          if (publicId) {
+            await cloudinary.uploader.destroy(publicId);
+          }
         }
 
-        await prisma.propiedadImage.createMany({
-          data: images.map((image) => ({
-            url: image!,
+        // 2. Eliminar en Prisma
+        await tx.propiedadImage.deleteMany({
+          where: { id: { in: imagesToDelete } },
+        });
+      }
+
+      /* ------------------------------------------------------------------
+          🔥 SUBIR IMÁGENES NUEVAS
+      ------------------------------------------------------------------ */
+
+      const newImages = formData.getAll("images") as File[];
+
+      if (newImages && newImages.length > 0) {
+        const uploaded = await uploadImages(newImages);
+
+        if (!uploaded) throw new Error("Error subiendo imágenes");
+
+        await tx.propiedadImage.createMany({
+          data: uploaded.map((url) => ({
+            url,
             propiedadId: propiedad.id,
           })),
         });
       }
 
-      return {
-        propiedad,
-      };
+      return { propiedad };
     });
 
-    // Todo: RevalidatePaths
+    // Revalidate paths
     revalidatePath("/admin/propiedads");
     revalidatePath(`/admin/propiedad/${propiedad.slug}`);
     revalidatePath(`/propiedad/${propiedad.slug}`);
 
-    return {
-      ok: true,
-      propiedad: prismaTx.propiedad,
-    };
+    return { ok: true, propiedad: prismaTx.propiedad };
+
   } catch (error) {
     console.log(error);
     return {
@@ -125,6 +134,8 @@ export const createUpdatePropiedad = async (formData: FormData) => {
   }
 };
 
+
+// SUBIDA DE IMÁGENES
 const uploadImages = async (images: File[]) => {
   try {
     const uploadPromises = images.map(async (image) => {
@@ -132,9 +143,11 @@ const uploadImages = async (images: File[]) => {
         const buffer = await image.arrayBuffer();
         const base64Image = Buffer.from(buffer).toString("base64");
 
-        return cloudinary.uploader
-          .upload(`data:image/png;base64,${base64Image}`)
-          .then((r) => r.secure_url);
+        const result = await cloudinary.uploader.upload(
+          `data:image/png;base64,${base64Image}`
+        );
+
+        return result.secure_url;
       } catch (error) {
         console.log(error);
         return null;
@@ -142,9 +155,9 @@ const uploadImages = async (images: File[]) => {
     });
 
     const uploadedImages = await Promise.all(uploadPromises);
-    return uploadedImages;
+    return uploadedImages.filter(Boolean) as string[];
   } catch (error) {
     console.log(error);
-    return null;
+    return [];
   }
 };

@@ -5,6 +5,7 @@ import { Propiedad } from '@/interface/propiedad.interface';
 import PropiedadAdminCard from '../Card/CardAdmin';
 
 const PropiedadAdminListing: React.FC<{ propiedads: Propiedad[], currentPage: number, totalPages: number }> = ({ propiedads, currentPage, totalPages }) => {
+
   return (
     <section className='pt-0!'>
       <div className='container max-w-8xl mx-auto px-5 2xl:px-0'>
