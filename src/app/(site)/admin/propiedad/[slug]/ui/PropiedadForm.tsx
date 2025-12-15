@@ -327,6 +327,17 @@ export const PropiedadForm = ({
                         </div>
                     </div>
 
+
+                            <textarea
+                                {...register("description", { required: false })}
+                                rows={8}
+                                cols={50}
+                                name='description'
+                                id='description'
+                                placeholder={t("propiedadForm.description")}
+                                required
+                                className='px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-2xl outline-primary focus:outline'></textarea>
+
                     <input
                         type="file"
                         multiple
