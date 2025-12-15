@@ -24,6 +24,7 @@ export default async function PropiedadPage({ searchParams }: Props) {
     } = (await getPaginatedPropiedadsWithImages({ page })) ?? {};
     return (
         <>
+
             <HeroSub
                 title="Gestión de Propiedades"
                 description="Administra y organiza tus propiedades de manera eficiente."

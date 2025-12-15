@@ -24,7 +24,7 @@ export default async function PropiedadPage({
 }) {
 
     const { slug } = await params;
-    const cleanSlug = decodeURIComponent(slug).replace(/\s+/g, " ");
+    const cleanSlug = decodeURIComponent(slug).replace(/\s+/g, "-").toLowerCase().trim();
 
     const [propiedad, categories, tiposPropiedad, ciudades] = await Promise.all([
         getPropiedadBySlug(cleanSlug),
