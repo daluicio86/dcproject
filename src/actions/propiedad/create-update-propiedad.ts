@@ -99,7 +99,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
       /* ---------------- ELIMINAR IMÁGENES ---------------- */
       if (imagesToDelete.length > 0) {
         const imagesDB = await tx.propiedadImage.findMany({
-          where: { id: { in: imagesToDelete } },
+          where: { id: { in: imagesToDelete.map(id => Number(id)) } },
         });
 
         for (const img of imagesDB) {
@@ -110,7 +110,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
         }
 
         await tx.propiedadImage.deleteMany({
-          where: { id: { in: imagesToDelete } },
+          where: { id: { in: imagesToDelete.map(id => Number(id)) } },
         });
       }
 
