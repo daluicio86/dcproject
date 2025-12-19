@@ -1,9 +1,7 @@
 
-import { redirect } from 'next/navigation';
 import React from 'react'
 import { PropiedadForm } from './ui/PropiedadForm';
 import { getCategories } from "@/actions/categories/get-categories";
-import { getAmenities } from '@/actions/amenitie/get-amenitie';
 import { getTiposPropiedad } from '@/actions/tipoPropiedad/get-tipoPropiedad';
 import { getPropiedadBySlug } from '@/actions';
 import { getCiudades } from '@/actions/ciudad/get-ciudad';
@@ -50,13 +48,15 @@ export default async function PropiedadPage({
                     propiedad
                         ? {
                             ...propiedad,
-                            address: propiedad.address === null ? undefined : propiedad.address,
-                            temperatura: propiedad.temperatura === null ? undefined : propiedad.temperatura,
-                            rentaVenta: propiedad.rentaVenta === null ? undefined : propiedad.rentaVenta,
-                            apto: propiedad.apto === null ? undefined : propiedad.apto,
-                            description: propiedad.description === null ? undefined : propiedad.description,
-                            userId: propiedad.userId === null ? undefined : propiedad.userId,
-                            geoLink: propiedad.geoLink === null ? undefined : propiedad.geoLink,
+                            address: propiedad.address ?? undefined,
+                            temperatura: propiedad.temperatura ?? undefined,
+                            rentaVenta: propiedad.rentaVenta ?? undefined,
+                            apto: propiedad.apto ?? undefined,
+                            description: propiedad.description ?? undefined,
+                            userId: propiedad.userId ?? undefined,
+                            geoLink: propiedad.geoLink ?? undefined,
+                            tipoMedida: propiedad.tipoMedida ?? undefined,
+                            ciudadId: propiedad.ciudadId ?? undefined,
                         }
                         : {}
                 }
