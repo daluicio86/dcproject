@@ -1,5 +1,4 @@
 import HeroSub from "@/components/shared/HeroSub";
-import PropertiesListing from "@/components/Properties/PropertyList";
 import React from "react";
 import { Metadata } from "next";
 import { getPaginatedPropiedadsWithImages } from "@/actions/propiedad/propiedad-pagination";
@@ -7,7 +6,6 @@ import { Pagination } from "@/components/Tables/Pagination";
 import { PropertyFilters } from "@/components/Properties/PropertyFilters ";
 import { getCategories } from "@/actions/categories/get-categories";
 import { getTiposPropiedad } from "@/actions/tipoPropiedad/get-tipoPropiedad";
-import PropiedadAdminList from "@/components/Propiedad/PropiedadAdminList";
 import PropiedadList from "@/components/Propiedad/PropiedadList";
 
 export const metadata: Metadata = {

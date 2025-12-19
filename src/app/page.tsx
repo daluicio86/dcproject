@@ -11,6 +11,7 @@ import Jubilados from '@/components/Home/Jubilados'
 import Actividades from '@/components/Home/Actividades'
 
 export default function Home() {
+  console.log("DATABASE_URL:", process.env.DATABASE_URL)
   return (
     <main>
       <Hero />

@@ -2,9 +2,10 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import prisma from "@/lib/prisma";
+
 import { signInEmailPassword } from "@/auth/actions/auth-actions";
 import { Adapter } from "next-auth/adapters";
+import { prisma } from "../../../../../lib/prisma";
 
 
 

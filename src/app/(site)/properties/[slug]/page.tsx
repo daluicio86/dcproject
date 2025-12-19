@@ -40,6 +40,8 @@ export default function Details() {
                     temperatura: result.temperatura === null ? '0' : result.temperatura,
                     geoLink: result.geoLink ?? "",
                     images: result.images ?? [],
+                    tipoMedida: result.tipoMedida ?? undefined,
+                    ciudadId: result.ciudadId ?? undefined,
                 });
                 setImages(result.images ?? []);
             } else {
