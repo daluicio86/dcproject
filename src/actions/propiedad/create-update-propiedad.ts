@@ -59,8 +59,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
     .replace(/\s+/g, "-")
     .trim();
 
-  const { id, categoriaId, tipoPropiedadId, ciudadId, ...rest } =
-    propiedadData;
+  const { id, categoriaId, tipoPropiedadId, ciudadId, ...rest } = propiedadData;
 
   const imagesToDelete = formData.getAll("imagesToDelete") as string[];
   const newFiles = formData.getAll("images") as File[];
@@ -222,7 +221,7 @@ const uploadMedia = async (files: File[]): Promise<UploadedMedia[]> => {
 
       return {
         url: result.secure_url,
-        type: (isVideo ? "video" : "image") as const,
+        type: isVideo ? "video" : ("image" as "video" | "image"),
       };
     })
   );
