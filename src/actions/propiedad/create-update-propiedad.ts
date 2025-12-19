@@ -21,13 +21,23 @@ const propiedadSchema = z.object({
   geoLink: z.string(),
   precio: z.coerce.number().min(0),
   metros: z.coerce.number().min(0),
+  tipoMedida: z.string(),
   altura: z.coerce.number().min(0),
+
   categoriaId: z.string(),
   tipoPropiedadId: z.string(),
-  ciudadId: z.string().optional(), // 👈 opcional REAL
+  ciudadId: z.string().optional(),
   rentaVenta: z.string(),
   temperatura: z.string(),
 });
+
+/* ------------------------------------------------------------------
+   TYPES
+------------------------------------------------------------------ */
+type UploadedMedia = {
+  url: string;
+  type: "image" | "video";
+};
 
 /* ------------------------------------------------------------------
    ACTION
@@ -37,27 +47,61 @@ export const createUpdatePropiedad = async (formData: FormData) => {
 
   const parsed = propiedadSchema.safeParse(data);
   if (!parsed.success) {
-    console.log(parsed.error);
+    console.error(parsed.error);
     return { ok: false };
   }
 
   const propiedadData = parsed.data;
 
-  // 🔥 slug limpio
   const slug = propiedadData.slug
     .toLowerCase()
     .replace(/%20/g, "-")
     .replace(/\s+/g, "-")
     .trim();
 
-  const { id, categoriaId, tipoPropiedadId, ciudadId, ...rest } = propiedadData;
+  const { id, categoriaId, tipoPropiedadId, ciudadId, ...rest } =
+    propiedadData;
 
-  // 🔥 imágenes a eliminar
   const imagesToDelete = formData.getAll("imagesToDelete") as string[];
+  const newFiles = formData.getAll("images") as File[];
 
   try {
-    const prismaTx = await prisma.$transaction(async (tx) => {
+    /* -------------------------------------------------------------
+       1️⃣ OBTENER MEDIA A ELIMINAR (ANTES)
+    ------------------------------------------------------------- */
+    let mediaDBToDelete: { id: number; url: string }[] = [];
+
+    if (imagesToDelete.length > 0) {
+      mediaDBToDelete = await prisma.propiedadImage.findMany({
+        where: { id: { in: imagesToDelete.map(Number) } },
+        select: { id: true, url: true },
+      });
+    }
+
+    /* -------------------------------------------------------------
+       2️⃣ SUBIR MEDIA NUEVA (FUERA DE TRANSACCIÓN)
+    ------------------------------------------------------------- */
+    let uploadedMedia: UploadedMedia[] = [];
+
+    if (newFiles.length > 0) {
+      uploadedMedia = await uploadMedia(newFiles);
+    }
+
+    /* -------------------------------------------------------------
+       3️⃣ TRANSACCIÓN DB
+    ------------------------------------------------------------- */
+    const propiedadTx = await prisma.$transaction(async (tx) => {
       let propiedad: Propiedad;
+
+      /* -------- VALIDAR CIUDAD -------- */
+      let ciudadExiste: { id: string } | null = null;
+
+      if (ciudadId) {
+        ciudadExiste = await tx.ciudad.findUnique({
+          where: { id: ciudadId },
+          select: { id: true },
+        });
+      }
 
       /* ---------------- UPDATE ---------------- */
       if (id) {
@@ -68,7 +112,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
           tipoPropiedad: { connect: { id: tipoPropiedadId } },
         };
 
-        if (ciudadId) {
+        if (ciudadExiste) {
           dataToUpdate.ciudad = { connect: { id: ciudadId } };
         }
 
@@ -76,10 +120,8 @@ export const createUpdatePropiedad = async (formData: FormData) => {
           where: { id },
           data: dataToUpdate,
         });
-      }
-
-      /* ---------------- CREATE ---------------- */
-      else {
+      } else {
+        /* ---------------- CREATE ---------------- */
         const dataToCreate: any = {
           ...rest,
           slug,
@@ -87,7 +129,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
           tipoPropiedad: { connect: { id: tipoPropiedadId } },
         };
 
-        if (ciudadId) {
+        if (ciudadExiste) {
           dataToCreate.ciudad = { connect: { id: ciudadId } };
         }
 
@@ -96,33 +138,19 @@ export const createUpdatePropiedad = async (formData: FormData) => {
         });
       }
 
-      /* ---------------- ELIMINAR IMÁGENES ---------------- */
+      /* ---------------- ELIMINAR MEDIA (DB) ---------------- */
       if (imagesToDelete.length > 0) {
-        const imagesDB = await tx.propiedadImage.findMany({
-          where: { id: { in: imagesToDelete.map(id => Number(id)) } },
-        });
-
-        for (const img of imagesDB) {
-          const publicId = img.url.split("/").pop()?.split(".")[0];
-          if (publicId) {
-            await cloudinary.uploader.destroy(publicId);
-          }
-        }
-
         await tx.propiedadImage.deleteMany({
-          where: { id: { in: imagesToDelete.map(id => Number(id)) } },
+          where: { id: { in: imagesToDelete.map(Number) } },
         });
       }
 
-      /* ---------------- SUBIR IMÁGENES ---------------- */
-      const newImages = formData.getAll("images") as File[];
-
-      if (newImages.length > 0) {
-        const uploaded = await uploadImages(newImages);
-
+      /* ---------------- GUARDAR MEDIA (DB) ---------------- */
+      if (uploadedMedia.length > 0) {
         await tx.propiedadImage.createMany({
-          data: uploaded.map((url) => ({
-            url,
+          data: uploadedMedia.map((media) => ({
+            url: media.url,
+            type: media.type,
             propiedadId: propiedad.id,
           })),
         });
@@ -131,12 +159,34 @@ export const createUpdatePropiedad = async (formData: FormData) => {
       return propiedad;
     });
 
+    /* -------------------------------------------------------------
+       4️⃣ BORRAR MEDIA DE CLOUDINARY
+    ------------------------------------------------------------- */
+    if (mediaDBToDelete.length > 0) {
+      await Promise.all(
+        mediaDBToDelete.map(async (media) => {
+          const publicId = media.url.split("/").pop()?.split(".")[0];
+          if (!publicId) return;
+
+          try {
+            await cloudinary.uploader.destroy(publicId, {
+              resource_type: "auto",
+            });
+          } catch (error) {
+            console.error(`Error borrando ${publicId}`, error);
+          }
+        })
+      );
+    }
+
+    /* -------------------------------------------------------------
+       5️⃣ REVALIDACIÓN
+    ------------------------------------------------------------- */
     revalidatePath("/admin/propiedads");
     revalidatePath(`/admin/propiedad/${slug}`);
     revalidatePath(`/propiedad/${slug}`);
 
-    return { ok: true, propiedad: prismaTx };
-
+    return { ok: true, propiedad: propiedadTx };
   } catch (error) {
     console.error(error);
     return {
@@ -147,19 +197,33 @@ export const createUpdatePropiedad = async (formData: FormData) => {
 };
 
 /* ------------------------------------------------------------------
-   SUBIDA DE IMÁGENES
+   SUBIDA DE MEDIA (IMÁGENES + VIDEOS)
 ------------------------------------------------------------------ */
-const uploadImages = async (images: File[]) => {
+const uploadMedia = async (files: File[]): Promise<UploadedMedia[]> => {
   const uploads = await Promise.all(
-    images.map(async (image) => {
-      const buffer = await image.arrayBuffer();
+    files.map(async (file) => {
+      // Limitar tamaño (50MB)
+      if (file.size > 50 * 1024 * 1024) {
+        throw new Error("Archivo demasiado grande");
+      }
+
+      const buffer = await file.arrayBuffer();
       const base64 = Buffer.from(buffer).toString("base64");
 
+      const isVideo = file.type.startsWith("video");
+
       const result = await cloudinary.uploader.upload(
-        `data:image/png;base64,${base64}`
+        `data:${file.type};base64,${base64}`,
+        {
+          resource_type: isVideo ? "video" : "image",
+          folder: "propiedades",
+        }
       );
 
-      return result.secure_url;
+      return {
+        url: result.secure_url,
+        type: (isVideo ? "video" : "image") as const,
+      };
     })
   );
 

@@ -1,9 +1,9 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { Propiedad, PropiedadImage as PropiedadWithImage } from "@/interface/propiedad.interface";
+import { Propiedad } from "@/interface/propiedad.interface";
 import { createUpdatePropiedad } from "@/actions/propiedad/create-update-propiedad";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { Categoria, Ciudad } from "@/interface";
 import { useTranslation } from "react-i18next";
 import HeroSub from "@/components/shared/HeroSub";
@@ -12,38 +12,14 @@ import { TipoPropiedad } from "@/interface/tipoPropiedad.interface";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-interface Props {
-    propiedad: Partial<Propiedad> & { images?: string[] };
-    categories: Categoria[];
-    tiposPropiedad: TipoPropiedad[];
-    ciudades: Ciudad[];
-}
+/* ------------------------------------------------------------------ */
+/* TYPES */
+/* ------------------------------------------------------------------ */
+type ExistingImage = {
+    id: number;
+    url: string;
+};
 
-interface FormInputs {
-    id: string
-    title: string
-    slug: string
-    description: string
-    apto: string
-    precio: number
-    metros: number
-    altura: number
-    address: string
-    geoLink: string
-    esPrincipal: boolean
-    fechaCreacion: Date
-
-    ciudadId?: string;
-    rentaVenta?: string;
-    temperatura?: string;
-
-    categoriaId: string
-    tipoPropiedadId: string
-
-    userId: string
-    images?: FileList;
-    //amenities: string[];
-}
 const enumRentaVenta = [
     { id: "1", name: "Renta" },
     { id: "2", name: "Venta" },
@@ -57,6 +33,44 @@ const enumClima = [
     { id: "4", name: "Húmedo 60%" },
 ];
 
+const enumTipoMedida = [
+    { id: "m", name: "m²" },
+    { id: "ha", name: "ha" },
+];
+
+interface Props {
+    propiedad: Partial<Propiedad> & {
+        images?: ExistingImage[];
+    };
+    categories: Categoria[];
+    tiposPropiedad: TipoPropiedad[];
+    ciudades: Ciudad[];
+}
+
+interface FormInputs {
+    title: string;
+    description: string;
+    apto: string;
+    precio: number;
+    metros: number;
+    tipoMedida: string;
+    altura: number;
+    address: string;
+    geoLink: string;
+
+    ciudadId?: string;
+    rentaVenta?: string;
+    temperatura?: string;
+
+    categoriaId: string;
+    tipoPropiedadId: string;
+
+    images?: FileList;
+}
+
+/* ------------------------------------------------------------------ */
+/* COMPONENT */
+/* ------------------------------------------------------------------ */
 export const PropiedadForm = ({
     propiedad,
     categories = [],
@@ -66,89 +80,86 @@ export const PropiedadForm = ({
     const router = useRouter();
     const { t } = useTranslation();
 
-    const {
-        handleSubmit,
-        register,
-        setValue,
-        watch,
-    } = useForm<FormInputs>({
+    const { handleSubmit, register, setValue, watch } = useForm<FormInputs>({
         defaultValues: {
             ...propiedad,
             precio: propiedad.precio ?? undefined,
-            temperatura: propiedad.temperatura ?? undefined,
-            images: undefined
-        }
+            images: undefined,
+        },
     });
 
-    // 🔥 estados
-    const [existingImages, setExistingImages] = useState<string[]>(propiedad.images ?? []);
+    /* ------------------------------------------------------------------ */
+    /* IMAGE STATE */
+    /* ------------------------------------------------------------------ */
+    const [existingImages, setExistingImages] = useState<ExistingImage[]>(
+        propiedad.images ?? []
+    );
+    const [imagesToDelete, setImagesToDelete] = useState<number[]>([]);
     const [newImages, setNewImages] = useState<File[]>([]);
 
     const watchedImages = watch("images");
 
-    // sync nuevas imágenes
     useEffect(() => {
         if (!watchedImages) return;
         setNewImages(Array.from(watchedImages));
     }, [watchedImages]);
 
-    // ❌ eliminar imagen existente
+    /* ------------------------------------------------------------------ */
+    /* IMAGE HANDLERS */
+    /* ------------------------------------------------------------------ */
     const removeExistingImage = (index: number) => {
-        setExistingImages(prev => prev.filter((_, i) => i !== index));
+        const image = existingImages[index];
+
+        setImagesToDelete((prev) => [...prev, image.id]);
+        setExistingImages((prev) => prev.filter((_, i) => i !== index));
     };
 
-    // ❌ eliminar imagen nueva
     const removeNewImage = (index: number) => {
         const updated = newImages.filter((_, i) => i !== index);
         setNewImages(updated);
 
         const dt = new DataTransfer();
-        updated.forEach(file => dt.items.add(file));
+        updated.forEach((file) => dt.items.add(file));
         setValue("images", dt.files);
     };
 
+    /* ------------------------------------------------------------------ */
+    /* SUBMIT */
+    /* ------------------------------------------------------------------ */
     const onSubmit = async (data: FormInputs) => {
         const formData = new FormData();
 
-        const { images, ...propiedadToSave } = data;
-
-        if (propiedad && propiedad.id) {
-            formData.append("id", String(propiedad.id ?? ""));
+        if (propiedad.id) {
+            formData.append("id", propiedad.id.toString());
         }
 
-        formData.append("title", propiedadToSave.title);//
-        formData.append("slug", propiedadToSave.title);
-        formData.append("description", propiedadToSave.description);
-        formData.append("apto", propiedadToSave.apto);
-        formData.append("precio", propiedadToSave.precio?.toString());//
-        formData.append("metros", propiedadToSave.metros?.toString());//
-        formData.append("altura", propiedadToSave.altura?.toString());//
-        formData.append("address", propiedadToSave.address);//
-        formData.append("geoLink", propiedadToSave.geoLink);//
-        //formData.append("esPrincipal", String(propiedadToSave.esPrincipal));
-        formData.append("esPrincipal", String(false));
-        formData.append("categoriaId", propiedadToSave.categoriaId);
-        formData.append("tipoPropiedadId", propiedadToSave.tipoPropiedadId);
-        //formData.append("amenities", propiedadToSave.amenities.toString());
-        formData.append("userId", session?.user?.id || '');
+        formData.append("title", data.title);
+        formData.append("slug", data.title);
+        formData.append("description", data.description);
+        formData.append("apto", data.apto);
+        formData.append("precio", data.precio.toString());
+        formData.append("metros", data.metros.toString());
+        formData.append("tipoMedida", data.tipoMedida);
+        formData.append("altura", data.altura.toString());
+        formData.append("address", data.address);
+        formData.append("geoLink", data.geoLink);
+        formData.append("esPrincipal", "false");
+        formData.append("categoriaId", data.categoriaId);
+        formData.append("tipoPropiedadId", data.tipoPropiedadId);
+        formData.append("userId", session?.user?.id || "");
 
-        //formData.append("ubicacion", propiedadToSave.tipoPropiedadId);
-        if (propiedadToSave.rentaVenta !== undefined) {
-            formData.append("rentaVenta", propiedadToSave.rentaVenta);
-        }
-        if (propiedadToSave.temperatura !== undefined) {
-            formData.append("temperatura", propiedadToSave.temperatura);
-        }
-        if (propiedadToSave.ciudadId !== undefined) {
-            formData.append("ciudadId", propiedadToSave.ciudadId);
-        }
+        if (data.rentaVenta) formData.append("rentaVenta", data.rentaVenta);
+        if (data.temperatura) formData.append("temperatura", data.temperatura);
+        if (data.ciudadId) formData.append("ciudadId", data.ciudadId);
 
-        // 🔥 imágenes existentes que se conservan
-        formData.append("existingImages", JSON.stringify(existingImages));
+        /* 🔥 IMÁGENES A BORRAR (IDs) */
+        imagesToDelete.forEach((id) => {
+            formData.append("imagesToDelete", id.toString());
+        });
 
-        // 🔥 nuevas imágenes
+        /* 🔥 IMÁGENES NUEVAS */
         if (data.images) {
-            Array.from(data.images).forEach(file => {
+            Array.from(data.images).forEach((file) => {
                 formData.append("images", file);
             });
         }
@@ -162,6 +173,10 @@ export const PropiedadForm = ({
         router.push("/admin/propiedads");
     };
 
+    console.log('existingImages:', existingImages);
+    /* ------------------------------------------------------------------ */
+    /* RENDER */
+    /* ------------------------------------------------------------------ */
     return (
         <>
             <HeroSub
@@ -171,31 +186,36 @@ export const PropiedadForm = ({
             />
 
             <div className="mx-auto w-full lg:w-2/3 xl:w-1/2 px-4">
-                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
+                <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 mb-5">
+
                     <div className='flex flex-col gap-8 mt-5'>
-                        <div className='flex flex-col lg:flex-row gap-6'>
+                        <div className="flex flex-col lg:flex-row gap-6">
                             <input
                                 {...register("title", { required: true })}
-                                type='text'
-                                name='title'
-                                id='title'
-                                autoComplete='Nombre'
+                                type="text"
+                                id="title"
                                 placeholder={t("propiedadForm.title")}
-                                required
-                                className='px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full'
+                                className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
                             />
 
-                            <input
-                                {...register("precio", { required: true })}
-                                type='number'
-                                name='precio'
-                                id='precio'
-                                autoComplete='off'
-                                placeholder={t("propiedadForm.price")}
-                                required
-                                className='px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full'
-                            />
+                            <div className="flex items-center gap-2 w-full">
+                                <input
+                                    {...register("precio", { required: true })}
+                                    type="number"
+                                    id="precio"
+                                    placeholder={t("propiedadForm.price")}
+                                    className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
+                                />
+
+                                <label
+                                    htmlFor="precio"
+                                    className="text-sm text-gray-500 whitespace-nowrap"
+                                >
+                                    USD
+                                </label>
+                            </div>
                         </div>
+
 
                         <div className='flex flex-col lg:flex-row gap-6'>
                             <input
@@ -208,6 +228,8 @@ export const PropiedadForm = ({
                                 required
                                 className='px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full'
                             />
+                        </div>
+                        <div className='flex flex-col lg:flex-row gap-6'>
                             <input
                                 type='text'
                                 {...register("geoLink", { required: false })}
@@ -230,16 +252,40 @@ export const PropiedadForm = ({
                                 className='px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full'
                             />
 
-                            <input
-                                {...register("altura", { required: false })}
-                                type='number'
-                                name='altura'
-                                id='altura'
-                                autoComplete='off'
-                                placeholder={t("propiedadForm.altura")}
-                                required
+                            <select
+                                {...register("tipoMedida", { required: true })}
                                 className='px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full'
-                            />
+                            >
+                                {enumTipoMedida ? (
+                                    Object.values(enumTipoMedida).map((tipo) => (
+                                        <option key={tipo.id} value={tipo.id}>
+                                            {tipo.name}
+                                        </option>
+                                    ))
+                                ) : <option key={-1} value=''>
+                                    Medidas no definido
+                                </option>}
+                            </select>
+                        </div>
+                        <div className='flex flex-col lg:flex-row gap-6'>
+                            <div className="flex items-center gap-2 w-full">
+                                <input
+                                    {...register("altura", { required: false })}
+                                    type='number'
+                                    name='altura'
+                                    id='altura'
+                                    autoComplete='off'
+                                    placeholder={t("propiedadForm.altura")}
+                                    required
+                                    className='px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full'
+                                />
+                                <label
+                                    htmlFor="precio"
+                                    className="text-sm text-gray-500 whitespace-nowrap"
+                                >
+                                    msnm
+                                </label>
+                            </div>
                         </div>
                         <div className='flex flex-col lg:flex-row gap-6'>
                             <input
@@ -271,23 +317,31 @@ export const PropiedadForm = ({
                                     No esta definida la renta o venta
                                 </option>}
                             </select>
-                            <select
-                                {...register("temperatura", { required: true })}
-                                className='px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full'
-                            >
-                                <option key={-1} value=''>
-                                    {t("propiedadForm.selectClimate")}
-                                </option>
-                                {enumClima ? (
-                                    Object.values(enumClima).map((tipo) => (
-                                        <option key={tipo.id} value={tipo.id}>
-                                            {tipo.name}
-                                        </option>
-                                    ))
-                                ) : <option key={-1} value=''>
-                                    Clima no definido
-                                </option>}
-                            </select>
+                            <div className="flex items-center gap-2 w-full">
+                                <select
+                                    {...register("temperatura", { required: true })}
+                                    className='px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full'
+                                >
+                                    <option key={-1} value=''>
+                                        {t("propiedadForm.selectClimate")}
+                                    </option>
+                                    {enumClima ? (
+                                        Object.values(enumClima).map((tipo) => (
+                                            <option key={tipo.id} value={tipo.id}>
+                                                {tipo.name}
+                                            </option>
+                                        ))
+                                    ) : <option key={-1} value=''>
+                                        Clima no definido
+                                    </option>}
+                                </select>
+                                <label
+                                    htmlFor="precio"
+                                    className="text-sm text-gray-500 whitespace-nowrap"
+                                >
+                                    centigrados
+                                </label>
+                            </div>
                         </div>
                         <div className='flex flex-col lg:flex-row gap-6'>
                             <select
@@ -328,59 +382,95 @@ export const PropiedadForm = ({
                     </div>
 
 
-                            <textarea
-                                {...register("description", { required: false })}
-                                rows={8}
-                                cols={50}
-                                name='description'
-                                id='description'
-                                placeholder={t("propiedadForm.description")}
-                                required
-                                className='px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-2xl outline-primary focus:outline'></textarea>
+                    <textarea
+                        {...register("description", { required: false })}
+                        rows={8}
+                        cols={50}
+                        name='description'
+                        id='description'
+                        placeholder={t("propiedadForm.description")}
+                        required
+                        className='px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-2xl outline-primary focus:outline'></textarea>
 
                     <input
                         type="file"
                         multiple
+                        accept="image/*,video/*"
                         {...register("images")}
                         className="border p-2"
                     />
 
-                    {/* 🔥 EXISTENTES */}
+
+                    {/* MEDIA EXISTENTE */}
                     {existingImages.length > 0 && (
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            {existingImages.map((img, index) => (
-                                <div key={img} className="relative group h-40">
-                                    <img src={img} className="w-full h-full object-cover rounded-xl" />
-                                    <button
-                                        type="button"
-                                        onClick={() => removeExistingImage(index)}
-                                        className="absolute top-2 right-2 bg-black/70 text-white w-8 h-8 rounded-full opacity-0 group-hover:opacity-100"
-                                    >
-                                        ✕
-                                    </button>
-                                </div>
-                            ))}
+                            {existingImages.map((media) => {
+                                const isVideo = media.url.match(/\.(mp4|webm|ogg)$/i);
+
+                                return (
+                                    <div key={media.id} className="relative h-40 rounded-xl overflow-hidden">
+                                        {isVideo ? (
+                                            <video
+                                                src={media.url}
+                                                className="absolute inset-0 w-full h-full object-cover"
+                                                controls
+                                            />
+                                        ) : (
+                                            <img
+                                                src={media.url}
+                                                alt="Media propiedad"
+                                                className="absolute inset-0 w-full h-full object-cover"
+                                            />
+                                        )}
+
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                removeExistingImage(
+                                                    existingImages.findIndex((i) => i.id === media.id)
+                                                )
+                                            }
+                                            className="absolute top-2 right-2 z-10 bg-black/70 text-white w-8 h-8 rounded-full flex items-center justify-center"
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+                                );
+                            })}
                         </div>
                     )}
-
-                    {/* 🔥 NUEVAS */}
                     {newImages.length > 0 && (
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                             {newImages.map((file, index) => {
                                 const url = URL.createObjectURL(file);
+                                const isVideo = file.type.startsWith("video");
+
                                 return (
-                                    <div key={index} className="relative group h-40">
-                                        <Image
-                                            src={url}
-                                            alt="Property image"
-                                            fill
-                                            className="w-full h-full object-cover rounded-xl"
-                                            onLoad={() => URL.revokeObjectURL(url)}
-                                        />
+                                    <div
+                                        key={`${file.name}-${index}`}
+                                        className="relative h-40 rounded-xl overflow-hidden"
+                                    >
+                                        {isVideo ? (
+                                            <video
+                                                src={url}
+                                                className="absolute inset-0 w-full h-full object-cover"
+                                                muted
+                                                controls
+                                            />
+                                        ) : (
+                                            <Image
+                                                src={url}
+                                                alt="Nueva imagen"
+                                                fill
+                                                className="object-cover"
+                                                onLoad={() => URL.revokeObjectURL(url)}
+                                            />
+                                        )}
+
                                         <button
                                             type="button"
                                             onClick={() => removeNewImage(index)}
-                                            className="absolute top-2 right-2 bg-black/70 text-white w-8 h-8 rounded-full opacity-0 group-hover:opacity-100"
+                                            className="absolute top-2 right-2 z-10 bg-black/70 text-white w-8 h-8 rounded-full flex items-center justify-center"
                                         >
                                             ✕
                                         </button>
@@ -390,8 +480,9 @@ export const PropiedadForm = ({
                         </div>
                     )}
 
+
                     <button className="bg-primary text-white px-6 py-3 rounded-full">
-                        {t("propiedadForm.submitButton")}
+                        Guardar
                     </button>
                 </form>
             </div>

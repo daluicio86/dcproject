@@ -11,6 +11,7 @@ export interface Propiedad {
   geoLink: string;
   esPrincipal: boolean;
   tipoPropiedadId: string;
+  tipoMedida: string;
   //ubicacion?: string;
   rentaVenta?: string;
   temperatura?: string;
@@ -23,5 +24,7 @@ export interface Propiedad {
 }
 
 export interface PropiedadImage {
+  id: number;
   url: string;
+  type?: string; // "image" | "video"
 }

@@ -17,7 +17,8 @@ function formatPriceEcuador(value) {
 
 const PropiedadCardV1: React.FC<{ item: Propiedad }> = ({ item }) => {
 
-  const { title, slug, apto, tipoPropiedadId, precio, metros,
+  const { title, slug, apto,
+    tipoMedida, tipoPropiedadId, precio, metros,
     altura, address, images } = item
   const { t } = useTranslation();
   const [api, setApi] = React.useState<CarouselApi | undefined>(undefined);
@@ -69,14 +70,21 @@ const PropiedadCardV1: React.FC<{ item: Propiedad }> = ({ item }) => {
                 {images.map((ele, index) => (
                   <CarouselItem key={index}>
                     <Link href={`/properties/${slug}`}>
-                      <Image
-                        src={ele}
-                        alt={index.toString()}
-                        width={250}
-                        height={250}
-                        className="rounded-2xl w-full h-96"
-                        unoptimized={true}
-                      />
+                      {ele.includes('.mp4') ? (
+                        <video
+                          src={ele}
+                          controls
+                          className="rounded-2xl w-full h-96"
+                        />
+                      ) : (
+                        <Image
+                          src={ele}
+                          alt={index.toString()}
+                          width={250}
+                          height={250}
+                          className="rounded-2xl w-full h-96"
+                          unoptimized={true}
+                        />)}
                     </Link>
                   </CarouselItem>
                 ))}
@@ -139,7 +147,7 @@ const PropiedadCardV1: React.FC<{ item: Propiedad }> = ({ item }) => {
                 width={20}
                 height={20}
               />
-              {tipoPropiedadId === "46b7ed78-bf5c-48e3-a878-123da509f361" ? (
+              {tipoMedida === "ha" ? (
                 <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
                   {metros}ha
                 </p>
@@ -153,7 +161,7 @@ const PropiedadCardV1: React.FC<{ item: Propiedad }> = ({ item }) => {
                 icon={'lineicons:arrow-up'}
                 width={20} height={20} />
               <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
-                Height: {altura}m
+                {altura}msnm
               </p>
             </div>
           </div>

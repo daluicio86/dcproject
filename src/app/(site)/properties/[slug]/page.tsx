@@ -7,11 +7,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getPropiedadBySlug } from '@/actions';
 import notFound from '@/app/not-found';
-import { Propiedad } from '@/interface';
+import { Propiedad, PropiedadImage } from '@/interface';
 import { useFavoritos } from '@/hooks/useFavoritos';
 
 import { useTranslation } from 'react-i18next';
-import PropertyAdminCard from '@/components/Home/Properties/Card/AdminCard';
 
 export default function Details() {
     const params = useParams();
@@ -21,7 +20,7 @@ export default function Details() {
     const { t } = useTranslation();
 
     const [item, setItem] = React.useState<Propiedad | null>(null);
-    const [images, setImages] = React.useState<string[]>([]);
+    const [images, setImages] = React.useState<PropiedadImage[]>([]);
 
     const [api, setApi] = React.useState<CarouselApi | undefined>(undefined);
     const [current, setCurrent] = React.useState(0);
@@ -91,7 +90,7 @@ export default function Details() {
                             <div className='flex flex-col gap-2 border-e border-black/10 dark:border-white/20 px-2 xs:px-4 mobile:px-8'>
                                 <Icon icon={'lineicons:arrow-up'} width={20} height={20} />
                                 <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
-                                    {item?.altura}m Height
+                                    {item?.altura}msnm
                                 </p>
                             </div>
                             <div className='flex flex-col gap-2 pl-2 xs:pl-4 mobile:pl-8'>
@@ -100,7 +99,7 @@ export default function Details() {
                                     width={20}
                                     height={20}
                                 />
-                                {item?.tipoPropiedadId === "46b7ed78-bf5c-48e3-a878-123da509f361" ? (<p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
+                                {item?.tipoMedida === "ha" ? (<p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
                                     {item?.metros}ha
                                 </p>) : (<p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
                                     {item?.metros}m<sup>2</sup>
@@ -111,32 +110,45 @@ export default function Details() {
                     </div>
                 </div>
                 <div className="grid grid-cols-12 gap-8 mt-10">
-
                     {/* Carrusel a la izquierda */}
                     <div className="lg:col-span-8 col-span-12">
-                        <Carousel className="rounded-2xl overflow-hidden w-full">
+                        <Carousel setApi={setApi} className="rounded-2xl overflow-hidden w-full">
                             <CarouselContent>
-                                {images.map((src, index) => (
-                                    <CarouselItem key={index}>
-                                        <Image
-                                            src={src}
+                                {images.map((ele, index) => (
+                                    <CarouselItem key={ele.id ?? ele.url}>
+                                        {ele.url.includes('.mp4') ? (
+                                            <video
+                                                src={ele.url}
+                                                controls
+                                                className="rounded-2xl w-full h-96"
+                                            />
+                                        ) : (
+                                            <Image
+                                                src={ele.url}
+                                                alt={index.toString()}
+                                                width={250}
+                                                height={250}
+                                                className="rounded-2xl w-full h-96"
+                                                unoptimized={true}
+                                            />)}
+
+                                        {/*<Image
+                                            src={ele.url}
                                             width={1600}
                                             height={900}
                                             className="w-full h-[420px] object-cover rounded-2xl"
                                             alt={`img-${index}`}
-                                        />
+                                        />*/}
                                     </CarouselItem>
                                 ))}
                             </CarouselContent>
-
                             {/* Dots abajo centrados */}
                             <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
                                 {images.map((_, i) => (
                                     <button
                                         key={i}
                                         onClick={() => handleDotClick(i)}
-                                        className={`w-2 h-2 rounded-full transition-all ${current - 1 === i ? "bg-white scale-125" : "bg-white/50"
-                                            }`}
+                                        className={`w-2 h-2 rounded-full transition-all ${current - 1 === i ? "bg-white scale-125" : "bg-white/50"}`}
                                     />
                                 ))}
                             </div>

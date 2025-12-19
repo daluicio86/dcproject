@@ -71,6 +71,8 @@ model Propiedad {
   tipoPropiedad   TipoPropiedad? @relation(fields: [tipoPropiedadId], references: [id])
   tipoPropiedadId String
 
+  tipoMedida String?
+
   // 👉 Ciudad opcional
   ciudadId String?
   ciudad   Ciudad?      @relation(fields: [ciudadId], references: [id])
@@ -90,11 +92,11 @@ model Favorito {
 }
 
 model PropiedadImage {
-  id  Int    @id @default(autoincrement())
-  url String
-
-  propiedad   Propiedad @relation(fields: [propiedadId], references: [id])
-  propiedadId String
+  id           Int      @id @default(autoincrement())
+  url          String
+  type         String?  // "image" | "video"
+  propiedadId  String
+  propiedad    Propiedad @relation(fields: [propiedadId], references: [id])
 }
 
 model Contacto {

@@ -21,7 +21,7 @@ function formatPriceEcuador(value) {
 
 
 const PropiedadAdminCard: React.FC<{ item: Propiedad }> = ({ item }) => {
-  const { id, title, slug, apto, tipoPropiedadId, precio, metros,
+  const { id, title, slug, apto, tipoMedida, precio, metros,
     altura, address, images } = item
 
   const { t } = useTranslation();
@@ -70,14 +70,21 @@ const PropiedadAdminCard: React.FC<{ item: Propiedad }> = ({ item }) => {
                 {images.map((ele, index) => (
                   <CarouselItem key={index}>
                     <Link href={`/admin/propiedad/${slug}`}>
-                      <Image
-                        src={ele}
-                        alt={index.toString()}
-                        width={250}
-                        height={250}
-                        className="rounded-2xl w-full h-96"
-                        unoptimized={true}
-                      />
+                      {ele.includes('.mp4') ? (
+                        <video
+                          src={ele}
+                          controls
+                          className="rounded-2xl w-full h-96"
+                        />
+                      ) : (
+                        <Image
+                          src={ele}
+                          alt={index.toString()}
+                          width={250}
+                          height={250}
+                          className="rounded-2xl w-full h-96"
+                          unoptimized={true}
+                        />)}
                     </Link>
                   </CarouselItem>
                 ))}
@@ -141,7 +148,7 @@ const PropiedadAdminCard: React.FC<{ item: Propiedad }> = ({ item }) => {
                 height={20}
               />
 
-              {tipoPropiedadId === "46b7ed78-bf5c-48e3-a878-123da509f361" ? (
+              {tipoMedida === "ha" ? (
                 <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
                   {metros}ha
                 </p>
@@ -155,7 +162,7 @@ const PropiedadAdminCard: React.FC<{ item: Propiedad }> = ({ item }) => {
                 icon={'lineicons:arrow-up'}
                 width={20} height={20} />
               <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
-                Height: {altura}m
+                {altura}msnm
               </p>
               <button onClick={handleDelete} title="Eliminar">
                 <AiFillDelete size={24} className="text-red-500" title='Delete' />

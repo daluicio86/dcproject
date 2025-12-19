@@ -16,7 +16,7 @@ function formatPriceEcuador(value) {
 
 
 const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
-  const { title, slug, apto, precio, tipoPropiedadId, metros,
+  const { title, slug, apto, precio, tipoMedida, metros,
     altura, address, images } = item
   const { t } = useTranslation();
   const [api, setApi] = React.useState<CarouselApi | undefined>(undefined);
@@ -43,19 +43,6 @@ const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
     <div>
       <div className='relative rounded-2xl border border-dark/10 dark:border-white/10 group hover:shadow-3xl duration-300 dark:hover:shadow-white/20'>
         <div className='overflow-hidden rounded-t-2xl'>
-          {/*<Link href={`/propiedad/${slug}`}>
-            {mainImage && (
-              <Image
-                src={mainImage}
-                alt={title}
-                width={440}
-                height={300}
-                className='w-full rounded-t-2xl group-hover:brightness-50 group-hover:scale-125 transition duration-300 delay-75'
-                unoptimized={true}
-              />
-            )}
-          </Link>*/}
-
           <div className="relative">
             <Carousel
               setApi={setApi}
@@ -67,14 +54,21 @@ const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
                 {images.map((ele, index) => (
                   <CarouselItem key={index}>
                     <Link href={`/admin/propiedad/${slug}`}>
-                      <Image
-                        src={ele}
-                        alt={index.toString()}
-                        width={250}
-                        height={250}
-                        className="rounded-2xl w-full h-96"
-                        unoptimized={true}
-                      />
+                      {ele.includes('.mp4') ? (
+                        <video
+                          src={ele}
+                          controls
+                          className="rounded-2xl w-full h-96"
+                        />
+                      ) : (
+                        <Image
+                          src={ele}
+                          alt={index.toString()}
+                          width={250}
+                          height={250}
+                          className="rounded-2xl w-full h-96"
+                          unoptimized={true}
+                        />)}
                     </Link>
                   </CarouselItem>
                 ))}
@@ -137,7 +131,7 @@ const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
                 width={20}
                 height={20}
               />
-              {tipoPropiedadId === "46b7ed78-bf5c-48e3-a878-123da509f361" ? (
+              {tipoMedida === "ha" ? (
                 <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
                   {metros}ha
                 </p>
@@ -151,7 +145,7 @@ const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
                 icon={'lineicons:arrow-up'}
                 width={20} height={20} />
               <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
-                Height: {altura}m
+                {altura}msnm
               </p>
             </div>
           </div>

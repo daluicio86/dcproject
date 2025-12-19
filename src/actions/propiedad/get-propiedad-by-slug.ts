@@ -5,22 +5,28 @@ import prisma from "@/lib/prisma";
 export async function getPropiedadBySlug(slug: string) {
   try {
     const propiedad = await prisma.propiedad.findFirst({
-      include: {
-        images: true,
-        //amenities: true,
-      },
       where: { slug },
+      include: {
+        images: {
+          select: {
+            id: true,
+            url: true,
+          },
+        },
+        // amenities: true,
+      },
     });
 
     if (!propiedad) return null;
 
     return {
       ...propiedad,
-      apto: propiedad.apto === null ? "" : propiedad.apto,
-      description: propiedad.description === null ? "" : propiedad.description,
-      userId: propiedad.userId === null ? "" : propiedad.userId,
-      images: propiedad.images.map((image) => image.url) || [],
-      //amenities: propiedad.amenities || [],
+      apto: propiedad.apto ?? "",
+      description: propiedad.description ?? "",
+      userId: propiedad.userId ?? "",
+      // 🔥 IMPORTANTE: ya NO transformamos images
+      images: propiedad.images,
+      // amenities: propiedad.amenities ?? [],
     };
   } catch (error) {
     console.log(error);
