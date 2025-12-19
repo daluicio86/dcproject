@@ -20,7 +20,7 @@ export interface Propiedad {
 
   categoriaId: string;
   userId: string;
-  images: string[];
+  images: PropiedadImage[];
   amenities?: { id: string; name: string }[];
   sevicios?: { id: string; nombre: string }[];
 }
