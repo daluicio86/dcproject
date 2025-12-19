@@ -223,6 +223,8 @@ const uploadMedia = async (files: File[]): Promise<UploadedMedia[]> => {
         url: result.secure_url,
         type: isVideo ? "video" : ("image" as "video" | "image"),
       };
+
+      
     })
   );
 
