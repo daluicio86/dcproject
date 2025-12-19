@@ -16,6 +16,8 @@ export interface Propiedad {
   rentaVenta?: string;
   temperatura?: string;
 
+  ciudadId?: string;
+
   categoriaId: string;
   userId: string;
   images: string[];
