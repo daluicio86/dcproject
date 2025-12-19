@@ -24,10 +24,10 @@ interface SearchParams {
     precioMax?: string;
 }
 
-export default async function PropertiesPage({ 
-    searchParams 
-}: { 
-    searchParams: Promise<SearchParams> 
+export default async function PropertiesPage({
+    searchParams
+}: {
+    searchParams: Promise<SearchParams>
 }) {
     // Desestructurar la Promise
     const params = await searchParams;
@@ -46,13 +46,13 @@ export default async function PropertiesPage({
     const precioMax = params?.precioMax ? parseInt(params.precioMax) : 10000000;
 
     const { propiedads, currentPage, totalPages } = await getPaginatedPropiedadsWithImages({
-        page, 
-        rentaVenta, 
-        temperatura, 
-        tipoPropiedad, 
-        categoriaId: categoria, 
-        precioMinimo: precioMin, 
-        precioMaximo: precioMax 
+        page,
+        rentaVenta,
+        temperatura,
+        tipoPropiedad,
+        categoriaId: categoria,
+        precioMinimo: precioMin,
+        precioMaximo: precioMax
     });
 
     return (
@@ -74,7 +74,15 @@ export default async function PropertiesPage({
                             ...p,
                             rentaVenta: p.rentaVenta === null ? undefined : p.rentaVenta,
                             temperatura: p.temperatura === null ? undefined : p.temperatura,
+                            tipoMedida: p.tipoMedida === null ? undefined : p.tipoMedida,
+                            ciudadId: p.ciudadId === null ? undefined : p.ciudadId,
                             geoLink: p.geoLink ?? "",
+                            images: p.images?.map((img) => ({
+                                id: img.id,
+                                url: img.url,
+                                type: img.type ?? undefined,
+                            })) ?? [],
+
                         }))}
                         currentPage={currentPage}
                         totalPages={totalPages}

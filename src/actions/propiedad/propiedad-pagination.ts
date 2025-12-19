@@ -44,9 +44,7 @@ export const getPaginatedPropiedadsWithImages = async ({
       take,
       skip: (page - 1) * take,
       include: {
-        images: {
-          select: { url: true },
-        },
+        images: true,
         //amenities: true,
       },
       where, // 👈 aquí usamos el objeto dinámico
@@ -66,7 +64,7 @@ export const getPaginatedPropiedadsWithImages = async ({
         address: p.address ?? "",
         description: p.description ?? "",
         userId: p.userId ?? "",
-        images: p.images.map((img) => img.url),
+        images: p.images.map((img) => img),
       })),
     };
   } catch (error) {

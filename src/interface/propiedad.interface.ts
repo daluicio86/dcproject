@@ -11,7 +11,7 @@ export interface Propiedad {
   geoLink: string;
   esPrincipal: boolean;
   tipoPropiedadId: string;
-  tipoMedida: string;
+  tipoMedida?: string;
   //ubicacion?: string;
   rentaVenta?: string;
   temperatura?: string;

@@ -54,15 +54,15 @@ const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
                 {images.map((ele, index) => (
                   <CarouselItem key={index}>
                     <Link href={`/admin/propiedad/${slug}`}>
-                      {ele.includes('.mp4') ? (
+                      {ele.url.includes('.mp4') ? (
                         <video
-                          src={ele}
+                          src={ele.url}
                           controls
                           className="rounded-2xl w-full h-96"
                         />
                       ) : (
                         <Image
-                          src={ele}
+                          src={ele.url}
                           alt={index.toString()}
                           width={250}
                           height={250}
