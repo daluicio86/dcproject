@@ -1,3 +1,4 @@
+import { PropiedadImage } from "./propiedad.interface";
 
 export interface Ciudad {
   id: string;
@@ -5,5 +6,5 @@ export interface Ciudad {
   descripcion?: string;
   url: string | null;
   servicios: { id: string; nombre: string }[];
-  propiedades: { id: string; title: string; images: string[] }[];
+  propiedades: { id: string; title: string; images: PropiedadImage[] }[];
 }

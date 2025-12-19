@@ -17,9 +17,7 @@ function formatPriceEcuador(value) {
 
 const PropiedadCardV1: React.FC<{ item: Propiedad }> = ({ item }) => {
 
-  const { title, slug, apto,
-    tipoMedida, tipoPropiedadId, precio, metros,
-    altura, address, images } = item
+  const { title, slug, apto, tipoMedida, precio, metros, altura, address, images } = item
   const { t } = useTranslation();
   const [api, setApi] = React.useState<CarouselApi | undefined>(undefined);
   const [current, setCurrent] = React.useState(0);
@@ -70,15 +68,15 @@ const PropiedadCardV1: React.FC<{ item: Propiedad }> = ({ item }) => {
                 {images.map((ele, index) => (
                   <CarouselItem key={index}>
                     <Link href={`/properties/${slug}`}>
-                      {ele.includes('.mp4') ? (
+                      {ele.url.includes('.mp4') ? (
                         <video
-                          src={ele}
+                          src={ele.url}
                           controls
                           className="rounded-2xl w-full h-96"
                         />
                       ) : (
                         <Image
-                          src={ele}
+                          src={ele.url}
                           alt={index.toString()}
                           width={250}
                           height={250}
