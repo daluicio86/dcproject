@@ -45,14 +45,22 @@ const PropertyAdminCard: React.FC<{ item: Propiedad }> = ({ item }) => {
                 {images.map((ele, index) => (
                   <CarouselItem key={index}>
                     <Link href={`/properties/${slug}`}>
-                      <Image
-                        src={ele.url}
-                        alt={index.toString()}
-                        width={250}
-                        height={250}
-                        className="rounded-2xl w-full h-96"
-                        unoptimized={true}
-                      />
+                      {ele.url.includes('.mp4') ? (
+                        <video
+                          src={ele.url}
+                          controls
+                          className="rounded-2xl w-full h-96"
+                        />
+                      ) : (
+                        <Image
+                          src={ele.url}
+                          alt={index.toString()}
+                          width={250}
+                          height={250}
+                          className="rounded-2xl w-full h-96"
+                          unoptimized={true}
+                        />)}
+
                     </Link>
                   </CarouselItem>
                 ))}
