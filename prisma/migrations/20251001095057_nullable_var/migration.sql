@@ -1,5 +1,0 @@
--- AlterTable
-ALTER TABLE "public"."Propiedad" ALTER COLUMN "metros" DROP NOT NULL,
-ALTER COLUMN "altura" DROP NOT NULL,
-ALTER COLUMN "address" DROP NOT NULL,
-ALTER COLUMN "precio" DROP NOT NULL;
