@@ -46,7 +46,7 @@ const PropertyAdminCard: React.FC<{ item: Propiedad }> = ({ item }) => {
                   <CarouselItem key={index}>
                     <Link href={`/properties/${slug}`}>
                       <Image
-                        src={ele}
+                        src={ele.url}
                         alt={index.toString()}
                         width={250}
                         height={250}
