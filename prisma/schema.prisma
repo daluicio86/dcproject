@@ -6,13 +6,12 @@
 
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
 }
-
-
 
 enum Role {
   admin
@@ -32,9 +31,9 @@ model Categoria {
 }
 
 model Amenities {
-  id          String      @id @default(uuid())
-  name        String      @unique
-  estado      Boolean     @default(true)
+  id     String  @id @default(uuid())
+  name   String  @unique
+  estado Boolean @default(true)
 }
 
 model TipoPropiedad {
@@ -72,7 +71,7 @@ model Propiedad {
   rentaVenta  String?
   temperatura String?
 
-  categoria   Categoria?     @relation(fields: [categoriaId], references: [id])
+  categoria   Categoria? @relation(fields: [categoriaId], references: [id])
   categoriaId String
 
   tipoPropiedad   TipoPropiedad? @relation(fields: [tipoPropiedadId], references: [id])
@@ -82,7 +81,7 @@ model Propiedad {
 
   // 👉 Ciudad opcional
   ciudadId String?
-  ciudad   Ciudad?      @relation(fields: [ciudadId], references: [id])
+  ciudad   Ciudad? @relation(fields: [ciudadId], references: [id])
 
   images PropiedadImage[]
   User   User?            @relation(fields: [userId], references: [id])
@@ -99,11 +98,11 @@ model Favorito {
 }
 
 model PropiedadImage {
-  id           Int      @id @default(autoincrement())
-  url          String
-  type         String?  // "image" | "video"
-  propiedadId  String
-  propiedad    Propiedad @relation(fields: [propiedadId], references: [id])
+  id          Int       @id @default(autoincrement())
+  url         String
+  type        String? // "image" | "video"
+  propiedadId String
+  propiedad   Propiedad @relation(fields: [propiedadId], references: [id])
 }
 
 model Contacto {
@@ -125,11 +124,11 @@ model Ciudad {
 }
 
 model Servicio {
-  id          String   @id @default(uuid())
+  id          String          @id @default(uuid())
   nombre      String
   descripcion String?
   ciudadId    String
-  ciudad      Ciudad   @relation(fields: [ciudadId], references: [id])
+  ciudad      Ciudad          @relation(fields: [ciudadId], references: [id])
   images      ServicioImage[]
 }
 
