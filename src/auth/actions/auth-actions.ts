@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { prisma } from "../../../lib/prisma";
+import prisma from "@/lib/prisma";
 
 export const signInEmailPassword = async (email: string, password: string) => {
   if (!email || !password) return null;

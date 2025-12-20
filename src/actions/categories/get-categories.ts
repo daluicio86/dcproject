@@ -1,6 +1,7 @@
 "use server";
 
-import { prisma } from "../../../lib/prisma";
+import prisma from "@/lib/prisma";
+
 
 export const getCategories = async (tipo:number) => {
   try {

@@ -2,10 +2,7 @@
 
 import prisma from '@/lib/prisma';
 
-
 export const getCategoryByName = async( name: string ) => {
-
-
   try {
 
     const categoria = await prisma.categoria.findFirst({

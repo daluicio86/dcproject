@@ -9,9 +9,9 @@ import FAQ from '@/components/Home/FAQs'
 import { Welcome } from '@/components/Home/Welcome'
 import Jubilados from '@/components/Home/Jubilados'
 import Actividades from '@/components/Home/Actividades'
+import './i18n';
 
 export default function Home() {
-  console.log("DATABASE_URL:", process.env.DATABASE_URL)
   return (
     <main>
       <Hero />
