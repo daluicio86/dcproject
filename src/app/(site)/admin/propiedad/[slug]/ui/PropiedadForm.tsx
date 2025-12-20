@@ -173,7 +173,6 @@ export const PropiedadForm = ({
         router.push("/admin/propiedads");
     };
 
-    console.log('existingImages:', existingImages);
     /* ------------------------------------------------------------------ */
     /* RENDER */
     /* ------------------------------------------------------------------ */

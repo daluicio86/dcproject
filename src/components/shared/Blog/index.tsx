@@ -22,9 +22,9 @@ const BlogSmall: React.FC = () => {
 
     useEffect(() => {
         // Any client-side effects can be handled here    
-        fetch("/api/posts")
+        /*fetch("/api/posts")
             .then(res => res.json())
-            .then(data => setPosts(data.slice(0, 3)));
+            .then(data => setPosts(data.slice(0, 3)));*/
     }, []);
     // Get all posts and map over them to ensure each field is a string
 

@@ -74,37 +74,35 @@ const Servicios = () => {
         <br />
         <div className="grid grid-cols-12 items-center gap-10">
           {ciudades?.map((item) => (
-            <>
-              <div className="lg:col-span-4 col-span-12">
-                <div className="relative rounded-2xl overflow-hidden group">
-                  <Link href={`/ciudades/${item.nombre}`}>
-                    <Image
-                      src={item.url || ""}
-                      alt="ciudades"
-                      width={680}
-                      height={386}
-                      className="w-full h-80"
-                      unoptimized={true}
-                    />
-                  </Link>
-                  <Link href={`/ciudades/${item.nombre}`} className="absolute w-full h-full bg-gradient-to-b from-black/0 to-black/80 top-full flex flex-col justify-between pl-10 pb-10 group-hover:top-0 duration-500">
-                    <div className="flex justify-end mt-6 mr-6">
-                      <div className="bg-white text-dark rounded-full w-fit p-4">
-                        <Icon icon="ph:arrow-right" width={24} height={24} />
-                      </div>
+            <div key={item.id} className="lg:col-span-4 col-span-12">
+              <div className="relative rounded-2xl overflow-hidden group">
+                <Link href={`/ciudades/${item.nombre}`}>
+                  <Image
+                    src={item.url || ""}
+                    alt="ciudades"
+                    width={680}
+                    height={386}
+                    className="w-full h-80"
+                    unoptimized={true}
+                  />
+                </Link>
+                <Link href={`/ciudades/${item.nombre}`} className="absolute w-full h-full bg-gradient-to-b from-black/0 to-black/80 top-full flex flex-col justify-between pl-10 pb-10 group-hover:top-0 duration-500">
+                  <div className="flex justify-end mt-6 mr-6">
+                    <div className="bg-white text-dark rounded-full w-fit p-4">
+                      <Icon icon="ph:arrow-right" width={24} height={24} />
                     </div>
-                    <div className="flex flex-col gap-2.5">
-                      <h3 className="text-white text-2xl">
-                        {item.nombre}
-                      </h3>
-                      <p className="text-white/80 text-base leading-6">
-                        y sus cercanías.
-                      </p>
-                    </div>
-                  </Link>
-                </div>
+                  </div>
+                  <div className="flex flex-col gap-2.5">
+                    <h3 className="text-white text-2xl">
+                      {item.nombre}
+                    </h3>
+                    <p className="text-white/80 text-base leading-6">
+                      y sus cercanías.
+                    </p>
+                  </div>
+                </Link>
               </div>
-            </>
+            </div>
           ))}
 
         </div>
