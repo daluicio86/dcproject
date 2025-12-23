@@ -199,34 +199,31 @@ export const createUpdatePropiedad = async (formData: FormData) => {
    SUBIDA DE MEDIA (IMÁGENES + VIDEOS)
 ------------------------------------------------------------------ */
 const uploadMedia = async (files: File[]): Promise<UploadedMedia[]> => {
-  const uploads = await Promise.all(
-    files.map(async (file) => {
-      // Limitar tamaño (50MB)
-      if (file.size > 50 * 1024 * 1024) {
-        throw new Error("Archivo demasiado grande");
+  const uploads: UploadedMedia[] = [];
+
+  for (const file of files) {
+    const isVideo = file.type.startsWith("video");
+
+    if (file.size > 40 * 1024 * 1024) {
+      throw new Error("El archivo es demasiado grande");
+    }
+
+    const buffer = Buffer.from(await file.arrayBuffer());
+
+    const result = await cloudinary.uploader.upload(
+      buffer as any,
+      {
+        resource_type: isVideo ? "video" : "image",
+        folder: "propiedades",
+        chunk_size: 6 * 1024 * 1024,
       }
+    );
 
-      const buffer = await file.arrayBuffer();
-      const base64 = Buffer.from(buffer).toString("base64");
-
-      const isVideo = file.type.startsWith("video");
-
-      const result = await cloudinary.uploader.upload(
-        `data:${file.type};base64,${base64}`,
-        {
-          resource_type: isVideo ? "video" : "image",
-          folder: "propiedades",
-        }
-      );
-
-      return {
-        url: result.secure_url,
-        type: isVideo ? "video" : ("image" as "video" | "image"),
-      };
-
-      
-    })
-  );
+    uploads.push({
+      url: result.secure_url,
+      type: isVideo ? "video" : "image",
+    });
+  }
 
   return uploads;
 };
