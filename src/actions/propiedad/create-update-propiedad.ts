@@ -198,37 +198,35 @@ export const createUpdatePropiedad = async (formData: FormData) => {
 /* ------------------------------------------------------------------
    SUBIDA DE MEDIA (IMÁGENES + VIDEOS)
 ------------------------------------------------------------------ */
-import streamifier from "streamifier";
-
 const uploadMedia = async (files: File[]): Promise<UploadedMedia[]> => {
-  const uploads: UploadedMedia[] = [];
+  const uploads = await Promise.all(
+    files.map(async (file) => {
+      // Limitar tamaño (50MB)
+      if (file.size > 50 * 1024 * 1024) {
+        throw new Error("Archivo demasiado grande");
+      }
 
-  for (const file of files) {
-    const isVideo = file.type.startsWith("video/");
-    const buffer = Buffer.from(await file.arrayBuffer());
+      const buffer = await file.arrayBuffer();
+      const base64 = Buffer.from(buffer).toString("base64");
 
-    const result = await new Promise<any>((resolve, reject) => {
-      const cldStream = cloudinary.uploader.upload_stream(
+      const isVideo = file.type.startsWith("video");
+
+      const result = await cloudinary.uploader.upload(
+        `data:${file.type};base64,${base64}`,
         {
           resource_type: isVideo ? "video" : "image",
           folder: "propiedades",
-        },
-        (error, result) => {
-          if (error) return reject(error);
-          resolve(result);
         }
       );
 
-      // ✅ aquí sí se envía el buffer al stream de Cloudinary
-      streamifier.createReadStream(buffer).pipe(cldStream);
-    });
+      return {
+        url: result.secure_url,
+        type: isVideo ? "video" : ("image" as "video" | "image"),
+      };
 
-    uploads.push({
-      url: result.secure_url,
-      type: isVideo ? "video" : "image",
-    });
-  }
+      
+    })
+  );
 
   return uploads;
 };
-
