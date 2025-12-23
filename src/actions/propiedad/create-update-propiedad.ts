@@ -198,26 +198,38 @@ export const createUpdatePropiedad = async (formData: FormData) => {
 /* ------------------------------------------------------------------
    SUBIDA DE MEDIA (IMÁGENES + VIDEOS)
 ------------------------------------------------------------------ */
+import streamifier from "streamifier";
+
+/* ------------------------------------------------------------------
+   SUBIDA DE MEDIA (IMÁGENES + VIDEOS)
+------------------------------------------------------------------ */
 const uploadMedia = async (files: File[]): Promise<UploadedMedia[]> => {
   const uploads: UploadedMedia[] = [];
 
   for (const file of files) {
     const isVideo = file.type.startsWith("video");
 
+    // ⚠️ límite REALISTA para Server Actions
     if (file.size > 40 * 1024 * 1024) {
-      throw new Error("El archivo es demasiado grande");
+      throw new Error("El video es demasiado grande para el servidor");
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    const result = await cloudinary.uploader.upload(
-      buffer as any,
-      {
-        resource_type: isVideo ? "video" : "image",
-        folder: "propiedades",
-        chunk_size: 6 * 1024 * 1024,
-      }
-    );
+    const result = await new Promise<any>((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_large(
+        streamifier.createReadStream(buffer),
+        {
+          resource_type: isVideo ? "video" : "image",
+          folder: "propiedades",
+          chunk_size: 10 * 1024 * 1024, // 10MB
+        },
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        }
+      );
+    });
 
     uploads.push({
       url: result.secure_url,
@@ -227,3 +239,4 @@ const uploadMedia = async (files: File[]): Promise<UploadedMedia[]> => {
 
   return uploads;
 };
+
