@@ -209,20 +209,27 @@ const uploadMedia = async (files: File[]): Promise<UploadedMedia[]> => {
   for (const file of files) {
     const isVideo = file.type.startsWith("video");
 
+    // ⚠️ límite REALISTA para Server Actions
     if (file.size > 40 * 1024 * 1024) {
-      throw new Error("El archivo es demasiado grande");
+      throw new Error("El video es demasiado grande para el servidor");
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
 
-    const result = await cloudinary.uploader.upload(
-      buffer as any,
-      {
-        resource_type: isVideo ? "video" : "image",
-        folder: "propiedades",
-        chunk_size: 10 * 1024 * 1024,
-      }
-    );
+    const result = await new Promise<any>((resolve, reject) => {
+      const uploadStream = cloudinary.uploader.upload_large(
+        streamifier.createReadStream(buffer),
+        {
+          resource_type: isVideo ? "video" : "image",
+          folder: "propiedades",
+          chunk_size: 20 * 1024 * 1024, // 20MB
+        },
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        }
+      );
+    });
 
     uploads.push({
       url: result.secure_url,
