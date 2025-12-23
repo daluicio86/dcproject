@@ -220,7 +220,7 @@ const uploadMedia = async (files: File[]): Promise<UploadedMedia[]> => {
       {
         resource_type: isVideo ? "video" : "image",
         folder: "propiedades",
-        chunk_size: 6 * 1024 * 1024,
+        chunk_size: 10 * 1024 * 1024,
       }
     );
 
