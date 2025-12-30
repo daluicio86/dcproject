@@ -62,7 +62,9 @@ export const createUpdatePropiedad = async (formData: FormData) => {
   const { id, categoriaId, tipoPropiedadId, ciudadId, ...rest } = propiedadData;
 
   const imagesToDelete = formData.getAll("imagesToDelete") as string[];
-  const newFiles = formData.getAll("images") as File[];
+ const uploadedMedia = JSON.parse(
+    (formData.get("uploadedMedia") as string | null) ?? "[]"
+  ) as UploadedMedia[];
 
   try {
     /* -------------------------------------------------------------
@@ -80,11 +82,11 @@ export const createUpdatePropiedad = async (formData: FormData) => {
     /* -------------------------------------------------------------
        2️⃣ SUBIR MEDIA NUEVA (FUERA DE TRANSACCIÓN)
     ------------------------------------------------------------- */
-    let uploadedMedia: UploadedMedia[] = [];
+    /*let uploadedMedia: UploadedMedia[] = [];
 
     if (newFiles.length > 0) {
       uploadedMedia = await uploadMedia(newFiles);
-    }
+    }*/
 
     /* -------------------------------------------------------------
        3️⃣ TRANSACCIÓN DB
@@ -198,35 +200,4 @@ export const createUpdatePropiedad = async (formData: FormData) => {
 /* ------------------------------------------------------------------
    SUBIDA DE MEDIA (IMÁGENES + VIDEOS)
 ------------------------------------------------------------------ */
-const uploadMedia = async (files: File[]): Promise<UploadedMedia[]> => {
-  const uploads = await Promise.all(
-    files.map(async (file) => {
-      // Limitar tamaño (50MB)
-      if (file.size > 50 * 1024 * 1024) {
-        throw new Error("Archivo demasiado grande");
-      }
 
-      const buffer = await file.arrayBuffer();
-      const base64 = Buffer.from(buffer).toString("base64");
-
-      const isVideo = file.type.startsWith("video");
-
-      const result = await cloudinary.uploader.upload(
-        `data:${file.type};base64,${base64}`,
-        {
-          resource_type: isVideo ? "video" : "image",
-          folder: "propiedades",
-        }
-      );
-
-      return {
-        url: result.secure_url,
-        type: isVideo ? "video" : ("image" as "video" | "image"),
-      };
-
-      
-    })
-  );
-
-  return uploads;
-};

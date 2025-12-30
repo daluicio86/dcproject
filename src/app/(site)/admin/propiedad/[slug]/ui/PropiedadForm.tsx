@@ -141,6 +141,24 @@ export const PropiedadForm = ({
         setUploadProgress(0);
         setUploadLabel("");
 
+
+        const uploads = [] as { url: string; type: "image" | "video" }[];
+
+        /* 🔥 Subir al client con progreso real */
+        for (let i = 0; i < newImages.length; i++) {
+            const file = newImages[i];
+            setUploadLabel(`Subiendo ${file.name}...`);
+
+            const media = await uploadToCloudinaryWithProgress(file, (percent) => {
+                // Promedio aproximado por archivo
+                const base = (i / newImages.length) * 100;
+                const progress = Math.min(100, base + percent / newImages.length);
+                setUploadProgress(Math.round(progress));
+            });
+
+            uploads.push({ url: media.url, type: media.type });
+        }
+
         formData.append("title", data.title);
         formData.append("slug", data.title);
         formData.append("description", data.description);
@@ -166,10 +184,14 @@ export const PropiedadForm = ({
         });
 
         /* 🔥 IMÁGENES NUEVAS */
-        if (data.images) {
+        /* if (data.images) {
             Array.from(data.images).forEach((file) => {
                 formData.append("images", file);
             });
+        }*/
+
+        if (uploads.length > 0) {
+            formData.append("uploadedMedia", JSON.stringify(uploads));
         }
 
         const { ok } = await createUpdatePropiedad(formData);
