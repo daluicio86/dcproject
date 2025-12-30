@@ -11,6 +11,7 @@ import { useSession } from "next-auth/react";
 import { TipoPropiedad } from "@/interface/tipoPropiedad.interface";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { uploadToCloudinaryWithProgress } from "@/lib/cloudinary-upload";
 
 /* ------------------------------------------------------------------ */
 /* TYPES */
@@ -88,6 +89,9 @@ export const PropiedadForm = ({
         },
     });
 
+    const [isUploading, setIsUploading] = useState(false);
+    const [uploadProgress, setUploadProgress] = useState(0);
+    const [uploadLabel, setUploadLabel] = useState<string>("");
     /* ------------------------------------------------------------------ */
     /* IMAGE STATE */
     /* ------------------------------------------------------------------ */
@@ -133,6 +137,10 @@ export const PropiedadForm = ({
             formData.append("id", propiedad.id.toString());
         }
 
+        setIsUploading(true);
+        setUploadProgress(0);
+        setUploadLabel("");
+
         formData.append("title", data.title);
         formData.append("slug", data.title);
         formData.append("description", data.description);
@@ -169,7 +177,9 @@ export const PropiedadForm = ({
             alert("Error al guardar");
             return;
         }
-
+        setIsUploading(false);
+        setUploadLabel("");
+        setUploadProgress(0);
         router.push("/admin/propiedads");
     };
 
@@ -185,6 +195,19 @@ export const PropiedadForm = ({
             />
 
             <div className="mx-auto w-full lg:w-2/3 xl:w-1/2 px-4">
+                {isUploading && (
+                    <div className="rounded-2xl border border-black/10 dark:border-white/10 p-4">
+                        <div className="text-sm mb-2">{uploadLabel || "Subiendo archivos..."}</div>
+                        <div className="w-full h-2 rounded-full bg-black/10 dark:bg-white/10 overflow-hidden">
+                            <div
+                                className="h-full bg-primary transition-all"
+                                style={{ width: `${uploadProgress}%` }}
+                            />
+                        </div>
+                        <div className="text-xs mt-2 text-gray-500">{uploadProgress}%</div>
+                    </div>
+                )}
+
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6 mb-5">
 
                     <div className='flex flex-col gap-8 mt-5'>

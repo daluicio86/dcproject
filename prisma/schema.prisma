@@ -91,11 +91,12 @@ model Favorito {
 }
 
 model PropiedadImage {
-  id           Int      @id @default(autoincrement())
-  url          String
-  type         String?  // "image" | "video"
-  propiedadId  String
-  propiedad    Propiedad @relation(fields: [propiedadId], references: [id])
+  id          Int      @id @default(autoincrement())
+  url         String
+  publicId    String?   // ✅ nuevo
+  type        String   // "image" | "video"
+  propiedadId String
+  propiedad   Propiedad @relation(fields: [propiedadId], references: [id])
 }
 
 model Contacto {

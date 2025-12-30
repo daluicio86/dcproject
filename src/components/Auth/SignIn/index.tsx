@@ -56,9 +56,7 @@ const Signin = ({ signInOpen }: { signInOpen?: any }) => {
       <div className="mb-10 text-center flex justify-center">
         <Logo />
       </div>
-
       <SocialSignIn />
-
       <span className="z-1 relative my-8 block text-center">
         <span className="-z-1 absolute left-0 top-1/2 block h-px w-full bg-black/10 dark:bg-white/20"></span>
         <span className="text-body-secondary relative z-10 inline-block bg-white px-3 text-base dark:bg-black">
