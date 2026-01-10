@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next'
 import { AiFillDelete } from 'react-icons/ai';
 import { useRouter } from 'next/navigation';
 import { deletePropiedad } from '@/actions/propiedad/delete-propiedad';
+import { useSession } from 'next-auth/react';
 
 
 function formatPriceEcuador(value) {
@@ -23,6 +24,14 @@ function formatPriceEcuador(value) {
 const PropiedadAdminCard: React.FC<{ item: Propiedad }> = ({ item }) => {
   const { id, title, slug, apto, tipoMedida, precio, metros,
     altura, address, images } = item
+  const { data: session } = useSession();
+
+  let url=`/admin/propiedad/${slug}`;
+  if (!session || session.user?.role !== 'admin') {
+    url=`/properties/${slug}`;
+  }
+
+  console.log("user", session?.user)
 
   const { t } = useTranslation();
   const [api, setApi] = React.useState<CarouselApi | undefined>(undefined);
@@ -69,7 +78,7 @@ const PropiedadAdminCard: React.FC<{ item: Propiedad }> = ({ item }) => {
               <CarouselContent>
                 {images.map((ele, index) => (
                   <CarouselItem key={index}>
-                    <Link href={`/admin/propiedad/${slug}`}>
+                    <Link href={url}>
                       {ele.url.includes('.mp4') ? (
                         <video
                           src={ele.url}

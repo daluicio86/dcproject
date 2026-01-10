@@ -3,6 +3,7 @@
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { Propiedad } from '@/interface';
 import { Icon } from '@iconify/react'
+import { useSession } from 'next-auth/react';
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react';
@@ -18,6 +19,12 @@ function formatPriceEcuador(value) {
 const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
   const { title, slug, apto, precio, tipoMedida, metros,
     altura, address, images } = item
+  const { data: session } = useSession();
+
+  let url = `/admin/propiedad/${slug}`;
+  if (!session || session.user?.role !== 'admin') {
+    url = `/properties/${slug}`;
+  }
   const { t } = useTranslation();
   const [api, setApi] = React.useState<CarouselApi | undefined>(undefined);
   const [current, setCurrent] = React.useState(0);
@@ -53,7 +60,7 @@ const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
               <CarouselContent>
                 {images.map((ele, index) => (
                   <CarouselItem key={index}>
-                    <Link href={`/admin/propiedad/${slug}`}>
+                    <Link href={url}>
                       {ele.url.includes('.mp4') ? (
                         <video
                           src={ele.url}
