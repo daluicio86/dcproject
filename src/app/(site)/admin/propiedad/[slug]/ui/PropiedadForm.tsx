@@ -101,6 +101,34 @@ export const PropiedadForm = ({
     const [imagesToDelete, setImagesToDelete] = useState<number[]>([]);
     const [newImages, setNewImages] = useState<File[]>([]);
 
+    // Lightbox / Modal
+    const [lightboxOpen, setLightboxOpen] = useState(false);
+    const [lightboxSrc, setLightboxSrc] = useState<string>("");
+    const [lightboxIsVideo, setLightboxIsVideo] = useState(false);
+
+    const openLightbox = (src: string, isVideo: boolean) => {
+        setLightboxSrc(src);
+        setLightboxIsVideo(isVideo);
+        setLightboxOpen(true);
+    };
+
+    const closeLightbox = () => {
+        setLightboxOpen(false);
+        setLightboxSrc("");
+        setLightboxIsVideo(false);
+    };
+
+    // Cerrar con ESC
+    useEffect(() => {
+        const onKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") closeLightbox();
+        };
+
+        if (lightboxOpen) window.addEventListener("keydown", onKeyDown);
+        return () => window.removeEventListener("keydown", onKeyDown);
+    }, [lightboxOpen]);
+
+
     const watchedImages = watch("images");
 
     useEffect(() => {
@@ -210,6 +238,45 @@ export const PropiedadForm = ({
     /* ------------------------------------------------------------------ */
     return (
         <>
+            {lightboxOpen && (
+                <div
+                    className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+                    onClick={closeLightbox}
+                    role="dialog"
+                    aria-modal="true"
+                >
+                    <div
+                        className="relative w-full h-full max-w-6xl max-h-[90vh]"
+                        onClick={(e) => e.stopPropagation()} // evita cerrar al hacer click en el contenido
+                    >
+                        <button
+                            type="button"
+                            onClick={closeLightbox}
+                            className="absolute -top-12 right-0 bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center"
+                            aria-label="Cerrar"
+                        >
+                            ✕
+                        </button>
+
+                        {lightboxIsVideo ? (
+                            <video
+                                src={lightboxSrc}
+                                className="w-full h-full object-contain rounded-xl bg-transparent"
+                                controls
+                                autoPlay
+                            />
+                        ) : (
+                            // Para fullscreen, mejor <img> que next/image (evitas configs y dominios)
+                            <img
+                                src={lightboxSrc}
+                                alt="Vista previa"
+                                className="w-full h-full object-scale-down rounded-xl bg-transparent"
+                            />
+                        )}
+                    </div>
+                </div>
+            )}
+
             <HeroSub
                 title="Property Maintenance."
                 description="Property Management: Control each property's data from one place."
@@ -456,14 +523,18 @@ export const PropiedadForm = ({
                                         {isVideo ? (
                                             <video
                                                 src={media.url}
-                                                className="absolute inset-0 w-full h-full object-cover"
+                                                className="absolute inset-0 w-full h-full object-cover cursor-pointer"
                                                 controls
+                                                onClick={() => openLightbox(media.url, true)}
                                             />
+
                                         ) : (
+
                                             <img
                                                 src={media.url}
                                                 alt="Media propiedad"
-                                                className="absolute inset-0 w-full h-full object-cover"
+                                                className="absolute inset-0 w-full h-full object-cover cursor-pointer"
+                                                onClick={() => openLightbox(media.url, false)}
                                             />
                                         )}
 
