@@ -1,9 +1,10 @@
 //import { create } from "zustand";
 import { initialData } from "./seed";
-import { prisma } from '../lib/prisma';
+import { prisma } from "../lib/prisma";
 
 async function main() {
-  const { categories, users, properties, amenities, tipoPropiedades } = initialData;
+  const { categories, users, properties, amenities, tipoPropiedades } =
+    initialData;
 
   await Promise.all([
     await prisma.propiedadImage.deleteMany(),
@@ -11,7 +12,15 @@ async function main() {
     await prisma.categoria.deleteMany(),
     await prisma.user.deleteMany(),
     await prisma.amenities.deleteMany(),
-    await prisma.tipoPropiedad.deleteMany(),
+    await Promise.all([
+      await prisma.tipoPropiedad.deleteMany({
+        where: {
+          name: {
+            not: "Hacienda", // 👈 valor que quieres conservar
+          },
+        },
+      }),
+    ]),
   ]);
   console.log("Borrando base de datos...");
 
@@ -33,18 +42,17 @@ async function main() {
     return map;
   }, {} as Record<string, string>);
 
-//tipo propiedades
+  //tipo propiedades
   await prisma.tipoPropiedad.createMany({
     data: tipoPropiedades,
   });
   console.log("Tipo de propiedades creadas");
 
-// amenities
+  // amenities
   await prisma.amenities.createMany({
     data: amenities,
   });
   console.log("Amenities creados");
-
 
   // properties
 

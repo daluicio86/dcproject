@@ -31,8 +31,6 @@ const PropiedadAdminCard: React.FC<{ item: Propiedad }> = ({ item }) => {
     url=`/properties/${slug}`;
   }
 
-  console.log("user", session?.user)
-
   const { t } = useTranslation();
   const [api, setApi] = React.useState<CarouselApi | undefined>(undefined);
   const [current, setCurrent] = React.useState(0);

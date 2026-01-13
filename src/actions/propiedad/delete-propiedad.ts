@@ -15,6 +15,10 @@ export const deletePropiedad = async (propiedadId: string) => {
       };
     }
 
+    await prisma.propiedadImage.deleteMany({
+      where: { propiedadId },
+    });
+
     await prisma.propiedad.delete({
       where: { id: propiedadId },
     });

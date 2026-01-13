@@ -129,10 +129,9 @@ export const initialData: SeedData = {
     { name: "Zona de descanso con hamacas", estado: true },
   ],
   tipoPropiedades: [
-    { name: "Habitación", estado: true },
     { name: "Casa", estado: true },
-    { name: "Loft", estado: true },
-    { name: "Hacienda", estado: true },
+    { name: "Terreno", estado: true },
+    //{ name: "Hacienda", estado: true },
   ],
   properties: [
     {
