@@ -24,7 +24,7 @@ export const signInEmailPassword = async (email: string, password: string) => {
 const createUser = async (name: string, email: string, password: string) => {
   const hashedPassword = bcrypt.hashSync(password, 10);
 
-  const role = email === "diego.aluicio@gmail.com" ? "admin" : "user";
+  const role = email === "crismalou@yahoo.com" ? "admin" : "user";
 
   const newUser = await prisma.user.create({
     data: {
@@ -39,7 +39,7 @@ const createUser = async (name: string, email: string, password: string) => {
 };
 
 const editUser = async (email: string) => {
-  const role = email === "diego.aluicio@gmail.com" ? "admin" : "user";
+  const role = email === "crismalou@yahoo.com" ? "admin" : "user";
 
   const updatedUser = await prisma.user.update({
     where: { email },
