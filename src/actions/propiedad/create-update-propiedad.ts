@@ -42,6 +42,41 @@ type UploadedMedia = {
 /* ------------------------------------------------------------------
    ACTION
 ------------------------------------------------------------------ */
+function slugify(input: string) {
+  return (
+    input
+      .toLowerCase()
+      .trim()
+      // quita acentos: áéíóúñ -> aeioun
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      // reemplaza cualquier cosa no alfanumérica por guión
+      .replace(/[^a-z0-9]+/g, "-")
+      // quita guiones al inicio/fin
+      .replace(/^-+|-+$/g, "")
+      // colapsa guiones dobles
+      .replace(/-+/g, "-")
+  );
+}
+
+async function makeUniqueSlug(tx: any, baseSlug: string, currentId?: string) {
+  let slug = baseSlug;
+  let n = 2;
+
+  while (true) {
+    const exists = await tx.propiedad.findFirst({
+      where: {
+        slug,
+        ...(currentId ? { NOT: { id: currentId } } : {}),
+      },
+      select: { id: true },
+    });
+
+    if (!exists) return slug;
+    slug = `${baseSlug}-${n++}`;
+  }
+}
+
 export const createUpdatePropiedad = async (formData: FormData) => {
   const data = Object.fromEntries(formData);
 
@@ -53,17 +88,13 @@ export const createUpdatePropiedad = async (formData: FormData) => {
 
   const propiedadData = parsed.data;
 
-  const slug = propiedadData.slug
-    .toLowerCase()
-    .replace(/%20/g, "-")
-    .replace(/\s+/g, "-")
-    .trim();
+  const baseSlug = slugify(propiedadData.slug || propiedadData.title);
 
   const { id, categoriaId, tipoPropiedadId, ciudadId, ...rest } = propiedadData;
 
   const imagesToDelete = formData.getAll("imagesToDelete") as string[];
- const uploadedMedia = JSON.parse(
-    (formData.get("uploadedMedia") as string | null) ?? "[]"
+  const uploadedMedia = JSON.parse(
+    (formData.get("uploadedMedia") as string | null) ?? "[]",
   ) as UploadedMedia[];
 
   try {
@@ -72,9 +103,12 @@ export const createUpdatePropiedad = async (formData: FormData) => {
     ------------------------------------------------------------- */
     let mediaDBToDelete: { id: number; url: string }[] = [];
 
-    if (imagesToDelete.length > 0) {
+    if (imagesToDelete.length > 0 && id) {
       mediaDBToDelete = await prisma.propiedadImage.findMany({
-        where: { id: { in: imagesToDelete.map(Number) } },
+        where: {
+          id: { in: imagesToDelete.map(Number) },
+          propiedadId: id,
+        },
         select: { id: true, url: true },
       });
     }
@@ -103,12 +137,12 @@ export const createUpdatePropiedad = async (formData: FormData) => {
           select: { id: true },
         });
       }
-
+      const uniqueSlug = await makeUniqueSlug(tx, baseSlug, id);
       /* ---------------- UPDATE ---------------- */
       if (id) {
         const dataToUpdate: any = {
           ...rest,
-          slug,
+          slug: uniqueSlug,
           categoria: { connect: { id: categoriaId } },
           tipoPropiedad: { connect: { id: tipoPropiedadId } },
         };
@@ -125,7 +159,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
         /* ---------------- CREATE ---------------- */
         const dataToCreate: any = {
           ...rest,
-          slug,
+          slug: uniqueSlug,
           categoria: { connect: { id: categoriaId } },
           tipoPropiedad: { connect: { id: tipoPropiedadId } },
         };
@@ -142,7 +176,10 @@ export const createUpdatePropiedad = async (formData: FormData) => {
       /* ---------------- ELIMINAR MEDIA (DB) ---------------- */
       if (imagesToDelete.length > 0) {
         await tx.propiedadImage.deleteMany({
-          where: { id: { in: imagesToDelete.map(Number) } },
+          where: {
+            id: { in: imagesToDelete.map(Number) },
+            propiedadId: propiedad.id,
+          },
         });
       }
 
@@ -166,7 +203,8 @@ export const createUpdatePropiedad = async (formData: FormData) => {
     if (mediaDBToDelete.length > 0) {
       await Promise.all(
         mediaDBToDelete.map(async (media) => {
-          const publicId = media.url.split("/").pop()?.split(".")[0];
+          const publicId = getCloudinaryPublicId(media.url);
+          //media.url.split("/").pop()?.split(".")[0];
           if (!publicId) return;
 
           try {
@@ -176,7 +214,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
           } catch (error) {
             console.error(`Error borrando ${publicId}`, error);
           }
-        })
+        }),
       );
     }
 
@@ -184,8 +222,8 @@ export const createUpdatePropiedad = async (formData: FormData) => {
        5️⃣ REVALIDACIÓN
     ------------------------------------------------------------- */
     revalidatePath("/admin/propiedads");
-    revalidatePath(`/admin/propiedad/${slug}`);
-    revalidatePath(`/propiedad/${slug}`);
+    revalidatePath(`/admin/propiedad/${propiedadTx.slug}`);
+    revalidatePath(`/propiedad/${propiedadTx.slug}`);
 
     return { ok: true, propiedad: propiedadTx };
   } catch (error) {
@@ -197,7 +235,24 @@ export const createUpdatePropiedad = async (formData: FormData) => {
   }
 };
 
+function getCloudinaryPublicId(url: string) {
+  // quita querystring
+  const clean = url.split("?")[0];
+  // toma lo que está después de "/upload/"
+  const idx = clean.indexOf("/upload/");
+  if (idx === -1) return null;
+
+  const afterUpload = clean.substring(idx + "/upload/".length);
+  // afterUpload puede tener "v123/folder/file.jpg"
+  const parts = afterUpload.split("/");
+  // elimina version si empieza por v123
+  const withoutVersion = parts[0].match(/^v\d+$/) ? parts.slice(1) : parts;
+  const joined = withoutVersion.join("/");
+  // quita extensión
+  return joined.replace(/\.[^/.]+$/, "");
+}
+
+
 /* ------------------------------------------------------------------
    SUBIDA DE MEDIA (IMÁGENES + VIDEOS)
 ------------------------------------------------------------------ */
-
