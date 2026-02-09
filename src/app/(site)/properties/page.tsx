@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "List of properties | Buying and selling",
 };
 
-interface SearchParams {
+type SearchParams = {
   page?: string;
   rentaVenta?: string;
   temperatura?: string;
@@ -20,7 +20,7 @@ interface SearchParams {
   categoria?: string;
   precioMin?: string;
   precioMax?: string;
-}
+};
 
 /** ✅ Cache: cosas “estáticas” que no cambian a cada rato */
 const getCategoriesCached = unstable_cache(
@@ -38,10 +38,9 @@ const getTiposPropiedadCached = unstable_cache(
 export default async function PropertiesPage({
   searchParams,
 }: {
-  /** ✅ En Next App Router, searchParams llega como objeto */
-  searchParams: SearchParams;
+  searchParams: Promise<SearchParams>;
 }) {
-  const params = searchParams ?? {};
+  const params = await searchParams;
   /** ✅ Esto ya NO consultará a DB cada render */
   const [categories, tiposPropiedad] = await Promise.all([
     getCategoriesCached(),
