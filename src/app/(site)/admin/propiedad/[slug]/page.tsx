@@ -57,6 +57,7 @@ export default async function PropiedadPage({
                             geoLink: propiedad.geoLink ?? undefined,
                             tipoMedida: propiedad.tipoMedida ?? undefined,
                             ciudadId: propiedad.ciudadId ?? undefined,
+                            esPrincipal: propiedad.esPrincipal ?? false,
                         }
                         : {}
                 }

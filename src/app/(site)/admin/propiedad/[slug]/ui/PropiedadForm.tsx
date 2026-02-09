@@ -64,6 +64,7 @@ interface FormInputs {
   address: string;
   geoLink: string;
 
+  esPrincipal: boolean;
   ciudadId?: string;
   rentaVenta?: string;
   temperatura?: string;
@@ -116,6 +117,7 @@ export const PropiedadForm = ({
   const { handleSubmit, register, setValue, watch } = useForm<FormInputs>({
     defaultValues: {
       ...propiedad,
+      esPrincipal: Boolean(propiedad.esPrincipal),
       precio: propiedad.precio ?? undefined,
       images: undefined,
     },
@@ -269,7 +271,6 @@ export const PropiedadForm = ({
 
       const results = await runWithConcurrency(tasks, CONCURRENCY);
       uploads.push(...results);
-
       // Datos del formulario
       formData.append("title", data.title);
       formData.append("slug", data.title);
@@ -281,7 +282,7 @@ export const PropiedadForm = ({
       formData.append("altura", data.altura.toString());
       formData.append("address", data.address);
       formData.append("geoLink", data.geoLink);
-      formData.append("esPrincipal", "false");
+      formData.append("esPrincipal", data.esPrincipal ? "true" : "false");
       formData.append("categoriaId", data.categoriaId);
       formData.append("tipoPropiedadId", data.tipoPropiedadId);
       formData.append("userId", session?.user?.id || "");
@@ -300,6 +301,7 @@ export const PropiedadForm = ({
         formData.append("uploadedMedia", JSON.stringify(uploads));
       }
 
+      console.log("🚀 ~ file: PropiedadForm.tsx:257 ~ onSubmit ~ formData:", data.esPrincipal);
       const { ok } = await createUpdatePropiedad(formData);
       if (!ok) {
         alert("Error al guardar");
@@ -318,6 +320,7 @@ export const PropiedadForm = ({
     }
   };
 
+  console.log("🚀 ~ file: PropiedadForm.tsx:263 ~ PropiedadForm ~ esPrincipal:", propiedad);
   /* ------------------------------------------------------------------ */
   /* RENDER */
   /* ------------------------------------------------------------------ */
@@ -388,6 +391,21 @@ export const PropiedadForm = ({
           className="flex flex-col gap-6 mb-5"
         >
           <div className="flex flex-col gap-8 mt-5">
+            <div className="flex items-center gap-3 w-full px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full">
+              <input
+                type="checkbox"
+                id="esPrincipal"
+                {...register("esPrincipal")}
+                className="h-5 w-5 accent-primary"
+              />
+              <label
+                htmlFor="esPrincipal"
+                className="text-sm text-gray-600 dark:text-gray-300"
+              >
+                Select whether the property is primary.
+              </label>
+            </div>
+
             <div className="flex flex-col lg:flex-row gap-6">
               <input
                 {...register("title", { required: true })}
@@ -462,7 +480,7 @@ export const PropiedadForm = ({
                   ))
                 ) : (
                   <option key={-1} value="">
-                    Medidas no definido
+                    Measures not defined
                   </option>
                 )}
               </select>

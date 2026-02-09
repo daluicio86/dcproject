@@ -29,6 +29,8 @@ const propiedadSchema = z.object({
   ciudadId: z.string().optional(),
   rentaVenta: z.string(),
   temperatura: z.string(),
+
+  esPrincipal: z.coerce.boolean().default(false),
 });
 
 /* ------------------------------------------------------------------
@@ -79,7 +81,6 @@ async function makeUniqueSlug(tx: any, baseSlug: string, currentId?: string) {
 
 export const createUpdatePropiedad = async (formData: FormData) => {
   const data = Object.fromEntries(formData);
-
   const parsed = propiedadSchema.safeParse(data);
   if (!parsed.success) {
     console.error(parsed.error);
@@ -251,7 +252,6 @@ function getCloudinaryPublicId(url: string) {
   // quita extensión
   return joined.replace(/\.[^/.]+$/, "");
 }
-
 
 /* ------------------------------------------------------------------
    SUBIDA DE MEDIA (IMÁGENES + VIDEOS)

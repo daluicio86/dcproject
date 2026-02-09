@@ -46,7 +46,7 @@ async function main() {
   await prisma.tipoPropiedad.createMany({
     data: tipoPropiedades,
   });
-  console.log("Tipo de propiedades creadas");
+
 
   // amenities
   await prisma.amenities.createMany({

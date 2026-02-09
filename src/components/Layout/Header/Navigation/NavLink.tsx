@@ -32,7 +32,7 @@ const NavLink: React.FC<NavLinkProps> = ({ item, onClick }) => {
   return (
     <li className='flex items-center group w-fit'>
       <div className={liststyle} />
-      <Link href={item.href} className={linkclasses} onClick={onClick}>
+      <Link href={item.href} className={linkclasses} onClick={onClick} prefetch={false}>
         {item.label}
       </Link>
     </li>

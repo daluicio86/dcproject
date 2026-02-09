@@ -1,7 +1,5 @@
-
-
-import { Categoria } from '@/interface'
-import CategoryCard from '../Card/Card'
+import { Categoria } from "@/interface";
+import CategoryCard from "../Card/Card";
 import React from "react";
 import {
   Table,
@@ -10,14 +8,13 @@ import {
   TableHeader,
   TableRow,
 } from "../../ui/table";
-import Link from 'next/link';
+import Link from "next/link";
 
 interface Props {
-  items?: Categoria[]
+  items?: Categoria[];
 }
 
 const PropertiesListing: React.FC<Props> = async ({ items }: Props) => {
-
   return (
     <section className="bg-cover pb-20 relative overflow-x-hidden">
       <div className="flex flex-col gap-6 items-center justify-center">
@@ -64,9 +61,7 @@ const PropertiesListing: React.FC<Props> = async ({ items }: Props) => {
         </div>
       </div>
     </section>
+  );
+};
 
-
-  )
-}
-
-export default PropertiesListing
+export default PropertiesListing;

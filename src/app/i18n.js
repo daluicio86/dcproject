@@ -6,7 +6,7 @@ import esTranslation from "../app/locales/es/translation.json";
 import deTranslation from "../app/locales/de/translation.json";
 
 i18n.use(initReactI18next).init({
-  lng: "es", // idioma por defecto
+  lng: "en", // idioma por defecto
   fallbackLng: "en",
   interpolation: { escapeValue: false },
   resources: {

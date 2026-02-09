@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma";
 interface PaginationOptions {
   page?: number;
   take?: number;
+  esPrincipal?: boolean;
   rentaVenta?: string;
   temperatura?: string;
   tipoPropiedad?: string;
@@ -15,6 +16,7 @@ interface PaginationOptions {
 export const getPaginatedPropiedadsWithImages = async ({
   page = 1,
   take = 12,
+  esPrincipal,
   rentaVenta,
   temperatura,
   categoriaId,
@@ -33,7 +35,8 @@ export const getPaginatedPropiedadsWithImages = async ({
         lte: precioMaximo,
       },
     };
-
+    
+    if (esPrincipal) where.esPrincipal = esPrincipal;
     if (rentaVenta) where.rentaVenta = rentaVenta;
     if (temperatura) where.temperatura = temperatura;
     if (categoriaId) where.categoriaId = categoriaId;
@@ -55,6 +58,7 @@ export const getPaginatedPropiedadsWithImages = async ({
 
     const totalPages = Math.ceil(totalCount / take);
 
+    //console.log("properTT", propiedads);
     return {
       currentPage: page,
       totalPages,
