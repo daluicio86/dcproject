@@ -98,6 +98,7 @@ export default async function PropertiesPage({
             temperatura: p.temperatura === null ? undefined : p.temperatura,
             tipoMedida: p.tipoMedida === null ? undefined : p.tipoMedida,
             tipoMedida1: p.tipoMedida1 === null ? undefined : p.tipoMedida1,
+            area: p.area === null ? undefined : p.area,
             ciudadId: p.ciudadId === null ? undefined : p.ciudadId,
             geoLink: p.geoLink ?? "",
             images:
