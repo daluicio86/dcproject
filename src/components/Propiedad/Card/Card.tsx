@@ -26,7 +26,9 @@ const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
     apto,
     precio,
     tipoMedida,
+    tipoMedida1,
     metros,
+    area,
     altura,
     address,
     images,
@@ -249,12 +251,20 @@ const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
                 </p>
                 <p className="text-sm font-semibold text-black dark:text-white">
                   {metros}
-                  {tipoMedida === "ha" ? (
-                    "ha"
+                  {tipoMedida === "ft" ? (
+                    "ft"
                   ) : (
                     <>
                       m<sup>2</sup>
                     </>
+                  )}
+                </p>
+                <p className="text-sm font-semibold text-black dark:text-white">
+                  {area > 0 && (
+                    <p className="text-sm font-semibold text-black dark:text-white">
+                      {area}
+                      {tipoMedida1 === "ha" ? "ha" : "acres"}
+                    </p>
                   )}
                 </p>
               </div>

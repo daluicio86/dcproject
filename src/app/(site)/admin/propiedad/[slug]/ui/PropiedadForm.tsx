@@ -39,9 +39,14 @@ const enumClima = [
   { id: "4", name: "Húmedo 60%" },
 ];
 
-const enumTipoMedida = [
+const enumTipoMedida1 = [
   { id: "m", name: "m²" },
+  { id: "ft2", name: "ft²" },
+];
+
+const enumTipoMedida2 = [
   { id: "ha", name: "ha" },
+  { id: "acres", name: "acres" },
 ];
 
 interface Props {
@@ -59,7 +64,9 @@ interface FormInputs {
   apto: string;
   precio: number;
   metros: number;
+  area: number;
   tipoMedida: string;
+  tipoMedida1: string;
   altura: number;
   address: string;
   geoLink: string;
@@ -278,7 +285,9 @@ export const PropiedadForm = ({
       formData.append("apto", data.apto);
       formData.append("precio", data.precio.toString());
       formData.append("metros", data.metros.toString());
+      formData.append("area", data.area.toString());
       formData.append("tipoMedida", data.tipoMedida);
+      formData.append("tipoMedida1", data.tipoMedida1);
       formData.append("altura", data.altura.toString());
       formData.append("address", data.address);
       formData.append("geoLink", data.geoLink);
@@ -472,8 +481,8 @@ export const PropiedadForm = ({
                 {...register("tipoMedida", { required: true })}
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               >
-                {enumTipoMedida ? (
-                  Object.values(enumTipoMedida).map((tipo) => (
+                {enumTipoMedida1 ? (
+                  Object.values(enumTipoMedida1).map((tipo) => (
                     <option key={tipo.id} value={tipo.id}>
                       {tipo.name}
                     </option>
@@ -485,6 +494,37 @@ export const PropiedadForm = ({
                 )}
               </select>
             </div>
+            <div className="flex flex-col lg:flex-row gap-6">
+              <input
+                {...register("area", { required: true })}
+                type="number"
+                name="area"
+                id="area"
+                autoComplete="off"
+                placeholder={t("propiedadForm.area")}
+                required
+                className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
+              />
+
+              <select
+                {...register("tipoMedida1", { required: true })}
+                className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
+              >
+                {enumTipoMedida2 ? (
+                  Object.values(enumTipoMedida2).map((tipo) => (
+                    <option key={tipo.id} value={tipo.id}>
+                      {tipo.name}
+                    </option>
+                  ))
+                ) : (
+                  <option key={-1} value="">
+                    Measures not defined
+                  </option>
+                )}
+              </select>
+            </div>
+
+
             <div className="flex flex-col lg:flex-row gap-6">
               <div className="flex items-center gap-2 w-full">
                 <input

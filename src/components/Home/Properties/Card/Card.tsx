@@ -8,7 +8,7 @@ import React from 'react';
 
 
 const PropertyCard: React.FC<{ item: Propiedad }> = ({ item }) => {
-  const { title, address, apto, altura, metros, slug, images } = item
+  const { title, address, apto, altura, metros, area, slug, images } = item
   const [api, setApi] = React.useState<CarouselApi | undefined>(undefined);
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
@@ -119,6 +119,11 @@ const PropertyCard: React.FC<{ item: Propiedad }> = ({ item }) => {
             <div className='flex flex-col gap-2 pl-2 xs:pl-4 mobile:pl-8'>
               <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
                 {metros}m<sup>2</sup>
+              </p>
+            </div>
+            <div className='flex flex-col gap-2 pl-2 xs:pl-4 mobile:pl-8'>
+              <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
+                {area}m<sup>2</sup>
               </p>
             </div>
           </div>

@@ -6,12 +6,14 @@ export interface Propiedad {
   apto?: string;
   precio: number | null;
   metros: number;
+  area: number;
   altura: number;
   address: string;
   geoLink: string;
   esPrincipal: boolean;
   tipoPropiedadId: string;
   tipoMedida?: string;
+  tipoMedida1?: string;
   //ubicacion?: string;
   rentaVenta?: string;
   temperatura?: string;

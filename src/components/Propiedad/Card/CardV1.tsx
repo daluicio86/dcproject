@@ -17,7 +17,7 @@ function formatPriceEcuador(value) {
 
 const PropiedadCardV1: React.FC<{ item: Propiedad }> = ({ item }) => {
 
-  const { title, slug, apto, tipoMedida, precio, metros, altura, address, images } = item
+  const { title, slug, apto, tipoMedida, tipoMedida1, precio, metros, area, altura, address, images } = item
   const { t } = useTranslation();
   const [api, setApi] = React.useState<CarouselApi | undefined>(undefined);
   const [current, setCurrent] = React.useState(0);
@@ -145,13 +145,37 @@ const PropiedadCardV1: React.FC<{ item: Propiedad }> = ({ item }) => {
                 width={20}
                 height={20}
               />
-              {tipoMedida === "ha" ? (
+              {tipoMedida === "ft" ? (
                 <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
-                  {metros}ha
+                  {metros}ft
+                </p>
+              ) : (
+                
+                <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
+                  {metros}m<sup>2</sup>
+                </p>)}
+              {tipoMedida1 === "ha" ? (
+                <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
+                  {area}ha
                 </p>
               ) : (
                 <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
-                  {metros}m<sup>2</sup>
+                  {area}acres
+                </p>)}
+            </div>
+            <div className='flex flex-col gap-2 border-e border-black/10 dark:border-white/20 px-2 xs:px-4 mobile:px-8'>
+              <Icon
+                icon={'lineicons:arrow-all-direction'}
+                width={20}
+                height={20}
+              />
+              {tipoMedida === "ha" ? (
+                <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
+                  {area}ha
+                </p>
+              ) : (
+                <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
+                  {area}m<sup>2</sup>
                 </p>)}
             </div>
             <div className='flex flex-col gap-2 pl-2 xs:pl-4 mobile:pl-8'>

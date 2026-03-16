@@ -17,7 +17,7 @@ function formatPriceEcuador(value) {
 
 
 const PrincipalCard: React.FC<{ item: Propiedad }> = ({ item }) => {
-  const { title, slug, apto, precio, tipoMedida, metros,
+  const { title, slug, apto, precio, tipoMedida, metros, area,
     altura, address, images } = item
   const { data: session } = useSession();
 
@@ -145,6 +145,21 @@ const PrincipalCard: React.FC<{ item: Propiedad }> = ({ item }) => {
               ) : (
                 <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
                   {metros}m<sup>2</sup>
+                </p>)}
+            </div>
+            <div className='flex flex-col gap-2 border-e border-black/10 dark:border-white/20 px-2 xs:px-4 mobile:px-8'>
+              <Icon
+                icon={'lineicons:arrow-all-direction'}
+                width={20}
+                height={20}
+              />
+              {tipoMedida === "ha" ? (
+                <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
+                  {area}ha
+                </p>
+              ) : (
+                <p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
+                  {area}m<sup>2</sup>
                 </p>)}
             </div>
             <div className='flex flex-col gap-2 pl-2 xs:pl-4 mobile:pl-8'>

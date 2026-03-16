@@ -21,6 +21,7 @@ interface Propiedad {
   slug: string;
   precio?: number | null;
   metros: number;
+  area: number;
   altura?: number;
   address?: string;
   esPrincipal: boolean;
@@ -95,6 +96,7 @@ export const Welcome = () => {
               geoLink: p.geoLink ?? "",
               precio: p.precio ?? null,
               metros: p.metros ?? 0,
+              area: p.area ?? 0,
               altura: p.altura ?? 0,
               address: p.address ?? "",
               esPrincipal: p.esPrincipal ?? false,

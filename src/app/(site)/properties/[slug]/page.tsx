@@ -176,6 +176,19 @@ export default function Details() {
                                     </p>)}
 
                                 </div>
+                                <div className='flex flex-col gap-2 pl-2 xs:pl-4 mobile:pl-8'>
+                                    <Icon
+                                        icon={'lineicons:arrow-all-direction'}
+                                        width={20}
+                                        height={20}
+                                    />
+                                    {item?.tipoMedida === "ha" ? (<p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
+                                        {item?.area}ha
+                                    </p>) : (<p className='text-sm mobile:text-base font-normal text-black dark:text-white'>
+                                        {item?.area}m<sup>2</sup>
+                                    </p>)}
+
+                                </div>
                             </div>
                         </div>
                     </div>

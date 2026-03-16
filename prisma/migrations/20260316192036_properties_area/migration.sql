@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Propiedad" ADD COLUMN     "area" DOUBLE PRECISION NOT NULL DEFAULT 0;

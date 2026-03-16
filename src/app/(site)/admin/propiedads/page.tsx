@@ -1,5 +1,4 @@
 import { getPaginatedPropiedadsWithImages } from '@/actions/propiedad/propiedad-pagination';
-import PropiedadListing from '@/components/Propiedad/PropiedadList';
 import HeroSub from '@/components/shared/HeroSub';
 import Link from 'next/link';
 import React from 'react'

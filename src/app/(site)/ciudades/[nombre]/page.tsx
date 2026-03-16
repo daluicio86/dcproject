@@ -76,6 +76,7 @@ export default function Details() {
                   precio: getNumber(obj["precio"]),
                   apto: getString(obj["apto"]),
                   metros: getNumber(obj["metros"]),
+                  area: getNumber(obj["area"]),
                   altura: getNumber(obj["altura"]),
                   address: getString(obj["address"]),
                   images: toStringArray(obj["images"]),

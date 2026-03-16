@@ -8,7 +8,7 @@ import React from 'react';
 
 
 const PropertyAdminCard: React.FC<{ item: Propiedad }> = ({ item }) => {
-  const { title, address, apto, altura, metros, slug, images } = item
+  const { title, address, apto, altura, metros, area, slug, images } = item
   const [api, setApi] = React.useState<CarouselApi | undefined>(undefined);
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);

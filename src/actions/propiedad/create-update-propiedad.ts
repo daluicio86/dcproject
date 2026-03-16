@@ -21,7 +21,9 @@ const propiedadSchema = z.object({
   geoLink: z.string(),
   precio: z.coerce.number().min(0),
   metros: z.coerce.number().min(0),
+  area: z.coerce.number().min(0),
   tipoMedida: z.string(),
+  tipoMedida1: z.string(),
   altura: z.coerce.number().min(0),
 
   categoriaId: z.string(),
