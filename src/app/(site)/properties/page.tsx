@@ -97,6 +97,7 @@ export default async function PropertiesPage({
             rentaVenta: p.rentaVenta === null ? undefined : p.rentaVenta,
             temperatura: p.temperatura === null ? undefined : p.temperatura,
             tipoMedida: p.tipoMedida === null ? undefined : p.tipoMedida,
+            tipoMedida1: p.tipoMedida1 === null ? undefined : p.tipoMedida1,
             ciudadId: p.ciudadId === null ? undefined : p.ciudadId,
             geoLink: p.geoLink ?? "",
             images:

@@ -58,7 +58,6 @@ export const getPaginatedPropiedadsWithImages = async ({
 
     const totalPages = Math.ceil(totalCount / take);
 
-    //console.log("properTT", propiedads);
     return {
       currentPage: page,
       totalPages,
