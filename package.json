@@ -14,7 +14,7 @@
     "@iconify/react": "^5.2.0",
     "@next-auth/prisma-adapter": "^1.0.7",
     "@prisma/adapter-pg": "^7.2.0",
-    "@prisma/client": "^5.22.0",
+    "@prisma/client": "^7.5.0",
     "@prisma/extension-accelerate": "^3.0.0",
     "@radix-ui/react-accordion": "^1.2.3",
     "@radix-ui/react-slot": "^1.1.2",
@@ -62,7 +62,7 @@
     "@types/react-slick": "^0.23.13",
     "eslint": "^9",
     "eslint-config-next": "15.2.1",
-    "prisma": "^5.22.0",
+    "prisma": "^7.5.0",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "typescript": "^5"
