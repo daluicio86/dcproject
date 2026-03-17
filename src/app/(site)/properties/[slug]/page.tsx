@@ -63,12 +63,12 @@ export default function Details() {
                 setItem({
                     ...result,
                     address: result.address ?? "",
-                    rentaVenta: result.rentaVenta === null ? '0' : result.rentaVenta,
-                    temperatura: result.temperatura === null ? '0' : result.temperatura,
+                    rentaVenta: result.rentaVenta ?? "0",
+                    temperatura: result.temperatura ?? "",
                     geoLink: result.geoLink ?? "",
-                    images: result.images ?? [],
                     tipoMedida: result.tipoMedida ?? undefined,
                     ciudadId: result.ciudadId ?? undefined,
+                    tipoMedida1: result.tipoMedida1 ?? undefined,
                 });
                 setImages(result.images ?? []);
             } else {
