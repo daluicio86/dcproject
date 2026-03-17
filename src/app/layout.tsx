@@ -7,8 +7,7 @@ import { ThemeProvider } from 'next-themes'
 import NextTopLoader from 'nextjs-toploader'
 import SessionProviderComp from '@/components/nextauth/SessionProvider'
 import { ClientProvider } from "@/components/Layout/ClientProvider"
-import "@/lib/i18n"
-import "./i18n"
+import I18nProvider from "@/components/providers/I18nProvider";
 
 const font = Bricolage_Grotesque({ subsets: ["latin"] })
 
@@ -35,7 +34,7 @@ export default function RootLayout({
           >
             <Header />
             <ClientProvider>
-              {children}
+              <I18nProvider>{children}</I18nProvider>
             </ClientProvider>
             <Footer />
           </ThemeProvider>
