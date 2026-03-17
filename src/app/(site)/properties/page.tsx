@@ -49,7 +49,7 @@ export default async function PropertiesPage({
 
   const page = params.page ? parseInt(params.page, 10) : 1;
   const rentaVenta = params.rentaVenta || undefined;
-  
+
   const temperatura = params.temperatura || undefined;
   const tipoPropiedad = params.tipoPropiedad || undefined;
   const categoria = params.categoria || undefined;
@@ -94,12 +94,12 @@ export default async function PropertiesPage({
         <PropiedadList
           propiedads={propiedads.map((p) => ({
             ...p,
-            rentaVenta: p.rentaVenta === null ? undefined : p.rentaVenta,
-            temperatura: p.temperatura === null ? undefined : p.temperatura,
-            tipoMedida: p.tipoMedida === null ? undefined : p.tipoMedida,
-            tipoMedida1: p.tipoMedida1 === null ? undefined : p.tipoMedida1,
-            area: p.area === null ? undefined : p.area,
-            ciudadId: p.ciudadId === null ? undefined : p.ciudadId,
+            rentaVenta: p.rentaVenta ?? undefined,
+            temperatura: p.temperatura ?? undefined,
+            tipoMedida: p.tipoMedida ?? undefined,
+            tipoMedida1: p.tipoMedida1 ?? undefined,
+            ciudadId: p.ciudadId ?? undefined,
+            area: p.area ?? 0,
             geoLink: p.geoLink ?? "",
             images:
               p.images?.map((img) => ({
