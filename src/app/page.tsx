@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-﻿"use client"
+"use client"
 
 import Link from 'next/link'
 import { useMemo } from 'react'
@@ -14,82 +13,82 @@ export default function Home() {
     if (lang === 'es') {
       return {
         hero: 'Propiedades en Ecuador para Inversionistas Jubilados',
-        whyTitle: '¿Por qué Ecuador?',
+        whyTitle: 'Â¿Por quÃ© Ecuador?',
         why: [
-          ['🇪🇨 1. Costo de vida accesible', 'Vivir en Ecuador suele ser más económico que en muchos países de América y Europa.'],
-          ['🌎 2. Diversidad natural en poco espacio', 'En pocas horas pasas de costa a Andes, Amazonía o Galápagos.'],
-          ['🌡️ 3. Climas para todos', 'Costa cálida, Andes templados, Amazonía húmeda todo el año.'],
-          ['❤️ 4. Gente amable y estilo tranquilo', 'Se valora la cercanía, comunidad y un ritmo de vida más calmado.'],
-          ['🏥 5. Salud accesible', 'Hospitales públicos económicos y clínicas privadas de buena calidad.'],
-          ['💵 6. Dólar como moneda', 'Aporta estabilidad económica y evita devaluaciones bruscas.'],
-          ['🧳 7. Facilidades para extranjeros', 'Opciones de visa para jubilados, inversión, trabajo y nómadas digitales.'],
-          ['🥑 8. Comida fresca y variada', 'Frutas, verduras y mariscos durante todo el año.'],
-          ['🏛️ 9. Cultura rica y diversa', 'Tradiciones indígenas, mestizaje, festividades y gastronomía.'],
+          ['ðŸ‡ªðŸ‡¨ 1. Costo de vida accesible', 'Vivir en Ecuador suele ser mÃ¡s econÃ³mico que en muchos paÃ­ses de AmÃ©rica y Europa.'],
+          ['ðŸŒŽ 2. Diversidad natural en poco espacio', 'En pocas horas pasas de costa a Andes, AmazonÃ­a o GalÃ¡pagos.'],
+          ['ðŸŒ¡ï¸ 3. Climas para todos', 'Costa cÃ¡lida, Andes templados, AmazonÃ­a hÃºmeda todo el aÃ±o.'],
+          ['â¤ï¸ 4. Gente amable y estilo tranquilo', 'Se valora la cercanÃ­a, comunidad y un ritmo de vida mÃ¡s calmado.'],
+          ['ðŸ¥ 5. Salud accesible', 'Hospitales pÃºblicos econÃ³micos y clÃ­nicas privadas de buena calidad.'],
+          ['ðŸ’µ 6. DÃ³lar como moneda', 'Aporta estabilidad econÃ³mica y evita devaluaciones bruscas.'],
+          ['ðŸ§³ 7. Facilidades para extranjeros', 'Opciones de visa para jubilados, inversiÃ³n, trabajo y nÃ³madas digitales.'],
+          ['ðŸ¥‘ 8. Comida fresca y variada', 'Frutas, verduras y mariscos durante todo el aÃ±o.'],
+          ['ðŸ›ï¸ 9. Cultura rica y diversa', 'Tradiciones indÃ­genas, mestizaje, festividades y gastronomÃ­a.'],
         ],
         actKicker: 'ACTIVIDADES EN ECUADOR',
-        actTitle: 'Ecuador ofrece experiencias para todo tipo de viajeros: naturaleza, aventura, cultura, gastronomía y relax.',
-        contactKicker: 'CONTÁCTANOS',
+        actTitle: 'Ecuador ofrece experiencias para todo tipo de viajeros: naturaleza, aventura, cultura, gastronomÃ­a y relax.',
+        contactKicker: 'CONTÃCTANOS',
         contactTitle: 'Agenda tu visita y da el primer paso a tu nuevo hogar.',
-        contactSub: 'Tu inversión es una experiencia única.',
+        contactSub: 'Tu inversiÃ³n es una experiencia Ãºnica.',
         call: 'Llama hoy',
         faqKicker: 'PREGUNTAS FRECUENTES',
         actCards: [
           {
-            title: '🌋 1. Aventura y Naturaleza',
+            title: 'ðŸŒ‹ 1. Aventura y Naturaleza',
             items: [
-              'Trekking a Quilotoa (cráter volcánico con laguna turquesa)',
+              'Trekking a Quilotoa (crÃ¡ter volcÃ¡nico con laguna turquesa)',
               'Escalar Cotopaxi o senderismo en el Parque Nacional Cotopaxi',
-              'Visitar Chimborazo (el punto más cercano al sol)',
-              'Buceo y snorkel en Galápagos',
-              'Canopy y rafting en Baños de Agua Santa',
+              'Visitar Chimborazo (el punto mÃ¡s cercano al sol)',
+              'Buceo y snorkel en GalÃ¡pagos',
+              'Canopy y rafting en BaÃ±os de Agua Santa',
             ],
           },
           {
-            title: '🏙️ 2. Cultura y Ciudades',
+            title: 'ðŸ™ï¸ 2. Cultura y Ciudades',
             items: [
-              'Centro Histórico de Quito (Patrimonio UNESCO)',
+              'Centro HistÃ³rico de Quito (Patrimonio UNESCO)',
               'Visitar Cuenca y sus iglesias coloniales',
-              'Recorrer el Malecón 2000 en Guayaquil',
+              'Recorrer el MalecÃ³n 2000 en Guayaquil',
               'Conocer La Ronda y Mitad del Mundo',
               'Visitar museos',
             ],
           },
           {
-            title: '🏖️ 3. Playas y Costa',
+            title: 'ðŸ–ï¸ 3. Playas y Costa',
             items: [
-              'Montañita (surf y vida nocturna)',
+              'MontaÃ±ita (surf y vida nocturna)',
               'Ayampe (tranquilidad, yoga y surf)',
-              'Los Frailes (de las mejores playas del país)',
+              'Los Frailes (de las mejores playas del paÃ­s)',
               'Salinas (balneario familiar)',
-              'Puerto López (avistamiento de ballenas)',
+              'Puerto LÃ³pez (avistamiento de ballenas)',
             ],
           },
           {
-            title: '🌿 4. Amazonía',
+            title: 'ðŸŒ¿ 4. AmazonÃ­a',
             items: [
               'Cuyabeno: biodiversidad y fauna',
-              'Yasuní: selva profunda y comunidades indígenas',
+              'YasunÃ­: selva profunda y comunidades indÃ­genas',
               'Tena: rafting y actividades de agua',
               'Paseos en canoa y avistamiento de delfines rosados',
             ],
           },
           {
-            title: '💗 5. Experiencias Únicas',
+            title: 'ðŸ’— 5. Experiencias Ãšnicas',
             items: [
-              'Avistamiento de ballenas jorobadas en Manabí',
-              'Cruzar la Nariz del Diablo (Riobamba - Alausí)',
+              'Avistamiento de ballenas jorobadas en ManabÃ­',
+              'Cruzar la Nariz del Diablo (Riobamba - AlausÃ­)',
               'Bosque Petrificado de Puyango',
               'Puentes colgantes en Mindo',
-              'Rutas de café y chocolate en costa y Amazonía',
+              'Rutas de cafÃ© y chocolate en costa y AmazonÃ­a',
             ],
           },
           {
-            title: '🛒 6. Mercados y Artesanías',
+            title: 'ðŸ›’ 6. Mercados y ArtesanÃ­as',
             items: [
-              'Mercado de Otavalo (de los más grandes de Sudamérica)',
-              'Artesanías de Cuenca',
+              'Mercado de Otavalo (de los mÃ¡s grandes de SudamÃ©rica)',
+              'ArtesanÃ­as de Cuenca',
               'Sombreros de paja toquilla (mal llamados Panama Hat)',
-              'Productos locales: cacao, café, cerámica y textiles',
+              'Productos locales: cacao, cafÃ©, cerÃ¡mica y textiles',
             ],
           },
         ],
@@ -97,21 +96,21 @@ export default function Home() {
     }
     if (lang === 'de') {
       return {
-        hero: 'Immobilien in Ecuador für pensionierte Investoren',
+        hero: 'Immobilien in Ecuador fÃ¼r pensionierte Investoren',
         whyTitle: 'Warum Ecuador?',
         why: [
-          ['🇪🇨 1. Erschwingliche Lebenshaltungskosten', 'Ecuador ist oft günstiger als viele Länder in Amerika und Europa.'],
-          ['🌎 2. Natürliche Vielfalt auf kleinem Raum', 'In wenigen Stunden von Küste zu Anden, Amazonas oder Galápagos.'],
-          ['🌡️ 3. Klima für jeden Geschmack', 'Warme Küste, gemäßigte Anden, feuchter Amazonas das ganze Jahr.'],
-          ['❤️ 4. Freundliche Menschen und entspannter Lebensstil', 'Herzlichkeit, Gemeinschaft und ein ruhigeres Lebenstempo.'],
-          ['🏥 5. Bezahlbare Gesundheitsversorgung', 'Günstige öffentliche Krankenhäuser und gute Privatkliniken.'],
-          ['💵 6. US-Dollar als Währung', 'Sorgt für Stabilität und reduziert starke Abwertungen.'],
-          ['🧳 7. Möglichkeiten für Ausländer', 'Visa für Rentner, Investoren, Arbeit und digitale Nomaden.'],
-          ['🥑 8. Frische und vielfältige Lebensmittel', 'Obst, Gemüse und Meeresfrüchte das ganze Jahr.'],
-          ['🏛️ 9. Reiche und vielfältige Kultur', 'Indigene Traditionen, Feste, Musik und Gastronomie.'],
+          ['ðŸ‡ªðŸ‡¨ 1. Erschwingliche Lebenshaltungskosten', 'Ecuador ist oft gÃ¼nstiger als viele LÃ¤nder in Amerika und Europa.'],
+          ['ðŸŒŽ 2. NatÃ¼rliche Vielfalt auf kleinem Raum', 'In wenigen Stunden von KÃ¼ste zu Anden, Amazonas oder GalÃ¡pagos.'],
+          ['ðŸŒ¡ï¸ 3. Klima fÃ¼r jeden Geschmack', 'Warme KÃ¼ste, gemÃ¤ÃŸigte Anden, feuchter Amazonas das ganze Jahr.'],
+          ['â¤ï¸ 4. Freundliche Menschen und entspannter Lebensstil', 'Herzlichkeit, Gemeinschaft und ein ruhigeres Lebenstempo.'],
+          ['ðŸ¥ 5. Bezahlbare Gesundheitsversorgung', 'GÃ¼nstige Ã¶ffentliche KrankenhÃ¤user und gute Privatkliniken.'],
+          ['ðŸ’µ 6. US-Dollar als WÃ¤hrung', 'Sorgt fÃ¼r StabilitÃ¤t und reduziert starke Abwertungen.'],
+          ['ðŸ§³ 7. MÃ¶glichkeiten fÃ¼r AuslÃ¤nder', 'Visa fÃ¼r Rentner, Investoren, Arbeit und digitale Nomaden.'],
+          ['ðŸ¥‘ 8. Frische und vielfÃ¤ltige Lebensmittel', 'Obst, GemÃ¼se und MeeresfrÃ¼chte das ganze Jahr.'],
+          ['ðŸ›ï¸ 9. Reiche und vielfÃ¤ltige Kultur', 'Indigene Traditionen, Feste, Musik und Gastronomie.'],
         ],
-        actKicker: 'AKTIVITÄTEN IN ECUADOR',
-        actTitle: 'Ecuador bietet Erlebnisse für alle Reisetypen: Natur, Abenteuer, Kultur, Gastronomie und Entspannung.',
+        actKicker: 'AKTIVITÃ„TEN IN ECUADOR',
+        actTitle: 'Ecuador bietet Erlebnisse fÃ¼r alle Reisetypen: Natur, Abenteuer, Kultur, Gastronomie und Entspannung.',
         contactKicker: 'KONTAKT',
         contactTitle: 'Vereinbaren Sie Ihren Besuch und machen Sie den ersten Schritt in Ihr neues Zuhause.',
         contactSub: 'Ihre Investition ist ein einzigartiges Erlebnis.',
@@ -119,58 +118,58 @@ export default function Home() {
         faqKicker: 'FAQS',
         actCards: [
           {
-            title: '🌋 1. Abenteuer und Natur',
+            title: 'ðŸŒ‹ 1. Abenteuer und Natur',
             items: [
-              'Trekking nach Quilotoa (Vulkankrater mit türkisfarbener Lagune)',
+              'Trekking nach Quilotoa (Vulkankrater mit tÃ¼rkisfarbener Lagune)',
               'Cotopaxi besteigen oder wandern im Cotopaxi-Nationalpark',
-              'Chimborazo besuchen (der sonnennächste Punkt der Erde)',
-              'Tauchen und Schnorcheln auf Galápagos',
-              'Canopy und Rafting in Baños de Agua Santa',
+              'Chimborazo besuchen (der sonnennÃ¤chste Punkt der Erde)',
+              'Tauchen und Schnorcheln auf GalÃ¡pagos',
+              'Canopy und Rafting in BaÃ±os de Agua Santa',
             ],
           },
           {
-            title: '🏙️ 2. Kultur und Städte',
+            title: 'ðŸ™ï¸ 2. Kultur und StÃ¤dte',
             items: [
               'Historisches Zentrum von Quito (UNESCO-Welterbe)',
               'Cuenca und seine Kolonialkirchen besuchen',
-              'Spaziergang am Malecón 2000 in Guayaquil',
+              'Spaziergang am MalecÃ³n 2000 in Guayaquil',
               'La Ronda und Mitad del Mundo entdecken',
               'Museen besuchen',
             ],
           },
           {
-            title: '🏖️ 3. Strände und Küste',
+            title: 'ðŸ–ï¸ 3. StrÃ¤nde und KÃ¼ste',
             items: [
-              'Montañita (Surfen und Nachtleben)',
+              'MontaÃ±ita (Surfen und Nachtleben)',
               'Ayampe (Ruhe, Yoga, Surfen)',
-              'Los Frailes (einer der besten Strände des Landes)',
+              'Los Frailes (einer der besten StrÃ¤nde des Landes)',
               'Salinas (familienfreundlicher Badeort)',
-              'Puerto López (Walbeobachtung)',
+              'Puerto LÃ³pez (Walbeobachtung)',
             ],
           },
           {
-            title: '🌿 4. Amazonas',
+            title: 'ðŸŒ¿ 4. Amazonas',
             items: [
               'Cuyabeno: Artenvielfalt und Tierwelt',
-              'Yasuní: tiefer Regenwald und indigene Gemeinschaften',
-              'Tena: Rafting und Wasseraktivitäten',
+              'YasunÃ­: tiefer Regenwald und indigene Gemeinschaften',
+              'Tena: Rafting und WasseraktivitÃ¤ten',
               'Kanufahrten und Beobachtung rosafarbener Delfine',
             ],
           },
           {
-            title: '💗 5. Einzigartige Erlebnisse',
+            title: 'ðŸ’— 5. Einzigartige Erlebnisse',
             items: [
-              'Beobachtung von Buckelwalen in Manabí',
-              'Überquerung der Teufelsnase (Riobamba - Alausí)',
+              'Beobachtung von Buckelwalen in ManabÃ­',
+              'Ãœberquerung der Teufelsnase (Riobamba - AlausÃ­)',
               'Versteinerter Wald von Puyango',
-              'Hängebrücken in Mindo',
-              'Kaffee- und Schokoladentouren an Küste und Amazonas',
+              'HÃ¤ngebrÃ¼cken in Mindo',
+              'Kaffee- und Schokoladentouren an KÃ¼ste und Amazonas',
             ],
           },
           {
-            title: '🛒 6. Märkte und Handwerk',
+            title: 'ðŸ›’ 6. MÃ¤rkte und Handwerk',
             items: [
-              'Otavalo-Markt (einer der größten Südamerikas)',
+              'Otavalo-Markt (einer der grÃ¶ÃŸten SÃ¼damerikas)',
               'Handwerkskunst aus Cuenca',
               'Sombreros aus Toquilla-Stroh (oft Panama-Hut genannt)',
               'Lokale Produkte: Kakao, Kaffee, Keramik und Textilien',
@@ -183,15 +182,15 @@ export default function Home() {
       hero: 'Properties in Ecuador for Retired Investors',
       whyTitle: 'Why Ecuador?',
       why: [
-        ['🇪🇨 1. Affordable cost of living', 'Living in Ecuador is often cheaper than in many countries in the Americas and Europe.'],
-        ['🌎 2. Natural diversity in a small area', 'In a few hours you can go from coast to Andes, Amazon, or Galapagos.'],
-        ['🌡️ 3. Climates for all tastes', 'Warm coast, temperate Andes, humid Amazon all year round.'],
-        ['❤️ 4. Friendly people and relaxed lifestyle', 'Warmth, community life, and a slower pace are part of daily life.'],
-        ['🏥 5. Affordable healthcare', 'Inexpensive public hospitals and good quality private clinics.'],
-        ['💵 6. US dollar as currency', 'Economic stability and fewer sharp devaluations.'],
-        ['🧳 7. Facilities for foreigners', 'Retiree, investment, work and digital nomad visa options.'],
-        ['🥑 8. Fresh and varied food', 'Fruits, vegetables, and seafood available year-round.'],
-        ['🏛️ 9. Rich and varied culture', 'Indigenous traditions, festivals, music, crafts, and gastronomy.'],
+        ['ðŸ‡ªðŸ‡¨ 1. Affordable cost of living', 'Living in Ecuador is often cheaper than in many countries in the Americas and Europe.'],
+        ['ðŸŒŽ 2. Natural diversity in a small area', 'In a few hours you can go from coast to Andes, Amazon, or Galapagos.'],
+        ['ðŸŒ¡ï¸ 3. Climates for all tastes', 'Warm coast, temperate Andes, humid Amazon all year round.'],
+        ['â¤ï¸ 4. Friendly people and relaxed lifestyle', 'Warmth, community life, and a slower pace are part of daily life.'],
+        ['ðŸ¥ 5. Affordable healthcare', 'Inexpensive public hospitals and good quality private clinics.'],
+        ['ðŸ’µ 6. US dollar as currency', 'Economic stability and fewer sharp devaluations.'],
+        ['ðŸ§³ 7. Facilities for foreigners', 'Retiree, investment, work and digital nomad visa options.'],
+        ['ðŸ¥‘ 8. Fresh and varied food', 'Fruits, vegetables, and seafood available year-round.'],
+        ['ðŸ›ï¸ 9. Rich and varied culture', 'Indigenous traditions, festivals, music, crafts, and gastronomy.'],
       ],
       actKicker: 'ACTIVITIES IN ECUADOR',
       actTitle: 'Ecuador offers experiences for all types of travelers: nature, adventure, culture, gastronomy, and relaxation.',
@@ -202,56 +201,56 @@ export default function Home() {
       faqKicker: 'FAQs',
       actCards: [
         {
-          title: '🌋 1. Adventure and Nature',
+          title: 'ðŸŒ‹ 1. Adventure and Nature',
           items: [
             'Trekking to Quilotoa (volcanic crater with turquoise lagoon)',
             'Climbing Cotopaxi or hiking in Cotopaxi National Park',
             'Visiting Chimborazo (the closest point to the sun)',
             'Diving and snorkeling in the Galapagos Islands',
-            'Canopy tours and rafting in Baños de Agua Santa',
+            'Canopy tours and rafting in BaÃ±os de Agua Santa',
           ],
         },
         {
-          title: '🏙️ 2. Culture and Cities',
+          title: 'ðŸ™ï¸ 2. Culture and Cities',
           items: [
             'Explore the Historic Center of Quito (UNESCO World Heritage Site)',
             'Visit Cuenca and its colonial churches',
-            'Stroll along the Malecón 2000 in Guayaquil',
+            'Stroll along the MalecÃ³n 2000 in Guayaquil',
             'Explore La Ronda and Mitad del Mundo',
             'Visit museums',
           ],
         },
         {
-          title: '🏖️ 3. Beaches and Coast',
+          title: 'ðŸ–ï¸ 3. Beaches and Coast',
           items: [
-            'Montañita (surfing and nightlife)',
+            'MontaÃ±ita (surfing and nightlife)',
             'Ayampe (tranquility, yoga, surfing)',
             'Los Frailes (one of the best beaches in the country)',
             'Salinas (family-friendly beach resort)',
-            'Puerto López (whale watching)',
+            'Puerto LÃ³pez (whale watching)',
           ],
         },
         {
-          title: '🌿 4. Amazon Rainforest',
+          title: 'ðŸŒ¿ 4. Amazon Rainforest',
           items: [
             'Cuyabeno: biodiversity and wildlife',
-            'Yasuní: deep rainforest and indigenous communities',
+            'YasunÃ­: deep rainforest and indigenous communities',
             'Tena: rafting and water activities',
             'Canoe tours and pink dolphin watching',
           ],
         },
         {
-          title: '💗 5. Unique Experiences',
+          title: 'ðŸ’— 5. Unique Experiences',
           items: [
-            'Humpback whale watching in Manabí',
-            "Crossing the Devil's Nose route (Riobamba - Alausí)",
+            'Humpback whale watching in ManabÃ­',
+            "Crossing the Devil's Nose route (Riobamba - AlausÃ­)",
             'Visiting the Puyango Petrified Forest',
             'Walking on suspension bridges in Mindo',
             'Coffee and chocolate tours on the coast and Amazon',
           ],
         },
         {
-          title: '🛒 6. Markets and Handicrafts',
+          title: 'ðŸ›’ 6. Markets and Handicrafts',
           items: [
             'Otavalo Market (one of the largest in South America)',
             'Handicrafts from Cuenca',
@@ -355,36 +354,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-=======
-//import FeaturedProperty from '@/components/Home/FeaturedProperty'
-import Hero from '@/components/Home/Hero'
-//import Properties from '@/components/Home/Properties'
-import Services from '@/components/Home/Services'
-import Testimonial from '@/components/Home/Testimonial'
-import BlogSmall from '@/components/shared/Blog'
-import GetInTouch from '@/components/Home/GetInTouch'
-import FAQ from '@/components/Home/FAQs'
-import { Welcome } from '@/components/Home/Welcome'
-import Jubilados from '@/components/Home/Jubilados'
-import Actividades from '@/components/Home/Actividades'
-import './i18n';
-
-export default function Home() {
-  return (
-    <main>
-      <Hero />
-      <Welcome />
-      <Services />
-      {/*<Properties />
-      <FeaturedProperty />*/}
-      <Jubilados />
-      <Actividades />
-
-      <Testimonial />
-      <BlogSmall />
-      <GetInTouch />
-      <FAQ />
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
     </main>
   )
 }

@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿"use server";
-=======
 "use server";
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
 
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
@@ -18,7 +14,6 @@ cloudinary.config(process.env.CLOUDINARY_URL ?? "");
 const propiedadSchema = z.object({
   id: z.string().optional(),
   title: z.string().min(3).max(255),
-<<<<<<< HEAD
   titleEn: z.string().optional(),
   titleDe: z.string().optional(),
   slug: z.string().min(3).max(255),
@@ -31,12 +26,6 @@ const propiedadSchema = z.object({
   apto: z.string(),
   aptoEn: z.string().optional(),
   aptoDe: z.string().optional(),
-=======
-  slug: z.string().min(3).max(255),
-  address: z.string(),
-  description: z.string(),
-  apto: z.string(),
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
   geoLink: z.string(),
   precio: z.coerce.number().min(0),
   metros: z.coerce.number().min(0),
@@ -70,17 +59,10 @@ function slugify(input: string) {
     input
       .toLowerCase()
       .trim()
-<<<<<<< HEAD
-      // quita acentos: Ã¡Ã©Ã­Ã³ÃºÃ± -> aeioun
+      // quita acentos: ÃƒÂ¡ÃƒÂ©ÃƒÂ­ÃƒÂ³ÃƒÂºÃƒÂ± -> aeioun
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
-      // reemplaza cualquier cosa no alfanumÃ©rica por guiÃ³n
-=======
-      // quita acentos: áéíóúñ -> aeioun
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      // reemplaza cualquier cosa no alfanumérica por guión
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+      // reemplaza cualquier cosa no alfanumÃƒÂ©rica por guiÃƒÂ³n
       .replace(/[^a-z0-9]+/g, "-")
       // quita guiones al inicio/fin
       .replace(/^-+|-+$/g, "")
@@ -128,11 +110,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
 
   try {
     /* -------------------------------------------------------------
-<<<<<<< HEAD
-       1ï¸âƒ£ OBTENER MEDIA A ELIMINAR (ANTES)
-=======
-       1️⃣ OBTENER MEDIA A ELIMINAR (ANTES)
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+       1Ã¯Â¸ÂÃ¢Æ’Â£ OBTENER MEDIA A ELIMINAR (ANTES)
     ------------------------------------------------------------- */
     let mediaDBToDelete: { id: number; url: string }[] = [];
 
@@ -147,11 +125,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
     }
 
     /* -------------------------------------------------------------
-<<<<<<< HEAD
-       2ï¸âƒ£ SUBIR MEDIA NUEVA (FUERA DE TRANSACCIÃ“N)
-=======
-       2️⃣ SUBIR MEDIA NUEVA (FUERA DE TRANSACCIÓN)
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+       2Ã¯Â¸ÂÃ¢Æ’Â£ SUBIR MEDIA NUEVA (FUERA DE TRANSACCIÃƒâ€œN)
     ------------------------------------------------------------- */
     /*let uploadedMedia: UploadedMedia[] = [];
 
@@ -160,11 +134,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
     }*/
 
     /* -------------------------------------------------------------
-<<<<<<< HEAD
-       3ï¸âƒ£ TRANSACCIÃ“N DB
-=======
-       3️⃣ TRANSACCIÓN DB
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+       3Ã¯Â¸ÂÃ¢Æ’Â£ TRANSACCIÃƒâ€œN DB
     ------------------------------------------------------------- */
     const propiedadTx = await prisma.$transaction(async (tx) => {
       let propiedad: Propiedad;
@@ -239,11 +209,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
     });
 
     /* -------------------------------------------------------------
-<<<<<<< HEAD
-       4ï¸âƒ£ BORRAR MEDIA DE CLOUDINARY
-=======
-       4️⃣ BORRAR MEDIA DE CLOUDINARY
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+       4Ã¯Â¸ÂÃ¢Æ’Â£ BORRAR MEDIA DE CLOUDINARY
     ------------------------------------------------------------- */
     if (mediaDBToDelete.length > 0) {
       await Promise.all(
@@ -264,11 +230,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
     }
 
     /* -------------------------------------------------------------
-<<<<<<< HEAD
-       5ï¸âƒ£ REVALIDACIÃ“N
-=======
-       5️⃣ REVALIDACIÓN
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+       5Ã¯Â¸ÂÃ¢Æ’Â£ REVALIDACIÃƒâ€œN
     ------------------------------------------------------------- */
     revalidatePath("/admin/propiedads");
     revalidatePath(`/admin/propiedad/${propiedadTx.slug}`);
@@ -287,11 +249,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
 function getCloudinaryPublicId(url: string) {
   // quita querystring
   const clean = url.split("?")[0];
-<<<<<<< HEAD
-  // toma lo que estÃ¡ despuÃ©s de "/upload/"
-=======
-  // toma lo que está después de "/upload/"
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+  // toma lo que estÃƒÂ¡ despuÃƒÂ©s de "/upload/"
   const idx = clean.indexOf("/upload/");
   if (idx === -1) return null;
 
@@ -301,21 +259,12 @@ function getCloudinaryPublicId(url: string) {
   // elimina version si empieza por v123
   const withoutVersion = parts[0].match(/^v\d+$/) ? parts.slice(1) : parts;
   const joined = withoutVersion.join("/");
-<<<<<<< HEAD
-  // quita extensiÃ³n
-=======
-  // quita extensión
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+  // quita extensiÃƒÂ³n
   return joined.replace(/\.[^/.]+$/, "");
 }
 
 /* ------------------------------------------------------------------
-<<<<<<< HEAD
-   SUBIDA DE MEDIA (IMÃGENES + VIDEOS)
+   SUBIDA DE MEDIA (IMÃƒÂGENES + VIDEOS)
 ------------------------------------------------------------------ */
 
 
-=======
-   SUBIDA DE MEDIA (IMÁGENES + VIDEOS)
------------------------------------------------------------------- */
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921

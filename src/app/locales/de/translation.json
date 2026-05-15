@@ -1,38 +1,34 @@
-{
+﻿{
   "welcome": "Willkommen in Ecuador",
-  "tagline": "Investieren Sie in Ecuador: das perfekte Ziel für Ihre nächste Immobilie.",
+  "tagline": "Investieren Sie in Ecuador: das perfekte Ziel fÃ¼r Ihre nÃ¤chste Immobilie.",
   "welcome1": "Kaufen und verkaufen in Ecuador",
   "welcome2": "Das beste Klima der Welt.",
   "ciudadDetalles": "Stadtdetails",
   "ciudadPropiedades": "Immobilien in der Stadt",
-  "ciudadCercanias": "In der Nähe befindliche Orte",
-  "selectCiudad": "Stadt auswählen",
+  "ciudadCercanias": "In der NÃ¤he befindliche Orte",
+  "selectCiudad": "Stadt auswÃ¤hlen",
   "contact": "Kontakt",
-<<<<<<< HEAD
   "btnText1": "Immobilieninformationen",
-=======
-  "btnText1": "Kontakt aufnehmen",
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
   "btnText2": "Details anzeigen",
   "categories": "Kategorien",
   "promotionalServiceText": "Entdecken Sie die besten Immobilien mit Expertenservice.",
-  "promotionalServiceText1": "Entdecken Sie eine vielfältige Auswahl an Premium-Immobilien, von luxuriösen Apartments bis hin zu geräumigen Villen, maßgeschneidert für Ihre Bedürfnisse.",
+  "promotionalServiceText1": "Entdecken Sie eine vielfÃ¤ltige Auswahl an Premium-Immobilien, von luxuriÃ¶sen Apartments bis hin zu gerÃ¤umigen Villen, maÃŸgeschneidert fÃ¼r Ihre BedÃ¼rfnisse.",
   "btnService": "Immobilien ansehen",
   "properties": "Immobilien",
-  "discoverInspiringHomes": "Entdecken Sie inspirierend gestaltete Häuser.",
-  "curatedHomes": "Ausgewählte Häuser, die Eleganz, Stil und Komfort vereinen.",
-  "featuredProperty": "Ausgewählte Immobilie",
+  "discoverInspiringHomes": "Entdecken Sie inspirierend gestaltete HÃ¤user.",
+  "curatedHomes": "AusgewÃ¤hlte HÃ¤user, die Eleganz, Stil und Komfort vereinen.",
+  "featuredProperty": "AusgewÃ¤hlte Immobilie",
   "modernLuxeVilla": "Moderne Luxusvilla",
-  "featuredPropertyDescription": "Erleben Sie luxuriöses Wohnen in einer modernen Luxusvilla in der 20 S Aurora Ave, Miami. Preis: Dieses 52 m² große Smart Home für 1.650.500 $ bietet 4 Schlafzimmer, 3 Badezimmer und großzügige Wohnbereiche. Freuen Sie sich auf Energieeffizienz, Tageslicht, Sicherheitssysteme, Außenbereiche und zwei Barbereiche – ideal für 8+ Gäste. Baujahr 2025.",
+  "featuredPropertyDescription": "Erleben Sie luxuriÃ¶ses Wohnen in einer modernen Luxusvilla in der 20 S Aurora Ave, Miami. Preis: Dieses 52 mÂ² groÃŸe Smart Home fÃ¼r 1.650.500 $ bietet 4 Schlafzimmer, 3 Badezimmer und groÃŸzÃ¼gige Wohnbereiche. Freuen Sie sich auf Energieeffizienz, Tageslicht, Sicherheitssysteme, AuÃŸenbereiche und zwei Barbereiche â€“ ideal fÃ¼r 8+ GÃ¤ste. Baujahr 2025.",
   "inquireNow": "Jetzt anfragen",
-  "estPrice": "Geschätzter Preis",
+  "estPrice": "GeschÃ¤tzter Preis",
   "testimonials": "Kundenmeinungen",
   "whatOurClientsSay": "Was unsere Kunden sagen",
-  "testimonial1": "Ich habe in kürzester Zeit mein Traumhaus gefunden! Die Angebote waren detailliert, die Fotos waren akkurat und der gesamte Prozess verlief reibungslos. Der Kundenservice war erstklassig und beantwortete alle meine Fragen. Ich werde diese Plattform in Zukunft definitiv wieder nutzen!",
-  "testimonial2": "Eine unglaubliche Erfahrung! Der Kundenservice war außergewöhnlich und sie haben mir geholfen, die perfekte Immobilie zu finden. Ich bin sehr dankbar für ihre Unterstützung.",
+  "testimonial1": "Ich habe in kÃ¼rzester Zeit mein Traumhaus gefunden! Die Angebote waren detailliert, die Fotos waren akkurat und der gesamte Prozess verlief reibungslos. Der Kundenservice war erstklassig und beantwortete alle meine Fragen. Ich werde diese Plattform in Zukunft definitiv wieder nutzen!",
+  "testimonial2": "Eine unglaubliche Erfahrung! Der Kundenservice war auÃŸergewÃ¶hnlich und sie haben mir geholfen, die perfekte Immobilie zu finden. Ich bin sehr dankbar fÃ¼r ihre UnterstÃ¼tzung.",
   "blog": "Blog",
   "realEstateInsights": "Immobilieninformationen",
-  "stayAheadInThePropertyMarket": "Bleiben Sie mit Expertenratschlägen und Updates auf dem Immobilienmarkt immer einen Schritt voraus",
+  "stayAheadInThePropertyMarket": "Bleiben Sie mit ExpertenratschlÃ¤gen und Updates auf dem Immobilienmarkt immer einen Schritt voraus",
   "readAllArticles": "Alle Artikel lesen",
   "heroSection": {
     "title": "Entdecken Sie Luxus und Eleganz",
@@ -40,12 +36,12 @@
   },
   "faq": {
     "iconText": "FAQs",
-    "title": "Alles über Amazing Farms",
-    "description": "Wir wissen, dass der Kauf, Verkauf oder die Investition in Immobilien überwältigend sein kann. Hier finden Sie einige häufig gestellte Fragen, die Ihnen den Prozess erleichtern",
+    "title": "Alles Ã¼ber Amazing Farms",
+    "description": "Wir wissen, dass der Kauf, Verkauf oder die Investition in Immobilien Ã¼berwÃ¤ltigend sein kann. Hier finden Sie einige hÃ¤ufig gestellte Fragen, die Ihnen den Prozess erleichtern",
     "items": {
       "item1": {
         "question": "1. Kann ich mein Anwesen individuell gestalten?",
-        "answer": "Selbstverständlich! Wir bieten Ihnen zahlreiche Anpassungsmöglichkeiten, damit Ihr Anwesen ganz nach Ihren Wünschen gestaltet wird."
+        "answer": "SelbstverstÃ¤ndlich! Wir bieten Ihnen zahlreiche AnpassungsmÃ¶glichkeiten, damit Ihr Anwesen ganz nach Ihren WÃ¼nschen gestaltet wird."
       },
       "item2": {
         "question": "2. Wo finde ich Immobilien?",
@@ -53,25 +49,25 @@
       },
       "item3": {
         "question": "3. Wie kaufe ich eine Immobilie?",
-        "answer": "Um eine Immobilie zu kaufen, durchsuchen Sie zunächst unsere Angebote online. Wenn Sie eine Immobilie gefunden haben, die Ihnen gefällt, kontaktieren Sie unser Verkaufsteam, um einen Besichtigungstermin zu vereinbaren. Anschließend können Sie ein Angebot abgeben und, falls es angenommen wird, die notwendigen Formalitäten und Finanzierungsoptionen erledigen."
+        "answer": "Um eine Immobilie zu kaufen, durchsuchen Sie zunÃ¤chst unsere Angebote online. Wenn Sie eine Immobilie gefunden haben, die Ihnen gefÃ¤llt, kontaktieren Sie unser Verkaufsteam, um einen Besichtigungstermin zu vereinbaren. AnschlieÃŸend kÃ¶nnen Sie ein Angebot abgeben und, falls es angenommen wird, die notwendigen FormalitÃ¤ten und Finanzierungsoptionen erledigen."
       }
     }
   },
   "footer": {
-    "subscribeText": "Bleiben Sie über die neuesten Nachrichten auf dem Laufenden",
+    "subscribeText": "Bleiben Sie Ã¼ber die neuesten Nachrichten auf dem Laufenden",
     "emailPlaceholder": "E-Mail-Adresse eingeben",
     "subscribeButton": "Abonnieren",
-    "subscribeDisclaimer": "Mit Ihrer Anmeldung stimmen Sie dem Erhalt unserer Werbe-E-Mails zu. Sie können sich jederzeit wieder abmelden.",
-    "title": "Beginnen Sie Ihren Weg zum Erfolg – ​​kontaktieren Sie uns noch heute.",
+    "subscribeDisclaimer": "Mit Ihrer Anmeldung stimmen Sie dem Erhalt unserer Werbe-E-Mails zu. Sie kÃ¶nnen sich jederzeit wieder abmelden.",
+    "title": "Beginnen Sie Ihren Weg zum Erfolg â€“ â€‹â€‹kontaktieren Sie uns noch heute.",
     "cta": "Kontaktieren Sie uns",
     "termsOfService": "Nutzungsbedingungen",
     "privacyPolicy": "Datenschutzrichtlinie",
-    "description": "Suchen Sie Ihre Traumimmobilie oder möchten Sie verkaufen? Unser Expertenteam bietet Ihnen individuelle Beratung und Marktexpertise, die auf Sie zugeschnitten ist."
+    "description": "Suchen Sie Ihre Traumimmobilie oder mÃ¶chten Sie verkaufen? Unser Expertenteam bietet Ihnen individuelle Beratung und Marktexpertise, die auf Sie zugeschnitten ist."
   },
   "contactUs": {
     "breadcrumb": "Kontakt",
     "title": "Haben Sie Fragen? Wir helfen Ihnen gerne!",
-    "description": "Suchen Sie Ihre Traumimmobilie oder möchten Sie verkaufen? Unser Expertenteam bietet Ihnen individuelle Beratung und Marktexpertise, die auf Ihre Bedürfnisse zugeschnitten ist.",
+    "description": "Suchen Sie Ihre Traumimmobilie oder mÃ¶chten Sie verkaufen? Unser Expertenteam bietet Ihnen individuelle Beratung und Marktexpertise, die auf Ihre BedÃ¼rfnisse zugeschnitten ist.",
     "formTitle": "Kontaktinformationen",
     "formDescription": "Bereit, Ihre Traumimmobilie zu finden oder zu verkaufen? Wir helfen Ihnen gerne!",
     "sendMessage": "Nachricht senden",
@@ -82,16 +78,16 @@
   },
   "investors": {
     "breadcrumb": "Investoren",
-    "title": "🌎 Ecuador: Leben im Zentrum des Planeten",
+    "title": "ðŸŒŽ Ecuador: Leben im Zentrum des Planeten",
     "description": {
-      "name": "Ecuador liegt direkt am Äquator und bietet daher ganzjährig ein außergewöhnliches Klima. Dank seiner privilegierten Lage bietet es eine einzigartige Vielfalt an Umgebungen:",
-      "point1": "Tropisch, ideal für alle, die Sonne und Strand lieben",
-      "point2": "Subtropisch, mit angenehmen Temperaturen und grünen Landschaften",
-      "point3": "Feucht, mit üppiger Vegetation und Natur",
-      "point4": "Trocken, perfekt für warme und stabile Klimazonen"
+      "name": "Ecuador liegt direkt am Ã„quator und bietet daher ganzjÃ¤hrig ein auÃŸergewÃ¶hnliches Klima. Dank seiner privilegierten Lage bietet es eine einzigartige Vielfalt an Umgebungen:",
+      "point1": "Tropisch, ideal fÃ¼r alle, die Sonne und Strand lieben",
+      "point2": "Subtropisch, mit angenehmen Temperaturen und grÃ¼nen Landschaften",
+      "point3": "Feucht, mit Ã¼ppiger Vegetation und Natur",
+      "point4": "Trocken, perfekt fÃ¼r warme und stabile Klimazonen"
     },
-    "description1": "Diese Vielfalt an Klimazonen und Ökosystemen macht das Land zu einem idealen Ort zum Leben, Investieren und Genießen. Ecuador bietet nicht nur Naturschönheit und hohe Lebensqualität, sondern auch attraktive Immobilienmöglichkeiten mit Objekten in städtischen, ländlichen und touristischen Gebieten für jeden Lebensstil.",
-    "title1": "In Ecuador zu investieren bedeutet, sich für ein Land mit einem privilegierten Klima und einzigartigen Ökosystemen zu entscheiden. Vielfalt und eine Zukunft voller Möglichkeiten."
+    "description1": "Diese Vielfalt an Klimazonen und Ã–kosystemen macht das Land zu einem idealen Ort zum Leben, Investieren und GenieÃŸen. Ecuador bietet nicht nur NaturschÃ¶nheit und hohe LebensqualitÃ¤t, sondern auch attraktive ImmobilienmÃ¶glichkeiten mit Objekten in stÃ¤dtischen, lÃ¤ndlichen und touristischen Gebieten fÃ¼r jeden Lebensstil.",
+    "title1": "In Ecuador zu investieren bedeutet, sich fÃ¼r ein Land mit einem privilegierten Klima und einzigartigen Ã–kosystemen zu entscheiden. Vielfalt und eine Zukunft voller MÃ¶glichkeiten."
   },
   "footerNavbar": {
     "home": "Startseite",
@@ -100,7 +96,7 @@
   },
   "property": {
     "title": "Entdecken Sie die Eigenschaften unglaublicher Erweiterungen.",
-    "description": "Erleben Sie Eleganz und Komfort in unseren exklusiven Luxusimmobilien für anspruchsvolles Wohnen.",
+    "description": "Erleben Sie Eleganz und Komfort in unseren exklusiven Luxusimmobilien fÃ¼r anspruchsvolles Wohnen.",
     "badge": "Immobilien"
   },
   "header": {
@@ -123,18 +119,18 @@
     "description": "Beschreibung",
     "suitable": "Geeignete Immobilie",
     "price": "Preis",
-    "meters": "Fläche",
-    "height": "Höhe m",
+    "meters": "FlÃ¤che",
+    "height": "HÃ¶he m",
     "address": "Adresse",
     "geoLink": "Google Maps-Link",
     "esPrincipal": "Ist es Hauptobjekt?",
     "images": "Bilder",
     "category": "Kategorie",
-    "selectCategory": "Kategorie auswählen",
-    "selectClimate": "Klima auswählen",
-    "selectRentaVenta": "auswählen",
-    "selectApto": "Geeignete Immobilie auswählen",
-    "selectImages": "Bilder auswählen",
+    "selectCategory": "Kategorie auswÃ¤hlen",
+    "selectClimate": "Klima auswÃ¤hlen",
+    "selectRentaVenta": "auswÃ¤hlen",
+    "selectApto": "Geeignete Immobilie auswÃ¤hlen",
+    "selectImages": "Bilder auswÃ¤hlen",
     "submitButton": "Immobilie speichern"
   },
   "servicioForm": {
@@ -143,76 +139,76 @@
   },
   "jubiladosForm": {
     "whyEcuador": "Warum Ecuador?",
-    "reason1": "🇪🇨 1. Erschwingliche Lebenshaltungskosten\nIm Vergleich zu vielen Ländern Amerikas und Europas ist das Leben in Ecuador in der Regel günstiger.\nGünstiger Wohnraum\nPreiswerte Dienstleistungen und Transport\nFrisches und preiswertes Essen (insbesondere auf Märkten)\n\n",
-    "reason2": "🌎 2. Natürliche Vielfalt auf kleinem Raum\nIn nur wenigen Stunden können Sie von der Küste ins Andenhochland, den Amazonas-Regenwald oder zu den Galapagos-Inseln gelangen.\nStrände\nBerge und Vulkane\nRegenwald\nModerne Städte\n\n",
-    "reason3": "🌡️ 3. Klimazonen für jeden Geschmack\nDa Ecuador am Äquator liegt, gibt es keine ausgeprägten Jahreszeiten.\nWenn Sie es warm mögen: Küste und Amazonas\nWenn Sie ein gemäßigtes Klima bevorzugen: Anden\nSie können immer eine Klimazone wählen, die Ihnen zusagt.\n\n",
-    "reason4": "❤️ 4. Freundliche Menschen und ein entspannter Lebensstil\nDie meisten Menschen schätzen:\nDie Freundlichkeit und Herzlichkeit\nDas Gemeinschaftsleben\nEin langsameres Lebenstempo als in anderen Ländern\n\n",
-    "reason5": "🏥 5. Bezahlbare Gesundheitsversorgung\nEs gibt preiswerte öffentliche Krankenhäuser und qualitativ hochwertige Privatkliniken zu niedrigeren Preisen als in den USA oder Europa.\n\n",
-    "reason6": "💵 6. US-Dollar als Währung\nDies zieht viele Menschen aufgrund der wirtschaftlichen Stabilität an und weil starke Abwertungen vermieden werden.\n\n",
-    "reason7": "🧳 7. Angebote für Ausländer\nEcuador bietet verschiedene Aufenthaltsvisa an:\nVisum für Rentner\nInvestorenvisum\nArbeitsvisum\nVisum für digitale Nomaden (vorübergehende Aufenthaltserlaubnis für Telearbeit)\n\n",
-    "reason8": "🥑 8. Frische und abwechslungsreiche Lebensmittel\nDas Land produziert Obst, Gemüse, und Meeresfrüchte das ganze Jahr über. Es ist einfach, sich gesund und frisch zu ernähren.\n\n",
-    "reason9": "🏛️ 9. Reichhaltige und vielfältige Kultur\nIndigene Traditionen\nMestizeneinflüsse\nFarbenfrohe Feste\nMusik, Kunsthandwerk und vielfältige Gastronomie."
+    "reason1": "ðŸ‡ªðŸ‡¨ 1. Erschwingliche Lebenshaltungskosten\nIm Vergleich zu vielen LÃ¤ndern Amerikas und Europas ist das Leben in Ecuador in der Regel gÃ¼nstiger.\nGÃ¼nstiger Wohnraum\nPreiswerte Dienstleistungen und Transport\nFrisches und preiswertes Essen (insbesondere auf MÃ¤rkten)\n\n",
+    "reason2": "ðŸŒŽ 2. NatÃ¼rliche Vielfalt auf kleinem Raum\nIn nur wenigen Stunden kÃ¶nnen Sie von der KÃ¼ste ins Andenhochland, den Amazonas-Regenwald oder zu den Galapagos-Inseln gelangen.\nStrÃ¤nde\nBerge und Vulkane\nRegenwald\nModerne StÃ¤dte\n\n",
+    "reason3": "ðŸŒ¡ï¸ 3. Klimazonen fÃ¼r jeden Geschmack\nDa Ecuador am Ã„quator liegt, gibt es keine ausgeprÃ¤gten Jahreszeiten.\nWenn Sie es warm mÃ¶gen: KÃ¼ste und Amazonas\nWenn Sie ein gemÃ¤ÃŸigtes Klima bevorzugen: Anden\nSie kÃ¶nnen immer eine Klimazone wÃ¤hlen, die Ihnen zusagt.\n\n",
+    "reason4": "â¤ï¸ 4. Freundliche Menschen und ein entspannter Lebensstil\nDie meisten Menschen schÃ¤tzen:\nDie Freundlichkeit und Herzlichkeit\nDas Gemeinschaftsleben\nEin langsameres Lebenstempo als in anderen LÃ¤ndern\n\n",
+    "reason5": "ðŸ¥ 5. Bezahlbare Gesundheitsversorgung\nEs gibt preiswerte Ã¶ffentliche KrankenhÃ¤user und qualitativ hochwertige Privatkliniken zu niedrigeren Preisen als in den USA oder Europa.\n\n",
+    "reason6": "ðŸ’µ 6. US-Dollar als WÃ¤hrung\nDies zieht viele Menschen aufgrund der wirtschaftlichen StabilitÃ¤t an und weil starke Abwertungen vermieden werden.\n\n",
+    "reason7": "ðŸ§³ 7. Angebote fÃ¼r AuslÃ¤nder\nEcuador bietet verschiedene Aufenthaltsvisa an:\nVisum fÃ¼r Rentner\nInvestorenvisum\nArbeitsvisum\nVisum fÃ¼r digitale Nomaden (vorÃ¼bergehende Aufenthaltserlaubnis fÃ¼r Telearbeit)\n\n",
+    "reason8": "ðŸ¥‘ 8. Frische und abwechslungsreiche Lebensmittel\nDas Land produziert Obst, GemÃ¼se, und MeeresfrÃ¼chte das ganze Jahr Ã¼ber. Es ist einfach, sich gesund und frisch zu ernÃ¤hren.\n\n",
+    "reason9": "ðŸ›ï¸ 9. Reichhaltige und vielfÃ¤ltige Kultur\nIndigene Traditionen\nMestizeneinflÃ¼sse\nFarbenfrohe Feste\nMusik, Kunsthandwerk und vielfÃ¤ltige Gastronomie."
   },
   "actividadesForm": {
-    "title": "AKTIVITÄTEN IN ECUADOR",
-    "description": "Ecuador bietet Erlebnisse für jeden Reisenden: Natur, Abenteuer, Kultur, Gastronomie und Entspannung. Hier sind einige der beliebtesten Aktivitäten:",
+    "title": "AKTIVITÃ„TEN IN ECUADOR",
+    "description": "Ecuador bietet Erlebnisse fÃ¼r jeden Reisenden: Natur, Abenteuer, Kultur, Gastronomie und Entspannung. Hier sind einige der beliebtesten AktivitÃ¤ten:",
     "activity1": {
-      "name": "🌋 1. Abenteuer und Natur",
-      "act1": "Trekking zum Quilotoa (Vulkankrater mit türkisfarbener Lagune)",
+      "name": "ðŸŒ‹ 1. Abenteuer und Natur",
+      "act1": "Trekking zum Quilotoa (Vulkankrater mit tÃ¼rkisfarbener Lagune)",
       "act2": "Besteigung des Cotopaxi oder Wandern im Cotopaxi-Nationalpark",
-      "act3": "Besuch des Chimborazo (der sonnennächste Punkt)",
+      "act3": "Besuch des Chimborazo (der sonnennÃ¤chste Punkt)",
       "act4": "Tauchen und Schnorcheln auf den Galapagos-Inseln",
-      "act5": "Canopy-Touren und Rafting in Baños de Agua Santa",
+      "act5": "Canopy-Touren und Rafting in BaÃ±os de Agua Santa",
       "act6": "Vogelbeobachtung in Mindo",
       "act7": "Wandern im Cajas-Nationalpark (Cuenca)",
       "act8": "Trekking in El Altar und Sangay Nationalparks"
     },
     "activity2": {
-      "name": "🏙️ 2. Kultur und Städte",
+      "name": "ðŸ™ï¸ 2. Kultur und StÃ¤dte",
       "act1": "Erkunden Sie das historische Zentrum von Quito (UNESCO-Weltkulturerbe)",
       "act2": "Besuchen Sie Cuenca und seine Kolonialkirchen",
-      "act3": "Schlendern Sie entlang des Malecón 2000 in Guayaquil",
+      "act3": "Schlendern Sie entlang des MalecÃ³n 2000 in Guayaquil",
       "act4": "Erkunden Sie La Ronda und Mitad del Mundo",
       "act5": "Besuchen Sie Museen"
     },
     "activity3": {
-      "name": "🏖️ 3. Strände und Küste",
-      "act1": "Montañita (Surfen und Nachtleben)",
+      "name": "ðŸ–ï¸ 3. StrÃ¤nde und KÃ¼ste",
+      "act1": "MontaÃ±ita (Surfen und Nachtleben)",
       "act2": "Ayampe (Ruhe, Yoga, Surfen)",
-      "act3": "Los Frailes (einer der schönsten Strände des Landes)",
+      "act3": "Los Frailes (einer der schÃ¶nsten StrÃ¤nde des Landes)",
       "act4": "Salinas (familienfreundlicher Badeort)",
-      "act5": "Puerto López (Walbeobachtung im Juni) (Stand: September)",
-      "act6": "Isla de la Plata (die „günstigen Galapagosinseln“)"
+      "act5": "Puerto LÃ³pez (Walbeobachtung im Juni) (Stand: September)",
+      "act6": "Isla de la Plata (die â€žgÃ¼nstigen Galapagosinselnâ€œ)"
     },
     "activity4": {
-      "name": "🌿 4. Amazonas-Regenwald",
-      "act1": "Cuyabeno → Wirtschaft und artenreiche Tierwelt",
-      "act2": "Yasuní → Tiefer Regenwald, indigene Gemeinschaften",
-      "act3": "Tena → Rafting und Wassersport",
+      "name": "ðŸŒ¿ 4. Amazonas-Regenwald",
+      "act1": "Cuyabeno â†’ Wirtschaft und artenreiche Tierwelt",
+      "act2": "YasunÃ­ â†’ Tiefer Regenwald, indigene Gemeinschaften",
+      "act3": "Tena â†’ Rafting und Wassersport",
       "act4": "Kanutouren, Kaiman- und Rosa-Delfin-Beobachtung"
     },
     "activity5": {
-      "name": "🐢 5. Galapagos",
+      "name": "ðŸ¢ 5. Galapagos",
       "act1": "Besuch von Isabela (Flamingo-Lagune, Lavatunnel)",
-      "act2": "Schnorcheln in Los Túneles",
-      "act3": "Ausflug nach Bartolomé (ikonische Landschaft)",
-      "act4": "Riesenschildkröten in El Chato",
-      "act5": "Strände: Tortuga Bay, Las Grietas"
+      "act2": "Schnorcheln in Los TÃºneles",
+      "act3": "Ausflug nach BartolomÃ© (ikonische Landschaft)",
+      "act4": "RiesenschildkrÃ¶ten in El Chato",
+      "act5": "StrÃ¤nde: Tortuga Bay, Las Grietas"
     },
     "activity6": {
-      "name": "❤️ 6. Einzigartige Erlebnisse",
-      "act1": "Buckelwalbeobachtung in Manabí",
-      "act2": "Überquerung der Teufelsnasenbahn (Riobamba – Alausí)",
+      "name": "â¤ï¸ 6. Einzigartige Erlebnisse",
+      "act1": "Buckelwalbeobachtung in ManabÃ­",
+      "act2": "Ãœberquerung der Teufelsnasenbahn (Riobamba â€“ AlausÃ­)",
       "act3": "Besuch des versteinerten Waldes von Puyango",
-      "act4": "Spaziergang auf Hängebrücken in Mindo",
-      "act5": "Kaffee- und Schokoladentouren an der Küste und im Amazonasgebiet",
+      "act4": "Spaziergang auf HÃ¤ngebrÃ¼cken in Mindo",
+      "act5": "Kaffee- und Schokoladentouren an der KÃ¼ste und im Amazonasgebiet",
       "act6": "Besuch indigener Gemeinschaften in Otavalo und Saraguro"
     },
     "activity7": {
-      "name": "🛒 7. Märkte und Kunsthandwerk",
-      "act1": "Markt in Otavalo (eines der größten in Südamerika)",
+      "name": "ðŸ›’ 7. MÃ¤rkte und Kunsthandwerk",
+      "act1": "Markt in Otavalo (eines der grÃ¶ÃŸten in SÃ¼damerika)",
       "act2": "Kunsthandwerk aus Cuenca",
-      "act3": "Strohhüte Toquilla (fälschlicherweise als „Panamahut“ bezeichnet)",
+      "act3": "StrohhÃ¼te Toquilla (fÃ¤lschlicherweise als â€žPanamahutâ€œ bezeichnet)",
       "act4": "Lokale Produkte: Kakao, Kaffee, Keramik, Textilien"
     }
   }

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import HeroSub from "@/components/shared/HeroSub";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -20,10 +20,7 @@ interface Propiedad {
   title: string;
   slug: string;
   precio?: number | null;
-<<<<<<< HEAD
   estado?: boolean;
-=======
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
   metros: number;
   area: number;
   altura?: number;
@@ -107,10 +104,7 @@ export const Welcome = () => {
               tipoPropiedadId: p.tipoPropiedadId ?? "",
               categoriaId: p.categoriaId ?? "",
               userId: p.userId ?? "",
-<<<<<<< HEAD
               estado: p.estado ?? true,
-=======
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
               images:
                 p.images?.map((img) => ({
                   id: Number(img.id),

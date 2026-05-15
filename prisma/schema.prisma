@@ -1,4 +1,4 @@
-generator client {
+﻿generator client {
   provider = "prisma-client-js"
 }
 
@@ -20,11 +20,8 @@ enum TipoCategoria {
 model Categoria {
   id        String      @id @default(uuid())
   name      String      @unique
-<<<<<<< HEAD
   nameEn    String?
   nameDe    String?
-=======
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
   tipo      Int
   estado    Boolean     @default(true)
   Propiedad Propiedad[]
@@ -33,22 +30,16 @@ model Categoria {
 model Amenities {
   id     String  @id @default(uuid())
   name   String  @unique
-<<<<<<< HEAD
   nameEn String?
   nameDe String?
-=======
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
   estado Boolean @default(true)
 }
 
 model TipoPropiedad {
   id          String      @id @default(uuid())
   name        String      @unique
-<<<<<<< HEAD
   nameEn      String?
   nameDe      String?
-=======
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
   estado      Boolean     @default(true)
   propiedades Propiedad[]
 }
@@ -66,7 +57,6 @@ enum RentaVenta {
 model Propiedad {
   id          String   @id @default(uuid())
   title       String
-<<<<<<< HEAD
   titleEn     String?
   titleDe     String?
   slug        String   @unique
@@ -76,21 +66,13 @@ model Propiedad {
   apto        String?
   aptoEn      String?
   aptoDe      String?
-=======
-  slug        String   @unique
-  description String?
-  apto        String?
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
   precio      Float    @default(0)
   metros      Float    @default(0)
   area        Float    @default(0)
   altura      Float    @default(0)
   address     String?
-<<<<<<< HEAD
   addressEn   String?
   addressDe   String?
-=======
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
   geoLink     String?
   esPrincipal Boolean  @default(false)
   createdAt   DateTime @default(now())
@@ -108,7 +90,7 @@ model Propiedad {
   tipoMedida String?
   tipoMedida1 String?
 
-  // 👉 Ciudad opcional
+  // ðŸ‘‰ Ciudad opcional
   ciudadId String?
   ciudad   Ciudad? @relation(fields: [ciudadId], references: [id])
 
@@ -129,7 +111,7 @@ model Favorito {
 model PropiedadImage {
   id          Int       @id @default(autoincrement())
   url         String
-  publicId    String? // ✅ nuevo
+  publicId    String? // âœ… nuevo
   type        String // "image" | "video"
   propiedadId String
   propiedad   Propiedad @relation(fields: [propiedadId], references: [id])
@@ -147,15 +129,11 @@ model Contacto {
 model Ciudad {
   id          String      @id @default(uuid())
   nombre      String
-<<<<<<< HEAD
   nombreEn    String?
   nombreDe    String?
   descripcion String?
   descripcionEn String?
   descripcionDe String?
-=======
-  descripcion String?
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
   url         String?
   servicios   Servicio[]
   propiedades Propiedad[]
@@ -164,15 +142,11 @@ model Ciudad {
 model Servicio {
   id          String          @id @default(uuid())
   nombre      String
-<<<<<<< HEAD
   nombreEn    String?
   nombreDe    String?
   descripcion String?
   descripcionEn String?
   descripcionDe String?
-=======
-  descripcion String?
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
   ciudadId    String
   ciudad      Ciudad          @relation(fields: [ciudadId], references: [id])
   images      ServicioImage[]

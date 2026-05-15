@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-﻿"use client";
-=======
 "use client";
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
 
 import { useForm } from "react-hook-form";
 import { redirect, useRouter } from 'next/navigation';
@@ -32,12 +28,8 @@ interface FormInputs {
 export const ServicioForm = ({ servicio, ciudades }: Props) => {
     const { data: session } = useSession();
     const router = useRouter();
-<<<<<<< HEAD
     const { t, i18n } = useTranslation();
     const lang = i18n.language?.slice(0,2) ?? 'en';
-=======
-    const { t } = useTranslation();
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
     const {
         handleSubmit,
         register,
@@ -76,22 +68,14 @@ export const ServicioForm = ({ servicio, ciudades }: Props) => {
 
         const { ok, servicio: updatedServicio } = await createUpdateServicio(formData);
         if (!ok) {
-<<<<<<< HEAD
             alert(lang === 'es' ? 'Servicio no se pudo actualizar' : lang === 'de' ? 'Service konnte nicht aktualisiert werden' : 'Service could not be updated');
-=======
-            alert('Servicio no se pudo actualizar');
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
             return;
         }
 
         //router.replace(`/admin/servicio/${ updatedContact?.slug }`)
 
         router.push('/admin/servicios');
-<<<<<<< HEAD
         alert(lang === 'es' ? 'Servicio actualizado correctamente' : lang === 'de' ? 'Service erfolgreich aktualisiert' : 'Service updated successfully');
-=======
-        alert('Servicio actualizado correctamente');
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
     };
 
     if (!session || session.user?.role !== 'admin') {
@@ -151,11 +135,7 @@ export const ServicioForm = ({ servicio, ciudades }: Props) => {
 
                             </div>
                             <div className="flex flex-col gap-4">
-<<<<<<< HEAD
                                 <span className="text-lg font-semibold">{lang === 'es' ? 'Fotos' : lang === 'de' ? 'Bilder' : 'Photos'}</span>
-=======
-                                <span className="text-lg font-semibold">Fotos</span>
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
                                 <input
                                     type="file"
                                     {...register('images')}
@@ -174,7 +154,4 @@ export const ServicioForm = ({ servicio, ciudades }: Props) => {
         </>
     );
 };
-<<<<<<< HEAD
 
-=======
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921

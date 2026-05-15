@@ -1,4 +1,4 @@
-"use server";
+﻿"use server";
 import { prisma } from "@/lib/prisma";
 
 interface PaginationOptions {
@@ -28,7 +28,7 @@ export const getPaginatedPropiedadsWithImages = async ({
   if (page < 1) page = 1;
 
   try {
-    // 🔹 Construir dinámicamente los filtros
+    // ðŸ”¹ Construir dinÃ¡micamente los filtros
     const where: any = {
       precio: {
         gte: precioMinimo,
@@ -40,11 +40,7 @@ export const getPaginatedPropiedadsWithImages = async ({
     if (rentaVenta) where.rentaVenta = rentaVenta;
     if (temperatura) where.temperatura = temperatura;
     if (categoriaId) where.categoriaId = categoriaId;
-<<<<<<< HEAD
     if (tipoPropiedad) where.tipoPropiedadId = tipoPropiedad;
-=======
-    if (tipoPropiedad) where.tipoPropiedad = { id: tipoPropiedad };
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
 
     // 1. Obtener los propiedads filtrados
     const propiedads = await prisma.propiedad.findMany({
@@ -54,7 +50,7 @@ export const getPaginatedPropiedadsWithImages = async ({
         images: true,
         //amenities: true,
       },
-      where, // 👈 aquí usamos el objeto dinámico
+      where, // ðŸ‘ˆ aquÃ­ usamos el objeto dinÃ¡mico
     });
 
     // 2. Calcular total de registros con los mismos filtros
@@ -76,6 +72,10 @@ export const getPaginatedPropiedadsWithImages = async ({
     };
   } catch (error) {
     console.error(error);
-    throw new Error("No se pudo cargar los propiedads");
+    return {
+      currentPage: page,
+      totalPages: 0,
+      propiedads: [],
+    };
   }
 };

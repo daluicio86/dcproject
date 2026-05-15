@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-﻿"use client";
-
-import { SubmitHandler, useForm } from "react-hook-form";
-=======
 "use client";
 
-import { useForm } from "react-hook-form";
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+import { SubmitHandler, useForm } from "react-hook-form";
 import { Propiedad } from "@/interface/propiedad.interface";
 import { createUpdatePropiedad } from "@/actions/propiedad/create-update-propiedad";
 import { useRouter } from "next/navigation";
@@ -39,27 +33,15 @@ const enumRentaVenta = [
 ];
 
 const enumClima = [
-<<<<<<< HEAD
-  { id: "1", name: "Seco 10-20Â°" },
-  { id: "2", name: "Seco 10-25Â°" },
-  { id: "3", name: "SubTropical 10-30Â°" },
-  { id: "4", name: "HÃºmedo 60%" },
+  { id: "1", name: "Seco 10-20Ãƒâ€šÃ‚Â°" },
+  { id: "2", name: "Seco 10-25Ãƒâ€šÃ‚Â°" },
+  { id: "3", name: "SubTropical 10-30Ãƒâ€šÃ‚Â°" },
+  { id: "4", name: "HÃƒÆ’Ã‚Âºmedo 60%" },
 ];
 
 const enumTipoMedida1 = [
-  { id: "m", name: "mÂ²" },
-  { id: "ft2", name: "ftÂ²" },
-=======
-  { id: "1", name: "Seco 10-20°" },
-  { id: "2", name: "Seco 10-25°" },
-  { id: "3", name: "SubTropical 10-30°" },
-  { id: "4", name: "Húmedo 60%" },
-];
-
-const enumTipoMedida1 = [
-  { id: "m", name: "m²" },
-  { id: "ft2", name: "ft²" },
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+  { id: "m", name: "mÃƒâ€šÃ‚Â²" },
+  { id: "ft2", name: "ftÃƒâ€šÃ‚Â²" },
 ];
 
 const enumTipoMedida2 = [
@@ -77,7 +59,6 @@ interface Props {
 }
 
 interface FormInputs {
-<<<<<<< HEAD
   titleEn?: string;
   titleDe?: string;
   title: string;
@@ -87,11 +68,6 @@ interface FormInputs {
   apto: string;
   aptoEn?: string;
   aptoDe?: string;
-=======
-  title: string;
-  description: string;
-  apto: string;
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
   precio: number;
   metros: number;
   area: number;
@@ -99,11 +75,8 @@ interface FormInputs {
   tipoMedida1: string;
   altura: number;
   address: string;
-<<<<<<< HEAD
   addressEn?: string;
   addressDe?: string;
-=======
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
   geoLink: string;
 
   esPrincipal: boolean;
@@ -154,17 +127,12 @@ export const PropiedadForm = ({
 }: Props) => {
   const { data: session } = useSession();
   const router = useRouter();
-<<<<<<< HEAD
   const { t, i18n } = useTranslation();
   const lang = i18n.language?.slice(0,2) ?? "en";
-=======
-  const { t } = useTranslation();
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
 
   const { handleSubmit, register, setValue, watch } = useForm<FormInputs>({
     defaultValues: {
       ...propiedad,
-<<<<<<< HEAD
       titleEn: propiedad.titleEn ?? undefined,
       titleDe: propiedad.titleDe ?? undefined,
       descriptionEn: propiedad.descriptionEn ?? undefined,
@@ -173,8 +141,6 @@ export const PropiedadForm = ({
       aptoDe: propiedad.aptoDe ?? undefined,
       addressEn: propiedad.addressEn ?? undefined,
       addressDe: propiedad.addressDe ?? undefined,
-=======
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
       esPrincipal: Boolean(propiedad.esPrincipal),
       precio: propiedad.precio ?? undefined,
       images: undefined,
@@ -225,13 +191,8 @@ export const PropiedadForm = ({
 
   const watchedImages = watch("images");
 
-<<<<<<< HEAD
-  // âœ… Crear previews SOLO una vez cuando cambia FileList.
-  // âœ… Revocar las anteriores para no filtrar memoria.
-=======
-  // ✅ Crear previews SOLO una vez cuando cambia FileList.
-  // ✅ Revocar las anteriores para no filtrar memoria.
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+  // ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Crear previews SOLO una vez cuando cambia FileList.
+  // ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Revocar las anteriores para no filtrar memoria.
   useEffect(() => {
     if (!watchedImages) return;
 
@@ -268,17 +229,10 @@ export const PropiedadForm = ({
   const removeNewImage = (index: number) => {
     setNewMedia((prev) => {
       const toRemove = prev[index];
-<<<<<<< HEAD
-      if (toRemove) URL.revokeObjectURL(toRemove.preview); // âœ… revoca al borrar
+      if (toRemove) URL.revokeObjectURL(toRemove.preview); // ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ revoca al borrar
       const updated = prev.filter((_, i) => i !== index);
 
-      // reconstruye FileList para RHF (igual que hacÃ­as)
-=======
-      if (toRemove) URL.revokeObjectURL(toRemove.preview); // ✅ revoca al borrar
-      const updated = prev.filter((_, i) => i !== index);
-
-      // reconstruye FileList para RHF (igual que hacías)
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+      // reconstruye FileList para RHF (igual que hacÃƒÆ’Ã‚Â­as)
       const dt = new DataTransfer();
       updated.forEach((m) => dt.items.add(m.file));
       setValue("images", dt.files);
@@ -290,11 +244,7 @@ export const PropiedadForm = ({
   /* ------------------------------------------------------------------ */
   /* SUBMIT */
   /* ------------------------------------------------------------------ */
-<<<<<<< HEAD
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-=======
-  const onSubmit = async (data: FormInputs) => {
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
     const formData = new FormData();
 
     if (propiedad.id) formData.append("id", propiedad.id.toString());
@@ -306,17 +256,10 @@ export const PropiedadForm = ({
     try {
       const uploads: { url: string; type: "image" | "video" }[] = [];
 
-<<<<<<< HEAD
-      // âœ… Progreso global real (promedio)
+      // ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Progreso global real (promedio)
       const perFileProgress = new Array(newMedia.length).fill(0);
 
-      // âœ… Throttle de updates (evita miles de renders)
-=======
-      // ✅ Progreso global real (promedio)
-      const perFileProgress = new Array(newMedia.length).fill(0);
-
-      // ✅ Throttle de updates (evita miles de renders)
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+      // ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Throttle de updates (evita miles de renders)
       const lastUpdateRef = { t: 0 };
       const updateGlobalProgress = () => {
         const now = Date.now();
@@ -328,11 +271,7 @@ export const PropiedadForm = ({
         setUploadProgress(Math.round(avg));
       };
 
-<<<<<<< HEAD
-      // âœ… Concurrencia limitada (3 a la vez)
-=======
-      // ✅ Concurrencia limitada (3 a la vez)
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+      // ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Concurrencia limitada (3 a la vez)
       const CONCURRENCY = 3;
 
       const tasks = newMedia.map((m, index) => async () => {
@@ -347,11 +286,7 @@ export const PropiedadForm = ({
           },
         );
 
-<<<<<<< HEAD
-        // asegÃºrate que quede 100% al final del archivo
-=======
-        // asegúrate que quede 100% al final del archivo
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+        // asegÃƒÆ’Ã‚Âºrate que quede 100% al final del archivo
         perFileProgress[index] = 100;
         updateGlobalProgress();
 
@@ -362,7 +297,6 @@ export const PropiedadForm = ({
       uploads.push(...results);
       // Datos del formulario
       formData.append("title", data.title);
-<<<<<<< HEAD
       formData.append("titleEn", data.titleEn ?? "");
       formData.append("titleDe", data.titleDe ?? "");
       formData.append("slug", data.title);
@@ -372,11 +306,6 @@ export const PropiedadForm = ({
       formData.append("apto", data.apto);
       formData.append("aptoEn", data.aptoEn ?? "");
       formData.append("aptoDe", data.aptoDe ?? "");
-=======
-      formData.append("slug", data.title);
-      formData.append("description", data.description);
-      formData.append("apto", data.apto);
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
       formData.append("precio", data.precio.toString());
       formData.append("metros", data.metros.toString());
       formData.append("area", data.area.toString());
@@ -384,11 +313,8 @@ export const PropiedadForm = ({
       formData.append("tipoMedida1", data.tipoMedida1);
       formData.append("altura", data.altura.toString());
       formData.append("address", data.address);
-<<<<<<< HEAD
       formData.append("addressEn", data.addressEn ?? "");
       formData.append("addressDe", data.addressDe ?? "");
-=======
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
       formData.append("geoLink", data.geoLink);
       formData.append("esPrincipal", data.esPrincipal ? "true" : "false");
       formData.append("categoriaId", data.categoriaId);
@@ -409,45 +335,26 @@ export const PropiedadForm = ({
         formData.append("uploadedMedia", JSON.stringify(uploads));
       }
 
-<<<<<<< HEAD
-      console.log("ðŸš€ ~ file: PropiedadForm.tsx:257 ~ onSubmit ~ formData:", data.esPrincipal);
+      console.log("ÃƒÂ°Ã…Â¸Ã…Â¡Ã¢â€šÂ¬ ~ file: PropiedadForm.tsx:257 ~ onSubmit ~ formData:", data.esPrincipal);
       const { ok } = await createUpdatePropiedad(formData);
       if (!ok) {
         alert(lang === "es" ? "Error al guardar" : lang === "de" ? "Fehler beim Speichern" : "Error while saving");
         return;
       }
 
-      // âœ… limpia estado al final
-=======
-      console.log("🚀 ~ file: PropiedadForm.tsx:257 ~ onSubmit ~ formData:", data.esPrincipal);
-      const { ok } = await createUpdatePropiedad(formData);
-      if (!ok) {
-        alert("Error al guardar");
-        return;
-      }
-
-      // ✅ limpia estado al final
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+      // ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ limpia estado al final
       setUploadLabel("");
       setUploadProgress(100);
 
       router.push("/admin/propiedads");
     } finally {
       setIsUploading(false);
-<<<<<<< HEAD
-      // opcional: resetear progreso tras un pequeÃ±o delay o dejarlo en 100
-=======
-      // opcional: resetear progreso tras un pequeño delay o dejarlo en 100
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+      // opcional: resetear progreso tras un pequeÃƒÆ’Ã‚Â±o delay o dejarlo en 100
       // setUploadProgress(0);
     }
   };
 
-<<<<<<< HEAD
-  console.log("ðŸš€ ~ file: PropiedadForm.tsx:263 ~ PropiedadForm ~ esPrincipal:", propiedad);
-=======
-  console.log("🚀 ~ file: PropiedadForm.tsx:263 ~ PropiedadForm ~ esPrincipal:", propiedad);
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+  console.log("ÃƒÂ°Ã…Â¸Ã…Â¡Ã¢â€šÂ¬ ~ file: PropiedadForm.tsx:263 ~ PropiedadForm ~ esPrincipal:", propiedad);
   /* ------------------------------------------------------------------ */
   /* RENDER */
   /* ------------------------------------------------------------------ */
@@ -470,11 +377,7 @@ export const PropiedadForm = ({
               className="absolute -top-12 right-0 bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center"
               aria-label="Cerrar"
             >
-<<<<<<< HEAD
-              âœ•
-=======
-              ✕
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+              ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¢
             </button>
 
             {lightboxIsVideo ? (
@@ -536,10 +439,6 @@ export const PropiedadForm = ({
                 Select whether the property is primary.
               </label>
             </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
             <div className="flex flex-col lg:flex-row gap-6">
               <input
                 {...register("title", { required: true })}
@@ -548,7 +447,6 @@ export const PropiedadForm = ({
                 placeholder={t("propiedadForm.title")}
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               />
-<<<<<<< HEAD
               <input
                 {...register("titleEn")}
                 type="text"
@@ -563,8 +461,6 @@ export const PropiedadForm = ({
                 placeholder="Titel (DE)"
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               />
-=======
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
 
               <div className="flex items-center gap-2 w-full">
                 <input
@@ -595,7 +491,6 @@ export const PropiedadForm = ({
                 required
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               />
-<<<<<<< HEAD
               <input
                 {...register("addressEn")}
                 type="text"
@@ -610,8 +505,6 @@ export const PropiedadForm = ({
                 placeholder="Adresse (DE)"
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               />
-=======
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
             </div>
             <div className="flex flex-col lg:flex-row gap-6">
               <input
@@ -715,7 +608,6 @@ export const PropiedadForm = ({
                 required
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               />
-<<<<<<< HEAD
               <input
                 {...register("aptoEn")}
                 type="text"
@@ -727,11 +619,9 @@ export const PropiedadForm = ({
                 {...register("aptoDe")}
                 type="text"
                 id="aptoDe"
-                placeholder="Geeignet für (DE)"
+                placeholder="Geeignet fÃƒÂ¼r (DE)"
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               />
-=======
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
             </div>
             <div className="flex flex-col lg:flex-row gap-6">
               <select
@@ -797,11 +687,7 @@ export const PropiedadForm = ({
                   ))
                 ) : (
                   <option key={-1} value="">
-<<<<<<< HEAD
-                    No existen categorÃ­as
-=======
-                    No existen categorías
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+                    No existen categorÃƒÆ’Ã‚Â­as
                   </option>
                 )}
               </select>
@@ -836,7 +722,6 @@ export const PropiedadForm = ({
             required
             className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-2xl outline-primary focus:outline"
           ></textarea>
-<<<<<<< HEAD
           <textarea
             {...register("descriptionEn")}
             rows={4}
@@ -853,8 +738,6 @@ export const PropiedadForm = ({
             placeholder="Beschreibung (DE)"
             className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-2xl outline-primary focus:outline"
           ></textarea>
-=======
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
 
           <input
             type="file"
@@ -902,11 +785,7 @@ export const PropiedadForm = ({
                       }
                       className="absolute top-2 right-2 z-10 bg-black/70 text-white w-8 h-8 rounded-full flex items-center justify-center"
                     >
-<<<<<<< HEAD
-                      âœ•
-=======
-                      ✕
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+                      ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¢
                     </button>
                   </div>
                 );
@@ -929,11 +808,7 @@ export const PropiedadForm = ({
                       muted
                       playsInline
                       preload="none"
-<<<<<<< HEAD
-                      // sin controls en grid (mÃ¡s liviano)
-=======
-                      // sin controls en grid (más liviano)
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+                      // sin controls en grid (mÃƒÆ’Ã‚Â¡s liviano)
                       onClick={() => openLightbox(m.preview, true)}
                     />
                   ) : (
@@ -952,11 +827,7 @@ export const PropiedadForm = ({
                     onClick={() => removeNewImage(index)}
                     className="absolute top-2 right-2 z-10 bg-black/70 text-white w-8 h-8 rounded-full flex items-center justify-center"
                   >
-<<<<<<< HEAD
-                    âœ•
-=======
-                    ✕
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
+                    ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¢
                   </button>
                 </div>
               ))}
@@ -967,21 +838,14 @@ export const PropiedadForm = ({
             className="bg-primary text-white px-6 py-3 rounded-full"
             disabled={isUploading}
           >
-<<<<<<< HEAD
             {isUploading ? (lang === "es" ? "Guardando..." : lang === "de" ? "Speichern..." : "Saving...") : (lang === "es" ? "Guardar" : lang === "de" ? "Speichern" : "Save")}
-=======
-            {isUploading ? "Guardando..." : "Guardar"}
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
           </button>
         </form>
       </div>
     </>
   );
 };
-<<<<<<< HEAD
 
 
 
 
-=======
->>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
