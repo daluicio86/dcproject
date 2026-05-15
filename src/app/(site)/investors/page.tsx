@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿"use client";
+=======
+"use client";
+>>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
 import { createUpdateContact } from '@/actions/contact/create-update-contacts';
 import { Icon } from '@iconify/react';
 import Image from 'next/image';
@@ -8,8 +12,12 @@ import { useTranslation } from 'react-i18next';
 
 export default function Investors() {
   const router = useRouter();
+<<<<<<< HEAD
   const { t, i18n } = useTranslation();
   const lang = i18n.language?.slice(0,2) ?? 'en';
+=======
+  const { t } = useTranslation();
+>>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +25,11 @@ export default function Investors() {
     const formData = new FormData(form);
     const { ok } = await createUpdateContact(formData);
     if (!ok) {
+<<<<<<< HEAD
       alert(lang === 'es' ? 'Contacto no se pudo actualizar' : lang === 'de' ? 'Kontakt konnte nicht aktualisiert werden' : 'Contact could not be updated');
+=======
+      alert('Contacto no se pudo actualizar');
+>>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
       return;
     }
     form.reset();
@@ -55,7 +67,11 @@ export default function Investors() {
         </ul>
       </div>
 
+<<<<<<< HEAD
       {/* DescripciÃ³n inferior */}
+=======
+      {/* Descripción inferior */}
+>>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
       <p className="text-base text-black/60 leading-relaxed max-w-3xl mx-auto text-center">
         {t("investors.description1")} 
       </p>
@@ -66,4 +82,7 @@ export default function Investors() {
     </div>
   );
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921

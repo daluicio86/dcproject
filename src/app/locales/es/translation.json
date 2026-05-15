@@ -8,7 +8,11 @@
   "ciudadCercanias": "Lugares cercanos",
   "selectCiudad": "Seleccionar ciudad",
   "contact": "Contáctanos",
+<<<<<<< HEAD
   "btnText1": "Información de la propiedad",
+=======
+  "btnText1": "Contactar",
+>>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
   "btnText2": "Ver detalles",
   "categories": "Categorías",
   "promotionalServiceText": "Explore las mejores propiedades con servicios expertos.",

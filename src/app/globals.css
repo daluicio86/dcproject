@@ -57,10 +57,13 @@ html {
   scroll-behavior: smooth;
 }
 
+<<<<<<< HEAD
 body {
   @apply bg-[#f4f5f7] text-[#10263b];
 }
 
+=======
+>>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
 /* Hide scrollbar for Chrome, Safari and Opera */
 .no-scrollbar::-webkit-scrollbar {
   display: none;
@@ -75,6 +78,7 @@ body {
 }
 
 section {
+<<<<<<< HEAD
   @apply py-16 md:py-20
 }
 
@@ -92,6 +96,9 @@ main {
 
 .btn-primary-ui {
   @apply inline-flex items-center justify-center rounded-full bg-[#08364a] px-6 py-3 text-sm font-bold uppercase tracking-[0.08em] text-white transition hover:bg-[#062a39];
+=======
+  @apply py-24
+>>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
 }
 
 .blog-details p, .blog-details hr {
@@ -140,4 +147,8 @@ main {
 
 .blog-details p {
   @apply text-dark dark:text-white text-xm leading-[1.2]
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921

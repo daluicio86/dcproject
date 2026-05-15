@@ -8,7 +8,11 @@
   "ciudadCercanias": "Nearby places",
   "selectCiudad": "Select city",
   "contact": "Contact Us",
+<<<<<<< HEAD
   "btnText1": "Property Information",
+=======
+  "btnText1": "Get in Touch",
+>>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
   "btnText2": "View Details",
   "categories": "Categories",
   "promotionalServiceText": "Explore best properties with expert services.",

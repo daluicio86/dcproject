@@ -40,7 +40,11 @@ export const getPaginatedPropiedadsWithImages = async ({
     if (rentaVenta) where.rentaVenta = rentaVenta;
     if (temperatura) where.temperatura = temperatura;
     if (categoriaId) where.categoriaId = categoriaId;
+<<<<<<< HEAD
     if (tipoPropiedad) where.tipoPropiedadId = tipoPropiedad;
+=======
+    if (tipoPropiedad) where.tipoPropiedad = { id: tipoPropiedad };
+>>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
 
     // 1. Obtener los propiedads filtrados
     const propiedads = await prisma.propiedad.findMany({

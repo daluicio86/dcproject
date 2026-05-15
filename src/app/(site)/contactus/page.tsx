@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿
+=======
+
+>>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
 "use client";
 import { createUpdateContact } from '@/actions/contact/create-update-contacts';
 import { Icon } from '@iconify/react'
@@ -14,8 +18,12 @@ import { useTranslation } from 'react-i18next';
 export default function ContactUs() {
 
   const router = useRouter();
+<<<<<<< HEAD
   const { t, i18n } = useTranslation();
   const lang = i18n.language?.slice(0,2) ?? 'en';
+=======
+  const { t } = useTranslation();
+>>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -27,7 +35,11 @@ export default function ContactUs() {
     const { ok } = await createUpdateContact(formData);
 
     if (!ok) {
+<<<<<<< HEAD
       alert(lang === 'es' ? 'Contacto no se pudo actualizar' : lang === 'de' ? 'Kontakt konnte nicht aktualisiert werden' : 'Contact could not be updated');
+=======
+      alert('Contacto no se pudo actualizar');
+>>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
       return;
     }
     form?.reset();
@@ -155,4 +167,7 @@ export default function ContactUs() {
     </div>
   )
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921

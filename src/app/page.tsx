@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿"use client"
 
 import Link from 'next/link'
@@ -354,6 +355,36 @@ export default function Home() {
           </div>
         </div>
       </section>
+=======
+//import FeaturedProperty from '@/components/Home/FeaturedProperty'
+import Hero from '@/components/Home/Hero'
+//import Properties from '@/components/Home/Properties'
+import Services from '@/components/Home/Services'
+import Testimonial from '@/components/Home/Testimonial'
+import BlogSmall from '@/components/shared/Blog'
+import GetInTouch from '@/components/Home/GetInTouch'
+import FAQ from '@/components/Home/FAQs'
+import { Welcome } from '@/components/Home/Welcome'
+import Jubilados from '@/components/Home/Jubilados'
+import Actividades from '@/components/Home/Actividades'
+import './i18n';
+
+export default function Home() {
+  return (
+    <main>
+      <Hero />
+      <Welcome />
+      <Services />
+      {/*<Properties />
+      <FeaturedProperty />*/}
+      <Jubilados />
+      <Actividades />
+
+      <Testimonial />
+      <BlogSmall />
+      <GetInTouch />
+      <FAQ />
+>>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
     </main>
   )
 }

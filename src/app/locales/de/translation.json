@@ -8,7 +8,11 @@
   "ciudadCercanias": "In der Nähe befindliche Orte",
   "selectCiudad": "Stadt auswählen",
   "contact": "Kontakt",
+<<<<<<< HEAD
   "btnText1": "Immobilieninformationen",
+=======
+  "btnText1": "Kontakt aufnehmen",
+>>>>>>> 36f3b4b4c01dbdfc5db8f637c6cf1498a3ad9921
   "btnText2": "Details anzeigen",
   "categories": "Kategorien",
   "promotionalServiceText": "Entdecken Sie die besten Immobilien mit Expertenservice.",
