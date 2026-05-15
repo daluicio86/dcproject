@@ -1,0 +1,216 @@
+{
+  "welcome": "Bienvenidos a Ecuador",
+  "tagline": "Invierte en Ecuador: el destino perfecto para tu próxima propiedad.",
+  "welcome1": "Compra y venta en Ecuador, ",
+  "welcome2": "el mejor clima del mundo.",
+  "ciudadDetalles": "Detalles de la ciudad",
+  "ciudadPropiedades": "Propiedades en la ciudad",
+  "ciudadCercanias": "Lugares cercanos",
+  "selectCiudad": "Seleccionar ciudad",
+  "contact": "Contáctanos",
+  "btnText1": "Información de la propiedad",
+  "btnText2": "Ver detalles",
+  "categories": "Categorías",
+  "promotionalServiceText": "Explore las mejores propiedades con servicios expertos.",
+  "promotionalServiceText1": "Descubra una amplia gama de propiedades premium, desde lujosos apartamentos hasta espaciosas villas, adaptadas a sus necesidades.",
+  "btnService": "Ver propiedades",
+  "properties": "Propiedades",
+  "discoverInspiringHomes": "Descubra hogares con diseños inspiradores.",
+  "curatedHomes": "Hogares seleccionados donde la elegancia, el estilo y la comodidad se unen.",
+  "featuredProperty": "Propiedad destacada",
+  "modernLuxeVilla": "Villa moderna de lujo",
+  "featuredPropertyDescription": "Experimente la vida de lujo en la villa moderna de lujo, ubicada en 20 S Aurora Ave, Miami. Con un precio de $1,650,500, esta casa inteligente de 560 ft² ofrece 4 dormitorios, 3 baños y amplias áreas de estar. Disfrute de eficiencia energética, luz natural, sistemas de seguridad, espacios al aire libre y 2 áreas de bar, perfectas para más de 8 invitados. Construida en 2025.",
+  "inquireNow": "Consultar ahora",
+  "estPrice": "Precio estimado",
+  "testimonials": "Testimonios",
+  "whatOurClientsSay": "Lo que dicen nuestros clientes",
+  "testimonial1": "¡Encontré la casa ideal en poco tiempo! Los listados eran detallados, las fotos eran precisas y todo el proceso se sintió fluido. El servicio al cliente fue de primera, respondiendo todas mis preguntas. ¡Definitivamente usaré esta plataforma nuevamente en el futuro!",
+  "testimonial2": "¡Una experiencia increíble! La atención al cliente fue excepcional y me ayudaron a encontrar la propiedad perfecta. Estoy muy agradecido por todo su apoyo.",
+  "blog": "Blog",
+  "realEstateInsights": "Perspectivas inmobiliarias",
+  "stayAheadInThePropertyMarket": "Manténgase a la vanguardia en el mercado inmobiliario con consejos y actualizaciones de expertos",
+  "readAllArticles": "Leer todos los artículos",
+  "heroSection": {
+    "title": "Descubra un reino de lujo y sofisticación",
+    "cta": "Póngase en contacto"
+  },
+  "faq": {
+    "iconText": "Preguntas frecuentes",
+    "title": "Todo sobre Fincas Asombrosas",
+    "description": "Sabemos que comprar, vender o invertir en bienes raíces puede ser abrumador. Aquí hay algunas preguntas frecuentes para ayudarlo a guiarse a través del proceso",
+    "items": {
+      "item1": {
+        "question": "1. ¿Puedo personalizar mi propiedad?",
+        "answer": "¡Por supuesto! Ofrecemos diversas opciones de personalización para que su propiedad sea realmente suya."
+      },
+      "item2": {
+        "question": "2. ¿Dónde puedo encontrar propiedades?",
+        "answer": "Puede encontrar nuestras propiedades publicadas en nuestro sitio web, con descripciones detalladas y fotos."
+      },
+      "item3": {
+        "question": "3. ¿Qué pasos se deben seguir para comprar una propiedad?",
+        "answer": "Para comprar una propiedad, comience explorando nuestros listados en línea. Una vez que encuentre una propiedad que le guste, contacte con nuestro equipo de ventas para programar una visita. Después, puede hacer una oferta y, si es aceptada, proceder con la documentación necesaria y las opciones de financiación."
+      }
+    }
+  },
+  "footer": {
+    "subscribeText": "Manténgase actualizado con las últimas noticias,",
+    "emailPlaceholder": "Ingrese su correo electrónico",
+    "subscribeButton": "Suscribirse",
+    "subscribeDisclaimer": "Al suscribirse, acepta recibir nuestros correos electrónicos promocionales. Puede darse de baja en cualquier momento.",
+    "title": "Comience su camino hacia el éxito, contáctenos hoy.",
+    "cta": "Póngase en contacto",
+    "termsOfService": "Términos de servicio",
+    "privacyPolicy": "Política de privacidad",
+    "description": "¿Busca la propiedad de sus sueños o está lista para vender? Nuestro equipo de expertos ofrece orientación personalizada y experiencia en el mercado adaptada a usted."
+  },
+  "contactUs": {
+    "breadcrumb": "Contáctenos",
+    "title": "¿Tiene preguntas? ¡Listos para ayudar!",
+    "description": "¿Busca la propiedad de sus sueños o está lista para vender? Nuestro equipo de expertos ofrece orientación personalizada y experiencia en el mercado adaptada a usted.",
+    "formTitle": "Información de contacto",
+    "formDescription": "¿Listo para encontrar la propiedad de sus sueños o vender su propiedad? ¡Estamos aquí para ayudar!",
+    "sendMessage": "Enviar mensaje",
+    "namePlaceholder": "Nombre*",
+    "phonePlaceholder": "Número de teléfono*",
+    "emailPlaceholder": "Dirección de correo electrónico*",
+    "messagePlaceholder": "Escriba aquí su mensaje"
+  },
+  "investors": {
+    "breadcrumb": "Inversionistas",
+    "title": "🌎 Ecuador: vivir en el centro del planeta",
+    "description": {
+      "name": "Ecuador se encuentra exactamente en la mitad del mundo, lo que le brinda un clima excepcional durante todo el año. Gracias a su ubicación privilegiada, ofrece una diversidad única de ambientes:",
+      "point1": "Tropical, ideal para quienes disfrutan del sol y la playa",
+      "point2": "Subtropical, con temperaturas agradables y paisajes verdes",
+      "point3": "Húmedo, con exuberante vegetación y naturaleza",      
+      "point4": "Seco, perfecto para climas cálidos y estables"
+    },
+    "description1": "Esta variedad de climas y ecosistemas convierte al país en un lugar ideal para vivir, invertir y disfrutar. Ecuador no solo ofrece belleza natural y calidad de vida, sino también oportunidades inmobiliarias atractivas, con propiedades en zonas urbanas, rurales y turísticas que se ajustan a cualquier estilo de vida.",
+    "title1": "Invertir en Ecuador significa elegir un país con clima privilegiado, diversidad única y un futuro lleno de posibilidades."
+  },
+  "footerNavbar": {
+    "home": "Inicio",
+    "properties": "Propiedades",
+    "contactUs": "Contáctenos"
+  },
+  "property": {
+    "title": "Descubra propiedades de extensiones increíbles.",
+    "description": "Experimente la elegancia y el confort con nuestras exclusivas fincas de lujo, diseñadas para una vida sofisticada.",
+    "badge": "Propiedades"
+  },
+  "header": {
+    "contact": "Contacto"
+  },
+  "navLinks": {
+    "home": "Inicio",
+    "properties": "Propiedades",
+    "contact": "Contacto",
+    "catalogs": "Catálogos",
+    "users": "Usuarios",
+    "roles": "Roles"
+  },
+  "login": {
+    "signIn": "Iniciar Sesión",
+    "signUp": "Registrarse"
+  },
+  "propiedadForm": {
+    "title": "Nombre",
+    "description": "Descripción",
+    "apto": "Propiedad apta para",
+    "price": "Precio",
+    "metros": "Superficie",
+    "area": "Superficie",
+    "altura": "Altura m",
+    "address": "Dirección",
+    "geoLink": "Enlace a Google Maps",
+    "esPrincipal": "¿Es la principal?",
+    "images": "Imágenes",
+    "categoria": "Categoría",
+    "selectCategory": "Seleccionar una categoría",
+    "selectClimate": "Seleccionar clima",
+    "selectRentaVenta": "Seleccionar",
+    "selectApto": "Seleccionar propiedad apta para",
+    "selectImages": "Seleccionar imágenes",
+    "submitButton": "Guardar propiedad"
+  },
+  "servicioForm": {
+    "nombre": "Nombre",
+    "submitButton": "Guardar Servicio"
+  },
+  "jubiladosForm": {
+    "whyEcuador": "¿Por qué Ecuador?",
+    "reason1": "🇪🇨 1. Costo de vida accesible\nComparado con muchos países de América y Europa, vivir en Ecuador suele ser más económico.\nVivienda más barata\nServicios y transporte a precios bajos\nAlimentación fresca y económica (especialmente en mercados)\n\n",
+    "reason2": "🌎 2. Diversidad natural en un espacio pequeño\nEn pocas horas puedes pasar de la costa al páramo andino, a la selva amazónica o a las islas Galápagos.\nPlayas\nMontañas y volcanes\nSelva tropical\nCiudades modernas\n\n",
+    "reason3": "🌡️ 3. Climas para todos los gustos\nComo Ecuador está en la línea ecuatorial, no hay estaciones marcadas.\nSi quieres calor: costa y Amazonía\nSi prefieres clima templado: Andes\nSiempre puedes escoger un clima que te quede cómodo.\n\n",
+    "reason4": "❤️ 4. Gente amable y estilo de vida tranquilo\nLa mayoría de personas valoran:\nLa cercanía y amabilidad\nLa vida comunitaria\nUn ritmo de vida menos acelerado que en otros países\n\n",
+    "reason5": "🏥 5. Servicios de salud accesibles\nHay hospitales públicos económicos y clínicas privadas de buena calidad a precios más bajos que en EE. UU. o Europa.\n\n",
+    "reason6": "💵 6. Dólar estadounidense como moneda\nEsto atrae a mucha gente por la estabilidad económica y porque se evitan devaluaciones fuertes.\n\n",
+    "reason7": "🧳 7. Facilidades para extranjeros\nEcuador ofrece diversas visas de residencia:\nVisa de jubilado\nVisa de inversión\nVisa de trabajo\nVisa para nómadas digitales (residente temporal por teletrabajo)\n\n",
+    "reason8": "🥑 8. Comida fresca y variada\nEl país produce todo el año frutas, verduras y productos del mar. Es fácil comer saludable y fresco.\n\n",
+    "reason9": "🏛️ 9. Cultura rica y variada\nTradiciones indígenas\nInfluencias mestizas\nFestividades coloridas\nMúsica, artesanías, gastronomía diversa."
+  },
+  "actividadesForm": {
+    "title": "ACTIVIDADES EN ECUADOR",
+    "description": "Ecuador ofrece experiencias para todo tipo de viajeros: naturaleza, aventura, cultura, gastronomía y relax. Aquí tienes las actividades más destacadas::",
+    "activity1": {
+      "name": "🌋 1. Aventura y naturaleza",
+      "act1": "Trekking al Quilotoa (cráter volcánico con laguna turquesa)",
+      "act2": "Subir al Cotopaxi o caminar en el Parque Nacional Cotopaxi",
+      "act3": "Visitar el Chimborazo (el punto más cercano al sol)",
+      "act4": "Buceo y snorkel en Galápagos",
+      "act5": "Canopy y rafting en Baños de Agua Santa",
+      "act6": "Observación de aves en Mindo",
+      "act7": "Caminatas en Cajas (Cuenca)",
+      "act8": "Trekking en El Altar y Sangay"
+    },
+    "activity2": {
+      "name": "🏙️ 2. Cultura y ciudades",
+      "act1": "Recorrer el Centro Histórico de Quito (Patrimonio UNESCO)",
+      "act2": "Visitar Cuenca y sus iglesias coloniales",
+      "act3": "Pasear por el Malecón 2000 en Guayaquil",
+      "act4": "Conocer La Ronda y Mitad del Mundo",
+      "act5": "Visitar museos"
+    },
+    "activity3": {
+      "name": "🏖️ 3. Playas y costa",
+      "act1": "Montañita (surf y vida nocturna)",
+      "act2": "Ayampe (tranquilidad, yoga, surf)",
+      "act3": "Los Frailes (una de las mejores playas del país)",
+      "act4": "Salinas (balneario familiar)",
+      "act5": "Puerto López (avistamiento de ballenas de junio a septiembre)",
+      "act6": "Isla de la Plata (la “Galápagos barata”)"
+    },
+    "activity4": {
+      "name": "🌿 4. Selva amazónica",
+      "act1": "Cuyabeno → economía y mucha fauna",
+      "act2": "Yasuní → selva profunda, comunidades indígenas",
+      "act3": "Tena → rafting y actividades acuáticas",
+      "act4": "Excursiones en canoe, observación de caimanes y delfines rosados"
+    },
+    "activity5": {
+      "name": "🐢 5. Galápagos",
+      "act1": "Visitar Isabela (laguna de flamingos, túneles de lava)",
+      "act2": "Snorkel en Los Túneles",
+      "act3": "Excursión a Bartolomé (paisaje icónico)",
+      "act4": "Tortugas gigantes en El Chato",
+      "act5": "Playas: Tortuga Bay, Las Grietas"
+    },
+    "activity6": {
+      "name": "❤️ 6. Experiencias únicas",
+      "act1": "Avistar ballenas jorobadas en Manabí",
+      "act2": "Cruzar el tren Nariz del Diablo (Riobamba – Alausí)",
+      "act3": "Visitar el bosque petrificado de Puyango",
+      "act4": "Caminar sobre puentes colgantes en Mindo",
+      "act5": "Tours de café y chocolate en la costa y Amazonía",
+      "act6": "Visitar comunidades indígenas en Otavalo y Saraguro"
+    },
+    "activity7": {
+      "name": "🛒 7. Mercados y artesanías",
+      "act1": "Mercado de Otavalo (uno de los más grandes de Sudamérica)",
+      "act2": "Artesanías de Cuenca",
+      "act3": "Sombreros de paja toquilla (mal llamados “Panama Hat”)",
+      "act4": "Productos locales: cacao, café, cerámica, textiles"
+    }
+  }
+}

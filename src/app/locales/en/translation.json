@@ -1,0 +1,216 @@
+{
+  "welcome": "Welcome to Ecuador",
+  "tagline": "Invest in Ecuador: the perfect destination for your next property.",
+  "welcome1": "Buying and selling in Ecuador, ",
+  "welcome2": "the most beautiful weather in the world.",
+  "ciudadDetalles": "City details",
+  "ciudadPropiedades": "Properties in the city",
+  "ciudadCercanias": "Nearby places",
+  "selectCiudad": "Select city",
+  "contact": "Contact Us",
+  "btnText1": "Property Information",
+  "btnText2": "View Details",
+  "categories": "Categories",
+  "promotionalServiceText": "Explore best properties with expert services.",
+  "promotionalServiceText1": "Discover a diverse range of premium properties, from luxurious apartments  to spacious villas, tailored to your needs",
+  "btnService": "View properties",
+  "properties": "Properties",
+  "discoverInspiringHomes": "Discover inspiring designed homes.",
+  "curatedHomes": "Curated homes where elegance, style, and comfort unite.",
+  "featuredProperty": "Featured property",
+  "modernLuxeVilla": "Modern luxe villa",
+  "featuredPropertyDescription": "Experience luxury living at modern luxe villa, located at 20 S Aurora Ave, Miami. Priced at $1,650,500, this 560 ft² smart home offers 4 bedrooms, 3 bathrooms, and spacious living areas. Enjoy energy efficiency, natural light, security systems, outdoor spaces, and 2 bar areas—perfect for 8+ guests. Built in 2025.",
+  "inquireNow": "Inquire Now",
+  "estPrice": "Estimated price",
+  "testimonials": "Testimonials",
+  "whatOurClientsSay": "What our clients say",
+  "testimonial1": "I found my ideal home in no time! The listings were detailed, the photos were accurate, and the whole process felt seamless. Customer service was top-notch, answering all my questions. I will definitely use this platform again in the future!",
+  "testimonial2": "An incredible experience! The customer service was exceptional, and they helped me find the perfect property. I'm so grateful for all their support.",
+  "blog": "Blog",
+  "realEstateInsights": "Real estate insights",
+  "stayAheadInThePropertyMarket": "Stay ahead in the property market with expert advice and updates",
+  "readAllArticles": "Read all articles",
+  "heroSection": {
+    "title": "Discover a realm of luxury and sophistication",
+    "cta": "Get In Touch"
+  },
+  "faq": {
+    "iconText": "FAQs",
+    "title": "All about Amazing Farms",
+    "description": "We know that buying, selling, or investing in real estate can be overwhelming. Here are some frequently asked questions to help guide you through the process",
+    "items": {
+      "item1": {
+        "question": "1. Can I customize my estate?",
+        "answer": "Absolutely! We offer a range of customization options to make your estate truly yours."
+      },
+      "item2": {
+        "question": "2. Where can I find estates?",
+        "answer": "You can find our estates listed on our website, complete with detailed descriptions and photos."
+      },
+      "item3": {
+        "question": "3. What steps to buy an estate?",
+        "answer": "To buy an estate, start by browsing our listings online. Once you find a property you like, contact our sales team to schedule a viewing. After that, you can make an offer, and if accepted, proceed with the necessary paperwork and financing options."
+      }
+    }
+  },
+  "footer": {
+    "subscribeText": "Stay updated with the latest news,",
+    "emailPlaceholder": "Enter Your Email",
+    "subscribeButton": "Subscribe",
+    "subscribeDisclaimer": "By subscribing, you agree to receive our promotional emails. You can unsubscribe at any time.",
+    "title": "Begin your path to\nsuccess contact us today.",
+    "cta": "Get In Touch",
+    "termsOfService": "Terms of service",
+    "privacyPolicy": "Privacy policy",
+    "description": "Looking for your dream property or ready to sell? Our expert team offers personalized guidance and market expertise tailored to you."
+  },
+  "contactUs": {
+    "breadcrumb": "Contact us",
+    "title": "Have questions? ready to help!",
+    "description": "Are you looking for your dream property or are you ready to sell? Our team of experts offers personalized guidance and market expertise tailored to your needs.",
+    "formTitle": "Contact information",
+    "formDescription": "Ready to find your dream property or sell your property? We’re here to help!",
+    "sendMessage": "Send message",
+    "namePlaceholder": "Name*",
+    "phonePlaceholder": "Phone number*",
+    "emailPlaceholder": "Email address*",
+    "messagePlaceholder": "Write here your message"
+  },
+  "investors": {
+    "breadcrumb": "Investors",
+    "title": "🌎 Ecuador: Living at the Center of the Planet",
+    "description": {
+      "name": "Ecuador is located exactly on the equator, giving it an exceptional climate year-round. Thanks to its privileged location, it offers a unique diversity of environments:",
+      "point1": "Tropical, ideal for those who enjoy the sun and the beach",
+      "point2": "Subtropical, with pleasant temperatures and green landscapes",
+      "point3": "Humid, with lush vegetation and nature",
+      "point4": "Dry, perfect for warm and stable climates"
+    },
+    "description1": "This variety of climates and ecosystems makes the country an ideal place to live, invest, and enjoy. Ecuador not only offers natural beauty and quality of life, but also attractive real estate opportunities, with properties in urban, rural, and tourist areas to suit any lifestyle.",
+    "title1": "Investing in Ecuador means choosing a country with a privileged climate, unique diversity, and a future full of possibilities."
+  },
+  "footerNavbar": {
+    "home": "Home",
+    "properties": "Properties",
+    "contactUs": "Contact Us"
+  },
+  "property": {
+    "title": "Discover the properties of incredible extensions.",
+    "description": "Experience elegance and comfort with our exclusive luxury estates, designed for sophisticated living.",
+    "badge": "Properties"
+  },
+  "header": {
+    "contact": "Contact"
+  },
+  "navLinks": {
+    "home": "Home",
+    "properties": "Properties",
+    "contact": "Contact",
+    "catalogs": "Catalogs",
+    "users": "Users",
+    "roles": "Roles"
+  },
+  "login": {
+    "signIn": "Sign in",
+    "signUp": "Sign Up"
+  },
+  "propiedadForm": {
+    "title": "Name",
+    "description": "Description",
+    "apto": "Property suitable for",
+    "price": "Price",
+    "metros": "Area",
+    "area": "Area",
+    "altura": "Height msnm",
+    "address": "Address",
+    "geoLink": "Google Maps link",
+    "esPrincipal": "Is it main?",
+    "images": "Images",
+    "categoria": "Category",
+    "selectCategory": "Select a category",
+    "selectClimate": "Select climate",
+    "selectRentaVenta": "Select",
+    "selectApto": "Select property suitable for",
+    "selectImages": "Select images",
+    "submitButton": "Save Property"
+  },
+  "servicioForm": {
+    "nombre": "Name",
+    "submitButton": "Save Service"
+  },
+  "jubiladosForm": {
+    "whyEcuador": "Why Ecuador?",
+    "reason1": "🇪🇨 1. Affordable cost of living\nCompared to many countries in the Americas and Europe, living in Ecuador is usually more affordable.\nCheaper housing\nLow-priced services and transportation\nFresh and inexpensive food (especially in markets)\n\n",
+    "reason2": "🌎 2. Natural diversity in a small area\nIn just a few hours you can go from the coast to the Andean highlands, the Amazon rainforest, or the Galapagos Islands.\nBeaches\nMountains and volcanoes\nRainforest\nModern cities\n\n",
+    "reason3": "🌡️ 3. Climates for all tastes\nSince Ecuador is on the equator, there are no distinct seasons.\nIf you want heat: coast and Amazon\nIf you prefer a temperate climate: Andes\nYou can always choose a climate that suits you.\n\n",
+    "reason4": "❤️ 4. Friendly people and a relaxed lifestyle\nMost people value:\nThe friendliness and warmth\nThe community life\nA slower pace of life than in other countries\n\n",
+    "reason5": "🏥 5. Affordable healthcare\nThere are inexpensive public hospitals and good quality private clinics at lower prices than in the US or Europe.\n\n",
+    "reason6": "💵 6. US dollar as currency\nThis attracts many people because of the economic stability and because sharp devaluations are avoided.\n\n",
+    "reason7": "🧳 7. Facilities for foreigners\nEcuador offers various residency visas:\nRetiree visa\nInvestment visa\nWork visa\nDigital nomad visa (temporary resident for teleworking)\n\n",
+    "reason8": "🥑 8. Fresh and varied food\nThe The country produces fruits, vegetables, and seafood year-round. It's easy to eat healthy and fresh.\n\n",
+    "reason9": "🏛️ 9. Rich and varied culture\nIndigenous traditions\nMestizo influences\nColorful festivals\nMusic, crafts, and diverse gastronomy."
+  },
+  "actividadesForm": {
+    "title": "ACTIVITIES IN ECUADOR",
+    "description": "Ecuador offers experiences for all types of travelers: nature, adventure, culture, gastronomy, and relaxation. Here are some of the most popular activities:",
+    "activity1": {
+      "name": "🌋 1. Adventure and Nature",
+      "act1": "Trekking to Quilotoa (volcanic crater with turquoise lagoon)",
+      "act2": "Climbing Cotopaxi or hiking in Cotopaxi National Park",
+      "act3": "Visiting Chimborazo (the closest point to the sun)",
+      "act4": "Diving and snorkeling in the Galapagos Islands",
+      "act5": "Canopy tours and rafting in Baños de Agua Santa",
+      "act6": "Birdwatching in Mindo",
+      "act7": "Hiking in Cajas National Park (Cuenca)",
+      "act8": "Trekking in El Altar and Sangay National Parks"
+    },
+    "activity2": {
+      "name": "🏙️ 2. Culture and Cities",
+      "act1": "Explore the Historic Center of Quito (UNESCO World Heritage Site)",
+      "act2": "Visit Cuenca and its colonial churches",
+      "act3": "Stroll along the Malecón 2000 in Guayaquil",
+      "act4": "Explore La Ronda and Mitad del Mundo",
+      "act5": "Visit museums"
+    },
+    "activity3": {
+      "name": "🏖️ 3. Beaches and Coast",
+      "act1": "Montañita (surfing and nightlife)",
+      "act2": "Ayampe (tranquility, yoga, surfing)",
+      "act3": "Los Frailes (one of the best beaches in the country)",
+      "act4": "Salinas (family-friendly beach resort)",
+      "act5": "Puerto López (whale watching in June) as of September)",
+      "act6": "Isla de la Plata (the 'cheap Galapagos')"
+    },
+    "activity4": {
+      "name": "🌿 4. Amazon Rainforest",
+      "act1": "Cuyabeno → economy and abundant wildlife",
+      "act2": "Yasuní → deep rainforest, indigenous communities",
+      "act3": "Tena → rafting and water activities",
+      "act4": "Canoe trips, caiman and pink dolphin watching"
+    },
+    "activity5": {
+      "name": "🐢 5. Galapagos",
+      "act1": "Visit Isabela (flamingo lagoon, lava tunnels)",
+      "act2": "Snorkeling in Los Túneles",
+      "act3": "Excursion to Bartolomé (iconic landscape)",
+      "act4": "Giant tortoises in El Chato",
+      "act5": "Beaches: Tortuga Bay, Las Grietas"
+    },
+    "activity6": {
+      "name": "❤️ 6. Unique Experiences",
+      "act1": "Humpback Whale Watching in Manabí",
+      "act2": "Crossing the Devil's Nose Train (Riobamba – Alausí)",
+      "act3": "Visiting the Puyango Petrified Forest",
+      "act4": "Walking on Suspension Bridges in Mindo",
+      "act5": "Coffee and Chocolate Tours on the Coast and Amazon",
+      "act6": "Visiting Indigenous Communities in Otavalo and Saraguro"
+    },
+    "activity7": {
+      "name": "🛒 7. Markets and Handicrafts",
+      "act1": "Otavalo Market (one of the largest in South America)",
+      "act2": "Handicrafts from Cuenca",
+      "act3": "Straw Hats toquilla (incorrectly called “Panama Hat”)",
+      "act4": "Local products: cacao, coffee, ceramics, textiles"
+    }
+  }
+}
