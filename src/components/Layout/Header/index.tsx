@@ -149,7 +149,7 @@ const Header: React.FC = () => {
                     <span>{labels.properties}</span>
                     <Icon icon='ph:caret-down-bold' width={12} height={12} />
                   </button>
-                  <div className='invisible absolute left-1/2 top-[145%] z-20 w-56 -translate-x-1/2 rounded-xl border border-white/20 bg-[#0f2f3f] p-2 opacity-0 shadow-xl transition group-hover:visible group-hover:opacity-100'>
+                  <div className='invisible absolute left-1/2 top-full z-20 mt-2 w-56 -translate-x-1/2 rounded-xl border border-white/20 bg-[#0f2f3f] p-2 opacity-0 shadow-xl transition group-hover:visible group-hover:opacity-100'>
                     {propertySubmenuItems.map((sub) => (
                       <Link key={sub.href} href={sub.href} className='block rounded-lg px-3 py-2 text-sm font-semibold text-white/90 transition hover:bg-white/10 hover:text-white'>
                         {sub.label}
