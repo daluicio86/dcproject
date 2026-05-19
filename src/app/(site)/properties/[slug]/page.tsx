@@ -148,7 +148,7 @@ export default function DetailsPage() {
 
           <div className="lg:col-span-4 col-span-12">
             <aside className="rounded-3xl border border-black/10 bg-white p-5 shadow-sm lg:sticky lg:top-[130px]">
-              <Image src="/images/users/arlene.jpg" alt="Elizabeth Cardenas" width={500} height={500} className="w-full h-56 rounded-2xl object-cover mb-4" unoptimized />
+              <Image src="/images/users/logo.jpeg" alt="Elizabeth Cardenas" width={500} height={500} className="w-full h-56 rounded-2xl object-cover mb-4" unoptimized />
               <h3 className="mb-1 text-3xl font-semibold tracking-tight text-[#0d2e49]">ELIZABETH CARDENAS</h3>
               <p className="text-sm text-black/70"><strong>{t.phone}:</strong> (+593)99-956-7412</p>
               <p className="mb-6 text-sm text-black/70"><strong>{t.email}:</strong> elizabethlinacardenas@hotmail.com</p>

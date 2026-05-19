@@ -78,7 +78,7 @@
   },
   "investors": {
     "breadcrumb": "Inversionistas",
-    "title": "ðŸŒŽ Ecuador: vivir en el centro del planeta",
+    "title": "Ecuador: vivir en el centro del planeta",
     "description": {
       "name": "Ecuador se encuentra exactamente en la mitad del mundo, lo que le brinda un clima excepcional durante todo el aÃ±o. Gracias a su ubicaciÃ³n privilegiada, ofrece una diversidad Ãºnica de ambientes:",
       "point1": "Tropical, ideal para quienes disfrutan del sol y la playa",
@@ -140,12 +140,12 @@
   },
   "jubiladosForm": {
     "whyEcuador": "Â¿Por quÃ© Ecuador?",
-    "reason1": "ðŸ‡ªðŸ‡¨ 1. Costo de vida accesible\nComparado con muchos paÃ­ses de AmÃ©rica y Europa, vivir en Ecuador suele ser mÃ¡s econÃ³mico.\nVivienda mÃ¡s barata\nServicios y transporte a precios bajos\nAlimentaciÃ³n fresca y econÃ³mica (especialmente en mercados)\n\n",
-    "reason2": "ðŸŒŽ 2. Diversidad natural en un espacio pequeÃ±o\nEn pocas horas puedes pasar de la costa al pÃ¡ramo andino, a la selva amazÃ³nica o a las islas GalÃ¡pagos.\nPlayas\nMontaÃ±as y volcanes\nSelva tropical\nCiudades modernas\n\n",
-    "reason3": "ðŸŒ¡ï¸ 3. Climas para todos los gustos\nComo Ecuador estÃ¡ en la lÃ­nea ecuatorial, no hay estaciones marcadas.\nSi quieres calor: costa y AmazonÃ­a\nSi prefieres clima templado: Andes\nSiempre puedes escoger un clima que te quede cÃ³modo.\n\n",
-    "reason4": "â¤ï¸ 4. Gente amable y estilo de vida tranquilo\nLa mayorÃ­a de personas valoran:\nLa cercanÃ­a y amabilidad\nLa vida comunitaria\nUn ritmo de vida menos acelerado que en otros paÃ­ses\n\n",
-    "reason5": "ðŸ¥ 5. Servicios de salud accesibles\nHay hospitales pÃºblicos econÃ³micos y clÃ­nicas privadas de buena calidad a precios mÃ¡s bajos que en EE. UU. o Europa.\n\n",
-    "reason6": "ðŸ’µ 6. DÃ³lar estadounidense como moneda\nEsto atrae a mucha gente por la estabilidad econÃ³mica y porque se evitan devaluaciones fuertes.\n\n",
+    "reason1": "1. Costo de vida accesible\nComparado con muchos paÃ­ses de AmÃ©rica y Europa, vivir en Ecuador suele ser mÃ¡s econÃ³mico.\nVivienda mÃ¡s barata\nServicios y transporte a precios bajos\nAlimentaciÃ³n fresca y econÃ³mica (especialmente en mercados)\n\n",
+    "reason2": "2. Diversidad natural en un espacio pequeÃ±o\nEn pocas horas puedes pasar de la costa al pÃ¡ramo andino, a la selva amazÃ³nica o a las islas GalÃ¡pagos.\nPlayas\nMontaÃ±as y volcanes\nSelva tropical\nCiudades modernas\n\n",
+    "reason3": " 3. Climas para todos los gustos\nComo Ecuador estÃ¡ en la lÃ­nea ecuatorial, no hay estaciones marcadas.\nSi quieres calor: costa y AmazonÃ­a\nSi prefieres clima templado: Andes\nSiempre puedes escoger un clima que te quede cÃ³modo.\n\n",
+    "reason4": " 4. Gente amable y estilo de vida tranquilo\nLa mayorÃ­a de personas valoran:\nLa cercanÃ­a y amabilidad\nLa vida comunitaria\nUn ritmo de vida menos acelerado que en otros paÃ­ses\n\n",
+    "reason5": ". Servicios de salud accesibles\nHay hospitales pÃºblicos econÃ³micos y clÃ­nicas privadas de buena calidad a precios mÃ¡s bajos que en EE. UU. o Europa.\n\n",
+    "reason6": "6. DÃ³lar estadounidense como moneda\nEsto atrae a mucha gente por la estabilidad econÃ³mica y porque se evitan devaluaciones fuertes.\n\n",
     "reason7": "ðŸ§³ 7. Facilidades para extranjeros\nEcuador ofrece diversas visas de residencia:\nVisa de jubilado\nVisa de inversiÃ³n\nVisa de trabajo\nVisa para nÃ³madas digitales (residente temporal por teletrabajo)\n\n",
     "reason8": "ðŸ¥‘ 8. Comida fresca y variada\nEl paÃ­s produce todo el aÃ±o frutas, verduras y productos del mar. Es fÃ¡cil comer saludable y fresco.\n\n",
     "reason9": "ðŸ›ï¸ 9. Cultura rica y variada\nTradiciones indÃ­genas\nInfluencias mestizas\nFestividades coloridas\nMÃºsica, artesanÃ­as, gastronomÃ­a diversa."
@@ -174,30 +174,30 @@
     },
     "activity3": {
       "name": "ðŸ–ï¸ 3. Playas y costa",
-      "act1": "MontaÃ±ita (surf y vida nocturna)",
+      "act1": "Montañita (surf y vida nocturna)",
       "act2": "Ayampe (tranquilidad, yoga, surf)",
       "act3": "Los Frailes (una de las mejores playas del paÃ­s)",
       "act4": "Salinas (balneario familiar)",
-      "act5": "Puerto LÃ³pez (avistamiento de ballenas de junio a septiembre)",
+      "act5": "Puerto López (avistamiento de ballenas de junio a septiembre)",
       "act6": "Isla de la Plata (la â€œGalÃ¡pagos barataâ€)"
     },
     "activity4": {
       "name": "ðŸŒ¿ 4. Selva amazÃ³nica",
       "act1": "Cuyabeno â†’ economÃ­a y mucha fauna",
-      "act2": "YasunÃ­ â†’ selva profunda, comunidades indÃ­genas",
-      "act3": "Tena â†’ rafting y actividades acuÃ¡ticas",
+      "act2": "Yasuní’ selva profunda, comunidades indÃ­genas",
+      "act3": "Tená’ rafting y actividades acuÃ¡ticas",
       "act4": "Excursiones en canoe, observaciÃ³n de caimanes y delfines rosados"
     },
     "activity5": {
       "name": "ðŸ¢ 5. GalÃ¡pagos",
-      "act1": "Visitar Isabela (laguna de flamingos, tÃºneles de lava)",
-      "act2": "Snorkel en Los TÃºneles",
+      "act1": "Visitar Isabela (laguna de flamingos, Túneles de lava)",
+      "act2": "Snorkel en Los Túneles",
       "act3": "ExcursiÃ³n a BartolomÃ© (paisaje icÃ³nico)",
       "act4": "Tortugas gigantes en El Chato",
       "act5": "Playas: Tortuga Bay, Las Grietas"
     },
     "activity6": {
-      "name": "â¤ï¸ 6. Experiencias Ãºnicas",
+      "name": " 6. Experiencias Ãºnicas",
       "act1": "Avistar ballenas jorobadas en ManabÃ­",
       "act2": "Cruzar el tren Nariz del Diablo (Riobamba â€“ AlausÃ­)",
       "act3": "Visitar el bosque petrificado de Puyango",

@@ -33,15 +33,15 @@ const enumRentaVenta = [
 ];
 
 const enumClima = [
-  { id: "1", name: "Seco 10-20Ãƒâ€šÃ‚Â°" },
-  { id: "2", name: "Seco 10-25Ãƒâ€šÃ‚Â°" },
-  { id: "3", name: "SubTropical 10-30Ãƒâ€šÃ‚Â°" },
-  { id: "4", name: "HÃƒÆ’Ã‚Âºmedo 60%" },
+  { id: "1", name: "Seco 10-20°" },
+  { id: "2", name: "Seco 10-25°" },
+  { id: "3", name: "SubTropical 10-30°" },
+  { id: "4", name: "Húmedo 60%" },
 ];
 
 const enumTipoMedida1 = [
-  { id: "m", name: "mÃƒâ€šÃ‚Â²" },
-  { id: "ft2", name: "ftÃƒâ€šÃ‚Â²" },
+  { id: "m", name: "m²" },
+  { id: "ft2", name: "ft²" },
 ];
 
 const enumTipoMedida2 = [
@@ -286,7 +286,7 @@ export const PropiedadForm = ({
           },
         );
 
-        // asegÃƒÆ’Ã‚Âºrate que quede 100% al final del archivo
+        // asegurate que quede 100% al final del archivo
         perFileProgress[index] = 100;
         updateGlobalProgress();
 
@@ -377,7 +377,7 @@ export const PropiedadForm = ({
               className="absolute -top-12 right-0 bg-black/70 text-white w-10 h-10 rounded-full flex items-center justify-center"
               aria-label="Cerrar"
             >
-              ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¢
+              x
             </button>
 
             {lightboxIsVideo ? (
@@ -619,7 +619,7 @@ export const PropiedadForm = ({
                 {...register("aptoDe")}
                 type="text"
                 id="aptoDe"
-                placeholder="Geeignet fÃƒÂ¼r (DE)"
+                placeholder="Geeignet für (DE)"
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               />
             </div>
@@ -785,7 +785,7 @@ export const PropiedadForm = ({
                       }
                       className="absolute top-2 right-2 z-10 bg-black/70 text-white w-8 h-8 rounded-full flex items-center justify-center"
                     >
-                      ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¢
+                      x
                     </button>
                   </div>
                 );
@@ -827,7 +827,7 @@ export const PropiedadForm = ({
                     onClick={() => removeNewImage(index)}
                     className="absolute top-2 right-2 z-10 bg-black/70 text-white w-8 h-8 rounded-full flex items-center justify-center"
                   >
-                    ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¢
+                    x
                   </button>
                 </div>
               ))}

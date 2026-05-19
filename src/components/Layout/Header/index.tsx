@@ -6,18 +6,27 @@ import { useMemo, useState } from 'react'
 import Image from 'next/image'
 import { navLinks } from '@/app/api/navlink'
 import { useTranslation } from 'react-i18next'
+import { useSession } from 'next-auth/react'
 
 const Header: React.FC = () => {
   const [navbarOpen, setNavbarOpen] = useState(false)
-  const menuItems = navLinks.filter((link) => link.role === 'user')
+  const { data: session } = useSession()
+  const isAdmin = session?.user?.role === 'admin'
   const { i18n } = useTranslation()
 
   const labels = useMemo(() => {
     const lang = i18n.language?.slice(0, 2)
-    if (lang === 'es') return { home: 'Inicio', properties: 'Propiedades', news: 'Noticias', investors: 'Inversionistas', contact: 'Contacto', schedule: 'Agendar', login: 'Ingresar' }
-    if (lang === 'de') return { home: 'Startseite', properties: 'Immobilien', news: 'Nachrichten', investors: 'Investoren', contact: 'Kontakt', schedule: 'Termin', login: 'Anmelden' }
-    return { home: 'Home', properties: 'Properties', news: 'News', investors: 'Investors', contact: 'Contact', schedule: 'Schedule', login: 'Login' }
+    if (lang === 'es') return { home: 'Inicio', properties: 'Propiedades', news: 'Noticias', investors: 'Inversionistas', contact: 'Contacto', schedule: 'Agendar', login: 'Ingresar', manager: 'Gestionar Propiedades' }
+    if (lang === 'de') return { home: 'Startseite', properties: 'Immobilien', news: 'Nachrichten', investors: 'Investoren', contact: 'Kontakt', schedule: 'Termin', login: 'Anmelden', manager: 'Immobilien Verwalten' }
+    return { home: 'Home', properties: 'Properties', news: 'News', investors: 'Investors', contact: 'Contact', schedule: 'Schedule', login: 'Login', manager: 'Manage Properties' }
   }, [i18n.language])
+
+  const menuItems = useMemo(() => {
+    const base = navLinks.filter((link) => link.role === 'user')
+    if (!isAdmin) return base
+    const propertiesManager = navLinks.find((link) => link.href === '/admin/propiedads')
+    return propertiesManager ? [...base, propertiesManager] : base
+  }, [isAdmin])
 
   const socialIcons = [
     'ph:facebook-logo-fill',
@@ -37,12 +46,19 @@ const Header: React.FC = () => {
 
   const resolveLabel = (href: string) => {
     if (href === '/') return labels.home
-    if (href.includes('/properties')) return labels.properties
+    if (href === '/properties') return labels.properties
     if (href.includes('/news')) return labels.news
     if (href.includes('/investors')) return labels.investors
     if (href.includes('/contact')) return labels.contact
+    if (href.includes('/admin/propiedads')) return labels.manager
     return href
   }
+
+  const nonPropertyItems = menuItems.filter((item) => item.href !== '/properties' && item.href !== '/admin/propiedads')
+  const propertySubmenuItems = [
+    { href: '/properties', label: labels.properties },
+    ...(isAdmin ? [{ href: '/admin/propiedads', label: labels.manager }] : []),
+  ]
 
   return (
     <header className='fixed top-0 z-50 w-full border-b border-black/10 bg-dark shadow-[0_6px_20px_rgba(0,0,0,0.12)]'>
@@ -79,7 +95,30 @@ const Header: React.FC = () => {
           {navbarOpen && (
             <div className='mt-4 rounded-2xl border border-black/10 bg-white p-5 shadow-lg'>
               <ul className='flex flex-col gap-4'>
-                {menuItems.map((item) => (
+                {isAdmin ? (
+                  <li>
+                    <details className='group'>
+                      <summary className='flex list-none items-center justify-between text-base font-medium text-[#5e6570] cursor-pointer'>
+                        <span>{labels.properties}</span>
+                        <Icon icon='ph:caret-down-bold' width={12} height={12} className='text-[#7d848e]' />
+                      </summary>
+                      <div className='mt-2 flex flex-col gap-2 rounded-xl border border-black/10 bg-[#f8fafb] p-2'>
+                        {propertySubmenuItems.map((sub) => (
+                          <Link key={sub.href} href={sub.href} onClick={() => setNavbarOpen(false)} className='rounded-lg px-3 py-2 text-sm font-medium text-[#304355] hover:bg-white'>
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    </details>
+                  </li>
+                ) : (
+                  <li>
+                    <Link href='/properties' onClick={() => setNavbarOpen(false)} className='flex items-center justify-between text-base font-medium text-[#5e6570]'>
+                      <span>{labels.properties}</span>
+                    </Link>
+                  </li>
+                )}
+                {nonPropertyItems.map((item) => (
                   <li key={item.href}>
                     <Link href={item.href} onClick={() => setNavbarOpen(false)} className='flex items-center justify-between text-base font-medium text-[#5e6570]'>
                       <span>{resolveLabel(item.href)}</span>
@@ -104,7 +143,28 @@ const Header: React.FC = () => {
 
           <div className='flex items-center gap-8'>
             <ul className='hidden items-center gap-10 lg:flex'>
-              {menuItems.map((item) => (
+              {isAdmin ? (
+                <li className='relative group'>
+                  <button type='button' className='inline-flex items-center gap-1 text-sm font-bold uppercase tracking-[0.02em] text-white transition hover:text-[#d4e7ef]'>
+                    <span>{labels.properties}</span>
+                    <Icon icon='ph:caret-down-bold' width={12} height={12} />
+                  </button>
+                  <div className='invisible absolute left-1/2 top-[145%] z-20 w-56 -translate-x-1/2 rounded-xl border border-white/20 bg-[#0f2f3f] p-2 opacity-0 shadow-xl transition group-hover:visible group-hover:opacity-100'>
+                    {propertySubmenuItems.map((sub) => (
+                      <Link key={sub.href} href={sub.href} className='block rounded-lg px-3 py-2 text-sm font-semibold text-white/90 transition hover:bg-white/10 hover:text-white'>
+                        {sub.label}
+                      </Link>
+                    ))}
+                  </div>
+                </li>
+              ) : (
+                <li>
+                  <Link href='/properties' className='text-sm font-bold uppercase tracking-[0.02em] text-white transition hover:text-[#d4e7ef]'>
+                    <span>{labels.properties}</span>
+                  </Link>
+                </li>
+              )}
+              {nonPropertyItems.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} className='text-sm font-bold uppercase tracking-[0.02em] text-white transition hover:text-[#d4e7ef]'>
                     <span>{resolveLabel(item.href)}</span>
