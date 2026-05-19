@@ -2,7 +2,7 @@
 
 import { Icon } from '@iconify/react'
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Image from 'next/image'
 import { navLinks } from '@/app/api/navlink'
 import { useTranslation } from 'react-i18next'
@@ -10,6 +10,8 @@ import { useSession } from 'next-auth/react'
 
 const Header: React.FC = () => {
   const [navbarOpen, setNavbarOpen] = useState(false)
+  const [desktopMenuOpen, setDesktopMenuOpen] = useState(false)
+  const desktopMenuRef = useRef<HTMLLIElement | null>(null)
   const { data: session } = useSession()
   const isAdmin = session?.user?.role === 'admin'
   const { i18n } = useTranslation()
@@ -59,6 +61,17 @@ const Header: React.FC = () => {
     { href: '/properties', label: labels.properties },
     ...(isAdmin ? [{ href: '/admin/propiedads', label: labels.manager }] : []),
   ]
+
+  useEffect(() => {
+    const onClickOutside = (event: MouseEvent) => {
+      if (!desktopMenuRef.current) return
+      if (!desktopMenuRef.current.contains(event.target as Node)) {
+        setDesktopMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', onClickOutside)
+    return () => document.removeEventListener('mousedown', onClickOutside)
+  }, [])
 
   return (
     <header className='fixed top-0 z-50 w-full border-b border-black/10 bg-dark shadow-[0_6px_20px_rgba(0,0,0,0.12)]'>
@@ -144,14 +157,18 @@ const Header: React.FC = () => {
           <div className='flex items-center gap-8'>
             <ul className='hidden items-center gap-10 lg:flex'>
               {isAdmin ? (
-                <li className='relative group'>
-                  <button type='button' className='inline-flex items-center gap-1 text-sm font-bold uppercase tracking-[0.02em] text-white transition hover:text-[#d4e7ef]'>
+                <li ref={desktopMenuRef} className='relative'>
+                  <button
+                    type='button'
+                    onClick={() => setDesktopMenuOpen((prev) => !prev)}
+                    className='inline-flex items-center gap-1 text-sm font-bold uppercase tracking-[0.02em] text-white transition hover:text-[#d4e7ef]'
+                  >
                     <span>{labels.properties}</span>
                     <Icon icon='ph:caret-down-bold' width={12} height={12} />
                   </button>
-                  <div className='invisible absolute left-1/2 top-full z-20 mt-2 w-56 -translate-x-1/2 rounded-xl border border-white/20 bg-[#0f2f3f] p-2 opacity-0 shadow-xl transition group-hover:visible group-hover:opacity-100'>
+                  <div className={`${desktopMenuOpen ? 'visible opacity-100' : 'invisible opacity-0'} absolute left-1/2 top-full z-20 mt-2 w-56 -translate-x-1/2 rounded-xl border border-white/20 bg-[#0f2f3f] p-2 shadow-xl transition`}>
                     {propertySubmenuItems.map((sub) => (
-                      <Link key={sub.href} href={sub.href} className='block rounded-lg px-3 py-2 text-sm font-semibold text-white/90 transition hover:bg-white/10 hover:text-white'>
+                      <Link key={sub.href} href={sub.href} onClick={() => setDesktopMenuOpen(false)} className='block rounded-lg px-3 py-2 text-sm font-semibold text-white/90 transition hover:bg-white/10 hover:text-white'>
                         {sub.label}
                       </Link>
                     ))}
