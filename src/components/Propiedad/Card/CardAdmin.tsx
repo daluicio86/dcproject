@@ -10,6 +10,7 @@ import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "@/componen
 import { Propiedad } from "@/interface";
 import { deletePropiedad } from "@/actions/propiedad/delete-propiedad";
 import { pickLocalizedValue } from "@/lib/localize-db";
+import { getPropertyAreaItems } from "@/lib/property-area";
 
 function formatPrice(value: number | string | null | undefined, lang: string) {
   if (value === null || value === undefined) {
@@ -89,6 +90,14 @@ const PropiedadAdminCard: React.FC<{ item: Propiedad }> = ({ item }) => {
         <Link href={url}><h3 className="mb-2 min-h-[64px] text-[32px] font-semibold leading-[1.2] text-[#0f2132] hover:underline sm:min-h-[72px]">{localizedTitle}</h3></Link>
         <p className="mb-2 text-[24px] font-semibold leading-tight text-[#4a5561]">{formatPrice(precio, lang)}</p>
         <p className="mb-4 min-h-[24px] text-base text-[#6c7785] sm:min-h-[28px]">{localizedAddress || "Ecuador"}</p>
+        <div className="mb-4 grid grid-cols-2 gap-2 text-sm">
+          {getPropertyAreaItems(item).map((areaItem) => (
+            <div key={areaItem.key} className="rounded-xl bg-[#f3f4f6] px-3 py-2">
+              <span className="font-semibold text-[#0f2132]">{areaItem.label}: </span>
+              <span className="text-[#6c7785]">{areaItem.value}</span>
+            </div>
+          ))}
+        </div>
         <div className="mt-auto flex items-center justify-between">
           <Link href={url} className="text-base font-semibold text-[#0f2132] hover:underline">{detailsText}</Link>
           <button type="button" onClick={handleDelete} disabled={isDeleting} className="rounded-md bg-red-600 px-3 py-1 text-xs font-semibold text-white hover:bg-red-700 disabled:opacity-60">{deleteText}</button>

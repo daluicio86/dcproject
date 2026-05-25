@@ -12,7 +12,9 @@ export interface Propiedad {
   aptoDe?: string | null;
   precio: number | null;
   metros: number;
+  ft2: number;
   area: number;
+  acres: number;
   altura: number;
   address: string;
   addressEn?: string | null;

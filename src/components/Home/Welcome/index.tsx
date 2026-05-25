@@ -22,7 +22,9 @@ interface Propiedad {
   precio?: number | null;
   estado?: boolean;
   metros: number;
+  ft2: number;
   area: number;
+  acres: number;
   altura?: number;
   address?: string;
   esPrincipal: boolean;
@@ -97,7 +99,9 @@ export const Welcome = () => {
               geoLink: p.geoLink ?? "",
               precio: p.precio ?? null,
               metros: p.metros ?? 0,
+              ft2: p.ft2 ?? 0,
               area: p.area ?? 0,
+              acres: p.acres ?? 0,
               altura: p.altura ?? 0,
               address: p.address ?? "",
               esPrincipal: p.esPrincipal ?? false,

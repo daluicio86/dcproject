@@ -28,10 +28,12 @@ const propiedadSchema = z.object({
   aptoDe: z.string().optional(),
   geoLink: z.string(),
   precio: z.coerce.number().min(0),
-  metros: z.coerce.number().min(0),
-  area: z.coerce.number().min(0),
-  tipoMedida: z.string(),
-  tipoMedida1: z.string(),
+  metros: z.coerce.number().min(0).optional().default(0),
+  ft2: z.coerce.number().min(0).optional().default(0),
+  area: z.coerce.number().min(0).optional().default(0),
+  acres: z.coerce.number().min(0).optional().default(0),
+  tipoMedida: z.string().optional(),
+  tipoMedida1: z.string().optional(),
   altura: z.coerce.number().min(0),
 
   categoriaId: z.string(),
@@ -41,7 +43,17 @@ const propiedadSchema = z.object({
   temperatura: z.string(),
 
   esPrincipal: z.coerce.boolean().default(false),
-});
+}).refine(
+  (data) =>
+    Number(data.metros ?? 0) > 0 ||
+    Number(data.ft2 ?? 0) > 0 ||
+    Number(data.area ?? 0) > 0 ||
+    Number(data.acres ?? 0) > 0,
+  {
+    message: "Debe ingresar al menos un valor de superficie.",
+    path: ["metros"],
+  },
+);
 
 /* ------------------------------------------------------------------
    TYPES

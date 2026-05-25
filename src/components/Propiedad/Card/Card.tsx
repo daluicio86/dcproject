@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Propiedad } from "@/interface";
 import { pickLocalizedValue } from "@/lib/localize-db";
+import { getPropertyAreaItems } from "@/lib/property-area";
 
 function formatPrice(value: number | string | null | undefined, lang: string) {
   if (value === null || value === undefined) {
@@ -82,6 +83,14 @@ const PropiedadCard: React.FC<{ item: Propiedad }> = ({ item }) => {
         <Link href={url}><h3 className="mb-2 min-h-[64px] text-[32px] font-semibold leading-[1.2] text-[#0f2132] hover:underline sm:min-h-[72px]">{localizedTitle}</h3></Link>
         <p className="mb-2 text-[24px] font-semibold leading-tight text-[#4a5561]">{formatPrice(precio, lang)}</p>
         <p className="mb-4 min-h-[24px] text-base text-[#6c7785] sm:min-h-[28px]">{localizedAddress || "Ecuador"}</p>
+        <div className="mb-4 grid grid-cols-2 gap-2 text-sm">
+          {getPropertyAreaItems(item).map((areaItem) => (
+            <div key={areaItem.key} className="rounded-xl bg-[#f3f4f6] px-3 py-2">
+              <span className="font-semibold text-[#0f2132]">{areaItem.label}: </span>
+              <span className="text-[#6c7785]">{areaItem.value}</span>
+            </div>
+          ))}
+        </div>
         <Link href={url} className="mt-auto text-base font-semibold text-[#0f2132] hover:underline">{detailsText}</Link>
       </div>
     </article>

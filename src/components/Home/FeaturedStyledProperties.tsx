@@ -5,6 +5,7 @@ import { Icon } from "@iconify/react";
 import { useTranslation } from "react-i18next";
 import { getPaginatedPropiedadsWithImages } from "@/actions/propiedad/propiedad-pagination";
 import { pickLocalizedValue } from "@/lib/localize-db";
+import { getPropertyAreaItems } from "@/lib/property-area";
 
 type PropertyItem = {
   id: string;
@@ -13,6 +14,10 @@ type PropertyItem = {
   titleDe?: string;
   slug: string;
   precio: number | null;
+  metros: number;
+  ft2: number;
+  area: number;
+  acres: number;
   address: string;
   addressEn?: string;
   addressDe?: string;
@@ -24,16 +29,21 @@ const FeaturedStyledProperties = () => {
   const lang = i18n.language?.slice(0, 2) ?? "en";
   const [items, setItems] = useState<PropertyItem[]>([]);
   const [imageIndexes, setImageIndexes] = useState<Record<string, number>>({});
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const result = await getPaginatedPropiedadsWithImages({
-        page: 1,
+        page,
         take: 6,
         esPrincipal: true,
         precioMinimo: 0,
         precioMaximo: 100000000000,
       });
+      setTotalPages(Math.max(1, Number(result.totalPages ?? 1)));
 
       setItems(
         (result.propiedads ?? []).map((p: any) => ({
@@ -43,6 +53,10 @@ const FeaturedStyledProperties = () => {
           titleDe: p.titleDe ?? undefined,
           slug: p.slug,
           precio: p.precio ?? null,
+          metros: p.metros ?? 0,
+          ft2: p.ft2 ?? 0,
+          area: p.area ?? 0,
+          acres: p.acres ?? 0,
           address: p.address ?? "",
           addressEn: p.addressEn ?? undefined,
           addressDe: p.addressDe ?? undefined,
@@ -55,10 +69,11 @@ const FeaturedStyledProperties = () => {
         initialIndexes[p.id] = 0;
       });
       setImageIndexes(initialIndexes);
+      setLoading(false);
     };
 
     fetchData();
-  }, []);
+  }, [page]);
 
   const goPrev = (propertyId: string, total: number) => {
     if (total <= 1) return;
@@ -83,6 +98,8 @@ const FeaturedStyledProperties = () => {
       : lang === "de"
         ? "Finden Sie Immobilienchancen in Ecuador."
         : "Find real estate opportunities in Ecuador.";
+  const previousLabel = lang === "es" ? "Anterior" : lang === "de" ? "Zurück" : "Previous";
+  const nextLabel = lang === "es" ? "Siguiente" : lang === "de" ? "Weiter" : "Next";
 
   return (
     <section id="propiedades" className="py-16">
@@ -130,6 +147,14 @@ const FeaturedStyledProperties = () => {
                   <h3 className="mb-2 text-[26px] font-semibold leading-tight text-[#1e1e1e]">{localizedTitle}</h3>
                   <p className="mb-3 text-base font-semibold text-[#5f5f5f]">{item.precio ? `$${item.precio.toLocaleString("en-US")}` : priceFallback}</p>
                   <p className="mb-4 text-sm text-black/55">{localizedAddress || "Quito, Ecuador"}</p>
+                  <div className="mb-4 grid grid-cols-2 gap-2 text-sm">
+                    {getPropertyAreaItems(item).map((areaItem) => (
+                      <div key={areaItem.key} className="rounded-xl bg-[#f3f4f6] px-3 py-2">
+                        <span className="font-semibold text-[#1e1e1e]">{areaItem.label}: </span>
+                        <span className="text-black/60">{areaItem.value}</span>
+                      </div>
+                    ))}
+                  </div>
                   <a href={`/properties/${item.slug}`} className="text-sm font-semibold text-[#1f1f1f] hover:underline">
                     {details}
                   </a>
@@ -137,6 +162,28 @@ const FeaturedStyledProperties = () => {
               </article>
             );
           })}
+        </div>
+
+        <div className="mt-8 flex items-center justify-center gap-3">
+          <button
+            type="button"
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            disabled={page <= 1 || loading}
+            className="rounded-lg border border-black/15 bg-white px-4 py-2 text-sm font-semibold text-[#1f2a37] disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {previousLabel}
+          </button>
+          <span className="rounded-lg bg-[#08364a] px-4 py-2 text-sm font-bold text-white">
+            {page} / {totalPages}
+          </span>
+          <button
+            type="button"
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            disabled={page >= totalPages || loading}
+            className="rounded-lg border border-black/15 bg-white px-4 py-2 text-sm font-semibold text-[#1f2a37] disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            {nextLabel}
+          </button>
         </div>
       </div>
     </section>

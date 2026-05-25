@@ -68,7 +68,9 @@ model Propiedad {
   aptoDe      String?
   precio      Float    @default(0)
   metros      Float    @default(0)
+  ft2         Float    @default(0)
   area        Float    @default(0)
+  acres       Float    @default(0)
   altura      Float    @default(0)
   address     String?
   addressEn   String?

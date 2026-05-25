@@ -56,7 +56,8 @@ const Header: React.FC = () => {
     return href
   }
 
-  const nonPropertyItems = menuItems.filter((item) => item.href !== '/properties' && item.href !== '/admin/propiedads')
+  const homeItem = menuItems.find((item) => item.href === '/')
+  const nonPropertyItems = menuItems.filter((item) => item.href !== '/' && item.href !== '/properties' && item.href !== '/admin/propiedads')
   const propertySubmenuItems = [
     { href: '/properties', label: labels.properties },
     ...(isAdmin ? [{ href: '/admin/propiedads', label: labels.manager }] : []),
@@ -108,6 +109,13 @@ const Header: React.FC = () => {
           {navbarOpen && (
             <div className='mt-4 rounded-2xl border border-black/10 bg-white p-5 shadow-lg'>
               <ul className='flex flex-col gap-4'>
+                {homeItem && (
+                  <li>
+                    <Link href={homeItem.href} onClick={() => setNavbarOpen(false)} className='flex items-center justify-between text-base font-medium text-[#5e6570]'>
+                      <span>{labels.home}</span>
+                    </Link>
+                  </li>
+                )}
                 {isAdmin ? (
                   <li>
                     <details className='group'>
@@ -156,6 +164,13 @@ const Header: React.FC = () => {
 
           <div className='flex items-center gap-8'>
             <ul className='hidden items-center gap-10 lg:flex'>
+              {homeItem && (
+                <li>
+                  <Link href={homeItem.href} className='text-sm font-bold uppercase tracking-[0.02em] text-white transition hover:text-[#d4e7ef]'>
+                    <span>{labels.home}</span>
+                  </Link>
+                </li>
+              )}
               {isAdmin ? (
                 <li ref={desktopMenuRef} className='relative'>
                   <button

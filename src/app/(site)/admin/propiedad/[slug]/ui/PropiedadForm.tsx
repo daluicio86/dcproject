@@ -69,10 +69,12 @@ interface FormInputs {
   aptoEn?: string;
   aptoDe?: string;
   precio: number;
-  metros: number;
-  area: number;
-  tipoMedida: string;
-  tipoMedida1: string;
+  metros?: number;
+  ft2?: number;
+  area?: number;
+  acres?: number;
+  tipoMedida?: string;
+  tipoMedida1?: string;
   altura: number;
   address: string;
   addressEn?: string;
@@ -143,6 +145,10 @@ export const PropiedadForm = ({
       addressDe: propiedad.addressDe ?? undefined,
       esPrincipal: Boolean(propiedad.esPrincipal),
       precio: propiedad.precio ?? undefined,
+      metros: propiedad.metros ?? undefined,
+      ft2: propiedad.ft2 ?? undefined,
+      area: propiedad.area ?? undefined,
+      acres: propiedad.acres ?? undefined,
       images: undefined,
     },
   });
@@ -245,6 +251,26 @@ export const PropiedadForm = ({
   /* SUBMIT */
   /* ------------------------------------------------------------------ */
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+    const metrosValue = Number(data.metros ?? 0);
+    const ft2Value = Number(data.ft2 ?? 0);
+    const areaValue = Number(data.area ?? 0);
+    const acresValue = Number(data.acres ?? 0);
+    if (
+      metrosValue <= 0 &&
+      ft2Value <= 0 &&
+      areaValue <= 0 &&
+      acresValue <= 0
+    ) {
+      alert(
+        lang === "es"
+          ? "Debes ingresar al menos un valor de superficie."
+          : lang === "de"
+            ? "Bitte geben Sie mindestens einen Flachenwert ein."
+            : "You must enter at least one area value.",
+      );
+      return;
+    }
+
     const formData = new FormData();
 
     if (propiedad.id) formData.append("id", propiedad.id.toString());
@@ -307,10 +333,12 @@ export const PropiedadForm = ({
       formData.append("aptoEn", data.aptoEn ?? "");
       formData.append("aptoDe", data.aptoDe ?? "");
       formData.append("precio", data.precio.toString());
-      formData.append("metros", data.metros.toString());
-      formData.append("area", data.area.toString());
-      formData.append("tipoMedida", data.tipoMedida);
-      formData.append("tipoMedida1", data.tipoMedida1);
+      formData.append("metros", String(metrosValue > 0 ? metrosValue : 0));
+      formData.append("ft2", String(ft2Value > 0 ? ft2Value : 0));
+      formData.append("area", String(areaValue > 0 ? areaValue : 0));
+      formData.append("acres", String(acresValue > 0 ? acresValue : 0));
+      formData.append("tipoMedida", "m2");
+      formData.append("tipoMedida1", "ha");
       formData.append("altura", data.altura.toString());
       formData.append("address", data.address);
       formData.append("addressEn", data.addressEn ?? "");
@@ -439,44 +467,49 @@ export const PropiedadForm = ({
                 Select whether the property is primary.
               </label>
             </div>
-            <div className="flex flex-col lg:flex-row gap-6">
-              <input
-                {...register("title", { required: true })}
-                type="text"
-                id="title"
-                placeholder={t("propiedadForm.title")}
-                className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
-              />
-              <input
-                {...register("titleEn")}
-                type="text"
-                id="titleEn"
-                placeholder="Title (EN)"
-                className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
-              />
-              <input
-                {...register("titleDe")}
-                type="text"
-                id="titleDe"
-                placeholder="Titel (DE)"
-                className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
-              />
-
-              <div className="flex items-center gap-2 w-full">
+            <div className="flex flex-col gap-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <input
-                  {...register("precio", { required: true })}
-                  type="number"
-                  id="precio"
-                  placeholder={t("propiedadForm.price")}
+                  {...register("title", { required: true })}
+                  type="text"
+                  id="title"
+                  placeholder={t("propiedadForm.title")}
+                  className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
+                />
+                <input
+                  {...register("titleEn")}
+                  type="text"
+                  id="titleEn"
+                  placeholder="Title (EN)"
+                  className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <input
+                  {...register("titleDe")}
+                  type="text"
+                  id="titleDe"
+                  placeholder="Titel (DE)"
                   className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
                 />
 
-                <label
-                  htmlFor="precio"
-                  className="text-sm text-gray-500 whitespace-nowrap"
-                >
-                  USD
-                </label>
+                <div className="flex items-center gap-2 w-full">
+                  <input
+                    {...register("precio", { required: true })}
+                    type="number"
+                    id="precio"
+                    placeholder={t("propiedadForm.price")}
+                    className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
+                  />
+
+                  <label
+                    htmlFor="precio"
+                    className="text-sm text-gray-500 whitespace-nowrap"
+                  >
+                    USD
+                  </label>
+                </div>
               </div>
             </div>
 
@@ -517,63 +550,45 @@ export const PropiedadForm = ({
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               />
             </div>
-            <div className="flex flex-col lg:flex-row gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <input
-                {...register("metros", { required: true })}
+                {...register("metros")}
                 type="number"
                 name="metros"
                 id="metros"
                 autoComplete="off"
-                placeholder={t("propiedadForm.metros")}
-                required
+                placeholder="m2"
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               />
-
-              <select
-                {...register("tipoMedida", { required: true })}
-                className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
-              >
-                {enumTipoMedida1 ? (
-                  Object.values(enumTipoMedida1).map((tipo) => (
-                    <option key={tipo.id} value={tipo.id}>
-                      {tipo.name}
-                    </option>
-                  ))
-                ) : (
-                  <option key={-1} value="">
-                    Measures not defined
-                  </option>
-                )}
-              </select>
-            </div>
-            <div className="flex flex-col lg:flex-row gap-6">
               <input
-                {...register("area", { required: true })}
+                {...register("ft2")}
+                type="number"
+                name="ft2"
+                id="ft2"
+                autoComplete="off"
+                placeholder="ft2"
+                className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
+              />
+            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <input
+                {...register("area")}
                 type="number"
                 name="area"
                 id="area"
                 autoComplete="off"
-                placeholder={t("propiedadForm.area")}
-                required
+                placeholder="ha"
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               />
-
-              <select
-                {...register("tipoMedida1", { required: true })}
+              <input
+                {...register("acres")}
+                type="number"
+                name="acres"
+                id="acres"
+                autoComplete="off"
+                placeholder="acres"
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
-              >
-                {enumTipoMedida2 ? (
-                  Object.values(enumTipoMedida2).map((tipo) => (
-                    <option key={tipo.id} value={tipo.id}>
-                      {tipo.name}
-                    </option>
-                  ))
-                ) : (
-                  <option key={-1} value="">
-                    Measures not defined
-                  </option>
-                )}
-              </select>
+              />
             </div>
 
 
