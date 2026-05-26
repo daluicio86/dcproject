@@ -119,6 +119,17 @@ async function runWithConcurrency<T>(
   return results;
 }
 
+function parseDecimalValue(value: unknown) {
+  if (typeof value === "number") return Number.isFinite(value) ? value : 0;
+  if (typeof value !== "string") return 0;
+
+  const normalizedValue = value.trim().replace(",", ".");
+  if (!normalizedValue) return 0;
+
+  const numericValue = Number(normalizedValue);
+  return Number.isFinite(numericValue) ? numericValue : 0;
+}
+
 /* ------------------------------------------------------------------ */
 /* COMPONENT */
 /* ------------------------------------------------------------------ */
@@ -251,10 +262,10 @@ export const PropiedadForm = ({
   /* SUBMIT */
   /* ------------------------------------------------------------------ */
   const onSubmit: SubmitHandler<FormInputs> = async (data) => {
-    const metrosValue = Number(data.metros ?? 0);
-    const ft2Value = Number(data.ft2 ?? 0);
-    const areaValue = Number(data.area ?? 0);
-    const acresValue = Number(data.acres ?? 0);
+    const metrosValue = parseDecimalValue(data.metros);
+    const ft2Value = parseDecimalValue(data.ft2);
+    const areaValue = parseDecimalValue(data.area);
+    const acresValue = parseDecimalValue(data.acres);
     if (
       metrosValue <= 0 &&
       ft2Value <= 0 &&
@@ -553,7 +564,8 @@ export const PropiedadForm = ({
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <input
                 {...register("metros")}
-                type="number"
+                type="text"
+                inputMode="decimal"
                 name="metros"
                 id="metros"
                 autoComplete="off"
@@ -562,7 +574,8 @@ export const PropiedadForm = ({
               />
               <input
                 {...register("ft2")}
-                type="number"
+                type="text"
+                inputMode="decimal"
                 name="ft2"
                 id="ft2"
                 autoComplete="off"
@@ -573,7 +586,8 @@ export const PropiedadForm = ({
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <input
                 {...register("area")}
-                type="number"
+                type="text"
+                inputMode="decimal"
                 name="area"
                 id="area"
                 autoComplete="off"
@@ -582,7 +596,8 @@ export const PropiedadForm = ({
               />
               <input
                 {...register("acres")}
-                type="number"
+                type="text"
+                inputMode="decimal"
                 name="acres"
                 id="acres"
                 autoComplete="off"

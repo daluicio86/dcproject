@@ -11,6 +11,13 @@ cloudinary.config(process.env.CLOUDINARY_URL ?? "");
 /* ------------------------------------------------------------------
    SCHEMA
 ------------------------------------------------------------------ */
+const decimalNumber = z.preprocess((value) => {
+  if (typeof value !== "string") return value;
+
+  const normalizedValue = value.trim().replace(",", ".");
+  return normalizedValue === "" ? 0 : normalizedValue;
+}, z.coerce.number());
+
 const propiedadSchema = z.object({
   id: z.string().optional(),
   title: z.string().min(3).max(255),
@@ -28,10 +35,10 @@ const propiedadSchema = z.object({
   aptoDe: z.string().optional(),
   geoLink: z.string(),
   precio: z.coerce.number().min(0),
-  metros: z.coerce.number().min(0).optional().default(0),
-  ft2: z.coerce.number().min(0).optional().default(0),
-  area: z.coerce.number().min(0).optional().default(0),
-  acres: z.coerce.number().min(0).optional().default(0),
+  metros: decimalNumber.pipe(z.number().min(0)).optional().default(0),
+  ft2: decimalNumber.pipe(z.number().min(0)).optional().default(0),
+  area: decimalNumber.pipe(z.number().min(0)).optional().default(0),
+  acres: decimalNumber.pipe(z.number().min(0)).optional().default(0),
   tipoMedida: z.string().optional(),
   tipoMedida1: z.string().optional(),
   altura: z.coerce.number().min(0),
