@@ -1,11 +1,8 @@
 'use client';
 
-
-import { generatePaginationNumbers } from '@/utils';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { redirect, usePathname, useSearchParams } from 'next/navigation';
-import { IoChevronBackOutline, IoChevronForwardOutline } from 'react-icons/io5';
 
 
 interface Props {
@@ -24,12 +21,6 @@ export const Pagination = ({ totalPages }: Props) => {
   if (currentPage < 1 || isNaN(+pageString) ) {
     redirect( pathname );
   }
- 
-
-
-  const allPages = generatePaginationNumbers(currentPage, totalPages);
-
-
   const createPageUrl = ( pageNumber: number | string ) => {
 
     const params = new URLSearchParams( searchParams );
@@ -51,55 +42,53 @@ export const Pagination = ({ totalPages }: Props) => {
 
   }
 
+  const hasPreviousPage = currentPage > 1;
+  const hasNextPage = currentPage < totalPages;
+
 
 
   return (
-    <div className="flex text-center justify-center mt-10 mb-32">
-
-      <nav aria-label="Page navigation example">
-
-        <ul className="flex list-style-none">
-          <li className="page-item">
+    <div className="flex justify-center pt-8 pb-16">
+      <nav aria-label="Pagination">
+        <ul className="flex list-none items-center justify-center gap-3">
+          <li>
             <Link
-              className="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-              href={ createPageUrl( currentPage - 1 ) }
+              aria-disabled={!hasPreviousPage}
+              tabIndex={hasPreviousPage ? 0 : -1}
+              className={clsx(
+                "block rounded-md border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm transition-colors",
+                hasPreviousPage
+                  ? "hover:bg-gray-50"
+                  : "pointer-events-none text-gray-400"
+              )}
+              href={ createPageUrl( hasPreviousPage ? currentPage - 1 : currentPage ) }
             >
-              <IoChevronBackOutline size={30} />
+              Previous
             </Link>
           </li>
 
-          {
-            allPages.map( (page, index) => (
-
-              <li key={ page } className="page-item">
-                <Link
-                  className={
-                    clsx(
-                      "page-link relative block py-1.5 px-3 border-0 outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none",
-                      {
-                        'bg-blue-600 shadow-sm text-white hover:text-white hover:bg-blue-700': page === currentPage
-                      }
-                    )
-                  }
-                  href={ createPageUrl( page ) }
-                >
-                  { page }
-                </Link>
-              </li>
-
-            ))
-
-          }
-
-
-          
-
-          <li className="page-item">
-            <Link
-              className="page-link relative block py-1.5 px-3 border-0 bg-transparent outline-none transition-all duration-300 rounded text-gray-800 hover:text-gray-800 hover:bg-gray-200 focus:shadow-none"
-              href={ createPageUrl( currentPage + 1 ) }
+          <li>
+            <span
+              aria-current="page"
+              className="block min-w-[64px] rounded-md bg-[#043f57] px-4 py-2 text-center text-sm font-bold text-white shadow-sm"
             >
-              <IoChevronForwardOutline size={30} />
+              {currentPage}/{totalPages}
+            </span>
+          </li>
+
+          <li>
+            <Link
+              aria-disabled={!hasNextPage}
+              tabIndex={hasNextPage ? 0 : -1}
+              className={clsx(
+                "block rounded-md border border-gray-200 bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm transition-colors",
+                hasNextPage
+                  ? "hover:bg-gray-50"
+                  : "pointer-events-none text-gray-400"
+              )}
+              href={ createPageUrl( hasNextPage ? currentPage + 1 : currentPage ) }
+            >
+              Next
             </Link>
           </li>
         </ul>
