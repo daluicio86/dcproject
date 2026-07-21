@@ -102,14 +102,15 @@ const FeaturedStyledProperties = () => {
   const nextLabel = lang === "es" ? "Siguiente" : lang === "de" ? "Weiter" : "Next";
 
   return (
-    <section id="propiedades" className="py-16">
-      <div className="container mx-auto max-w-8xl px-4 sm:px-6 lg:px-0">
+    <section id="propiedades" className="relative bg-[#0a2934] py-24 text-white">
+      <div className="absolute -left-32 top-10 h-80 w-80 rounded-full bg-[#22c99c]/10 blur-3xl" />
+      <div className="container relative mx-auto max-w-[1400px] px-5 lg:px-8">
         <div className="mb-12 text-center">
           <div className="mb-2 flex items-center justify-center">
             <Icon icon="ph:house-simple-fill" width={18} height={18} className="text-[#16b887]" />
           </div>
-          <h2 className="mb-3 text-4xl font-semibold text-[#1e252b] sm:text-6xl">{title}</h2>
-          <p className="text-lg text-[#75808b]">{subtitle}</p>
+          <h2 className="mb-3 text-4xl font-semibold tracking-[-0.04em] text-white sm:text-6xl">{title}</h2>
+          <p className="text-lg text-white/55">{subtitle}</p>
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
@@ -120,7 +121,7 @@ const FeaturedStyledProperties = () => {
             const priceFallback = lang === "es" ? "Precio por consultar" : lang === "de" ? "Preis auf Anfrage" : "Price on request";
 
             return (
-              <article key={item.id} className="overflow-hidden rounded-xl border border-black/10 bg-white">
+              <article key={item.id} className="group overflow-hidden rounded-[28px] border border-white/10 bg-white text-[#172023] shadow-2xl transition hover:-translate-y-1.5">
                 <div
                   className="relative h-64 w-full"
                   style={{
@@ -131,25 +132,25 @@ const FeaturedStyledProperties = () => {
                 >
                   {item.images.length > 1 && (
                     <>
-                      <button type="button" aria-label="Imagen anterior" onClick={() => goPrev(item.id, item.images.length)} className="absolute bottom-4 left-4 flex h-9 w-9 items-center justify-center rounded-full bg-black/35 text-white backdrop-blur-sm transition hover:bg-black/55">
+                      <button type="button" data-testid={`previous-image-${item.id}`} aria-label="Imagen anterior" onClick={(event) => { event.preventDefault(); event.stopPropagation(); goPrev(item.id, item.images.length); }} className="absolute bottom-4 left-4 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-black/35 text-white backdrop-blur-sm transition hover:bg-black/55">
                         <Icon icon="ph:caret-left-bold" width={16} height={16} />
                       </button>
-                      <button type="button" aria-label="Siguiente imagen" onClick={() => goNext(item.id, item.images.length)} className="absolute bottom-4 left-14 flex h-9 w-9 items-center justify-center rounded-full bg-black/35 text-white backdrop-blur-sm transition hover:bg-black/55">
+                      <button type="button" data-testid={`next-image-${item.id}`} aria-label="Siguiente imagen" onClick={(event) => { event.preventDefault(); event.stopPropagation(); goNext(item.id, item.images.length); }} className="absolute bottom-4 left-14 z-20 flex h-9 w-9 items-center justify-center rounded-full bg-black/35 text-white backdrop-blur-sm transition hover:bg-black/55">
                         <Icon icon="ph:caret-right-bold" width={16} height={16} />
                       </button>
-                      <span className="absolute bottom-4 right-4 rounded-full bg-black/35 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
+                      <span data-testid={`image-counter-${item.id}`} className="absolute bottom-4 right-4 z-20 rounded-full bg-black/35 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">
                         {(imageIndexes[item.id] ?? 0) + 1}/{item.images.length}
                       </span>
                     </>
                   )}
                 </div>
-                <div className="p-5">
+                <div className="p-6">
                   <h3 className="mb-2 text-[26px] font-semibold leading-tight text-[#1e1e1e]">{localizedTitle}</h3>
                   <p className="mb-3 text-base font-semibold text-[#5f5f5f]">{item.precio ? `$${item.precio.toLocaleString("en-US")}` : priceFallback}</p>
                   <p className="mb-4 text-sm text-black/55">{localizedAddress || "Quito, Ecuador"}</p>
                   <div className="mb-4 grid grid-cols-2 gap-2 text-sm">
                     {getPropertyAreaItems(item).map((areaItem) => (
-                      <div key={areaItem.key} className="rounded-xl bg-[#f3f4f6] px-3 py-2">
+                      <div key={areaItem.key} translate="no" className="rounded-xl bg-[#f3f4f6] px-3 py-2">
                         <span className="font-semibold text-[#1e1e1e]">{areaItem.label}: </span>
                         <span className="text-black/60">{areaItem.value}</span>
                       </div>
@@ -167,18 +168,20 @@ const FeaturedStyledProperties = () => {
         <div className="mt-8 flex items-center justify-center gap-3">
           <button
             type="button"
-            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            data-testid="previous-properties-page"
+            onClick={(event) => { event.preventDefault(); setPage((currentPage) => Math.max(1, currentPage - 1)); }}
             disabled={page <= 1 || loading}
             className="rounded-lg border border-black/15 bg-white px-4 py-2 text-sm font-semibold text-[#1f2a37] disabled:cursor-not-allowed disabled:opacity-50"
           >
             {previousLabel}
           </button>
-          <span className="rounded-lg bg-[#08364a] px-4 py-2 text-sm font-bold text-white">
+          <span data-testid="properties-page-counter" aria-live="polite" className="rounded-lg bg-[#08364a] px-4 py-2 text-sm font-bold text-white">
             {page} / {totalPages}
           </span>
           <button
             type="button"
-            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            data-testid="next-properties-page"
+            onClick={(event) => { event.preventDefault(); setPage((currentPage) => Math.min(totalPages, currentPage + 1)); }}
             disabled={page >= totalPages || loading}
             className="rounded-lg border border-black/15 bg-white px-4 py-2 text-sm font-semibold text-[#1f2a37] disabled:cursor-not-allowed disabled:opacity-50"
           >

@@ -14,10 +14,10 @@ const enumRentaVenta = [
 ];
 
 const enumClima = [
-  { id: "1", name: "Seco 10.20Â°" },
-  { id: "2", name: "Seco 10.25Â°" },
-  { id: "3", name: "SubTropical 10.30Â°" },
-  { id: "4", name: "HÃºmedo 60%" },
+  { id: "1", name: "Seco 10.20°" },
+  { id: "2", name: "Seco 10.25°" },
+  { id: "3", name: "SubTropical 10.30°" },
+  { id: "4", name: "Húmedo 60%" },
 ];
 
 interface Props {
@@ -42,23 +42,23 @@ export function PropertyFilters({ categories, tiposPropiedad }: Props) {
     title: lang === "es" ? "Encuentra tu propiedad ideal" : lang === "de" ? "Finden Sie Ihre ideale Immobilie" : "Find your ideal property",
     subtitle:
       lang === "es"
-        ? "Filtra por tipo, clima, categorÃ­a y rango de precio."
+        ? "Filtra por tipo, clima, categoría y rango de precio."
         : lang === "de"
           ? "Filtern Sie nach Typ, Klima, Kategorie und Preisspanne."
           : "Filter by type, climate, category, and price range.",
     rentSale: lang === "es" ? "Renta / Venta" : lang === "de" ? "Miete / Verkauf" : "Rent / Sale",
     climate: lang === "es" ? "Clima" : lang === "de" ? "Klima" : "Climate",
-    category: lang === "es" ? "CategorÃ­a" : lang === "de" ? "Kategorie" : "Category",
+    category: lang === "es" ? "Categoría" : lang === "de" ? "Kategorie" : "Category",
     propertyType: lang === "es" ? "Tipo de Propiedad" : lang === "de" ? "Immobilientyp" : "Property Type",
-    minPrice: lang === "es" ? "Precio mÃ­nimo" : lang === "de" ? "Mindestpreis" : "Min price",
-    maxPrice: lang === "es" ? "Precio mÃ¡ximo" : lang === "de" ? "Maximalpreis" : "Max price",
+    minPrice: lang === "es" ? "Precio mínimo" : lang === "de" ? "Mindestpreis" : "Min price",
+    maxPrice: lang === "es" ? "Precio máximo" : lang === "de" ? "Maximalpreis" : "Max price",
     all: lang === "es" ? "Todos" : lang === "de" ? "Alle" : "All",
     search: lang === "es" ? "Buscar" : lang === "de" ? "Suchen" : "Search",
-    clear: lang === "es" ? "Limpiar filtros" : lang === "de" ? "Filter lÃ¶schen" : "Clear filters",
-    noRentSale: lang === "es" ? "No se definiÃ³ renta/venta" : lang === "de" ? "Keine Miet-/Verkaufsoption" : "The rental or sale is not defined.",
-    noClimate: lang === "es" ? "No se definiÃ³ clima" : lang === "de" ? "Klima nicht definiert" : "Climate not defined",
-    noCategory: lang === "es" ? "No hay categorÃ­as" : lang === "de" ? "Keine Kategorien verfÃ¼gbar" : "There are no categories",
-    noType: lang === "es" ? "No hay tipos de propiedad" : lang === "de" ? "Keine Immobilientypen verfÃ¼gbar" : "There are no property types",
+    clear: lang === "es" ? "Limpiar filtros" : lang === "de" ? "Filter löschen" : "Clear filters",
+    noRentSale: lang === "es" ? "No se definió renta/venta" : lang === "de" ? "Keine Miet-/Verkaufsoption" : "The rental or sale is not defined.",
+    noClimate: lang === "es" ? "No se definió clima" : lang === "de" ? "Klima nicht definiert" : "Climate not defined",
+    noCategory: lang === "es" ? "No hay categorías" : lang === "de" ? "Keine Kategorien verfügbar" : "There are no categories",
+    noType: lang === "es" ? "No hay tipos de propiedad" : lang === "de" ? "Keine Immobilientypen verfügbar" : "There are no property types",
   };
 
   const handleFilter = (e: React.FormEvent) => {
@@ -103,12 +103,12 @@ export function PropertyFilters({ categories, tiposPropiedad }: Props) {
 
   return (
     <section className="!pt-0">
-      <div className="relative overflow-x-hidden pb-16">
-        <div className="mx-auto w-full max-w-[1050px] px-4">
+      <div className="relative -mt-10 overflow-x-hidden pb-16">
+        <div className="mx-auto w-full max-w-[1180px] px-4">
           <form onSubmit={handleFilter}>
-            <div className="rounded-3xl border border-black/10 bg-white p-5 shadow-[0_10px_30px_rgba(0,0,0,0.08)] sm:p-7 lg:p-8">
+            <div className="rounded-[30px] border border-black/[0.06] bg-white/95 p-5 shadow-[0_22px_60px_rgba(15,45,55,0.13)] backdrop-blur-xl sm:p-7 lg:p-8">
               <div className="mb-6 text-left">
-                <h3 className="text-2xl font-semibold text-[#0f2132] sm:text-3xl">{ui.title}</h3>
+                <h2 className="text-2xl font-semibold tracking-[-0.025em] text-[#0f2132] sm:text-3xl">{ui.title}</h2>
                 <p className="mt-1 text-sm text-[#647282] sm:text-base">{ui.subtitle}</p>
               </div>
 

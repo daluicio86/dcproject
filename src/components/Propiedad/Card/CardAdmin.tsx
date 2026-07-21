@@ -41,24 +41,24 @@ const PropiedadAdminCard: React.FC<{ item: Propiedad }> = ({ item }) => {
   }, [api]);
 
   const handleDelete = async () => {
-    const confirmed = window.confirm(lang === "es" ? "Â¿Seguro que quieres eliminar esta propiedad?" : lang === "de" ? "MÃ¶chten Sie diese Immobilie wirklich lÃ¶schen?" : "Are you sure you want to delete this property?");
+    const confirmed = window.confirm(lang === "es" ? "¿Seguro que quieres eliminar esta propiedad?" : lang === "de" ? "Möchten Sie diese Immobilie wirklich löschen?" : "Are you sure you want to delete this property?");
     if (!confirmed) return;
     try {
       setIsDeleting(true);
       const resp = await deletePropiedad(id);
-      if (!resp.ok) return alert(resp.message || (lang === "es" ? "No se pudo eliminar la propiedad" : lang === "de" ? "Immobilie konnte nicht gelÃ¶scht werden" : "Could not delete property"));
-      alert(lang === "es" ? "Propiedad eliminada correctamente" : lang === "de" ? "Immobilie erfolgreich gelÃ¶scht" : "Property deleted successfully");
+      if (!resp.ok) return alert(resp.message || (lang === "es" ? "No se pudo eliminar la propiedad" : lang === "de" ? "Immobilie konnte nicht gelöscht werden" : "Could not delete property"));
+      alert(lang === "es" ? "Propiedad eliminada correctamente" : lang === "de" ? "Immobilie erfolgreich gelöscht" : "Property deleted successfully");
       router.refresh();
     } catch {
-      alert(lang === "es" ? "OcurriÃ³ un error al eliminar la propiedad" : lang === "de" ? "Beim LÃ¶schen ist ein Fehler aufgetreten" : "An error occurred while deleting property");
+      alert(lang === "es" ? "Ocurrió un error al eliminar la propiedad" : lang === "de" ? "Beim Löschen ist ein Fehler aufgetreten" : "An error occurred while deleting property");
     } finally {
       setIsDeleting(false);
     }
   };
 
   const safeImages = images?.length ? images : [{ id: 0, url: "/images/properties/property8.jpg" } as any];
-  const detailsText = lang === "es" ? "MÃ¡s detalles" : lang === "de" ? "Mehr Details" : "More details";
-  const deleteText = isDeleting ? (lang === "es" ? "Eliminando..." : lang === "de" ? "LÃ¶schen..." : "Deleting...") : (lang === "es" ? "Eliminar" : lang === "de" ? "LÃ¶schen" : "Delete");
+  const detailsText = lang === "es" ? "Más detalles" : lang === "de" ? "Mehr Details" : "More details";
+  const deleteText = isDeleting ? (lang === "es" ? "Eliminando..." : lang === "de" ? "Löschen..." : "Deleting...") : (lang === "es" ? "Eliminar" : lang === "de" ? "Löschen" : "Delete");
   const localizedTitle = pickLocalizedValue(title, titleEn, titleDe, lang);
   const localizedAddress = pickLocalizedValue(address, addressEn, addressDe, lang);
 

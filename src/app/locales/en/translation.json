@@ -1,4 +1,4 @@
-﻿{
+{
   "welcome": "Welcome to Ecuador",
   "tagline": "Invest in Ecuador: the perfect destination for your next property.",
   "welcome1": "Buying and selling in Ecuador, ",
@@ -19,7 +19,7 @@
   "curatedHomes": "Curated homes where elegance, style, and comfort unite.",
   "featuredProperty": "Featured property",
   "modernLuxeVilla": "Modern luxe villa",
-  "featuredPropertyDescription": "Experience luxury living at modern luxe villa, located at 20 S Aurora Ave, Miami. Priced at $1,650,500, this 560 ftÂ² smart home offers 4 bedrooms, 3 bathrooms, and spacious living areas. Enjoy energy efficiency, natural light, security systems, outdoor spaces, and 2 bar areasâ€”perfect for 8+ guests. Built in 2025.",
+  "featuredPropertyDescription": "Experience luxury living at modern luxe villa, located at 20 S Aurora Ave, Miami. Priced at $1,650,500, this 560 ft² smart home offers 4 bedrooms, 3 bathrooms, and spacious living areas. Enjoy energy efficiency, natural light, security systems, outdoor spaces, and 2 bar areas—perfect for 8+ guests. Built in 2025.",
   "inquireNow": "Inquire Now",
   "estPrice": "Estimated price",
   "testimonials": "Testimonials",
@@ -69,7 +69,7 @@
     "title": "Have questions? ready to help!",
     "description": "Are you looking for your dream property or are you ready to sell? Our team of experts offers personalized guidance and market expertise tailored to your needs.",
     "formTitle": "Contact information",
-    "formDescription": "Ready to find your dream property or sell your property? Weâ€™re here to help!",
+    "formDescription": "Ready to find your dream property or sell your property? We’re here to help!",
     "sendMessage": "Send message",
     "namePlaceholder": "Name*",
     "phonePlaceholder": "Phone number*",
@@ -147,7 +147,7 @@
     "reason5": "5. Affordable healthcare\nThere are inexpensive public hospitals and good quality private clinics at lower prices than in the US or Europe.\n\n",
     "reason6": "6. US dollar as currency\nThis attracts many people because of the economic stability and because sharp devaluations are avoided.\n\n",
     "reason7": "7. Facilities for foreigners\nEcuador offers various residency visas:\nRetiree visa\nInvestment visa\nWork visa\nDigital nomad visa (temporary resident for teleworking)\n\n",
-    "reason8": "8. Fresh and varied food\nThe The country produces fruits, vegetables, and seafood year-round. It's easy to eat healthy and fresh.\n\n",
+    "reason8": "8. Fresh and varied food\nThe country produces fruits, vegetables, and seafood year-round. It's easy to eat healthy and fresh.\n\n",
     "reason9": "9. Rich and varied culture\nIndigenous traditions\nMestizo influences\nColorful festivals\nMusic, crafts, and diverse gastronomy."
   },
   "actividadesForm": {
@@ -159,7 +159,7 @@
       "act2": "Climbing Cotopaxi or hiking in Cotopaxi National Park",
       "act3": "Visiting Chimborazo (the closest point to the sun)",
       "act4": "Diving and snorkeling in the Galapagos Islands",
-      "act5": "Canopy tours and rafting in BaÃ±os de Agua Santa",
+      "act5": "Canopy tours and rafting in Baños de Agua Santa",
       "act6": "Birdwatching in Mindo",
       "act7": "Hiking in Cajas National Park (Cuenca)",
       "act8": "Trekking in El Altar and Sangay National Parks"
@@ -168,7 +168,7 @@
       "name": "2. Culture and Cities",
       "act1": "Explore the Historic Center of Quito (UNESCO World Heritage Site)",
       "act2": "Visit Cuenca and its colonial churches",
-      "act3": "Stroll along the MalecÃ³n 2000 in Guayaquil",
+      "act3": "Stroll along the Malecón 2000 in Guayaquil",
       "act4": "Explore La Ronda and Mitad del Mundo",
       "act5": "Visit museums"
     },
@@ -178,28 +178,28 @@
       "act2": "Ayampe (tranquility, yoga, surfing)",
       "act3": "Los Frailes (one of the best beaches in the country)",
       "act4": "Salinas (family-friendly beach resort)",
-      "act5": "Puerto López (whale watching in June) as of September)",
+      "act5": "Puerto López (whale watching from June to September)",
       "act6": "Isla de la Plata (the 'cheap Galapagos')"
     },
     "activity4": {
       "name": "4. Amazon Rainforest",
-      "act1": "Cuyabeno â†’ economy and abundant wildlife",
-      "act2": "Yasuní’ deep rainforest, indigenous communities",
-      "act3": "Tená’ rafting and water activities",
+      "act1": "Cuyabeno → economy and abundant wildlife",
+      "act2": "Yasuní → deep rainforest and indigenous communities",
+      "act3": "Tena → rafting and water activities",
       "act4": "Canoe trips, caiman and pink dolphin watching"
     },
     "activity5": {
       "name": "5. Galapagos",
       "act1": "Visit Isabela (flamingo lagoon, lava tunnels)",
       "act2": "Snorkeling in Los Túneles",
-      "act3": "Excursion to BartolomÃ© (iconic landscape)",
+      "act3": "Excursion to Bartolomé (iconic landscape)",
       "act4": "Giant tortoises in El Chato",
       "act5": "Beaches: Tortuga Bay, Las Grietas"
     },
     "activity6": {
       "name": "6. Unique Experiences",
-      "act1": "Humpback Whale Watching in ManabÃ­",
-      "act2": "Crossing the Devil's Nose Train (Riobamba â€“ AlausÃ­)",
+      "act1": "Humpback Whale Watching in Manabí",
+      "act2": "Crossing the Devil's Nose Train (Riobamba – Alausí)",
       "act3": "Visiting the Puyango Petrified Forest",
       "act4": "Walking on Suspension Bridges in Mindo",
       "act5": "Coffee and Chocolate Tours on the Coast and Amazon",
@@ -209,7 +209,7 @@
       "name": "7. Markets and Handicrafts",
       "act1": "Otavalo Market (one of the largest in South America)",
       "act2": "Handicrafts from Cuenca",
-      "act3": "Straw Hats toquilla (incorrectly called â€œPanama Hatâ€)",
+      "act3": "Toquilla straw hats (incorrectly called “Panama hats”)",
       "act4": "Local products: cacao, coffee, ceramics, textiles"
     }
   }

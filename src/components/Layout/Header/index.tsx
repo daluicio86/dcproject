@@ -30,17 +30,11 @@ const Header: React.FC = () => {
     return propertiesManager ? [...base, propertiesManager] : base
   }, [isAdmin])
 
-  const socialIcons = [
-    'ph:facebook-logo-fill',
-    'ri:twitter-x-fill',
-    'ph:youtube-logo-fill',
-    'ph:instagram-logo-fill',
-    'ri:tiktok-fill',
-    'ph:flickr-logo-fill',
-    'ph:linkedin-logo-fill',
-  ]
-
-  const languageOptions = ['en', 'de', 'es'] as const
+  const languageOptions = [
+    { code: 'en', label: 'English' },
+    { code: 'de', label: 'Deutsch' },
+    { code: 'es', label: 'Español' },
+  ] as const
   const setLang = (lng: 'en' | 'de' | 'es') => {
     i18n.changeLanguage(lng)
     if (typeof window !== 'undefined') localStorage.setItem('lang', lng)
@@ -76,34 +70,27 @@ const Header: React.FC = () => {
 
   return (
     <header className='fixed top-0 z-50 w-full border-b border-black/10 bg-dark shadow-[0_6px_20px_rgba(0,0,0,0.12)]'>
-      <div className='mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-10'>
-        <div className='lg:hidden py-3'>
-          <div className='flex justify-center'>
-            <Link href='/' className='block shrink-0'>
-              <Image src='/images/header/logo.jpeg' alt='Logo' width={220} height={220} className='h-[74px] w-auto object-contain' unoptimized />
+      <div className='mx-auto max-w-[1720px] px-4 sm:px-6 lg:px-4 2xl:px-10'>
+        <div className='py-3 xl:hidden'>
+          <div className='flex items-center justify-between gap-3'>
+            <Link href='/' className='flex shrink-0 items-center gap-3' aria-label='Properties in Ecuador — Inicio'>
+              <Image src='/images/header/logo-transparent-v2.png' alt='' width={640} height={640} className='h-[54px] w-auto object-contain' unoptimized />
+              <span className='flex flex-col text-left'>
+                <span className='text-[12px] font-bold leading-tight tracking-wide text-white sm:text-[13px]'>Properties in Ecuador</span>
+                <span className='mt-1 text-[9px] font-medium leading-tight tracking-[0.14em] text-white/70 sm:text-[10px]'>Retired Investors</span>
+              </span>
             </Link>
+            <button onClick={() => setNavbarOpen(!navbarOpen)} className='flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white backdrop-blur' aria-label='Abrir menú'>
+              <span aria-hidden='true' className='text-[25px] font-light leading-none'>{navbarOpen ? '×' : '☰'}</span>
+            </button>
           </div>
 
-          <div className='mt-3 flex items-center justify-center gap-3'>
-            {socialIcons.map((icon) => (
-              <Link key={icon} href='#' className='flex h-9 w-9 items-center justify-center rounded-full bg-[#17395a] text-white'>
-                <Icon icon={icon} width={18} height={18} />
-              </Link>
-            ))}
-          </div>
-
-          <div className='mt-3 flex items-center justify-center gap-2'>
-            {languageOptions.map((lng) => (
-              <button key={lng} onClick={() => setLang(lng)} className={`rounded-md px-2 py-1 text-xs font-bold uppercase ${i18n.language?.startsWith(lng) ? 'bg-[#17395a] text-white' : 'bg-white text-[#17395a]'}`}>
-                {lng}
+          <div className='mt-2 flex items-center justify-end gap-1.5'>
+            {languageOptions.map(({ code, label }) => (
+              <button key={code} type='button' lang={code} translate='no' aria-label={`Cambiar idioma a ${label}`} onClick={() => setLang(code)} className={`rounded-full px-2.5 py-1 text-[10px] font-bold transition ${i18n.language?.startsWith(code) ? 'bg-[#42d7b0] text-[#082d37]' : 'bg-white/10 text-white/80'}`}>
+                {label}
               </button>
             ))}
-          </div>
-
-          <div className='mt-4 flex justify-center'>
-            <button onClick={() => setNavbarOpen(!navbarOpen)} className='rounded-md border border-[#e0a11d] bg-[#efefef] p-2 text-[#4b4b4b]' aria-label='Abrir menu'>
-              <Icon icon={navbarOpen ? 'ph:x-bold' : 'ph:list-bold'} width={24} height={24} />
-            </button>
           </div>
 
           {navbarOpen && (
@@ -157,13 +144,17 @@ const Header: React.FC = () => {
           )}
         </div>
 
-        <nav className='hidden h-[96px] items-center justify-between lg:flex'>
-          <Link href='/' className='block shrink-0'>
-            <Image src='/images/header/logo.jpeg' alt='Logo' width={220} height={220} className='h-[74px] w-auto object-contain sm:h-[80px] lg:h-[86px]' unoptimized />
+        <nav className='hidden h-[96px] items-center justify-between xl:flex'>
+          <Link href='/' className='flex shrink-0 items-center gap-2 2xl:gap-3' aria-label='Properties in Ecuador — Inicio'>
+            <Image src='/images/header/logo-transparent-v2.png' alt='' width={640} height={640} className='h-[64px] w-auto object-contain 2xl:h-[72px]' unoptimized />
+            <span className='flex flex-col text-left'>
+              <span className='whitespace-nowrap text-[12px] font-bold leading-tight tracking-wide text-white 2xl:text-[14px]'>Properties in Ecuador</span>
+              <span className='mt-1 whitespace-nowrap text-[9px] font-medium leading-tight tracking-[0.1em] text-white/80 2xl:text-[11px] 2xl:tracking-[0.14em]'>Retired Investors</span>
+            </span>
           </Link>
 
-          <div className='flex items-center gap-8'>
-            <ul className='hidden items-center gap-10 lg:flex'>
+          <div className='flex min-w-0 items-center gap-3 2xl:gap-8'>
+            <ul className='hidden items-center gap-5 xl:flex 2xl:gap-10'>
               {homeItem && (
                 <li>
                   <Link href={homeItem.href} className='text-sm font-bold uppercase tracking-[0.02em] text-white transition hover:text-[#d4e7ef]'>
@@ -209,16 +200,16 @@ const Header: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link href='/contactus' className='rounded-xl bg-white px-7 py-3 text-sm font-bold uppercase tracking-[0.02em] text-[#07384a] transition hover:bg-[#e7eef1]'>
+                <Link href='/contactus' className='rounded-xl bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.02em] text-[#07384a] transition hover:bg-[#e7eef1] 2xl:px-7'>
                   {labels.schedule}
                 </Link>
               </li>
             </ul>
 
-            <div className='flex gap-2'>
-              {languageOptions.map((lng) => (
-                <button key={lng} onClick={() => setLang(lng)} className={`rounded-md px-2 py-1 text-xs font-bold uppercase ${i18n.language?.startsWith(lng) ? 'bg-white text-[#07384a]' : 'bg-white/20 text-white'}`}>
-                  {lng}
+            <div className='flex shrink-0 gap-1 2xl:gap-2'>
+              {languageOptions.map(({ code, label }) => (
+                <button key={code} type='button' lang={code} translate='no' aria-label={`Cambiar idioma a ${label}`} onClick={() => setLang(code)} className={`rounded-md px-2 py-1 text-xs font-bold ${i18n.language?.startsWith(code) ? 'bg-white text-[#07384a]' : 'bg-white/20 text-white'}`}>
+                  {label}
                 </button>
               ))}
             </div>

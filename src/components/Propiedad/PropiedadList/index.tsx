@@ -6,9 +6,9 @@ import { Propiedad } from '@/interface/propiedad.interface';
 const PropiedadListing: React.FC<{ propiedads: Propiedad[], currentPage: number, totalPages: number }> = ({ propiedads, currentPage, totalPages }) => {
   
   return (
-    <section className='pt-0!'>
-      <div className='container max-w-8xl mx-auto px-5 2xl:px-0'>
-        <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10'>
+    <section className='!pt-0 pb-24'>
+      <div className='container mx-auto max-w-[1400px] px-5 lg:px-8'>
+        <div className='grid grid-cols-1 gap-7 md:grid-cols-2 xl:grid-cols-3'>
           {propiedads.map((propiedad, index) => (
             <div key={index} className=''>
               <PropiedadCard item={propiedad} />

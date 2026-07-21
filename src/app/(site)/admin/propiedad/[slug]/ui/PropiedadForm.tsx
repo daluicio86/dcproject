@@ -208,8 +208,8 @@ export const PropiedadForm = ({
 
   const watchedImages = watch("images");
 
-  // ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Crear previews SOLO una vez cuando cambia FileList.
-  // ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Revocar las anteriores para no filtrar memoria.
+  // ✅ Crear previews SOLO una vez cuando cambia FileList.
+  // ✅ Revocar las anteriores para no filtrar memoria.
   useEffect(() => {
     if (!watchedImages) return;
 
@@ -246,10 +246,10 @@ export const PropiedadForm = ({
   const removeNewImage = (index: number) => {
     setNewMedia((prev) => {
       const toRemove = prev[index];
-      if (toRemove) URL.revokeObjectURL(toRemove.preview); // ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ revoca al borrar
+      if (toRemove) URL.revokeObjectURL(toRemove.preview); // ✅ revoca al borrar
       const updated = prev.filter((_, i) => i !== index);
 
-      // reconstruye FileList para RHF (igual que hacÃƒÆ’Ã‚Â­as)
+      // reconstruye FileList para RHF (igual que hacías)
       const dt = new DataTransfer();
       updated.forEach((m) => dt.items.add(m.file));
       setValue("images", dt.files);
@@ -293,10 +293,10 @@ export const PropiedadForm = ({
     try {
       const uploads: { url: string; type: "image" | "video" }[] = [];
 
-      // ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Progreso global real (promedio)
+      // ✅ Progreso global real (promedio)
       const perFileProgress = new Array(newMedia.length).fill(0);
 
-      // ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Throttle de updates (evita miles de renders)
+      // ✅ Throttle de updates (evita miles de renders)
       const lastUpdateRef = { t: 0 };
       const updateGlobalProgress = () => {
         const now = Date.now();
@@ -308,7 +308,7 @@ export const PropiedadForm = ({
         setUploadProgress(Math.round(avg));
       };
 
-      // ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Concurrencia limitada (3 a la vez)
+      // ✅ Concurrencia limitada (3 a la vez)
       const CONCURRENCY = 3;
 
       const tasks = newMedia.map((m, index) => async () => {
@@ -374,26 +374,26 @@ export const PropiedadForm = ({
         formData.append("uploadedMedia", JSON.stringify(uploads));
       }
 
-      console.log("ÃƒÂ°Ã…Â¸Ã…Â¡Ã¢â€šÂ¬ ~ file: PropiedadForm.tsx:257 ~ onSubmit ~ formData:", data.esPrincipal);
+      console.log("🚀 ~ file: PropiedadForm.tsx:257 ~ onSubmit ~ formData:", data.esPrincipal);
       const { ok } = await createUpdatePropiedad(formData);
       if (!ok) {
         alert(lang === "es" ? "Error al guardar" : lang === "de" ? "Fehler beim Speichern" : "Error while saving");
         return;
       }
 
-      // ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ limpia estado al final
+      // ✅ limpia estado al final
       setUploadLabel("");
       setUploadProgress(100);
 
       router.push("/admin/propiedads");
     } finally {
       setIsUploading(false);
-      // opcional: resetear progreso tras un pequeÃƒÆ’Ã‚Â±o delay o dejarlo en 100
+      // opcional: resetear progreso tras un pequeño delay o dejarlo en 100
       // setUploadProgress(0);
     }
   };
 
-  console.log("ÃƒÂ°Ã…Â¸Ã…Â¡Ã¢â€šÂ¬ ~ file: PropiedadForm.tsx:263 ~ PropiedadForm ~ esPrincipal:", propiedad);
+  console.log("🚀 ~ file: PropiedadForm.tsx:263 ~ PropiedadForm ~ esPrincipal:", propiedad);
   /* ------------------------------------------------------------------ */
   /* RENDER */
   /* ------------------------------------------------------------------ */
@@ -443,7 +443,7 @@ export const PropiedadForm = ({
         badge="Properties"
       />
 
-      <div className="mx-auto w-full lg:w-2/3 xl:w-1/2 px-4">
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
         {isUploading && (
           <div className="rounded-2xl border border-black/10 dark:border-white/10 p-4">
             <div className="text-sm mb-2">
@@ -461,10 +461,10 @@ export const PropiedadForm = ({
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex flex-col gap-6 mb-5"
+          className="mb-8 flex flex-col gap-8 rounded-3xl border border-black/10 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-white/5 sm:p-8"
         >
-          <div className="flex flex-col gap-8 mt-5">
-            <div className="flex items-center gap-3 w-full px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full">
+          <div className="flex flex-col gap-8">
+            <div className="flex items-center gap-3 w-full rounded-2xl border border-primary/20 bg-primary/5 px-5 py-4">
               <input
                 type="checkbox"
                 id="esPrincipal"
@@ -475,11 +475,18 @@ export const PropiedadForm = ({
                 htmlFor="esPrincipal"
                 className="text-sm text-gray-600 dark:text-gray-300"
               >
-                Select whether the property is primary.
+                Marcar como propiedad principal.
               </label>
             </div>
-            <div className="flex flex-col gap-6">
+            <section className="flex flex-col gap-5">
+              <div>
+                <h2 className="text-xl font-semibold text-[#172023] dark:text-white">Información principal</h2>
+                <p className="mt-1 text-sm text-gray-500">Nombre y precio de la propiedad.</p>
+              </div>
+              <div className="flex flex-col gap-6">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <label htmlFor="title" className="flex flex-col gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+                  Nombre (ES)
                 <input
                   {...register("title", { required: true })}
                   type="text"
@@ -487,6 +494,9 @@ export const PropiedadForm = ({
                   placeholder={t("propiedadForm.title")}
                   className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
                 />
+                </label>
+                <label htmlFor="titleEn" className="flex flex-col gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+                  Title (EN)
                 <input
                   {...register("titleEn")}
                   type="text"
@@ -494,9 +504,12 @@ export const PropiedadForm = ({
                   placeholder="Title (EN)"
                   className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
                 />
+                </label>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <label htmlFor="titleDe" className="flex flex-col gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+                  Titel (DE)
                 <input
                   {...register("titleDe")}
                   type="text"
@@ -504,27 +517,35 @@ export const PropiedadForm = ({
                   placeholder="Titel (DE)"
                   className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
                 />
+                </label>
 
-                <div className="flex items-center gap-2 w-full">
+                <label htmlFor="precio" className="flex flex-col gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+                  Precio
+                  <div className="relative">
                   <input
                     {...register("precio", { required: true })}
                     type="number"
                     id="precio"
                     placeholder={t("propiedadForm.price")}
-                    className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
+                    className="w-full rounded-full border border-black/10 px-6 py-3.5 pr-20 outline-primary focus:outline dark:border-white/10"
                   />
-
-                  <label
-                    htmlFor="precio"
-                    className="text-sm text-gray-500 whitespace-nowrap"
-                  >
+                  <span className="pointer-events-none absolute inset-y-0 right-6 flex items-center text-sm font-medium text-gray-500">
                     USD
-                  </label>
+                  </span>
+                  </div>
+                </label>
                 </div>
               </div>
-            </div>
+            </section>
 
-            <div className="flex flex-col lg:flex-row gap-6">
+            <section className="flex flex-col gap-5 border-t border-black/10 pt-7 dark:border-white/10">
+              <div>
+                <h2 className="text-xl font-semibold text-[#172023] dark:text-white">Ubicación</h2>
+                <p className="mt-1 text-sm text-gray-500">Direcciones y enlace del mapa.</p>
+              </div>
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+              <label htmlFor="address" className="flex flex-col gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+                Dirección (ES)
               <input
                 {...register("address", { required: false })}
                 type="text"
@@ -535,6 +556,9 @@ export const PropiedadForm = ({
                 required
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               />
+              </label>
+              <label htmlFor="addressEn" className="flex flex-col gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+                Address (EN)
               <input
                 {...register("addressEn")}
                 type="text"
@@ -542,6 +566,9 @@ export const PropiedadForm = ({
                 placeholder="Address (EN)"
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               />
+              </label>
+              <label htmlFor="addressDe" className="flex flex-col gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+                Adresse (DE)
               <input
                 {...register("addressDe")}
                 type="text"
@@ -549,8 +576,11 @@ export const PropiedadForm = ({
                 placeholder="Adresse (DE)"
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               />
+              </label>
             </div>
             <div className="flex flex-col lg:flex-row gap-6">
+              <label htmlFor="geoLink" className="flex w-full flex-col gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+                Enlace a Google Maps
               <input
                 type="text"
                 {...register("geoLink", { required: false })}
@@ -560,55 +590,86 @@ export const PropiedadForm = ({
                 placeholder={t("propiedadForm.geoLink")}
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               />
+              </label>
+            </div>
+            </section>
+            <section className="flex flex-col gap-5 border-t border-black/10 pt-7 dark:border-white/10">
+              <div>
+                <h2 className="text-xl font-semibold text-[#172023] dark:text-white">Superficie y altitud</h2>
+                <p className="mt-1 text-sm text-gray-500">Ingrese las equivalencias disponibles y la altura.</p>
+              </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="metros" className="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                  m² (metros cuadrados)
+                </label>
+                <input
+                  {...register("metros")}
+                  type="text"
+                  inputMode="decimal"
+                  name="metros"
+                  id="metros"
+                  autoComplete="off"
+                  placeholder="m²"
+                  className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="ft2" className="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                  pie² (pies cuadrados)
+                </label>
+                <input
+                  {...register("ft2")}
+                  type="text"
+                  inputMode="decimal"
+                  name="ft2"
+                  id="ft2"
+                  autoComplete="off"
+                  placeholder="pie²"
+                  className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
+                />
+              </div>
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <input
-                {...register("metros")}
-                type="text"
-                inputMode="decimal"
-                name="metros"
-                id="metros"
-                autoComplete="off"
-                placeholder="m2"
-                className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
-              />
-              <input
-                {...register("ft2")}
-                type="text"
-                inputMode="decimal"
-                name="ft2"
-                id="ft2"
-                autoComplete="off"
-                placeholder="ft2"
-                className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
-              />
-            </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <input
-                {...register("area")}
-                type="text"
-                inputMode="decimal"
-                name="area"
-                id="area"
-                autoComplete="off"
-                placeholder="ha"
-                className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
-              />
-              <input
-                {...register("acres")}
-                type="text"
-                inputMode="decimal"
-                name="acres"
-                id="acres"
-                autoComplete="off"
-                placeholder="acres"
-                className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
-              />
+              <div className="flex flex-col gap-2">
+                <label htmlFor="area" className="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                  ha (hectáreas)
+                </label>
+                <input
+                  {...register("area")}
+                  type="text"
+                  inputMode="decimal"
+                  name="area"
+                  id="area"
+                  autoComplete="off"
+                  placeholder="ha"
+                  className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="acres" className="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                  acres
+                </label>
+                <input
+                  {...register("acres")}
+                  type="text"
+                  inputMode="decimal"
+                  name="acres"
+                  id="acres"
+                  autoComplete="off"
+                  placeholder="acres"
+                  className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
+                />
+              </div>
             </div>
 
 
-            <div className="flex flex-col lg:flex-row gap-6">
-              <div className="flex items-center gap-2 w-full">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+              <div className="flex flex-col gap-2 lg:col-span-2">
+                <label htmlFor="altura" className="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                  Altura sobre el nivel del mar
+                </label>
+                <div className="relative">
                 <input
                   {...register("altura", { required: false })}
                   type="number"
@@ -617,17 +678,24 @@ export const PropiedadForm = ({
                   autoComplete="off"
                   placeholder={t("propiedadForm.altura")}
                   required
-                  className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
+                  className="w-full rounded-full border border-black/10 px-6 py-3.5 pr-24 outline-primary focus:outline dark:border-white/10"
                 />
-                <label
-                  htmlFor="precio"
-                  className="text-sm text-gray-500 whitespace-nowrap"
-                >
+                <span className="pointer-events-none absolute inset-y-0 right-6 flex items-center text-sm font-medium text-gray-500">
                   msnm
-                </label>
+                </span>
+                </div>
               </div>
             </div>
-            <div className="flex flex-col lg:flex-row gap-6">
+            </section>
+
+            <section className="flex flex-col gap-5 border-t border-black/10 pt-7 dark:border-white/10">
+              <div>
+                <h2 className="text-xl font-semibold text-[#172023] dark:text-white">Clasificación</h2>
+                <p className="mt-1 text-sm text-gray-500">Uso recomendado, modalidad, clima y tipo de propiedad.</p>
+              </div>
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+              <label className="flex flex-col gap-2" htmlFor="apto">
+                <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Propiedad apta para (ES)</span>
               <input
                 {...register("apto", { required: false })}
                 type="text"
@@ -638,6 +706,9 @@ export const PropiedadForm = ({
                 required
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               />
+              </label>
+              <label className="flex flex-col gap-2" htmlFor="aptoEn">
+                <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Suitable for (EN)</span>
               <input
                 {...register("aptoEn")}
                 type="text"
@@ -645,6 +716,9 @@ export const PropiedadForm = ({
                 placeholder="Suitable for (EN)"
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               />
+              </label>
+              <label className="flex flex-col gap-2" htmlFor="aptoDe">
+                <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Geeignet für (DE)</span>
               <input
                 {...register("aptoDe")}
                 type="text"
@@ -652,8 +726,11 @@ export const PropiedadForm = ({
                 placeholder="Geeignet für (DE)"
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
               />
+              </label>
             </div>
-            <div className="flex flex-col lg:flex-row gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+              <label className="flex flex-col gap-2">
+                <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Renta / Venta</span>
               <select
                 {...register("rentaVenta", { required: true })}
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
@@ -673,10 +750,13 @@ export const PropiedadForm = ({
                   </option>
                 )}
               </select>
-              <div className="flex items-center gap-2 w-full">
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Clima</span>
+                <div className="relative">
                 <select
                   {...register("temperatura", { required: true })}
-                  className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
+                  className="w-full rounded-full border border-black/10 px-6 py-3.5 pr-28 outline-primary focus:outline dark:border-white/10"
                 >
                   <option key={-1} value="">
                     {t("propiedadForm.selectClimate")}
@@ -693,15 +773,13 @@ export const PropiedadForm = ({
                     </option>
                   )}
                 </select>
-                <label
-                  htmlFor="precio"
-                  className="text-sm text-gray-500 whitespace-nowrap"
-                >
-                  centigrados
-                </label>
+                <span className="pointer-events-none absolute inset-y-0 right-10 flex items-center text-sm text-gray-500">°C</span>
+                </div>
+              </label>
               </div>
-            </div>
-            <div className="flex flex-col lg:flex-row gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+              <label className="flex flex-col gap-2">
+                <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Categoría</span>
               <select
                 {...register("categoriaId", { required: true })}
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
@@ -717,10 +795,13 @@ export const PropiedadForm = ({
                   ))
                 ) : (
                   <option key={-1} value="">
-                    No existen categorÃƒÆ’Ã‚Â­as
+                    No existen categorías
                   </option>
                 )}
               </select>
+              </label>
+              <label className="flex flex-col gap-2">
+                <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Tipo de propiedad</span>
               <select
                 {...register("tipoPropiedadId", { required: true })}
                 className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full"
@@ -740,8 +821,17 @@ export const PropiedadForm = ({
                   </option>
                 )}
               </select>
+              </label>
             </div>
+            </section>
           </div>
+          <section className="flex flex-col gap-5 border-t border-black/10 pt-7 dark:border-white/10">
+            <div>
+              <h2 className="text-xl font-semibold text-[#172023] dark:text-white">Descripciones</h2>
+              <p className="mt-1 text-sm text-gray-500">Contenido público en los tres idiomas.</p>
+            </div>
+          <label htmlFor="description" className="flex flex-col gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+            Descripción (ES)
           <textarea
             {...register("description", { required: false })}
             rows={8}
@@ -752,6 +842,9 @@ export const PropiedadForm = ({
             required
             className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-2xl outline-primary focus:outline"
           ></textarea>
+          </label>
+          <label htmlFor="descriptionEn" className="flex flex-col gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+            Description (EN)
           <textarea
             {...register("descriptionEn")}
             rows={4}
@@ -760,6 +853,9 @@ export const PropiedadForm = ({
             placeholder="Description (EN)"
             className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-2xl outline-primary focus:outline"
           ></textarea>
+          </label>
+          <label htmlFor="descriptionDe" className="flex flex-col gap-2 text-sm font-semibold text-gray-700 dark:text-gray-200">
+            Beschreibung (DE)
           <textarea
             {...register("descriptionDe")}
             rows={4}
@@ -768,14 +864,22 @@ export const PropiedadForm = ({
             placeholder="Beschreibung (DE)"
             className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-2xl outline-primary focus:outline"
           ></textarea>
+          </label>
+          </section>
 
+          <section className="flex flex-col gap-4 border-t border-black/10 pt-7 dark:border-white/10">
+          <div>
+            <h2 className="text-xl font-semibold text-[#172023] dark:text-white">Fotos y videos</h2>
+            <p className="mt-1 text-sm text-gray-500">Seleccione los archivos que desea agregar a la propiedad.</p>
+          </div>
           <input
             type="file"
             multiple
             accept="image/*,video/*"
             {...register("images")}
-            className="border p-2"
+            className="w-full rounded-2xl border border-dashed border-black/20 bg-gray-50 p-4 dark:border-white/20 dark:bg-white/5"
           />
+          </section>
 
           {/* MEDIA EXISTENTE */}
           {existingImages.length > 0 && (
@@ -838,7 +942,7 @@ export const PropiedadForm = ({
                       muted
                       playsInline
                       preload="none"
-                      // sin controls en grid (mÃƒÆ’Ã‚Â¡s liviano)
+                      // sin controls en grid (más liviano)
                       onClick={() => openLightbox(m.preview, true)}
                     />
                   ) : (
@@ -875,7 +979,3 @@ export const PropiedadForm = ({
     </>
   );
 };
-
-
-
-

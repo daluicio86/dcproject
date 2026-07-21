@@ -92,7 +92,7 @@ export const CiudadForm = ({ item }: Props) => {
                 </button>
               </div>
             ) : (
-              <p className="text-gray-500 text-sm">{lang === "es" ? "No hay imagen seleccionada" : lang === "de" ? "Kein Bild ausgewÃƒÂ¤hlt" : "No image selected"}</p>
+              <p className="text-gray-500 text-sm">{lang === "es" ? "No hay imagen seleccionada" : lang === "de" ? "Kein Bild ausgewählt" : "No image selected"}</p>
             )}
 
             <input type="file" {...register("url")} onChange={handleFileChange} className="p-2 border rounded-md bg-gray-200" accept="image/png, image/jpeg, image/avif" />

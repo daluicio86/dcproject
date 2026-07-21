@@ -28,7 +28,7 @@ export const getPaginatedPropiedadsWithImages = async ({
   if (page < 1) page = 1;
 
   try {
-    // ðŸ”¹ Construir dinÃ¡micamente los filtros
+    // 🔹 Construir dinámicamente los filtros
     const where: any = {
       precio: {
         gte: precioMinimo,
@@ -47,10 +47,12 @@ export const getPaginatedPropiedadsWithImages = async ({
       take,
       skip: (page - 1) * take,
       include: {
-        images: true,
+        images: {
+          orderBy: [{ type: "asc" }, { id: "asc" }],
+        },
         //amenities: true,
       },
-      where, // ðŸ‘ˆ aquÃ­ usamos el objeto dinÃ¡mico
+      where, // 👈 aquí usamos el objeto dinámico
     });
 
     // 2. Calcular total de registros con los mismos filtros

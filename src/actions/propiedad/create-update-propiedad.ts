@@ -78,10 +78,10 @@ function slugify(input: string) {
     input
       .toLowerCase()
       .trim()
-      // quita acentos: ÃƒÂ¡ÃƒÂ©ÃƒÂ­ÃƒÂ³ÃƒÂºÃƒÂ± -> aeioun
+      // quita acentos: áéíóúñ -> aeioun
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
-      // reemplaza cualquier cosa no alfanumÃƒÂ©rica por guiÃƒÂ³n
+      // reemplaza cualquier cosa no alfanumérica por guión
       .replace(/[^a-z0-9]+/g, "-")
       // quita guiones al inicio/fin
       .replace(/^-+|-+$/g, "")
@@ -129,7 +129,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
 
   try {
     /* -------------------------------------------------------------
-       1Ã¯Â¸ÂÃ¢Æ’Â£ OBTENER MEDIA A ELIMINAR (ANTES)
+       1. OBTENER MEDIA A ELIMINAR (ANTES)
     ------------------------------------------------------------- */
     let mediaDBToDelete: { id: number; url: string }[] = [];
 
@@ -144,7 +144,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
     }
 
     /* -------------------------------------------------------------
-       2Ã¯Â¸ÂÃ¢Æ’Â£ SUBIR MEDIA NUEVA (FUERA DE TRANSACCIÃƒâ€œN)
+       2. SUBIR MEDIA NUEVA (FUERA DE TRANSACCIÓN)
     ------------------------------------------------------------- */
     /*let uploadedMedia: UploadedMedia[] = [];
 
@@ -153,7 +153,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
     }*/
 
     /* -------------------------------------------------------------
-       3Ã¯Â¸ÂÃ¢Æ’Â£ TRANSACCIÃƒâ€œN DB
+       3. TRANSACCIÓN DB
     ------------------------------------------------------------- */
     const propiedadTx = await prisma.$transaction(async (tx) => {
       let propiedad: Propiedad;
@@ -228,7 +228,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
     });
 
     /* -------------------------------------------------------------
-       4Ã¯Â¸ÂÃ¢Æ’Â£ BORRAR MEDIA DE CLOUDINARY
+       4. BORRAR MEDIA DE CLOUDINARY
     ------------------------------------------------------------- */
     if (mediaDBToDelete.length > 0) {
       await Promise.all(
@@ -249,7 +249,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
     }
 
     /* -------------------------------------------------------------
-       5Ã¯Â¸ÂÃ¢Æ’Â£ REVALIDACIÃƒâ€œN
+       5. REVALIDACIÓN
     ------------------------------------------------------------- */
     revalidatePath("/admin/propiedads");
     revalidatePath(`/admin/propiedad/${propiedadTx.slug}`);
@@ -268,7 +268,7 @@ export const createUpdatePropiedad = async (formData: FormData) => {
 function getCloudinaryPublicId(url: string) {
   // quita querystring
   const clean = url.split("?")[0];
-  // toma lo que estÃƒÂ¡ despuÃƒÂ©s de "/upload/"
+  // toma lo que está después de "/upload/"
   const idx = clean.indexOf("/upload/");
   if (idx === -1) return null;
 
@@ -278,12 +278,11 @@ function getCloudinaryPublicId(url: string) {
   // elimina version si empieza por v123
   const withoutVersion = parts[0].match(/^v\d+$/) ? parts.slice(1) : parts;
   const joined = withoutVersion.join("/");
-  // quita extensiÃƒÂ³n
+  // quita extensión
   return joined.replace(/\.[^/.]+$/, "");
 }
 
 /* ------------------------------------------------------------------
-   SUBIDA DE MEDIA (IMÃƒÂGENES + VIDEOS)
+   SUBIDA DE MEDIA (IMÁGENES + VIDEOS)
 ------------------------------------------------------------------ */
-
 

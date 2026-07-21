@@ -23,7 +23,7 @@ const ContactCard: React.FC<{ item: Contacto }> = ({ item }) => {
               </p>
             </div>
             <div>
-              <Link href='https://wa.me/+593995421104?text=Hello%20Rent or Buy%2C%20I%20have%20a%20question?'
+              <Link href='https://wa.me/593994567412?text=Hello%20Rent or Buy%2C%20I%20have%20a%20question?'
                 target='_blank'
                 className='text-base font-normal text-primary px-5 py-2 rounded-full bg-primary/10'>
                 {telefono}

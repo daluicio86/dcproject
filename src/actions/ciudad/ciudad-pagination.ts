@@ -28,7 +28,11 @@ export const getPaginatedCiudades = async ({
           include: { images: true },
         },
         propiedades: {
-          include: { images: true },
+          include: {
+            images: {
+              orderBy: [{ type: "asc" }, { id: "asc" }],
+            },
+          },
         },
       },
       orderBy: { nombre: "asc" },

@@ -1,6 +1,7 @@
 ﻿"use client";
 
-import HeroSub from "@/components/shared/HeroSub";
+import { Icon } from "@iconify/react";
+import Image from "next/image";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -153,36 +154,66 @@ export default function NewsPage() {
     };
   }, [lang]);
 
-  return (
-    <>
-      <HeroSub
-        title={content.pageTitle}
-        description={content.pageDescription}
-        badge={content.badge}
-      />
+  const newsImages = [
+    "/images/blog/blog-1.jpg",
+    "/images/blog/blog-2.jpg",
+    "/images/blog/blog-3.jpg",
+    "/images/blog/blog-4.jpg",
+    "/images/blog/blog-5.jpg",
+    "/images/blog/blog-6.jpg",
+  ];
 
-      <section className="pt-0!">
-        <div className="container max-w-8xl mx-auto px-5 2xl:px-0 pb-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {content.items.map((item) => (
-              <article key={item.title} className="rounded-2xl border border-black/10 bg-white p-6 shadow-sm">
+  const editorial = lang === "es"
+    ? { eyebrow: "Historias que inspiran", feature: "Ecuador en movimiento", description: "Cultura, naturaleza y nuevas oportunidades vistas desde cada región del país." }
+    : lang === "de"
+      ? { eyebrow: "Inspirierende Geschichten", feature: "Ecuador in Bewegung", description: "Kultur, Natur und neue Chancen aus allen Regionen des Landes." }
+      : { eyebrow: "Stories that inspire", feature: "Ecuador in motion", description: "Culture, nature, and emerging opportunities from every region of the country." };
+
+  return (
+    <main className="bg-[#f4f1ea]">
+      <section className="relative isolate min-h-[650px] overflow-hidden pt-[110px] xl:pt-[96px]">
+        <Image src="/images/blog/blog-9.jpg" alt="Noticias de Ecuador" fill priority className="object-cover" unoptimized />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,25,33,0.94),rgba(7,35,45,0.72)_55%,rgba(7,35,45,0.18))]" />
+        <div className="relative mx-auto flex min-h-[553px] max-w-[1400px] items-center px-5 py-16 sm:px-8 lg:px-12">
+          <div className="max-w-4xl text-white">
+            <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] backdrop-blur-md"><Icon icon="ph:newspaper-clipping-bold" width={18} className="text-[#5ce0b8]" />{editorial.eyebrow}</p>
+            <p className="mb-3 text-sm font-bold uppercase tracking-[0.23em] text-[#5ce0b8]">{editorial.feature}</p>
+            <h1 className="text-4xl font-semibold leading-[1.03] tracking-[-0.045em] sm:text-6xl lg:text-7xl">{content.pageTitle}</h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-white/70">{editorial.description}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative z-10 bg-[#f4f1ea] pb-24 pt-12 sm:pt-16 lg:pt-20">
+        <div className="container mx-auto max-w-[1400px] px-5 lg:px-8">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {content.items.map((item, index) => (
+              <article key={item.title} className="group relative overflow-hidden rounded-[28px] border border-black/[0.06] bg-white shadow-[0_12px_35px_rgba(15,45,55,0.09)] transition duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_50px_rgba(15,45,55,0.15)]">
+                <div className="relative h-52 overflow-hidden">
+                  <Image src={newsImages[index]} alt={item.title} fill className="object-cover transition duration-700 group-hover:scale-105" unoptimized />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#092b36]/50 to-transparent" />
+                </div>
+                <div className="relative min-h-[280px] p-7">
+                <span className="absolute right-5 top-3 text-7xl font-semibold text-black/[0.025]">{String(index + 1).padStart(2, "0")}</span>
                 <div className="mb-4 flex items-center justify-between gap-3">
-                  <span className="rounded-full bg-[#e7f7f2] px-3 py-1 text-xs font-semibold text-[#169f78]">
+                  <span className="relative rounded-full bg-[#e1f7f0] px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#087e5e]">
                     {item.category}
                   </span>
                   <span className="text-xs text-black/50">{item.date}</span>
                 </div>
 
-                <h2 className="mb-3 text-2xl font-semibold leading-tight text-[#16212b]">
+                <h2 className="relative mb-4 text-2xl font-semibold leading-tight tracking-[-0.025em] text-[#16212b] transition group-hover:text-[#0d8766]">
                   {item.title}
                 </h2>
 
-                <p className="text-sm leading-6 text-black/65">{item.summary}</p>
+                <p className="relative text-sm leading-7 text-black/60">{item.summary}</p>
+                <div className="absolute inset-x-7 bottom-0 h-1 origin-left scale-x-0 rounded-full bg-[#31c99b] transition duration-300 group-hover:scale-x-100" />
+                </div>
               </article>
             ))}
           </div>
         </div>
       </section>
-    </>
+    </main>
   );
 }

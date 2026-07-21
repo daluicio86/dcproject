@@ -16,7 +16,9 @@ export const getCiudadByName = async (nombre: string) => {
         },
         propiedades: {
           include: {
-            images: true, // 👈 Incluye las imágenes asociadas a cada propiedad
+            images: {
+              orderBy: [{ type: "asc" }, { id: "asc" }],
+            },
           },
         },
       },

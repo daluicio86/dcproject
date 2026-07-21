@@ -14,6 +14,7 @@ export async function getPropiedadBySlug(slug: string, onlyPublished = false) {
             id: true,
             url: true,
           },
+          orderBy: [{ type: "asc" }, { id: "asc" }],
         },
         // amenities: true,
       },
@@ -26,7 +27,7 @@ export async function getPropiedadBySlug(slug: string, onlyPublished = false) {
       apto: propiedad.apto ?? "",
       description: propiedad.description ?? "",
       userId: propiedad.userId ?? "",
-      // ðŸ”¥ IMPORTANTE: ya NO transformamos images
+      // 🔥 IMPORTANTE: ya NO transformamos images
       images: propiedad.images,
       // amenities: propiedad.amenities ?? [],
     };

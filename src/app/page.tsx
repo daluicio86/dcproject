@@ -264,32 +264,44 @@ export default function Home() {
     }
   }, [lang])
 
+  const heroUi = lang === "es"
+    ? { badge: "Vivir e invertir en Ecuador", action: "Ver propiedades", contact: "Planificar una visita", note: "Una selección inmobiliaria para una nueva etapa de vida." }
+    : lang === "de"
+      ? { badge: "Leben und investieren in Ecuador", action: "Immobilien ansehen", contact: "Besuch planen", note: "Ausgewählte Immobilien für einen neuen Lebensabschnitt." }
+      : { badge: "Live and invest in Ecuador", action: "View properties", contact: "Plan a visit", note: "A curated real estate collection for your next chapter." }
+
   return (
-    <main className="bg-[#f5f1ea] pt-[182px] text-[#1f1f1f] lg:pt-[104px]">
+    <main className="bg-[#f5f1ea] pt-[110px] text-[#1f1f1f] xl:pt-[96px]">
       <section className="py-0" style={{ paddingTop: 0, paddingBottom: 0 }}>
-        <div className="w-full">
-          <div className="relative min-h-[285px] overflow-hidden sm:min-h-[360px] lg:min-h-[430px]" style={{ backgroundImage: "linear-gradient(90deg, rgba(13, 26, 42, 0.18) 0%, rgba(25, 52, 82, 0.55) 55%, rgba(36, 70, 108, 0.75) 100%), url('/images/tumbaco/tumbaco2.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
-            <div className="mx-auto flex min-h-[285px] max-w-[1140px] items-end justify-end px-4 pb-8 sm:min-h-[360px] sm:px-6 sm:pb-12 lg:min-h-[430px] lg:pb-14">
-              <div className="w-full max-w-[360px] sm:max-w-[430px]">
-                <div className="mb-3 h-[3px] w-full rounded-full bg-[#e0b217]" />
-                <h1 className="text-right text-2xl font-semibold italic leading-tight text-white sm:text-[42px]">{tr.hero}</h1>
-                <div className="ml-auto mt-3 h-[3px] w-full rounded-full bg-[#e0b217]" />
+        <div className="relative isolate min-h-[700px] overflow-hidden" style={{ backgroundImage: "url('/images/tumbaco/tumbaco2.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}>
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,25,33,0.95),rgba(7,35,45,0.72)_55%,rgba(7,35,45,0.16))]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_20%,rgba(73,222,178,0.2),transparent_30%)]" />
+            <div className="relative mx-auto flex min-h-[700px] max-w-[1400px] items-center px-5 py-16 sm:px-8 lg:px-12">
+              <div className="max-w-4xl text-white">
+                <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] backdrop-blur-md">{heroUi.badge}</p>
+                <h1 className="max-w-4xl text-4xl font-semibold leading-[1.03] tracking-[-0.045em] sm:text-6xl lg:text-7xl">{tr.hero}</h1>
+                <p className="mt-6 max-w-2xl text-base leading-8 text-white/70 sm:text-lg">{heroUi.note}</p>
+                <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                  <Link href="#propiedades" className="rounded-full bg-[#43d7aa] px-7 py-4 text-center text-sm font-bold text-[#082129] shadow-xl transition hover:-translate-y-1 hover:bg-white">{heroUi.action}</Link>
+                  <Link href="/contactus" className="rounded-full border border-white/25 bg-white/10 px-7 py-4 text-center text-sm font-bold text-white backdrop-blur-md transition hover:bg-white/20">{heroUi.contact}</Link>
+                </div>
               </div>
             </div>
-          </div>
         </div>
       </section>
 
       <FeaturedStyledProperties />
 
-      <section className="py-16">
-        <div className="container mx-auto max-w-8xl px-4 sm:px-6 lg:px-0">
-          <div className="mb-10"><h2 className="text-4xl font-semibold text-[#1e252b] sm:text-5xl">{tr.whyTitle}</h2></div>
+      <section className="py-24">
+        <div className="container mx-auto max-w-[1400px] px-5 lg:px-8">
+          <div className="mb-12 max-w-3xl"><p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-[#0b9c74]">Ecuador 360°</p><h2 className="text-4xl font-semibold tracking-[-0.04em] text-[#1e252b] sm:text-6xl">{tr.whyTitle}</h2></div>
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {tr.why.map(([title, desc]) => (
-              <article key={title} className="rounded-2xl border border-black/10 bg-white p-5">
-                <h3 className="mb-2 text-lg font-semibold">{title}</h3>
-                <p className="text-sm text-black/70">{desc}</p>
+            {tr.why.map(([title, desc], index) => (
+              <article key={title} className="group relative min-h-[190px] overflow-hidden rounded-[26px] border border-black/[0.05] bg-white p-6 shadow-[0_10px_30px_rgba(15,45,55,0.06)] transition hover:-translate-y-1 hover:shadow-xl">
+                <span className="absolute right-5 top-3 text-6xl font-semibold text-black/[0.025]">{String(index + 1).padStart(2, "0")}</span>
+                <div className="mb-5 h-1 w-12 rounded-full bg-[#39ca9d] transition-all group-hover:w-20" />
+                <h3 className="relative mb-3 text-lg font-semibold">{title}</h3>
+                <p className="relative text-sm leading-6 text-black/60">{desc}</p>
               </article>
             ))}
           </div>
@@ -326,12 +338,12 @@ export default function Home() {
             <h2 className="mb-4 text-3xl font-semibold sm:text-5xl">{tr.contactTitle}</h2>
             <p className="mb-8 text-white/80">{tr.contactSub}</p>
             <div className="grid gap-4 text-base sm:grid-cols-3">
-              <p>(+593)99-542-1104</p>
+              <p>(+593)99-456-7412</p>
               <p>elizabethlinacardenas@hotmail.com</p>
               <p>Quito - Ecuador</p>
             </div>
             <div className="mt-8">
-              <Link href="https://wa.me/593995421104" target="_blank" className="inline-block rounded-full bg-white px-8 py-3 text-sm font-semibold uppercase tracking-wide text-[#232323] transition hover:bg-[#f0e9de]">
+              <Link href="https://wa.me/593994567412" target="_blank" className="inline-block rounded-full bg-white px-8 py-3 text-sm font-semibold uppercase tracking-wide text-[#232323] transition hover:bg-[#f0e9de]">
                 {tr.call}
               </Link>
             </div>

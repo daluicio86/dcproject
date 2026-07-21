@@ -1,4 +1,3 @@
-import HeroSub from "@/components/shared/HeroSub";
 import React from "react";
 import { Metadata } from "next";
 import { getPaginatedPropiedadsWithImages } from "@/actions/propiedad/propiedad-pagination";
@@ -7,6 +6,7 @@ import { getCategories } from "@/actions/categories/get-categories";
 import { getTiposPropiedad } from "@/actions/tipoPropiedad/get-tipoPropiedad";
 import PropiedadList from "@/components/Propiedad/PropiedadList";
 import { unstable_cache } from "next/cache";
+import { PropertiesHero } from "@/components/Properties/PropertiesHero";
 
 export const metadata: Metadata = {
   title: "List of properties | Buying and selling",
@@ -73,16 +73,9 @@ export default async function PropertiesPage({
 
   return (
     <>
-      <HeroSub
-        title="Discover inspiring designed homes."
-        description="Experience elegance and comfort with our exclusive luxury villas, designed for sophisticated living."
-        badge="Properties"
-      />
+      <PropertiesHero />
 
-      <PropertyFilters
-        categories={categories ?? []}
-        tiposPropiedad={tiposPropiedad ?? []}
-      />
+      <div id="property-search"><PropertyFilters categories={categories ?? []} tiposPropiedad={tiposPropiedad ?? []} /></div>
 
       {!propiedads || propiedads.length === 0 ? (
         <div className="mx-20">

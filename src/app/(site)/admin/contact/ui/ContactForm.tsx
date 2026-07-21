@@ -62,7 +62,7 @@ export const ContactForm = ({ contact }: Props) => {
         </div>
 
         <div className="flex flex-col mb-2">
-          <span>{lang === "es" ? "TelÃ©fono" : lang === "de" ? "Telefon" : "Phone"}</span>
+          <span>{lang === "es" ? "Teléfono" : lang === "de" ? "Telefon" : "Phone"}</span>
           <input type="text" className="p-2 border rounded-md bg-gray-200" {...register("telefono", { required: true })} />
         </div>
 

@@ -36,7 +36,7 @@ export const CategoryForm = ({ item }: Props) => {
 
     const { ok } = await createUpdateCategory(formData);
     if (!ok) {
-      alert(lang === "es" ? "La categorÃƒÂ­a no se pudo actualizar" : lang === "de" ? "Kategorie konnte nicht aktualisiert werden" : "Category could not be updated");
+      alert(lang === "es" ? "La categoría no se pudo actualizar" : lang === "de" ? "Kategorie konnte nicht aktualisiert werden" : "Category could not be updated");
       return;
     }
 
@@ -48,7 +48,7 @@ export const CategoryForm = ({ item }: Props) => {
       <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-3xl bg-white dark:bg-neutral-900 rounded-2xl p-6 shadow-md">
         <div className="flex flex-col lg:flex-row gap-6">
           <select {...register("tipo", { required: true })} className="px-6 py-3.5 border border-black/10 dark:border-white/10 rounded-full outline-primary focus:outline w-full">
-            <option key={-1} value="">{lang === "es" ? "Seleccionar tipo" : lang === "de" ? "Typ auswÃƒÂ¤hlen" : "Select type"}</option>
+            <option key={-1} value="">{lang === "es" ? "Seleccionar tipo" : lang === "de" ? "Typ auswählen" : "Select type"}</option>
             {tipoCategoria.map((categoria) => (
               <option key={categoria.value} value={categoria.value}>{categoria.text}</option>
             ))}

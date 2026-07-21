@@ -6,7 +6,9 @@ export const getPropiedads = async () => {
   try {
     const propiedads = await prisma.propiedad.findMany({
       include: {
-        images: true,
+        images: {
+          orderBy: [{ type: "asc" }, { id: "asc" }],
+        },
         //amenities: true,
       },
       orderBy: {

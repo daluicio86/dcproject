@@ -54,7 +54,13 @@ html {
 }
 
 body {
-  @apply bg-[#f4f5f7] text-[#10263b];
+  @apply bg-[#f4f1ea] text-[#10263b];
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: #41d6a8;
+  color: #082129;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -85,7 +91,7 @@ main {
 }
 
 .btn-primary-ui {
-  @apply inline-flex items-center justify-center rounded-full bg-[#08364a] px-6 py-3 text-sm font-bold uppercase tracking-[0.08em] text-white transition hover:bg-[#062a39];
+  @apply inline-flex items-center justify-center rounded-full bg-[#08364a] px-6 py-3 text-sm font-bold tracking-[0.04em] text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-[#062a39];
 }
 
 .blog-details p, .blog-details hr {

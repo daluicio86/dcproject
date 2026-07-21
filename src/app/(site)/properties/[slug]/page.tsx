@@ -12,6 +12,32 @@ import { pickLocalizedValue } from "@/lib/localize-db";
 import { getPropertyAreaItems } from "@/lib/property-area";
 import { useTranslation } from "react-i18next";
 
+function getSectorMapEmbedUrl(geoLink: string, address: string) {
+  const cleanLink = geoLink.trim();
+
+  if (cleanLink.includes("/maps/embed")) return cleanLink;
+
+  if (cleanLink) {
+    try {
+      const parsed = new URL(cleanLink);
+      const query = parsed.searchParams.get("q") || parsed.searchParams.get("query");
+      if (query) {
+        return `https://www.google.com/maps?q=${encodeURIComponent(query)}&output=embed`;
+      }
+
+      const coordinates = cleanLink.match(/@(-?\d+(?:\.\d+)?),(-?\d+(?:\.\d+)?)/);
+      if (coordinates) {
+        return `https://www.google.com/maps?q=${coordinates[1]},${coordinates[2]}&output=embed`;
+      }
+    } catch {
+      // Si no es una URL completa, se usa como búsqueda del sector.
+    }
+  }
+
+  const sectorQuery = cleanLink || address || "Ecuador";
+  return `https://www.google.com/maps?q=${encodeURIComponent(sectorQuery)}&output=embed`;
+}
+
 export default function DetailsPage() {
   const params = useParams();
   const slug = params.slug as string;
@@ -64,16 +90,17 @@ export default function DetailsPage() {
   const description = item
     ? pickLocalizedValue(item.description, item.descriptionEn, item.descriptionDe, lang)
     : "";
+  const sectorMapUrl = item ? getSectorMapEmbedUrl(item.geoLink || "", address) : "";
   const t = {
-    detailsTitle: lang === "es" ? "InformaciÃƒÂ³n de Propiedad" : lang === "de" ? "Immobilieninformationen" : "Property Information",
+    detailsTitle: lang === "es" ? "Información de Propiedad" : lang === "de" ? "Immobilieninformationen" : "Property Information",
     propertyDetails: lang === "es" ? "Detalles de la Propiedad" : lang === "de" ? "Objektdetails" : "Property Details",
-    similar: lang === "es" ? "Propiedades Similares" : lang === "de" ? "Ãƒâ€žhnliche Immobilien" : "Similar Properties",
-    seeMore: lang === "es" ? "MÃƒÂ¡s detalles" : lang === "de" ? "Mehr Details" : "More details",
+    similar: lang === "es" ? "Propiedades Similares" : lang === "de" ? "Ähnliche Immobilien" : "Similar Properties",
+    seeMore: lang === "es" ? "Más detalles" : lang === "de" ? "Mehr Details" : "More details",
     send: lang === "es" ? "ENVIAR MENSAJE" : lang === "de" ? "NACHRICHT SENDEN" : "SEND MESSAGE",
-    noDescription: lang === "es" ? "No hay descripciÃƒÂ³n disponible." : lang === "de" ? "Keine Beschreibung verfÃƒÂ¼gbar." : "No description available.",
+    noDescription: lang === "es" ? "No hay descripción disponible." : lang === "de" ? "Keine Beschreibung verfügbar." : "No description available.",
     name: lang === "es" ? "Nombre" : lang === "de" ? "Name" : "Name",
     email: lang === "es" ? "Correo" : lang === "de" ? "E-Mail" : "Email",
-    phone: lang === "es" ? "TelÃƒÂ©fono" : lang === "de" ? "Telefon" : "Phone",
+    phone: lang === "es" ? "Teléfono" : lang === "de" ? "Telefon" : "Phone",
   };
 
   const gallery = useMemo(() => {
@@ -108,7 +135,7 @@ export default function DetailsPage() {
   }, [allProps, item]);
 
   const waMessage = encodeURIComponent(
-    `Hola, me interesa la propiedad: ${title}.\nNombre: ${name || "-"}\nCorreo: ${email || "-"}\nTelÃƒÂ©fono: ${phone || "-"}`,
+    `Hola, me interesa la propiedad: ${title}.\nNombre: ${name || "-"}\nCorreo: ${email || "-"}\nTeléfono: ${phone || "-"}`,
   );
 
   if (!loaded) {
@@ -177,7 +204,7 @@ export default function DetailsPage() {
               {item && (
                 <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
                   {getPropertyAreaItems(item).map((areaItem) => (
-                    <div key={areaItem.key} className="rounded-2xl border border-black/10 bg-[#f7f8fa] px-4 py-3">
+                    <div key={areaItem.key} lang="es" translate="no" className="rounded-2xl border border-black/10 bg-[#f7f8fa] px-4 py-3">
                       <p className="text-xs font-semibold uppercase tracking-wide text-black/45">{areaItem.label}</p>
                       <p className="mt-1 text-lg font-semibold text-[#10263b]">{areaItem.value}</p>
                     </div>
@@ -186,13 +213,46 @@ export default function DetailsPage() {
               )}
               <p className="text-lg leading-8 text-black/70">{description || t.noDescription}</p>
             </div>
+
+            <section className="mt-6 overflow-hidden rounded-3xl border border-black/10 bg-white shadow-sm">
+              <div className="p-6 md:p-8">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <h2 className="text-3xl font-semibold text-[#10263b]">
+                      {lang === "es" ? "Ubicación del sector" : lang === "de" ? "Lage der Umgebung" : "Area location"}
+                    </h2>
+                    <p className="mt-2 max-w-3xl text-sm leading-6 text-black/60">
+                      {lang === "es"
+                        ? "El mapa muestra una referencia aproximada del sector y no la ubicación exacta de la propiedad."
+                        : lang === "de"
+                          ? "Die Karte zeigt die ungefähre Umgebung, nicht den genauen Standort der Immobilie."
+                          : "The map shows the approximate area, not the property's exact location."}
+                    </p>
+                  </div>
+                  {item?.geoLink?.startsWith("http") && (
+                    <Link href={item.geoLink} target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[#10263b]/15 px-4 py-2 text-sm font-semibold text-[#10263b] transition hover:bg-[#f3f4f6]">
+                      <Icon icon="ph:map-pin" width={18} height={18} />
+                      {lang === "es" ? "Abrir en Google Maps" : lang === "de" ? "In Google Maps öffnen" : "Open in Google Maps"}
+                    </Link>
+                  )}
+                </div>
+              </div>
+              <iframe
+                src={sectorMapUrl}
+                title={lang === "es" ? "Ubicación aproximada del sector" : "Approximate area location"}
+                className="h-[320px] w-full border-0 sm:h-[400px]"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            </section>
           </div>
 
           <div className="lg:col-span-4 col-span-12">
             <aside className="rounded-3xl border border-black/10 bg-white p-5 shadow-sm lg:sticky lg:top-[130px]">
               <Image src="/images/users/logo.jpeg" alt="Elizabeth Cardenas" width={500} height={500} className="w-full h-56 rounded-2xl object-cover mb-4" unoptimized />
               <h3 className="mb-1 text-3xl font-semibold tracking-tight text-[#0d2e49]">ELIZABETH CARDENAS</h3>
-              <p className="text-sm text-black/70"><strong>{t.phone}:</strong> (+593)99-956-7412</p>
+              <p className="text-sm text-black/70"><strong>{t.phone}:</strong> (+593)99-456-7412</p>
               <p className="mb-6 text-sm text-black/70"><strong>{t.email}:</strong> elizabethlinacardenas@hotmail.com</p>
 
               <h4 className="mb-4 text-2xl font-semibold text-[#0d2e49]">{t.detailsTitle}</h4>
@@ -204,7 +264,7 @@ export default function DetailsPage() {
               </div>
 
               <Link
-                href={`https://wa.me/593999567412?text=${waMessage}`}
+                href={`https://wa.me/593994567412?text=${waMessage}`}
                 target="_blank"
                 className="mt-4 inline-block w-full rounded-full bg-[#08364a] px-6 py-4 text-center text-sm font-bold uppercase tracking-[0.2em] text-white hover:bg-[#052737]"
               >
@@ -224,11 +284,15 @@ export default function DetailsPage() {
                 <article key={sp.id} className="flex h-full flex-col overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm">
                   <div className="h-56 w-full shrink-0" style={{ backgroundImage: `url('${sp.images?.[0]?.url ?? "/images/properties/property8.jpg"}')`, backgroundSize: "cover", backgroundPosition: "center" }} />
                   <div className="flex flex-1 flex-col p-5">
-                    <h4 className="mb-2 text-2xl font-semibold leading-tight text-[#10263b]">{cardTitle}</h4>
+                    <h4 className="mb-2 text-2xl font-semibold leading-tight text-[#10263b]">
+                      <Link href={`/properties/${sp.slug}`} className="transition hover:text-[#17607a] hover:underline">
+                        {cardTitle}
+                      </Link>
+                    </h4>
                     <p className="mb-4 text-base text-black/55">{cardAddress || "Ecuador"}</p>
                     <div className="mb-4 grid grid-cols-2 gap-2 text-sm">
                       {getPropertyAreaItems(sp).map((areaItem) => (
-                        <div key={areaItem.key} className="rounded-xl bg-[#f3f4f6] px-3 py-2">
+                        <div key={areaItem.key} lang="es" translate="no" className="rounded-xl bg-[#f3f4f6] px-3 py-2">
                           <span className="font-semibold text-[#10263b]">{areaItem.label}: </span>
                           <span className="text-black/60">{areaItem.value}</span>
                         </div>
