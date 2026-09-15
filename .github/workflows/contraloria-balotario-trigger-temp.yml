@@ -1,0 +1,50 @@
+name: Temporary Contraloria Balotario Trigger
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    if: startsWith(github.event.issue.title, '[TEMP CONTRALORIA BALOTARIO]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install PDF tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qpdf
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4 pypdf
+
+      - name: Run embedded temporary builder
+        run: |
+          mkdir -p output/pdfs
+          awk '/python - <<.PY./ {flag=1; next} flag && /^          PY$/ {exit} flag {sub(/^          /, ""); print}' .github/workflows/contraloria-balotario-temp.yml > /tmp/contraloria_builder.py
+          python /tmp/contraloria_builder.py
+        env:
+          PAGE_URL: https://convocatorias.contraloria.gob.pe/solucionarios.html
+
+      - name: Upload consolidated PDF and audit files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contraloria-balotario-completo
+          path: |
+            output/BALOTARIO_UNICO_CONTRALORIA_COMPLETO.pdf
+            output/manifest.csv
+            output/summary.json
+            output/failed.txt
+            output/page.html
+          if-no-files-found: warn
+          retention-days: 1
+          compression-level: 0
