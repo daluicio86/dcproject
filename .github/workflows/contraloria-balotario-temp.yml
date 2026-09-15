@@ -1,0 +1,343 @@
+name: Temporary Contraloria Balotario Builder
+
+on:
+  push:
+    paths:
+      - '.github/workflows/contraloria-balotario-temp.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install PDF tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qpdf
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4 pypdf
+
+      - name: Download all solucionarios and merge
+        env:
+          PAGE_URL: https://convocatorias.contraloria.gob.pe/solucionarios.html
+        run: |
+          mkdir -p output/pdfs
+          python - <<'PY'
+          import csv
+          import hashlib
+          import html as htmlmod
+          import json
+          import os
+          import re
+          import shutil
+          import subprocess
+          import sys
+          import time
+          from pathlib import Path
+          from urllib.parse import urljoin, urlparse, urlunparse
+
+          import requests
+          from bs4 import BeautifulSoup
+          from pypdf import PdfReader, PdfWriter
+
+          PAGE_URL = os.environ['PAGE_URL']
+          OUT = Path('output')
+          PDF_DIR = OUT / 'pdfs'
+          OUT.mkdir(exist_ok=True)
+          PDF_DIR.mkdir(exist_ok=True)
+
+          UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36'
+          session = requests.Session()
+          session.headers.update({
+              'User-Agent': UA,
+              'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+              'Accept-Language': 'es-PE,es;q=0.9,en;q=0.7',
+              'Referer': 'https://convocatorias.contraloria.gob.pe/'
+          })
+
+          def fetch_page(url):
+              errors = []
+              for attempt in range(1, 6):
+                  try:
+                      r = session.get(url, timeout=45, allow_redirects=True)
+                      if r.ok and len(r.content) > 1000:
+                          return r.text, r.url
+                      errors.append(f'attempt {attempt}: HTTP {r.status_code}, bytes={len(r.content)}')
+                  except Exception as exc:
+                      errors.append(f'attempt {attempt}: {exc!r}')
+                  time.sleep(attempt * 2)
+              # curl fallback
+              tmp = OUT / 'page_curl.html'
+              cmd = ['curl','-L','--fail','--retry','5','--retry-all-errors','--connect-timeout','20','--max-time','120','-A',UA,'-o',str(tmp),url]
+              try:
+                  subprocess.run(cmd, check=True)
+                  text = tmp.read_text('utf-8', errors='replace')
+                  if len(text) > 1000:
+                      return text, url
+              except Exception as exc:
+                  errors.append(f'curl: {exc!r}')
+              raise RuntimeError('Could not fetch page: ' + ' | '.join(errors))
+
+          page_html, effective_page_url = fetch_page(PAGE_URL)
+          (OUT / 'page.html').write_text(page_html, encoding='utf-8')
+
+          soup = BeautifulSoup(page_html, 'html.parser')
+          candidates = []
+          seen = set()
+
+          def add_candidate(raw, context=''):
+              if not raw:
+                  return
+              raw = htmlmod.unescape(str(raw)).strip().strip('"\'')
+              # Extract a PDF-looking token from JS or attributes.
+              m = re.search(r'(?i)(https?://[^\s"\'<>]+?\.pdf(?:\?[^\s"\'<>]*)?|(?:\.{0,2}/|/)?[^\s"\'<>]+?\.pdf(?:\?[^\s"\'<>]*)?)', raw)
+              if not m:
+                  return
+              token = m.group(1).replace('\\/', '/')
+              full = urljoin(effective_page_url, token)
+              p = urlparse(full)
+              # Drop fragment only; preserve query because some servers use it.
+              full = urlunparse((p.scheme, p.netloc, p.path, p.params, p.query, ''))
+              low = full.lower()
+              if '.pdf' not in low:
+                  return
+              # Only official Contraloria solutionnaire PDFs.
+              if not (('contraloria.gob.pe' in p.netloc.lower()) and ('solucion' in low or '/dl728/' in low)):
+                  return
+              if full not in seen:
+                  seen.add(full)
+                  candidates.append({'url': full, 'context': context})
+
+          # Preserve DOM order; each table row context helps manifest readability.
+          for tag in soup.find_all(True):
+              context = ''
+              row = tag.find_parent('tr')
+              if row:
+                  context = ' '.join(row.stripped_strings)
+              for attr in ('href','src','data-href','data-url','onclick'):
+                  if tag.has_attr(attr):
+                      add_candidate(tag.get(attr), context)
+
+          # Catch PDF URLs embedded in scripts/JSON that BeautifulSoup attributes miss.
+          for m in re.finditer(r'(?i)(https?://[^\s"\'<>]+?\.pdf(?:\?[^\s"\'<>]*)?|(?:\.{0,2}/|/)?[A-Za-z0-9_./%?=&+\-]+?\.pdf(?:\?[^\s"\'<>]*)?)', page_html):
+              add_candidate(m.group(1), '')
+
+          # Keep only links that clearly belong to solucionarios. If the page has direct dl728 links
+          # without the word, they are retained only when their path includes a CPM and PDF.
+          filtered = []
+          for c in candidates:
+              u = c['url'].lower()
+              if '/solucionarios/' in u or 'solucionario' in u or (re.search(r'/cpm-[^/]+/', u) and '/dl728/' in u):
+                  filtered.append(c)
+          candidates = filtered
+
+          if len(candidates) < 2:
+              print('HTML length:', len(page_html))
+              print('Candidates:', candidates)
+              raise RuntimeError(f'Only {len(candidates)} PDF candidates found; page parsing likely failed')
+
+          print(f'Found {len(candidates)} PDF link(s) on page')
+
+          def alternate_urls(url):
+              outs = [url]
+              p = urlparse(url)
+              if '/dl728/' in p.path:
+                  if p.netloc.lower().startswith('convocatorias.'):
+                      outs.append(urlunparse((p.scheme, 'doc.contraloria.gob.pe', p.path, p.params, p.query, '')))
+                  elif p.netloc.lower().startswith('doc.'):
+                      outs.append(urlunparse((p.scheme, 'convocatorias.contraloria.gob.pe', p.path, p.params, p.query, '')))
+              # Some historic links use http; try https and vice versa last.
+              if p.scheme == 'http':
+                  outs.append(urlunparse(('https', p.netloc, p.path, p.params, p.query, '')))
+              return list(dict.fromkeys(outs))
+
+          def valid_pdf_bytes(data):
+              return len(data) > 100 and data.lstrip().startswith(b'%PDF')
+
+          def download_one(url, dest):
+              errs = []
+              headers = {
+                  'User-Agent': UA,
+                  'Accept': 'application/pdf,application/octet-stream;q=0.9,*/*;q=0.8',
+                  'Referer': PAGE_URL,
+              }
+              for alt in alternate_urls(url):
+                  for attempt in range(1, 5):
+                      try:
+                          with session.get(alt, headers=headers, stream=True, timeout=(20, 90), allow_redirects=True) as r:
+                              data = r.content
+                              if r.ok and valid_pdf_bytes(data):
+                                  dest.write_bytes(data)
+                                  return alt, len(data), None
+                              errs.append(f'{alt} attempt {attempt}: HTTP {r.status_code}, bytes={len(data)}, type={r.headers.get("content-type")}')
+                      except Exception as exc:
+                          errs.append(f'{alt} attempt {attempt}: {exc!r}')
+                      time.sleep(min(attempt, 3))
+                  # curl fallback for each alternate
+                  tmp = dest.with_suffix('.part')
+                  cmd = ['curl','-L','--fail','--retry','4','--retry-all-errors','--connect-timeout','20','--max-time','180','-A',UA,'-e',PAGE_URL,'-o',str(tmp),alt]
+                  try:
+                      subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                      data = tmp.read_bytes()
+                      if valid_pdf_bytes(data):
+                          tmp.replace(dest)
+                          return alt, len(data), None
+                      errs.append(f'{alt} curl: invalid PDF bytes={len(data)}')
+                  except Exception as exc:
+                      errs.append(f'{alt} curl: {exc!r}')
+                  finally:
+                      if tmp.exists():
+                          tmp.unlink(missing_ok=True)
+              return None, 0, ' | '.join(errs[-8:])
+
+          rows = []
+          unique_files = []
+          hash_to_first = {}
+          failed = []
+          total_pages = 0
+
+          for i, c in enumerate(candidates, start=1):
+              dest = PDF_DIR / f'{i:05d}.pdf'
+              final_url, size, err = download_one(c['url'], dest)
+              row = {
+                  'order': i,
+                  'context': c.get('context',''),
+                  'listed_url': c['url'],
+                  'download_url': final_url or '',
+                  'status': '',
+                  'bytes': size,
+                  'sha256': '',
+                  'pages': '',
+                  'duplicate_of': '',
+                  'error': err or '',
+              }
+              if err:
+                  row['status'] = 'FAILED'
+                  failed.append(row)
+                  rows.append(row)
+                  print(f'[{i}/{len(candidates)}] FAILED {c["url"]}')
+                  continue
+
+              data = dest.read_bytes()
+              digest = hashlib.sha256(data).hexdigest()
+              row['sha256'] = digest
+              if digest in hash_to_first:
+                  row['status'] = 'DUPLICATE'
+                  row['duplicate_of'] = hash_to_first[digest]
+                  dest.unlink(missing_ok=True)
+                  rows.append(row)
+                  print(f'[{i}/{len(candidates)}] duplicate of {row["duplicate_of"]}')
+                  continue
+
+              try:
+                  reader = PdfReader(str(dest), strict=False)
+                  pages = len(reader.pages)
+                  if pages < 1:
+                      raise ValueError('zero pages')
+              except Exception as exc:
+                  row['status'] = 'FAILED_INVALID_PDF'
+                  row['error'] = repr(exc)
+                  failed.append(row)
+                  dest.unlink(missing_ok=True)
+                  rows.append(row)
+                  print(f'[{i}/{len(candidates)}] INVALID {c["url"]}: {exc!r}')
+                  continue
+
+              hash_to_first[digest] = i
+              row['status'] = 'OK'
+              row['pages'] = pages
+              total_pages += pages
+              unique_files.append(dest)
+              rows.append(row)
+              print(f'[{i}/{len(candidates)}] OK pages={pages} bytes={size}')
+
+          manifest_path = OUT / 'manifest.csv'
+          with manifest_path.open('w', newline='', encoding='utf-8-sig') as f:
+              fieldnames = ['order','context','listed_url','download_url','status','bytes','sha256','pages','duplicate_of','error']
+              w = csv.DictWriter(f, fieldnames=fieldnames)
+              w.writeheader()
+              w.writerows(rows)
+
+          failed_path = OUT / 'failed.txt'
+          failed_path.write_text('\n'.join(f"{r['order']}\t{r['listed_url']}\t{r['error']}" for r in failed), encoding='utf-8')
+
+          merged = OUT / 'BALOTARIO_UNICO_CONTRALORIA_COMPLETO.pdf'
+          merge_error = None
+          if unique_files:
+              # qpdf is memory-efficient and preserves the original page content streams.
+              cmd = ['qpdf','--empty','--pages', *[str(p) for p in unique_files], '--', str(merged)]
+              try:
+                  subprocess.run(cmd, check=True)
+              except Exception as exc:
+                  merge_error = f'qpdf failed: {exc!r}; using pypdf fallback'
+                  print(merge_error)
+                  writer = PdfWriter()
+                  for p in unique_files:
+                      writer.append(str(p))
+                  with merged.open('wb') as f:
+                      writer.write(f)
+                  writer.close()
+
+          final_pages = 0
+          final_bytes = 0
+          final_sha256 = ''
+          final_valid = False
+          final_error = ''
+          if merged.exists():
+              try:
+                  final_reader = PdfReader(str(merged), strict=False)
+                  final_pages = len(final_reader.pages)
+                  final_bytes = merged.stat().st_size
+                  final_sha256 = hashlib.sha256(merged.read_bytes()).hexdigest()
+                  final_valid = final_pages == total_pages and final_pages > 0
+                  if not final_valid:
+                      final_error = f'page count mismatch: expected {total_pages}, got {final_pages}'
+              except Exception as exc:
+                  final_error = repr(exc)
+
+          summary = {
+              'page_url': PAGE_URL,
+              'effective_page_url': effective_page_url,
+              'candidate_links': len(candidates),
+              'downloaded_ok': sum(1 for r in rows if r['status'] == 'OK'),
+              'duplicates_exact': sum(1 for r in rows if r['status'] == 'DUPLICATE'),
+              'failed': len(failed),
+              'unique_pdfs_merged': len(unique_files),
+              'source_pages_total': total_pages,
+              'final_pages': final_pages,
+              'final_bytes': final_bytes,
+              'final_sha256': final_sha256,
+              'final_valid': final_valid,
+              'final_error': final_error,
+              'merge_note': merge_error,
+          }
+          (OUT / 'summary.json').write_text(json.dumps(summary, indent=2, ensure_ascii=False), encoding='utf-8')
+          print(json.dumps(summary, indent=2, ensure_ascii=False))
+
+          if failed or not final_valid:
+              sys.exit(2)
+          PY
+
+      - name: Upload consolidated PDF and audit files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contraloria-balotario-completo
+          path: |
+            output/BALOTARIO_UNICO_CONTRALORIA_COMPLETO.pdf
+            output/manifest.csv
+            output/summary.json
+            output/failed.txt
+            output/page.html
+          if-no-files-found: warn
+          retention-days: 1
+          compression-level: 0
