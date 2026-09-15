@@ -1,0 +1,28 @@
+name: Temporary Contraloria Direct PDF Test
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    if: startsWith(github.event.issue.title, '[TEMP CONTRALORIA TESTDOC]')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test direct document host
+        run: |
+          set -x
+          curl -L --fail --connect-timeout 15 --max-time 60 -A 'Mozilla/5.0' -o test.pdf 'https://doc.contraloria.gob.pe/dl728/2023/CPM-01-2023/solucionarios/Conocimientos/COD_001-2023-CG.pdf'
+          ls -lh test.pdf
+          head -c 4 test.pdf | xxd
+      - name: Upload test
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: testdoc
+          path: test.pdf
+          if-no-files-found: warn
+          retention-days: 1
