@@ -1,0 +1,32 @@
+name: Temporary Contraloria PDF Recovery
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: read
+
+jobs:
+  recover:
+    if: startsWith(github.event.issue.title, '[TEMP CONTRALORIA RECOVERY]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install parser
+        run: pip install requests pypdf
+      - name: Recover broken historical PDFs
+        run: python scripts/contraloria_recover_failed_temp.py
+      - name: Upload recovery audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contraloria-recovery
+          path: output_recovery/
+          if-no-files-found: warn
+          retention-days: 1
+          compression-level: 0
