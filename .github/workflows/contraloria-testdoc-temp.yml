@@ -1,4 +1,4 @@
-name: Temporary Contraloria Storage Test
+name: Temporary Contraloria Wayback Test
 
 on:
   issues:
@@ -12,24 +12,52 @@ jobs:
     if: startsWith(github.event.issue.title, '[TEMP CONTRALORIA TESTDOC]')
     runs-on: ubuntu-latest
     steps:
-      - name: Test Oracle object storage listing
+      - name: Query Wayback CDX and recover latest page
         run: |
           set -x
-          BASE='https://objectstorage.us-ashburn-1.oraclecloud.com/p/Ovj4ah5usLFDMxJZEj8Q1wmkP3ld9SVohrd3t7yhw5Hf0jle-D5RGMG9_fr1Zc9n/n/id08kfinkj3s/b/doccontraloria/o'
-          curl -L --connect-timeout 15 --max-time 60 -A 'Mozilla/5.0' -D headers.txt -o listing.json "$BASE?prefix=dl728%2F2023%2FCPM-02-2023%2Fsolucionarios%2F&limit=1000" || true
-          echo '--- headers ---'
-          cat headers.txt || true
-          echo '--- body first 3000 ---'
-          head -c 3000 listing.json || true
+          curl -L --fail --connect-timeout 20 --max-time 90 -A 'Mozilla/5.0' -G 'https://web.archive.org/cdx/search/cdx' \
+            --data-urlencode 'url=https://convocatorias.contraloria.gob.pe/solucionarios.html' \
+            --data-urlencode 'output=json' \
+            --data-urlencode 'fl=timestamp,original,statuscode,digest' \
+            --data-urlencode 'filter=statuscode:200' \
+            --data-urlencode 'filter=mimetype:text/html' \
+            --data-urlencode 'from=2022' \
+            --data-urlencode 'to=2026' \
+            --data-urlencode 'limit=100' \
+            --data-urlencode 'collapse=digest' \
+            -o cdx.json || true
+          echo '--- CDX ---'
+          head -c 12000 cdx.json || true
           echo
-          wc -c listing.json || true
+          python - <<'PY'
+          import json, pathlib, subprocess
+          p=pathlib.Path('cdx.json')
+          try:
+              data=json.loads(p.read_text())
+          except Exception as e:
+              print('CDX parse failed',repr(e)); raise SystemExit(0)
+          if len(data)<2:
+              print('No snapshots'); raise SystemExit(0)
+          print('snapshots',len(data)-1)
+          rows=data[1:]
+          for row in rows[-10:]: print(row)
+          ts=rows[-1][0]
+          url=f'https://web.archive.org/web/{ts}id_/https://convocatorias.contraloria.gob.pe/solucionarios.html'
+          print('fetching',url)
+          subprocess.run(['curl','-L','--fail','--connect-timeout','20','--max-time','180','-A','Mozilla/5.0','-o','snapshot.html',url],check=False)
+          if pathlib.Path('snapshot.html').exists():
+              print('snapshot bytes',pathlib.Path('snapshot.html').stat().st_size)
+              text=pathlib.Path('snapshot.html').read_text(errors='replace')
+              print('pdf markers',text.lower().count('.pdf'))
+              print('CPM markers',text.count('CPM'))
+          PY
       - name: Upload test
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: testdoc-listing
+          name: testdoc-wayback
           path: |
-            listing.json
-            headers.txt
+            cdx.json
+            snapshot.html
           if-no-files-found: warn
           retention-days: 1
