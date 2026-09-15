@@ -1,4 +1,4 @@
-name: Temporary Contraloria Direct PDF Test
+name: Temporary Contraloria Storage Test
 
 on:
   issues:
@@ -12,17 +12,24 @@ jobs:
     if: startsWith(github.event.issue.title, '[TEMP CONTRALORIA TESTDOC]')
     runs-on: ubuntu-latest
     steps:
-      - name: Test direct document host
+      - name: Test Oracle object storage listing
         run: |
           set -x
-          curl -L --fail --connect-timeout 15 --max-time 60 -A 'Mozilla/5.0' -o test.pdf 'https://doc.contraloria.gob.pe/dl728/2023/CPM-01-2023/solucionarios/Conocimientos/COD_001-2023-CG.pdf'
-          ls -lh test.pdf
-          head -c 4 test.pdf | xxd
+          BASE='https://objectstorage.us-ashburn-1.oraclecloud.com/p/Ovj4ah5usLFDMxJZEj8Q1wmkP3ld9SVohrd3t7yhw5Hf0jle-D5RGMG9_fr1Zc9n/n/id08kfinkj3s/b/doccontraloria/o'
+          curl -L --connect-timeout 15 --max-time 60 -A 'Mozilla/5.0' -D headers.txt -o listing.json "$BASE?prefix=dl728%2F2023%2FCPM-02-2023%2Fsolucionarios%2F&limit=1000" || true
+          echo '--- headers ---'
+          cat headers.txt || true
+          echo '--- body first 3000 ---'
+          head -c 3000 listing.json || true
+          echo
+          wc -c listing.json || true
       - name: Upload test
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: testdoc
-          path: test.pdf
+          name: testdoc-listing
+          path: |
+            listing.json
+            headers.txt
           if-no-files-found: warn
           retention-days: 1
