@@ -1,0 +1,48 @@
+name: Temporary Complete Contraloria Balotario
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    if: startsWith(github.event.issue.title, '[TEMP CONTRALORIA COMPLETE]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install PDF tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qpdf
+          python -m pip install --upgrade pip
+          pip install requests beautifulsoup4 pypdf
+
+      - name: Download all official PDFs and merge
+        env:
+          DOWNLOAD_WORKERS: '24'
+        run: |
+          python scripts/contraloria_wayback_builder_temp.py
+
+      - name: Upload consolidated PDF and audit manifest
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: BALOTARIO_UNICO_CONTRALORIA_COMPLETO
+          path: |
+            output_complete/BALOTARIO_UNICO_CONTRALORIA_COMPLETO.pdf
+            output_complete/manifest.csv
+            output_complete/summary.json
+            output_complete/failed.txt
+            output_complete/urls.txt
+          if-no-files-found: warn
+          retention-days: 1
+          compression-level: 0
